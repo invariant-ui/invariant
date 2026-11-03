@@ -1,0 +1,4 @@
+{
+  // comments are legal in tsconfig
+  "compilerOptions": { "outDir": "dist", "rootDir": "src", "jsx": "react-jsx", "declaration": true }
+}

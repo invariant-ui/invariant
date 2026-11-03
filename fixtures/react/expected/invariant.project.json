@@ -1,0 +1,513 @@
+{
+  "diagnostics": [],
+  "discoveryVersion": "1.0.0",
+  "docFiles": [],
+  "graph": {
+    "edges": [
+      {
+        "from": "package:@acme/ui",
+        "to": "tool:typescript",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui",
+        "to": "tool:vite",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui",
+        "to": "tokens:src/tokens.css",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui",
+        "to": "tokens:src/tokens.json",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui",
+        "to": "tokens:tailwind.config.ts",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui",
+        "to": "framework:react",
+        "type": "uses-framework"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "framework:react",
+        "label": "react",
+        "type": "framework"
+      },
+      {
+        "id": "package:@acme/ui",
+        "label": "@acme/ui",
+        "type": "package"
+      },
+      {
+        "id": "tokens:src/tokens.css",
+        "label": "src/tokens.css",
+        "type": "token-file"
+      },
+      {
+        "id": "tokens:src/tokens.json",
+        "label": "src/tokens.json",
+        "type": "token-file"
+      },
+      {
+        "id": "tokens:tailwind.config.ts",
+        "label": "tailwind.config.ts",
+        "type": "token-file"
+      },
+      {
+        "id": "tool:typescript",
+        "label": "typescript",
+        "type": "build-tool"
+      },
+      {
+        "id": "tool:vite",
+        "label": "vite",
+        "type": "build-tool"
+      }
+    ]
+  },
+  "packageManager": {
+    "evidence": [],
+    "name": "unknown"
+  },
+  "packages": [
+    {
+      "buildTools": [
+        {
+          "evidence": [
+            {
+              "ref": "tsconfig.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "vite",
+              "type": "dependency"
+            }
+          ],
+          "name": "vite"
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "dependencies",
+          "name": "class-variance-authority",
+          "range": "^0.7.0"
+        },
+        {
+          "kind": "peerDependencies",
+          "name": "react",
+          "range": "^18.2.0"
+        },
+        {
+          "kind": "peerDependencies",
+          "name": "react-dom",
+          "range": "^18.2.0"
+        },
+        {
+          "kind": "dependencies",
+          "name": "styled-components",
+          "range": "^6.0.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "tailwindcss",
+          "range": "^3.4.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "typescript",
+          "range": "^5.6.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "vite",
+          "range": "^5.4.0"
+        }
+      ],
+      "dir": ".",
+      "entryPoints": [
+        {
+          "condition": "types",
+          "exports": [
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 13,
+              "name": "AcmeIcon",
+              "reexportOf": {
+                "external": false,
+                "module": "./Icon"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 9,
+              "name": "Badge",
+              "reexportOf": {
+                "external": false,
+                "module": "./Badge"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "type",
+              "line": 2,
+              "name": "ButtonProps",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": true
+            },
+            {
+              "file": "src/Card.tsx",
+              "kind": "value",
+              "line": 26,
+              "name": "Card",
+              "typeOnly": false
+            },
+            {
+              "file": "src/Card.tsx",
+              "kind": "type",
+              "line": 5,
+              "name": "CardProps",
+              "typeOnly": true
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 3,
+              "name": "IconButton",
+              "reexportOf": {
+                "external": false,
+                "module": "./IconButton"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 10,
+              "name": "LazyChart",
+              "reexportOf": {
+                "external": false,
+                "module": "./LazyChart"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "default",
+              "line": 8,
+              "name": "Link",
+              "reexportOf": {
+                "external": false,
+                "module": "./Link"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 6,
+              "name": "Modal",
+              "reexportOf": {
+                "external": false,
+                "module": "./Modal"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 5,
+              "name": "Select",
+              "reexportOf": {
+                "external": false,
+                "module": "./Select"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/layout/Stack.tsx",
+              "kind": "value",
+              "line": 6,
+              "name": "Stack",
+              "typeOnly": false
+            },
+            {
+              "file": "src/layout/Stack.tsx",
+              "kind": "type",
+              "line": 1,
+              "name": "StackProps",
+              "typeOnly": true
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 7,
+              "name": "Text",
+              "reexportOf": {
+                "external": false,
+                "module": "./Text"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 14,
+              "name": "Tooltip",
+              "reexportOf": {
+                "external": false,
+                "module": "./Tooltip"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 16,
+              "name": "VERSION",
+              "reexportOf": {
+                "external": false,
+                "module": "./version"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 12,
+              "name": "useDisclosure",
+              "reexportOf": {
+                "external": false,
+                "module": "./hooks"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "src/index.ts",
+              "kind": "value",
+              "line": 11,
+              "name": "withTheme",
+              "reexportOf": {
+                "external": false,
+                "module": "./withTheme"
+              },
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "src/index.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "50b8358b65ec05a1b23a067a8cfd9a0113598816b382b6114bf2230a28436b23",
+              "path": "src/Badge.tsx"
+            },
+            {
+              "contentHash": "44b8a9d81fc2c87c72bc1de0cefec360ac4826508ef9f0c353d88f1e45313343",
+              "path": "src/Button.tsx"
+            },
+            {
+              "contentHash": "df32647bcb4495f6436fddedec97201b1e8bc0dffa7c1b827f23bd7c18360b39",
+              "path": "src/Card.tsx"
+            },
+            {
+              "contentHash": "d8de2b9a06c98719836dd8a9b1c651a941f6bad2929a7c3712d83d3e3386d18a",
+              "path": "src/Icon.tsx"
+            },
+            {
+              "contentHash": "c39d5e30db50848713c7fb60fd6d7100ec646972ea9688f9e075b06ae202e06c",
+              "path": "src/IconButton.tsx"
+            },
+            {
+              "contentHash": "844f621b0cf994f41ca992721aa76fb0548fc4c91c261b9c1cc37dcc43518605",
+              "path": "src/LazyChart.tsx"
+            },
+            {
+              "contentHash": "f3e1d7491e5d11c4025e26415373d5772c4decdb6fe35911a1a1b29dd75a1419",
+              "path": "src/Modal.tsx"
+            },
+            {
+              "contentHash": "1e09c96201f7f8f16f1c90f4d0c240e47e78a778931ff77519cefeb5e3dfa9a7",
+              "path": "src/Select.tsx"
+            },
+            {
+              "contentHash": "f2fdcdd0c044df043f384a0f5304316518a4923e3d7a3ff9e76e455cd828e5aa",
+              "path": "src/Text.tsx"
+            },
+            {
+              "contentHash": "7e921504ba2687bb63ff952227c7f5bdebcf2aca25dd01ba944cfe1547177592",
+              "path": "src/Tooltip.tsx"
+            },
+            {
+              "contentHash": "0b76154941199f2df9dbc21e4083e5a649bc2fd561b266c9062b2111456638b6",
+              "path": "src/hooks/index.ts"
+            },
+            {
+              "contentHash": "572d572f6ca1b05d23b14b28d8dc0afad71edd2bf9aba02ecaf4f8dc38923a9a",
+              "path": "src/index.ts"
+            },
+            {
+              "contentHash": "b38b8779bdbd285687ff40990c77ddf0fcfeff9353e445631ba3b6a7ee0b42ae",
+              "path": "src/layout/Stack.tsx"
+            },
+            {
+              "contentHash": "7ad1f617b0b1d287968c9a7bb3872706cdf887e4c1e89923e2eaf5cd5ffe473a",
+              "path": "src/layout/index.ts"
+            },
+            {
+              "contentHash": "a54f72894468468bab90bd41f99be8393f7ad653b523852f04a84761fa4f98dd",
+              "path": "src/version.ts"
+            },
+            {
+              "contentHash": "a2117a16c1898a7b0efa149047cf161edbddd4ba54d06d9992d91513d42c64a8",
+              "path": "src/withTheme.tsx"
+            }
+          ],
+          "resolution": "mapped",
+          "subpath": ".",
+          "target": "./dist/index.d.ts"
+        },
+        {
+          "condition": "types",
+          "exports": [
+            {
+              "file": "src/button.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "src/button.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "44b8a9d81fc2c87c72bc1de0cefec360ac4826508ef9f0c353d88f1e45313343",
+              "path": "src/Button.tsx"
+            },
+            {
+              "contentHash": "6ec7b1ed9d39be3f5ec97cf6d9bd447864df690176bc7e0d35d5a5da3bc4f819",
+              "path": "src/button.ts"
+            }
+          ],
+          "resolution": "mapped",
+          "subpath": "./button",
+          "target": "./dist/button.d.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^18.2.0",
+          "dependencyKind": "peerDependencies",
+          "line": 10,
+          "name": "react",
+          "package": "react"
+        }
+      ],
+      "id": "package:@acme/ui",
+      "manifest": {
+        "contentHash": "87c03dcecb14a67c1b8c0d8770a0c963f0b945056f60f93bc1694dc7f6b65621",
+        "path": "package.json"
+      },
+      "name": "@acme/ui",
+      "private": false,
+      "scripts": [],
+      "version": "3.0.0"
+    }
+  ],
+  "stats": {
+    "filesScanned": 28,
+    "truncated": false
+  },
+  "storybooks": [],
+  "tokenFiles": [
+    {
+      "contentHash": "4a3e4463820dc2f06c5cea1470a74087ff70ced2c13d8bfa00acf87a489b6243",
+      "cssVariables": [
+        {
+          "line": 2,
+          "name": "--color-brand",
+          "scope": ":root",
+          "value": "#0057ff"
+        },
+        {
+          "aliasOf": "--color-brand",
+          "line": 3,
+          "name": "--color-action",
+          "scope": ":root",
+          "value": "var(--color-brand)"
+        },
+        {
+          "line": 4,
+          "name": "--space-md",
+          "scope": ":root",
+          "value": "16px"
+        },
+        {
+          "line": 6,
+          "name": "--color-brand",
+          "scope": "[data-theme=\"dark\"]",
+          "value": "#4d8dff"
+        }
+      ],
+      "kind": "css-custom-properties",
+      "package": "package:@acme/ui",
+      "path": "src/tokens.css"
+    },
+    {
+      "contentHash": "ac39790c5b6facf36432bace2222cf2eea6508cc94954509f64ad1d3e9329cda",
+      "format": "dtcg-like",
+      "kind": "json-tokens",
+      "package": "package:@acme/ui",
+      "path": "src/tokens.json",
+      "tokenCount": 1
+    },
+    {
+      "contentHash": "07f35256a1cdcbc90abc794a55eb24fdecf0cf5f57211f7a2d09b36d64ce860c",
+      "kind": "tailwind-config",
+      "package": "package:@acme/ui",
+      "path": "tailwind.config.ts"
+    }
+  ],
+  "workspaces": {
+    "kind": "none",
+    "patterns": []
+  }
+}

@@ -1,0 +1,757 @@
+{
+  "capabilities": [
+    "accessibility.*",
+    "composition.*",
+    "events.*",
+    "implementations.*",
+    "name",
+    "props.*",
+    "slots.*",
+    "styling.*",
+    "variants.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "component",
+      "name": "Button",
+      "ref": "vue:packages/vue-ui/src/Button.vue#Button"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_16c1c9c9f44f1079026820ee",
+      "location": {
+        "line": 6,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "disabled?: boolean",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_179b4e460b2774ec2ae55de0",
+      "location": {
+        "line": 1,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_2c8241cec970db45539cd961",
+      "location": {
+        "line": 5,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_390312627b0fdd877e59e5d6",
+      "location": {
+        "line": 4,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "variant?: \"primary\" | \"secondary\" | \"ghost\"",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_7c3416182fba1f7d5a4f1a66",
+      "location": {
+        "line": 11,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "{ (e: \"press\", event: MouseEvent): void }",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_7c4b77f9af505da6cc661277",
+      "location": {
+        "line": 12,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "default(): unknown;",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_813cbb6c3ce56f8c8ee643c8",
+      "location": {
+        "line": 15,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_cd3df462030c322d3ca5e521",
+      "location": {
+        "line": 23,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_d56659843530d875b7164ad9",
+      "location": {
+        "line": 12,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "icon(): unknown",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_de35d518f7794fc97e521208",
+      "location": {
+        "line": 7,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "label: string",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_813cbb6c3ce56f8c8ee643c8"
+      ],
+      "origin": "extracted",
+      "path": "accessibility.attributes",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        "aria-label"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_813cbb6c3ce56f8c8ee643c8"
+      ],
+      "origin": "extracted",
+      "path": "accessibility.role",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "button"
+    },
+    {
+      "evidenceIds": [
+        "ev_7c3416182fba1f7d5a4f1a66"
+      ],
+      "origin": "extracted",
+      "path": "events.press.declared",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_7c3416182fba1f7d5a4f1a66"
+      ],
+      "origin": "extracted",
+      "path": "events.press.extensions.vue.emit",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "press"
+    },
+    {
+      "evidenceIds": [
+        "ev_7c3416182fba1f7d5a4f1a66"
+      ],
+      "origin": "extracted",
+      "path": "events.press.extensions.vue.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "emit"
+    },
+    {
+      "evidenceIds": [
+        "ev_7c3416182fba1f7d5a4f1a66"
+      ],
+      "origin": "extracted",
+      "path": "events.press.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "type"
+    },
+    {
+      "evidenceIds": [
+        "ev_7c3416182fba1f7d5a4f1a66"
+      ],
+      "origin": "extracted",
+      "path": "events.press.payload.text",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "event: MouseEvent"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.exportName",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.exports",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        {
+          "name": "Button",
+          "subpath": "."
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.file",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "packages/vue-ui/src/Button.vue"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "sfc"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.localName",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.optionsApi",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.propsComplete",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.scriptLang",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "ts"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.extensions.vue.scriptSetup",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.framework",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "vue"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.importPath",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "@demo/vue-ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "implementations.vue.packageName",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "@demo/vue-ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_16c1c9c9f44f1079026820ee"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.default",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_16c1c9c9f44f1079026820ee"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.extensions.vue.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_16c1c9c9f44f1079026820ee"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "type"
+    },
+    {
+      "evidenceIds": [
+        "ev_16c1c9c9f44f1079026820ee"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.required",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_16c1c9c9f44f1079026820ee"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.type.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_16c1c9c9f44f1079026820ee"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.type.text",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_de35d518f7794fc97e521208"
+      ],
+      "origin": "extracted",
+      "path": "props.label.extensions.vue.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_de35d518f7794fc97e521208"
+      ],
+      "origin": "extracted",
+      "path": "props.label.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "type"
+    },
+    {
+      "evidenceIds": [
+        "ev_de35d518f7794fc97e521208"
+      ],
+      "origin": "extracted",
+      "path": "props.label.required",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_de35d518f7794fc97e521208"
+      ],
+      "origin": "extracted",
+      "path": "props.label.type.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "string"
+    },
+    {
+      "evidenceIds": [
+        "ev_de35d518f7794fc97e521208"
+      ],
+      "origin": "extracted",
+      "path": "props.label.type.text",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "string"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.allowedValues",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.default",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.extensions.vue.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "type"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.required",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.text",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "\"sm\" | \"md\" | \"lg\""
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.allowedValues",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.default",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.extensions.vue.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "type"
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.required",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.type.kind",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.type.text",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "\"primary\" | \"secondary\" | \"ghost\""
+    },
+    {
+      "evidenceIds": [
+        "ev_7c4b77f9af505da6cc661277"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.declared",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_7c4b77f9af505da6cc661277"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "both"
+    },
+    {
+      "evidenceIds": [
+        "ev_d56659843530d875b7164ad9"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.declared",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_d56659843530d875b7164ad9"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "both"
+    },
+    {
+      "evidenceIds": [
+        "ev_cd3df462030c322d3ca5e521"
+      ],
+      "origin": "extracted",
+      "path": "styling.cssVariables",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        "--color-action"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_179b4e460b2774ec2ae55de0"
+      ],
+      "origin": "extracted",
+      "path": "styling.scoped",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.default",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "prop-union"
+    },
+    {
+      "evidenceIds": [
+        "ev_2c8241cec970db45539cd961"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.values",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.default",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.extensions.vue.source",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": "prop-union"
+    },
+    {
+      "evidenceIds": [
+        "ev_390312627b0fdd877e59e5d6"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.values",
+      "subject": "vue:packages/vue-ui/src/Button.vue#Button",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost"
+      ]
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "vue",
+      "version": "0.1.0"
+    },
+    "id": "vue-demo-vue-ui",
+    "inputHash": "f25da64044496dc2ea5619a0fd10fbc2f84ad3b8b2e1a449e61510cfd4dd7198",
+    "location": "packages/vue-ui",
+    "type": "vue",
+    "version": {
+      "kind": "package-version",
+      "value": "1.0.0"
+    }
+  }
+}

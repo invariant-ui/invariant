@@ -1,0 +1,56 @@
+{
+  "capabilities": [
+    "extensions.css.*",
+    "file.*",
+    "name"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "token-file",
+      "name": "tailwind.config.ts",
+      "ref": "token-file:tailwind.config.ts"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_93acf131e9f09d4b90a9528f",
+      "location": {
+        "path": "tailwind.config.ts",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "tokens-acme-ui",
+      "sourceRef": "tailwind.config.ts",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_93acf131e9f09d4b90a9528f"
+      ],
+      "origin": "extracted",
+      "path": "file.kind",
+      "subject": "token-file:tailwind.config.ts",
+      "value": "tailwind-config"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-tokens",
+      "version": "0.1.0"
+    },
+    "id": "tokens-acme-ui",
+    "inputHash": "34e7e45713d86fcbe84d481f0c9acab55540d801acba6785b8b01f7c6125630a",
+    "location": ".",
+    "type": "tokens"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@acme/tokens",
+  "version": "1.2.0",
+  "exports": {
+    "./css": "./src/tokens.css",
+    "./tokens.json": "./src/tokens.json"
+  },
+  "devDependencies": { "style-dictionary": "^4.0.0" }
+}

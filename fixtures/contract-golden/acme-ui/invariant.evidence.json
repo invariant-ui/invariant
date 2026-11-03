@@ -1,0 +1,1589 @@
+{
+  "contractContentHash": "1d21106b945b8a0bd90eb8b7193f98f8e2c4b133c94e0950f5448377880f48c6",
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_03a3be72edf8fe063077c2b0",
+      "location": {
+        "line": 1,
+        "path": "src/Tooltip.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "open?: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Tooltip.tsx#Tooltip",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_067eeeb1454c008e26a1b3fc",
+      "location": {
+        "line": 22,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children: ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#CardBody",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_07dc315052bd18b39ad2ec47",
+      "location": {
+        "line": 3,
+        "path": "src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--space-md)",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.module.css#--space-md",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_0a1fea4aec0173552b495e27",
+      "location": {
+        "line": 9,
+        "path": "src/IconButton.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Button {...rest} aria-label={label} variant=\"ghost\">",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/IconButton.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_0fedd533f002b751c0bb537e",
+      "location": {
+        "line": 1,
+        "path": "src/Link.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children: React.ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Link.tsx#Link",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_10f94f121146d27131c53032",
+      "location": {
+        "line": 1,
+        "path": "src/Tooltip.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children: React.ReactElement;",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Tooltip.tsx#Tooltip",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_13e4f84a47499d0243a63993",
+      "location": {
+        "line": 18,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "title: string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#CardHeader",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_15bb1f09df9ddead7eadc6ef",
+      "location": {
+        "line": 6,
+        "path": "src/layout/Stack.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "({ gap = \"md\", children }) => (",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/layout/Stack.tsx#Stack",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_16287965e4c908eb4b5d61ec",
+      "location": {
+        "line": 1,
+        "path": "src/Tooltip.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "content: React.ReactNode;",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Tooltip.tsx#Tooltip",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_177ea763eebae7a889c65da8",
+      "location": {
+        "line": 6,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "getKey: (option: T) => string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_18ca96969be14139161c706c",
+      "location": {
+        "line": 12,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_19ee1b6deed69bd6272ff1a9",
+      "location": {
+        "line": 16,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "onPress?: (event: React.MouseEvent<HTMLButtonElement>) => void",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_1c36eeac8a3c4046dfe5ff83",
+      "location": {
+        "line": 12,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Text tone=\"danger\">",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_2899ce270d703f2949d0c250",
+      "location": {
+        "line": 7,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "shadow: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#7",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_289d97d85435d107db6fa15e",
+      "location": {
+        "line": 18,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "function CardHeader({ title }: { title: string }) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#CardHeader",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_2c64276bf0ad3e8246a61b65",
+      "location": {
+        "line": 3,
+        "path": "src/Badge.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "Badge = styled.span<{ tone?: \"info\" | \"warn\" }>`",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Badge.tsx#Badge",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_2de6306828e1b9135e2d580a",
+      "location": {
+        "line": 22,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "function CardBody({ children }: { children: ReactNode }) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#CardBody",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_333be2b3520d859a0277d256",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size: { control: \"radio\", options: [\"sm\", \"lg\", \"xl\"], table: { defaultValue: { summary: \"lg\" } } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#7",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_3fd827d13ec6484bd47b7c51",
+      "location": {
+        "line": 10,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "function CardRoot({ elevated = false, children }: CardProps) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#Card",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_45f46f1555f5ec477fec25be",
+      "location": {
+        "line": 8,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "shadow: { control: \"boolean\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#8",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_47d53f3a4f231e6ebbd33ca4",
+      "location": {
+        "line": 9,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Card elevated>",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_4806899dbe2d1d890706f830",
+      "location": {
+        "line": 10,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export function Select<T>({ options, value, onChange, renderOption, getKey, placeholder = \"Select…\" }: SelectProps<T>) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_4947d273ba1e2ed6b733d303",
+      "location": {
+        "line": 12,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_4c489d9dfeb5800505580c79",
+      "location": {
+        "line": 6,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "\"data-testid\"?: string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_4e2dd3a0316e820e4fc524f3",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "onClose?: () => void",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Modal.tsx#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_4f2b07696e5d5e8903a6b8c8",
+      "location": {
+        "line": 15,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "loading?: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_56f20912a79af1ef318b8de7",
+      "location": {
+        "line": 3,
+        "path": "src/LazyChart.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "LazyChart = lazy(() => import(\"./Chart\"))",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/LazyChart.tsx#LazyChart",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_577a1472804c20c5a68e0922",
+      "location": {
+        "line": 28,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "function Button(",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_5a1f14afca915ec8e6697ba9",
+      "location": {
+        "line": 15,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "loading?: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_5c381fcc83538765eb2aaace",
+      "location": {
+        "line": 5,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "renderOption?: (option: T) => React.ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_60d0b0aa4636db23cb8a64d1",
+      "location": {
+        "line": 28,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_62f135cc7f748e3be51ff5e1",
+      "location": {
+        "line": 6,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "\"data-testid\"?: string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_67abf2d9e487576f8ea3efcd",
+      "location": {
+        "line": 14,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "plain?: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_69e37e4c9abe2b2b5cebf83a",
+      "location": {
+        "line": 12,
+        "path": "src/Modal.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export class Modal extends Component<ModalProps> {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Modal.tsx#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_6ac2a6b93d2220184efeb761",
+      "location": {
+        "line": 40,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant: \"danger\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#40",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_6ad69f4a5ed573f869aa687f",
+      "location": {
+        "line": 2,
+        "path": "src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.module.css#--color-action",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_7181d9d35d74513191a69c5f",
+      "location": {
+        "line": 1,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.mdx",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_784c15187c627e26f8b22be2",
+      "location": {
+        "line": 1,
+        "path": "src/Icon.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: number",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Icon.tsx#Icon",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_7afe28a2ad2f6931d7fc9e59",
+      "location": {
+        "line": 14,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "plain?: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_7c4e18fef65ed00f575259ec",
+      "location": {
+        "line": 8,
+        "path": "src/Modal.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children?: React.ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Modal.tsx#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_80c1d0d59ce04db76a538ce1",
+      "location": {
+        "line": 12,
+        "path": "src/Text.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "as?: \"p\" | \"span\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Text.tsx#Text",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_81ea3e7b5d3c11d27da5b250",
+      "location": {
+        "line": 14,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant: {",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#14",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_8b251bc782ed832049e3aa1d",
+      "location": {
+        "line": 17,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Icon name=\"gear\" />",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_8b8f4086e2f21dc8f0b46c6f",
+      "location": {
+        "line": 6,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "elevated?: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#Card",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_8de78f86b5dfcab9077b7940",
+      "location": {
+        "line": 5,
+        "path": "src/Modal.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "title?: string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Modal.tsx#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_8e3c6446de18d664a20cad21",
+      "location": {
+        "line": 7,
+        "path": "src/IconButton.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "IconButton = memo(function IconButton({ name, label, ...rest }: IconButtonProps) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/IconButton.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_8f6fd8902d776541fc99c2f1",
+      "location": {
+        "line": 13,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Select options={[\"a\", \"b\"]} getKey={(o) => o} />",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_91047bbd55dcf47bd297396b",
+      "location": {
+        "line": 26,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "Card = Object.assign(CardRoot, { Header: CardHeader, Body: CardBody })",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#Card",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_92c4b385672040e2ab932f00",
+      "location": {
+        "line": 2,
+        "path": "src/layout/Stack.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "gap?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/layout/Stack.tsx#Stack",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_9af85949c3817e85abf89a86",
+      "location": {
+        "line": 1,
+        "path": "src/Icon.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export function Icon({ name, size = 16 }: { name: string; size?: number }) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Icon.tsx#Icon",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_9e78193da49080b922cc1aa6",
+      "location": {
+        "line": 19,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Card shadow />",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_9eaed69d08f76997a7706bdd",
+      "location": {
+        "line": 14,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Button variant=\"primary\" size=\"lg\">",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_9ed9f9102d54ef77d88bb06c",
+      "location": {
+        "line": 11,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Card.Body>",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_9efc1ddd4d137b2caa04a251",
+      "location": {
+        "line": 6,
+        "path": "src/layout/Stack.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "Stack: React.FC<StackProps> = ({ gap = \"md\", children }) => (",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/layout/Stack.tsx#Stack",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a0a6f17aa71a696bd547fd81",
+      "location": {
+        "line": 11,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "variant?: \"primary\" | \"secondary\" | \"ghost\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a24da36484acf8e358d0b353",
+      "location": {
+        "line": 10,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Card.Header title=\"Overview\" />",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a29a4c5a3620f259272d6f55",
+      "location": {
+        "line": 4,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "onChange?: (value: T) => void",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a376b6cbc018b067f70de9a5",
+      "location": {
+        "line": 1,
+        "path": "src/Link.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "Link = ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Link.tsx#Link",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a57487f7be2e97500e7cd36c",
+      "location": {
+        "line": 15,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Button variant=\"danger\">",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a6029cd4f5f8393d673d223d",
+      "location": {
+        "line": 6,
+        "path": "src/Modal.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"lg\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Modal.tsx#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a84a9b305f8e04133c192ba9",
+      "location": {
+        "line": 4,
+        "path": "src/Modal.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "open: boolean",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Modal.tsx#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_ac344b00194a6c742dff7be4",
+      "location": {
+        "line": 5,
+        "path": "src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-brand)",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.module.css#--color-brand",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_af08bd8e626fe3caebb0dcae",
+      "location": {
+        "line": 42,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "plain: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#42",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_b7b15bbd11e87e6d826cca56",
+      "location": {
+        "line": 17,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children: React.ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_b8eff882acfa64b73d4354c6",
+      "location": {
+        "line": 3,
+        "path": "src/Badge.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "tone?: \"info\" | \"warn\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Badge.tsx#Badge",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_bc52931c3ccd47b481270429",
+      "location": {
+        "line": 3,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "value?: T",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_bce9e11ae32a5242ba3efde6",
+      "location": {
+        "line": 19,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "icon?: React.ReactElement",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_c2fabde247dda4bab5a71680",
+      "location": {
+        "line": 16,
+        "path": "src/Dashboard.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Button variant={pick()}>",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Dashboard.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_c378e7e13caf4816098960f6",
+      "location": {
+        "line": 21,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "shadow: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#21",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_c7565b2be520c2fd42897457",
+      "location": {
+        "line": 2,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "options: T[]",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_cb1b12ad6150756392175003",
+      "location": {
+        "line": 5,
+        "path": "src/IconButton.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "label: string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/IconButton.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_cf58de39c443c8cb298e7e63",
+      "location": {
+        "line": 13,
+        "path": "src/Text.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children: React.ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Text.tsx#Text",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_d36bca3734045d6c6db90435",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size: \"xl\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#11",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d3faae277ce98107338f5b89",
+      "location": {
+        "line": 16,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "onPress?: (event: React.MouseEvent<HTMLButtonElement>) => void",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d7b616e08cb4484d8a6d1b7e",
+      "location": {
+        "line": 3,
+        "path": "src/Text.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "text = cva(\"text\", {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Text.tsx#Text",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d8dc700455a63d3d14ac4eae",
+      "location": {
+        "line": 7,
+        "path": "src/Select.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "placeholder?: string",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Select.tsx#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_e18319969260512471225852",
+      "location": {
+        "line": 11,
+        "path": "src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "variant?: \"primary\" | \"secondary\" | \"ghost\"",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_e24f2065291bc925c76eb028",
+      "location": {
+        "line": 1,
+        "path": "src/Icon.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "name: string;",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Icon.tsx#Icon",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_e36fd0b10ad34a1a4f21c581",
+      "location": {
+        "line": 16,
+        "path": "src/Text.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export function Text({ as: Tag = \"p\", tone, weight, children }: TextProps) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Text.tsx#Text",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_e6e0e38c8f97c4f6b4743cdc",
+      "location": {
+        "line": 22,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "plain: { control: \"boolean\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#22",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_e990ddfba7074b727e5c15bd",
+      "location": {
+        "line": 5,
+        "path": "src/IconButton.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "name: string;",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/IconButton.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_eee80144c208e30849abc5d7",
+      "location": {
+        "line": 1,
+        "path": "src/Tooltip.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export function Tooltip({ content, children, open }: { content: React.ReactNode; children: React.ReactElement; open?: boolean }) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Tooltip.tsx#Tooltip",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f147342b4bc2065d2549e043",
+      "location": {
+        "line": 7,
+        "path": "src/IconButton.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "function IconButton({ name, label, ...rest }: IconButtonProps) {",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/IconButton.tsx#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f7d687cfc931d1d83b09c55a",
+      "location": {
+        "line": 10,
+        "path": "src/IconButton.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "<Icon name={name} />",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/IconButton.tsx#usage",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f889f406919d94ec3969ea70",
+      "location": {
+        "line": 3,
+        "path": "src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--space-lg)",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Button.module.css#--space-lg",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f900dc0beb4f72d7b984d1c4",
+      "location": {
+        "line": 7,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children?: ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Card.tsx#Card",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f9a3c9f66f874314b55952b5",
+      "location": {
+        "line": 3,
+        "path": "src/layout/Stack.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children?: React.ReactNode",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/layout/Stack.tsx#Stack",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_fe391b1d721cedf5acb50a3d",
+      "location": {
+        "line": 1,
+        "path": "src/Link.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "href: string;",
+      "sourceId": "react-acme-ui",
+      "sourceRef": "src/Link.tsx#Link",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "evidenceVersion": "1.0.0"
+}

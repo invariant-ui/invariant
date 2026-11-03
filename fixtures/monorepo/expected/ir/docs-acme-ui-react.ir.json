@@ -1,0 +1,152 @@
+{
+  "capabilities": [
+    "doc.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "doc-page",
+      "name": "@acme/ui-react",
+      "ref": "doc:packages/ui-react/README.md"
+    },
+    {
+      "kind": "doc-page",
+      "name": "Button usage",
+      "ref": "doc:packages/ui-react/src/Button.mdx"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_026ff3450bc5993deab538c1",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-react/src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/Button.mdx",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_6645f0df3344316104ace155",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-react/README.md",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-ui-react",
+      "sourceRef": "packages/ui-react/README.md",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_6645f0df3344316104ace155"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:packages/ui-react/README.md",
+      "value": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "@acme/ui-react"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_6645f0df3344316104ace155"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:packages/ui-react/README.md",
+      "value": "readme"
+    },
+    {
+      "evidenceIds": [
+        "ev_6645f0df3344316104ace155"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:packages/ui-react/README.md",
+      "value": 4
+    },
+    {
+      "evidenceIds": [
+        "ev_6645f0df3344316104ace155"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:packages/ui-react/README.md",
+      "value": "@acme/ui-react"
+    },
+    {
+      "evidenceIds": [
+        "ev_026ff3450bc5993deab538c1"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:packages/ui-react/src/Button.mdx",
+      "value": [
+        {
+          "level": 1,
+          "line": 5,
+          "text": "Button usage"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_026ff3450bc5993deab538c1"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:packages/ui-react/src/Button.mdx",
+      "value": "mdx"
+    },
+    {
+      "evidenceIds": [
+        "ev_026ff3450bc5993deab538c1"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:packages/ui-react/src/Button.mdx",
+      "value": 8
+    },
+    {
+      "evidenceIds": [
+        "ev_026ff3450bc5993deab538c1"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:packages/ui-react/src/Button.mdx",
+      "value": "Button usage"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-markdown",
+      "version": "0.1.0"
+    },
+    "id": "docs-acme-ui-react",
+    "inputHash": "675a92fe64900302084d4410ab33bb63600420f1a8c047946e79bbce1c0a1b21",
+    "location": "packages/ui-react",
+    "type": "markdown"
+  }
+}

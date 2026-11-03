@@ -1,0 +1,354 @@
+{
+  "capabilities": [
+    "deprecated",
+    "description",
+    "extensions.*",
+    "modes.*",
+    "name",
+    "value.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "token",
+      "name": "color-action",
+      "ref": "css:src/tokens.css#--color-action"
+    },
+    {
+      "kind": "token",
+      "name": "color-brand",
+      "ref": "css:src/tokens.css#--color-brand"
+    },
+    {
+      "kind": "token",
+      "name": "space-md",
+      "ref": "css:src/tokens.css#--space-md"
+    },
+    {
+      "kind": "token",
+      "name": "color.brand",
+      "ref": "token:src/tokens.json#color.brand"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "design-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_24ee4d67d1f2652701f5739d",
+      "location": {
+        "line": 3,
+        "path": "src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-action: var(--color-brand);",
+      "sourceId": "design-tokens-acme-ui",
+      "sourceRef": "src/tokens.css#--color-action",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "design-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_3d1e00990c5679bb7e973c99",
+      "location": {
+        "line": 4,
+        "path": "src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--space-md: 16px;",
+      "sourceId": "design-tokens-acme-ui",
+      "sourceRef": "src/tokens.css#--space-md",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "design-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_a43e5899a41db6923d5ec9fb",
+      "location": {
+        "line": 1,
+        "path": "src/tokens.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "design-tokens-acme-ui",
+      "sourceRef": "src/tokens.json#color.brand",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "design-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_a840598bccbe4b004aa7a167",
+      "location": {
+        "line": 6,
+        "path": "src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-brand: #4d8dff;",
+      "sourceId": "design-tokens-acme-ui",
+      "sourceRef": "src/tokens.css#--color-brand",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "design-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_cdf4c7f1d4ef15c084a9b466",
+      "location": {
+        "line": 2,
+        "path": "src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-brand: #0057ff;",
+      "sourceId": "design-tokens-acme-ui",
+      "sourceRef": "src/tokens.css#--color-brand",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_24ee4d67d1f2652701f5739d"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.name",
+      "subject": "css:src/tokens.css#--color-action",
+      "value": "--color-action"
+    },
+    {
+      "evidenceIds": [
+        "ev_24ee4d67d1f2652701f5739d"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.root.rawValue",
+      "subject": "css:src/tokens.css#--color-action",
+      "value": "var(--color-brand)"
+    },
+    {
+      "evidenceIds": [
+        "ev_24ee4d67d1f2652701f5739d"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.root.valueKind",
+      "subject": "css:src/tokens.css#--color-action",
+      "value": "reference"
+    },
+    {
+      "evidenceIds": [
+        "ev_24ee4d67d1f2652701f5739d"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:src/tokens.css#--color-action",
+      "value": "color-action"
+    },
+    {
+      "evidenceIds": [
+        "ev_24ee4d67d1f2652701f5739d"
+      ],
+      "origin": "extracted",
+      "path": "value.aliasOf",
+      "subject": "css:src/tokens.css#--color-action",
+      "value": "color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_a840598bccbe4b004aa7a167"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.modes.dark.rawValue",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "#4d8dff"
+    },
+    {
+      "evidenceIds": [
+        "ev_a840598bccbe4b004aa7a167"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.modes.dark.valueKind",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "color"
+    },
+    {
+      "evidenceIds": [
+        "ev_a840598bccbe4b004aa7a167"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.modes.dark.via",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "selector"
+    },
+    {
+      "evidenceIds": [
+        "ev_cdf4c7f1d4ef15c084a9b466"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.name",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "--color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_a840598bccbe4b004aa7a167"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.name",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "--color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_cdf4c7f1d4ef15c084a9b466"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.root.rawValue",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "#0057ff"
+    },
+    {
+      "evidenceIds": [
+        "ev_cdf4c7f1d4ef15c084a9b466"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.root.valueKind",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "color"
+    },
+    {
+      "evidenceIds": [
+        "ev_a840598bccbe4b004aa7a167"
+      ],
+      "origin": "extracted",
+      "path": "modes.dark.value",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "#4d8dff"
+    },
+    {
+      "evidenceIds": [
+        "ev_cdf4c7f1d4ef15c084a9b466"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_a840598bccbe4b004aa7a167"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_cdf4c7f1d4ef15c084a9b466"
+      ],
+      "origin": "extracted",
+      "path": "value.value",
+      "subject": "css:src/tokens.css#--color-brand",
+      "value": "#0057ff"
+    },
+    {
+      "evidenceIds": [
+        "ev_3d1e00990c5679bb7e973c99"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.name",
+      "subject": "css:src/tokens.css#--space-md",
+      "value": "--space-md"
+    },
+    {
+      "evidenceIds": [
+        "ev_3d1e00990c5679bb7e973c99"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.root.rawValue",
+      "subject": "css:src/tokens.css#--space-md",
+      "value": "16px"
+    },
+    {
+      "evidenceIds": [
+        "ev_3d1e00990c5679bb7e973c99"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.root.valueKind",
+      "subject": "css:src/tokens.css#--space-md",
+      "value": "length"
+    },
+    {
+      "evidenceIds": [
+        "ev_3d1e00990c5679bb7e973c99"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:src/tokens.css#--space-md",
+      "value": "space-md"
+    },
+    {
+      "evidenceIds": [
+        "ev_3d1e00990c5679bb7e973c99"
+      ],
+      "origin": "extracted",
+      "path": "value.value",
+      "subject": "css:src/tokens.css#--space-md",
+      "value": "16px"
+    },
+    {
+      "evidenceIds": [
+        "ev_a43e5899a41db6923d5ec9fb"
+      ],
+      "origin": "extracted",
+      "path": "extensions.dtcg.type",
+      "subject": "token:src/tokens.json#color.brand",
+      "value": "color"
+    },
+    {
+      "evidenceIds": [
+        "ev_a43e5899a41db6923d5ec9fb"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "token:src/tokens.json#color.brand",
+      "value": "color.brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_a43e5899a41db6923d5ec9fb"
+      ],
+      "origin": "extracted",
+      "path": "value.value",
+      "subject": "token:src/tokens.json#color.brand",
+      "value": "#0057ff"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "design-tokens",
+      "version": "0.1.0"
+    },
+    "id": "design-tokens-acme-ui",
+    "inputHash": "467a84e09dc35e93cfc2229c734d1b018715bdbbfcb44f3d00719ae263b79712",
+    "location": ".",
+    "type": "tokens"
+  }
+}

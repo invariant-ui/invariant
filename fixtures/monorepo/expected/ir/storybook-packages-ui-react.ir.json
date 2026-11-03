@@ -1,0 +1,165 @@
+{
+  "capabilities": [
+    "config.*"
+  ],
+  "completeness": "partial",
+  "diagnostics": [
+    {
+      "code": "discovery.storybook-dynamic-config",
+      "location": {
+        "path": "packages/ui-react/.storybook/main.ts"
+      },
+      "message": "Storybook 'viteFinal' in packages/ui-react/.storybook/main.ts is not statically determinable",
+      "severity": "warning",
+      "sourceId": "storybook-packages-ui-react"
+    }
+  ],
+  "entities": [
+    {
+      "kind": "config",
+      "name": "Storybook (packages/ui-react)",
+      "ref": "storybook:packages/ui-react"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-storybook",
+        "version": "0.1.0"
+      },
+      "id": "ev_f1e40d57ac8e5a9f3e3deafc",
+      "location": {
+        "path": "packages/ui-react/.storybook/main.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "storybook-packages-ui-react",
+      "sourceRef": "packages/ui-react/.storybook/main.ts",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.addons",
+      "subject": "storybook:packages/ui-react",
+      "value": [
+        "@storybook/addon-a11y",
+        "@storybook/addon-essentials"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.dynamicProperties",
+      "subject": "storybook:packages/ui-react",
+      "value": [
+        "viteFinal"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.framework",
+      "subject": "storybook:packages/ui-react",
+      "value": "@storybook/react-vite"
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.path",
+      "subject": "storybook:packages/ui-react",
+      "value": "packages/ui-react/.storybook/main.ts"
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.staticDirs",
+      "subject": "storybook:packages/ui-react",
+      "value": [
+        "../public"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.stories",
+      "subject": "storybook:packages/ui-react",
+      "value": [
+        {
+          "pattern": "../src/**/*.mdx"
+        },
+        {
+          "pattern": "../src/**/*.stories.@(ts|tsx)"
+        }
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.storyFileCount",
+      "subject": "storybook:packages/ui-react",
+      "value": 2
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.storyFiles",
+      "subject": "storybook:packages/ui-react",
+      "value": [
+        "packages/ui-react/src/Button.mdx",
+        "packages/ui-react/src/Button.stories.tsx"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_f1e40d57ac8e5a9f3e3deafc"
+      ],
+      "origin": "extracted",
+      "path": "config.version",
+      "subject": "storybook:packages/ui-react",
+      "value": {
+        "declaredRange": "^8.4.0",
+        "package": "storybook"
+      }
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-storybook",
+      "version": "0.1.0"
+    },
+    "id": "storybook-packages-ui-react",
+    "inputHash": "4da846ca6e7effbd3f6fa036a53050a877e3696568a31010bae4b80bb83b9eff",
+    "location": "packages/ui-react",
+    "type": "storybook"
+  }
+}

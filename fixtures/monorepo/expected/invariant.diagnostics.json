@@ -1,0 +1,23 @@
+{
+  "diagnostics": [
+    {
+      "code": "discovery.storybook-dynamic-config",
+      "location": {
+        "path": "packages/ui-react/.storybook/main.ts"
+      },
+      "message": "Storybook 'viteFinal' in packages/ui-react/.storybook/main.ts is not statically determinable",
+      "severity": "warning",
+      "sourceId": "storybook-packages-ui-react"
+    },
+    {
+      "code": "discovery.entry-pattern-unsupported",
+      "location": {
+        "path": "packages/ui-react/package.json"
+      },
+      "message": "Entry pattern ./icons/* in package:@acme/ui-react is not expanded",
+      "severity": "info",
+      "sourceId": "npm-acme-ui-react"
+    }
+  ],
+  "diagnosticsVersion": "1.0.0"
+}

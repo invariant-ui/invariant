@@ -1,0 +1,93 @@
+{
+  "capabilities": [
+    "doc.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "doc-page",
+      "name": "Button",
+      "ref": "doc:src/Button.mdx"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_cfa5b82e678af4c5c980f6c2",
+      "location": {
+        "line": 1,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-ui",
+      "sourceRef": "src/Button.mdx",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_cfa5b82e678af4c5c980f6c2"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:src/Button.mdx",
+      "value": [
+        {
+          "level": 1,
+          "line": 6,
+          "text": "Button"
+        },
+        {
+          "level": 2,
+          "line": 15,
+          "text": "Variants"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_cfa5b82e678af4c5c980f6c2"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:src/Button.mdx",
+      "value": "mdx"
+    },
+    {
+      "evidenceIds": [
+        "ev_cfa5b82e678af4c5c980f6c2"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:src/Button.mdx",
+      "value": 22
+    },
+    {
+      "evidenceIds": [
+        "ev_cfa5b82e678af4c5c980f6c2"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:src/Button.mdx",
+      "value": "Button"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-markdown",
+      "version": "0.1.0"
+    },
+    "id": "docs-acme-ui",
+    "inputHash": "41135075ef486a1a4ca1039241b6f56f41269be903dd794f149e1492de277fb0",
+    "location": ".",
+    "type": "markdown"
+  }
+}

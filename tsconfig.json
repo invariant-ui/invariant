@@ -1,0 +1,62 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/shared"
+    },
+    {
+      "path": "packages/diagnostics"
+    },
+    {
+      "path": "packages/contract"
+    },
+    {
+      "path": "packages/compiler-ir"
+    },
+    {
+      "path": "packages/compiler-core"
+    },
+    {
+      "path": "packages/artifact-generator"
+    },
+    {
+      "path": "packages/compiler-tokens"
+    },
+    {
+      "path": "packages/compiler-react"
+    },
+    {
+      "path": "packages/compiler-storybook"
+    },
+    {
+      "path": "packages/reconciliation"
+    },
+    {
+      "path": "packages/compiler-vue"
+    },
+    {
+      "path": "packages/compiler-angular"
+    },
+    {
+      "path": "packages/semantic-engine"
+    },
+    {
+      "path": "apps/cli"
+    },
+    {
+      "path": "packages/contract-query"
+    },
+    {
+      "path": "packages/mcp"
+    },
+    {
+      "path": "packages/agent-kit"
+    },
+    {
+      "path": "packages/validation"
+    },
+    {
+      "path": "packages/governance"
+    }
+  ]
+}

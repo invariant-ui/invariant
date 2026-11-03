@@ -1,0 +1,530 @@
+{
+  "diagnostics": [
+    {
+      "code": "reconcile.storybook.arg-undeclared",
+      "entityId": "storybook:src/Card.stories.tsx",
+      "location": {
+        "line": 7,
+        "path": "src/Card.stories.tsx"
+      },
+      "message": "Components/Card passes arg \"shadow\", which Card does not declare as a prop",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.arg-undeclared",
+      "entityId": "storybook:src/Card.stories.tsx#Plain",
+      "location": {
+        "line": 21,
+        "path": "src/Card.stories.tsx"
+      },
+      "message": "Plain passes arg \"shadow\", which Card does not declare as a prop",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.arg-value-not-allowed",
+      "entityId": "storybook:src/Button.stories.tsx#Danger",
+      "location": {
+        "line": 40,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Danger sets Button.variant to \"danger\", which is not one of its declared values (\"primary\", \"secondary\", \"ghost\")",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.arg-value-not-allowed",
+      "entityId": "storybook:src/Modal.stories.tsx#Open",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "Open sets Modal.size to \"xl\", which is not one of its declared values (\"sm\", \"lg\")",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.control-option-not-allowed",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "location": {
+        "line": 14,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Components/Button: the control for Button.variant offers \"danger\", which the component does not declare",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.control-option-not-allowed",
+      "entityId": "storybook:src/Modal.stories.tsx",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "Components/Modal: the control for Modal.size offers \"xl\", which the component does not declare",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.control-undeclared",
+      "entityId": "storybook:src/Card.stories.tsx",
+      "location": {
+        "line": 8,
+        "path": "src/Card.stories.tsx"
+      },
+      "message": "Components/Card documents a control for \"shadow\", which Card does not declare as a prop",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.default-mismatch",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "location": {
+        "line": 14,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Components/Button documents the default of Button.variant as secondary, but the code default is \"primary\"",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.default-mismatch",
+      "entityId": "storybook:src/Modal.stories.tsx",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "Components/Modal documents the default of Modal.size as lg, but the code default is \"sm\"",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.deprecated-demonstrated",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "location": {
+        "line": 22,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Components/Button documents a control for \"plain\", a deprecated prop of Button",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.deprecated-demonstrated",
+      "entityId": "storybook:src/Button.stories.tsx#Deprecated",
+      "location": {
+        "line": 42,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Deprecated uses arg \"plain\", a deprecated prop of Button",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "reconcile.storybook.prop-not-demonstrated",
+      "entityId": "react:src/Button.tsx#Button",
+      "message": "Button declares data-testid, which no story passes as an arg or documents as a control",
+      "severity": "info",
+      "sourceId": "react-acme-ui"
+    },
+    {
+      "code": "reconcile.storybook.prop-not-demonstrated",
+      "entityId": "react:src/IconButton.tsx#IconButton",
+      "message": "IconButton declares data-testid, loading, plain, which no story passes as an arg or documents as a control",
+      "severity": "info",
+      "sourceId": "react-acme-ui"
+    },
+    {
+      "code": "reconcile.storybook.prop-not-demonstrated",
+      "entityId": "react:src/Select.tsx#Select",
+      "message": "Select declares placeholder, renderOption, value, which no story passes as an arg or documents as a control",
+      "severity": "info",
+      "sourceId": "react-acme-ui"
+    },
+    {
+      "code": "reconcile.storybook.unverifiable-names",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "message": "Components/Button: bogus, tone could not be verified against Button, whose props are inherited from types that were not enumerated",
+      "severity": "info",
+      "sourceId": "stories-root"
+    }
+  ],
+  "discrepancies": [
+    {
+      "claim": {
+        "storybook": true
+      },
+      "code": "reconcile.storybook.arg-undeclared",
+      "codeEvidence": [],
+      "component": "react:src/Card.tsx#Card",
+      "entityId": "storybook:src/Card.stories.tsx",
+      "location": {
+        "line": 7,
+        "path": "src/Card.stories.tsx"
+      },
+      "message": "Components/Card passes arg \"shadow\", which Card does not declare as a prop",
+      "prop": "shadow",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_2899ce270d703f2949d0c250"
+      ]
+    },
+    {
+      "claim": {
+        "storybook": true
+      },
+      "code": "reconcile.storybook.arg-undeclared",
+      "codeEvidence": [],
+      "component": "react:src/Card.tsx#Card",
+      "entityId": "storybook:src/Card.stories.tsx#Plain",
+      "location": {
+        "line": 21,
+        "path": "src/Card.stories.tsx"
+      },
+      "message": "Plain passes arg \"shadow\", which Card does not declare as a prop",
+      "prop": "shadow",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_c378e7e13caf4816098960f6"
+      ]
+    },
+    {
+      "claim": {
+        "code": [
+          "primary",
+          "secondary",
+          "ghost"
+        ],
+        "storybook": "danger"
+      },
+      "code": "reconcile.storybook.arg-value-not-allowed",
+      "codeEvidence": [
+        "ev_a0a6f17aa71a696bd547fd81"
+      ],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "storybook:src/Button.stories.tsx#Danger",
+      "location": {
+        "line": 40,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Danger sets Button.variant to \"danger\", which is not one of its declared values (\"primary\", \"secondary\", \"ghost\")",
+      "prop": "variant",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_6ac2a6b93d2220184efeb761"
+      ]
+    },
+    {
+      "claim": {
+        "code": [
+          "sm",
+          "lg"
+        ],
+        "storybook": "xl"
+      },
+      "code": "reconcile.storybook.arg-value-not-allowed",
+      "codeEvidence": [
+        "ev_a6029cd4f5f8393d673d223d"
+      ],
+      "component": "react:src/Modal.tsx#Modal",
+      "entityId": "storybook:src/Modal.stories.tsx#Open",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "Open sets Modal.size to \"xl\", which is not one of its declared values (\"sm\", \"lg\")",
+      "prop": "size",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_d36bca3734045d6c6db90435"
+      ]
+    },
+    {
+      "claim": {
+        "code": [
+          "primary",
+          "secondary",
+          "ghost"
+        ],
+        "storybook": [
+          "danger"
+        ]
+      },
+      "code": "reconcile.storybook.control-option-not-allowed",
+      "codeEvidence": [
+        "ev_a0a6f17aa71a696bd547fd81"
+      ],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "location": {
+        "line": 14,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Components/Button: the control for Button.variant offers \"danger\", which the component does not declare",
+      "prop": "variant",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ]
+    },
+    {
+      "claim": {
+        "code": [
+          "sm",
+          "lg"
+        ],
+        "storybook": [
+          "xl"
+        ]
+      },
+      "code": "reconcile.storybook.control-option-not-allowed",
+      "codeEvidence": [
+        "ev_a6029cd4f5f8393d673d223d"
+      ],
+      "component": "react:src/Modal.tsx#Modal",
+      "entityId": "storybook:src/Modal.stories.tsx",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "Components/Modal: the control for Modal.size offers \"xl\", which the component does not declare",
+      "prop": "size",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_333be2b3520d859a0277d256"
+      ]
+    },
+    {
+      "claim": {
+        "storybook": true
+      },
+      "code": "reconcile.storybook.control-undeclared",
+      "codeEvidence": [],
+      "component": "react:src/Card.tsx#Card",
+      "entityId": "storybook:src/Card.stories.tsx",
+      "location": {
+        "line": 8,
+        "path": "src/Card.stories.tsx"
+      },
+      "message": "Components/Card documents a control for \"shadow\", which Card does not declare as a prop",
+      "prop": "shadow",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_45f46f1555f5ec477fec25be"
+      ]
+    },
+    {
+      "claim": {
+        "code": "primary",
+        "storybook": "secondary"
+      },
+      "code": "reconcile.storybook.default-mismatch",
+      "codeEvidence": [
+        "ev_577a1472804c20c5a68e0922",
+        "ev_a0a6f17aa71a696bd547fd81"
+      ],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "location": {
+        "line": 14,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Components/Button documents the default of Button.variant as secondary, but the code default is \"primary\"",
+      "prop": "variant",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ]
+    },
+    {
+      "claim": {
+        "code": "sm",
+        "storybook": "lg"
+      },
+      "code": "reconcile.storybook.default-mismatch",
+      "codeEvidence": [
+        "ev_69e37e4c9abe2b2b5cebf83a",
+        "ev_a6029cd4f5f8393d673d223d"
+      ],
+      "component": "react:src/Modal.tsx#Modal",
+      "entityId": "storybook:src/Modal.stories.tsx",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "Components/Modal documents the default of Modal.size as lg, but the code default is \"sm\"",
+      "prop": "size",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_333be2b3520d859a0277d256"
+      ]
+    },
+    {
+      "claim": {
+        "code": "deprecated",
+        "storybook": true
+      },
+      "code": "reconcile.storybook.deprecated-demonstrated",
+      "codeEvidence": [
+        "ev_7afe28a2ad2f6931d7fc9e59"
+      ],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "location": {
+        "line": 22,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Components/Button documents a control for \"plain\", a deprecated prop of Button",
+      "prop": "plain",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_e6e0e38c8f97c4f6b4743cdc"
+      ]
+    },
+    {
+      "claim": {
+        "code": "deprecated",
+        "storybook": true
+      },
+      "code": "reconcile.storybook.deprecated-demonstrated",
+      "codeEvidence": [
+        "ev_7afe28a2ad2f6931d7fc9e59"
+      ],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "storybook:src/Button.stories.tsx#Deprecated",
+      "location": {
+        "line": 42,
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "Deprecated uses arg \"plain\", a deprecated prop of Button",
+      "prop": "plain",
+      "severity": "warning",
+      "sourceId": "stories-root",
+      "storybookEvidence": [
+        "ev_af08bd8e626fe3caebb0dcae"
+      ]
+    },
+    {
+      "code": "reconcile.storybook.prop-not-demonstrated",
+      "codeEvidence": [
+        "ev_62f135cc7f748e3be51ff5e1"
+      ],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "react:src/Button.tsx#Button",
+      "message": "Button declares data-testid, which no story passes as an arg or documents as a control",
+      "severity": "info",
+      "sourceId": "react-acme-ui",
+      "storybookEvidence": []
+    },
+    {
+      "code": "reconcile.storybook.prop-not-demonstrated",
+      "codeEvidence": [
+        "ev_4c489d9dfeb5800505580c79",
+        "ev_4f2b07696e5d5e8903a6b8c8",
+        "ev_67abf2d9e487576f8ea3efcd"
+      ],
+      "component": "react:src/IconButton.tsx#IconButton",
+      "entityId": "react:src/IconButton.tsx#IconButton",
+      "message": "IconButton declares data-testid, loading, plain, which no story passes as an arg or documents as a control",
+      "severity": "info",
+      "sourceId": "react-acme-ui",
+      "storybookEvidence": []
+    },
+    {
+      "code": "reconcile.storybook.prop-not-demonstrated",
+      "codeEvidence": [
+        "ev_d8dc700455a63d3d14ac4eae",
+        "ev_5c381fcc83538765eb2aaace",
+        "ev_bc52931c3ccd47b481270429"
+      ],
+      "component": "react:src/Select.tsx#Select",
+      "entityId": "react:src/Select.tsx#Select",
+      "message": "Select declares placeholder, renderOption, value, which no story passes as an arg or documents as a control",
+      "severity": "info",
+      "sourceId": "react-acme-ui",
+      "storybookEvidence": []
+    },
+    {
+      "code": "reconcile.storybook.unverifiable-names",
+      "codeEvidence": [],
+      "component": "react:src/Button.tsx#Button",
+      "entityId": "storybook:src/Button.stories.tsx",
+      "message": "Components/Button: bogus, tone could not be verified against Button, whose props are inherited from types that were not enumerated",
+      "severity": "info",
+      "sourceId": "stories-root",
+      "storybookEvidence": []
+    }
+  ],
+  "links": [
+    {
+      "component": "react:src/Button.tsx#Button",
+      "componentSourceId": "react-acme-ui",
+      "group": "storybook:src/Button.stories.tsx",
+      "matchedBy": "file+localName",
+      "stories": [
+        "storybook:src/Button.stories.tsx#Danger",
+        "storybook:src/Button.stories.tsx#Deprecated",
+        "storybook:src/Button.stories.tsx#Primary",
+        "storybook:src/Button.stories.tsx#WithIcon"
+      ],
+      "storySourceId": "stories-root",
+      "via": "component"
+    },
+    {
+      "component": "react:src/Card.tsx#Card",
+      "componentSourceId": "react-acme-ui",
+      "group": "storybook:src/Card.stories.tsx",
+      "matchedBy": "file+localName",
+      "stories": [
+        "storybook:src/Card.stories.tsx#Basic",
+        "storybook:src/Card.stories.tsx#Plain"
+      ],
+      "storySourceId": "stories-root",
+      "via": "component"
+    },
+    {
+      "component": "react:src/IconButton.tsx#IconButton",
+      "componentSourceId": "react-acme-ui",
+      "group": "storybook:src/IconButton.stories.tsx",
+      "matchedBy": "file+localName",
+      "stories": [
+        "storybook:src/IconButton.stories.tsx#Settings"
+      ],
+      "storySourceId": "stories-root",
+      "via": "component"
+    },
+    {
+      "component": "react:src/Modal.tsx#Modal",
+      "componentSourceId": "react-acme-ui",
+      "group": "storybook:src/Modal.stories.tsx",
+      "matchedBy": "file+localName",
+      "stories": [
+        "storybook:src/Modal.stories.tsx#Open"
+      ],
+      "storySourceId": "stories-root",
+      "via": "component"
+    },
+    {
+      "component": "react:src/Select.tsx#Select",
+      "componentSourceId": "react-acme-ui",
+      "group": "storybook:src/Select.stories.tsx",
+      "matchedBy": "file+localName",
+      "stories": [
+        "storybook:src/Select.stories.tsx#Basic"
+      ],
+      "storySourceId": "stories-root",
+      "via": "component"
+    }
+  ]
+}

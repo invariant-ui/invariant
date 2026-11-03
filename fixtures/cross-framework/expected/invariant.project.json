@@ -1,0 +1,273 @@
+{
+  "diagnostics": [],
+  "discoveryVersion": "1.0.0",
+  "docFiles": [],
+  "graph": {
+    "edges": [
+      {
+        "from": "package:@demo/angular-ui",
+        "to": "framework:angular",
+        "type": "uses-framework"
+      },
+      {
+        "from": "package:@demo/react-ui",
+        "to": "framework:react",
+        "type": "uses-framework"
+      },
+      {
+        "from": "package:@demo/vue-ui",
+        "to": "framework:vue",
+        "type": "uses-framework"
+      }
+    ],
+    "nodes": [
+      {
+        "id": "framework:angular",
+        "label": "angular",
+        "type": "framework"
+      },
+      {
+        "id": "framework:react",
+        "label": "react",
+        "type": "framework"
+      },
+      {
+        "id": "framework:vue",
+        "label": "vue",
+        "type": "framework"
+      },
+      {
+        "id": "package:@demo/angular-ui",
+        "label": "@demo/angular-ui",
+        "type": "package"
+      },
+      {
+        "id": "package:@demo/react-ui",
+        "label": "@demo/react-ui",
+        "type": "package"
+      },
+      {
+        "id": "package:@demo/vue-ui",
+        "label": "@demo/vue-ui",
+        "type": "package"
+      },
+      {
+        "id": "package:cross-framework-demo",
+        "label": "cross-framework-demo",
+        "type": "package"
+      }
+    ]
+  },
+  "packageManager": {
+    "evidence": [],
+    "name": "unknown"
+  },
+  "packages": [
+    {
+      "buildTools": [],
+      "dependencies": [],
+      "dir": ".",
+      "entryPoints": [],
+      "frameworks": [],
+      "id": "package:cross-framework-demo",
+      "manifest": {
+        "contentHash": "1a529413aa8629dc6322e2f0afe661a38671dbf220a1cd225caf49fac07601ab",
+        "path": "package.json"
+      },
+      "name": "cross-framework-demo",
+      "private": true,
+      "scripts": []
+    },
+    {
+      "buildTools": [],
+      "dependencies": [
+        {
+          "kind": "peerDependencies",
+          "name": "@angular/core",
+          "range": "^18.0.0"
+        }
+      ],
+      "dir": "packages/angular-ui",
+      "entryPoints": [
+        {
+          "condition": "conventional",
+          "exports": [
+            {
+              "file": "packages/angular-ui/src/lib/button.component.ts",
+              "kind": "value",
+              "line": 3,
+              "name": "DemoButton",
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/angular-ui/src/public-api.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "39d69e8a135d51d2a4c42d004e8b5c57e7a94ca0d2c86465add77ddd1e880355",
+              "path": "packages/angular-ui/src/lib/button.component.ts"
+            },
+            {
+              "contentHash": "ae13e19bf83ea52d5dd2ab524c3857c020f22aba2e2f368ade4dc97f39fea852",
+              "path": "packages/angular-ui/src/public-api.ts"
+            }
+          ],
+          "resolution": "declared",
+          "subpath": ".",
+          "target": "src/public-api.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^18.0.0",
+          "dependencyKind": "peerDependencies",
+          "line": 1,
+          "name": "angular",
+          "package": "@angular/core"
+        }
+      ],
+      "id": "package:@demo/angular-ui",
+      "manifest": {
+        "contentHash": "2f27378ba41f58777a2613064bf0e76f875d03a36cfd90987bd51a4e63e22221",
+        "path": "packages/angular-ui/package.json"
+      },
+      "name": "@demo/angular-ui",
+      "private": false,
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    {
+      "buildTools": [],
+      "dependencies": [
+        {
+          "kind": "peerDependencies",
+          "name": "react",
+          "range": "^18.2.0"
+        }
+      ],
+      "dir": "packages/react-ui",
+      "entryPoints": [
+        {
+          "condition": "default",
+          "exports": [
+            {
+              "file": "packages/react-ui/src/index.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/react-ui/src/index.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "29edd49b453fb5f28630f0136bd35ec88b16bbb367e73b1e9e11524360c75628",
+              "path": "packages/react-ui/src/Button.tsx"
+            },
+            {
+              "contentHash": "6ec7b1ed9d39be3f5ec97cf6d9bd447864df690176bc7e0d35d5a5da3bc4f819",
+              "path": "packages/react-ui/src/index.ts"
+            }
+          ],
+          "resolution": "declared",
+          "subpath": ".",
+          "target": "./src/index.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^18.2.0",
+          "dependencyKind": "peerDependencies",
+          "line": 1,
+          "name": "react",
+          "package": "react"
+        }
+      ],
+      "id": "package:@demo/react-ui",
+      "manifest": {
+        "contentHash": "4e98f9dc0dd2cbe06f2942fbe7ab01e365e24ceb1f536070898cbb7153cac6fd",
+        "path": "packages/react-ui/package.json"
+      },
+      "name": "@demo/react-ui",
+      "private": false,
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    {
+      "buildTools": [],
+      "dependencies": [
+        {
+          "kind": "peerDependencies",
+          "name": "vue",
+          "range": "^3.5.0"
+        }
+      ],
+      "dir": "packages/vue-ui",
+      "entryPoints": [
+        {
+          "condition": "default",
+          "exports": [
+            {
+              "file": "packages/vue-ui/src/index.ts",
+              "kind": "default",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button.vue"
+              },
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/vue-ui/src/index.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "f3008950ea30f89efe5fcfa29249764cd553f9d26ac7783326d15b03979a6574",
+              "path": "packages/vue-ui/src/index.ts"
+            }
+          ],
+          "resolution": "declared",
+          "subpath": ".",
+          "target": "./src/index.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^3.5.0",
+          "dependencyKind": "peerDependencies",
+          "line": 1,
+          "name": "vue",
+          "package": "vue"
+        }
+      ],
+      "id": "package:@demo/vue-ui",
+      "manifest": {
+        "contentHash": "6ee95bfd1a9311aad0c48f6300b63a3154aaf972a5c042c939ca3d7b3e9f41ab",
+        "path": "packages/vue-ui/package.json"
+      },
+      "name": "@demo/vue-ui",
+      "private": false,
+      "scripts": [],
+      "version": "1.0.0"
+    }
+  ],
+  "stats": {
+    "filesScanned": 11,
+    "truncated": false
+  },
+  "storybooks": [],
+  "tokenFiles": [],
+  "workspaces": {
+    "kind": "package-json",
+    "patterns": [
+      "packages/*"
+    ],
+    "source": "package.json"
+  }
+}

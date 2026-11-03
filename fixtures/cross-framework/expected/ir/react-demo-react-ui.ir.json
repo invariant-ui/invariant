@@ -1,0 +1,805 @@
+{
+  "capabilities": [
+    "accessibility.*",
+    "composition.*",
+    "deprecated",
+    "description",
+    "examples.*",
+    "implementations.*",
+    "lifecycle",
+    "name",
+    "props.*",
+    "slots.*",
+    "styling.*",
+    "usage.*",
+    "variants.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "component",
+      "name": "Button",
+      "ref": "react:packages/react-ui/src/Button.tsx#Button"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_0120ad6e26bb504149ab4307",
+      "location": {
+        "line": 4,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "variant?: \"primary\" | \"secondary\" | \"ghost\"",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_24fa6fc8af907782d9c71839",
+      "location": {
+        "line": 8,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "onPress?: (event: MouseEvent) => void",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_29da61a18f4b6dbeb0791fbe",
+      "location": {
+        "line": 6,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "disabled?: boolean",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_542d754a17ee4de01b31a1a1",
+      "location": {
+        "line": 10,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children?: React.ReactNode",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_5d449709a54138a316e881de",
+      "location": {
+        "line": 5,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_827aec999c867f2422f5504b",
+      "location": {
+        "line": 1,
+        "path": "packages/react-ui/src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.module.css#--color-action",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a155c6834799638f7b3a1d88",
+      "location": {
+        "line": 9,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "icon?: React.ReactNode",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_add45c21cc5b1bb8bda1de1a",
+      "location": {
+        "line": 7,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "label: string",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f20753e66167d0259055fa54",
+      "location": {
+        "line": 13,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export function Button({ variant = \"primary\", size = \"md\", disabled = false, label, onPress, icon, children }: ButtonProps) {",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "accessibility.attributes",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "aria-label"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "accessibility.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "button"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.exportName",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.exports",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        {
+          "name": "Button",
+          "subpath": "."
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.file",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "packages/react-ui/src/Button.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.forwardRef",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "function"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.localName",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.memo",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.extensions.react.propsComplete",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.framework",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "react"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.importPath",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "@demo/react-ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "implementations.react.packageName",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "@demo/react-ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_542d754a17ee4de01b31a1a1"
+      ],
+      "origin": "extracted",
+      "path": "props.children.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "children"
+    },
+    {
+      "evidenceIds": [
+        "ev_542d754a17ee4de01b31a1a1"
+      ],
+      "origin": "extracted",
+      "path": "props.children.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_542d754a17ee4de01b31a1a1"
+      ],
+      "origin": "extracted",
+      "path": "props.children.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "component"
+    },
+    {
+      "evidenceIds": [
+        "ev_542d754a17ee4de01b31a1a1"
+      ],
+      "origin": "extracted",
+      "path": "props.children.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "React.ReactNode"
+    },
+    {
+      "evidenceIds": [
+        "ev_29da61a18f4b6dbeb0791fbe",
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.default",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_29da61a18f4b6dbeb0791fbe"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_29da61a18f4b6dbeb0791fbe"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_29da61a18f4b6dbeb0791fbe"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_29da61a18f4b6dbeb0791fbe"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_a155c6834799638f7b3a1d88"
+      ],
+      "origin": "extracted",
+      "path": "props.icon.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "slot"
+    },
+    {
+      "evidenceIds": [
+        "ev_a155c6834799638f7b3a1d88"
+      ],
+      "origin": "extracted",
+      "path": "props.icon.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_a155c6834799638f7b3a1d88"
+      ],
+      "origin": "extracted",
+      "path": "props.icon.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "component"
+    },
+    {
+      "evidenceIds": [
+        "ev_a155c6834799638f7b3a1d88"
+      ],
+      "origin": "extracted",
+      "path": "props.icon.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "React.ReactNode"
+    },
+    {
+      "evidenceIds": [
+        "ev_add45c21cc5b1bb8bda1de1a"
+      ],
+      "origin": "extracted",
+      "path": "props.label.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_add45c21cc5b1bb8bda1de1a"
+      ],
+      "origin": "extracted",
+      "path": "props.label.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_add45c21cc5b1bb8bda1de1a"
+      ],
+      "origin": "extracted",
+      "path": "props.label.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "string"
+    },
+    {
+      "evidenceIds": [
+        "ev_add45c21cc5b1bb8bda1de1a"
+      ],
+      "origin": "extracted",
+      "path": "props.label.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "string"
+    },
+    {
+      "evidenceIds": [
+        "ev_24fa6fc8af907782d9c71839"
+      ],
+      "origin": "extracted",
+      "path": "props.onPress.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "event-handler"
+    },
+    {
+      "evidenceIds": [
+        "ev_24fa6fc8af907782d9c71839"
+      ],
+      "origin": "extracted",
+      "path": "props.onPress.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_24fa6fc8af907782d9c71839"
+      ],
+      "origin": "extracted",
+      "path": "props.onPress.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "function"
+    },
+    {
+      "evidenceIds": [
+        "ev_24fa6fc8af907782d9c71839"
+      ],
+      "origin": "extracted",
+      "path": "props.onPress.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "(event: MouseEvent) => void"
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "props.size.allowedValues",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de",
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "props.size.default",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "props.size.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "props.size.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "\"sm\" | \"md\" | \"lg\""
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.allowedValues",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307",
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.default",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.extensions.react.role",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "prop"
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.type.kind",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.type.text",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "\"primary\" | \"secondary\" | \"ghost\""
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.declared",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.extensions.react.prop",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "children"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.extensions.react.typeText",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "React.ReactNode"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.declared",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.extensions.react.prop",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "icon"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.extensions.react.typeText",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "React.ReactNode"
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.required",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "styling.cssModules",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "packages/react-ui/src/Button.module.css"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_827aec999c867f2422f5504b",
+        "ev_f20753e66167d0259055fa54"
+      ],
+      "origin": "extracted",
+      "path": "styling.cssVariables",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "--color-action"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.default",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.extensions.react.source",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "prop-union"
+    },
+    {
+      "evidenceIds": [
+        "ev_5d449709a54138a316e881de"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.values",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.default",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.extensions.react.source",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": "prop-union"
+    },
+    {
+      "evidenceIds": [
+        "ev_0120ad6e26bb504149ab4307"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.values",
+      "subject": "react:packages/react-ui/src/Button.tsx#Button",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost"
+      ]
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "react",
+      "version": "0.1.0"
+    },
+    "id": "react-demo-react-ui",
+    "inputHash": "d2ab8db144694ce73344e43e63233788e80152611869f438d84251eab8acb7ac",
+    "location": "packages/react-ui",
+    "type": "react",
+    "version": {
+      "kind": "package-version",
+      "value": "1.0.0"
+    }
+  }
+}

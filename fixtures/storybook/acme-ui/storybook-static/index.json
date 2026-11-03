@@ -1,0 +1,10 @@
+{
+  "v": 5,
+  "entries": {
+    "components-button--primary": { "type": "story", "id": "components-button--primary", "name": "Primary", "title": "Components/Button", "importPath": "./src/Button.stories.tsx", "tags": ["autodocs"] },
+    "components-button--danger": { "type": "story", "id": "components-button--danger", "name": "Danger", "title": "Components/Button", "importPath": "./src/Button.stories.tsx", "tags": ["autodocs"] },
+    "components-button--docs": { "type": "docs", "id": "components-button--docs", "name": "Docs", "title": "Components/Button", "importPath": "./src/Button.mdx", "tags": [] },
+    "components-card--basic": { "type": "story", "id": "components-card--basic", "name": "Basic", "title": "Components/Card", "importPath": "./src/Card.stories.tsx", "tags": [] },
+    "removed--old": { "type": "story", "id": "removed--old", "name": "Old", "title": "Removed", "importPath": "./src/Removed.stories.tsx", "tags": [] }
+  }
+}

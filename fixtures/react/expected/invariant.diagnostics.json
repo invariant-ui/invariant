@@ -1,0 +1,25 @@
+{
+  "diagnostics": [
+    {
+      "code": "react.props-unresolved",
+      "location": {
+        "line": 3,
+        "path": "src/LazyChart.tsx"
+      },
+      "message": "LazyChart: lazy component: props are defined by the dynamically imported module",
+      "severity": "warning",
+      "sourceId": "react-acme-ui"
+    },
+    {
+      "code": "react.higher-order-component",
+      "location": {
+        "line": 1,
+        "path": "src/withTheme.tsx"
+      },
+      "message": "withTheme returns a component (a higher-order component) and was not analyzed",
+      "severity": "info",
+      "sourceId": "react-acme-ui"
+    }
+  ],
+  "diagnosticsVersion": "1.0.0"
+}

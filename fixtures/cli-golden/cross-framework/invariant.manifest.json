@@ -1,0 +1,100 @@
+{
+  "artifacts": [
+    {
+      "bytes": 38009,
+      "path": "invariant.contract.json",
+      "sha256": "98203defb6e61b73a61e11305d8a15ac0fee9e3ef5c0eefd28af960e3aa4d72d"
+    },
+    {
+      "bytes": 57,
+      "path": "invariant.diagnostics.json",
+      "sha256": "578473a4215c12b92fffa42ac861dd9eec52d9fad0be04d6b4880567a55d74a7"
+    },
+    {
+      "bytes": 15877,
+      "path": "invariant.evidence.json",
+      "sha256": "fea8074a9ed7b2d69e64e5eb2cc593edf4d205f13d16fe4cc25291e088e95736"
+    },
+    {
+      "bytes": 4158,
+      "path": "invariant.report.html",
+      "sha256": "a09b016cd5904f58fae7f92657d74fd8d0c93a8c2b00ab6f34133bb9d6e6b904"
+    },
+    {
+      "bytes": 2431,
+      "path": "invariant.review.json",
+      "sha256": "d91a8df9cc6d678bb277e1f4d0d5ec9aef6199f7a1c853e94b91d074d2a99a74"
+    }
+  ],
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "manifestVersion": "1.0.0",
+  "sources": [
+    {
+      "adapterId": "angular",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "angular-demo-angular-ui",
+      "inputHash": "5838e0e45cb0b65619814f0d3c3dafb14890f8f14808cec3b011331639100a55",
+      "irContentHash": "d73373697a294226eedd61ae37c969be2a9013395a2f07445c3d64f639b02191",
+      "type": "angular"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-cross-framework-demo",
+      "inputHash": "7059f427b01944808e82d41265cbf753e908aec3e57e995b19f10fee4c2f574b",
+      "irContentHash": "f98b54404620c5fe6615285e23d2c91b7aa9e00cb3e01f33c2aaccf2c6c5500c",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-demo-angular-ui",
+      "inputHash": "b92b725e180c56bcd47ebf24db9410fdd66fc13f5df16cb3347301eee20c285a",
+      "irContentHash": "cf6f1e934ff44e3df39c28fa7ed8fbbe30d6620fc451211079ae3552d865238a",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-demo-react-ui",
+      "inputHash": "8a826d89b52920643104cce06b29ed8efb7a64d2a759be0b7550b90b4a2e467f",
+      "irContentHash": "1a4fba0b4cd059e620c5b85fde48e96c8c980ba7b760e7f40c9ed8bb49ffd897",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-demo-vue-ui",
+      "inputHash": "d91aa27f9ad43dd665b0fc9232b0704289731d8555a9c1b3f196ccf1a9565038",
+      "irContentHash": "e79bb7393361f3fa461cf694f1380b14964663e88f54ef451958f2ddd526f295",
+      "type": "npm"
+    },
+    {
+      "adapterId": "react",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "react-demo-react-ui",
+      "inputHash": "d2ab8db144694ce73344e43e63233788e80152611869f438d84251eab8acb7ac",
+      "irContentHash": "c5c82cb044dce9dec0c2090a25fbe3d95ced8b4a0560c140b126ec8bd5c37f84",
+      "type": "react"
+    },
+    {
+      "adapterId": "vue",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "vue-demo-vue-ui",
+      "inputHash": "f25da64044496dc2ea5619a0fd10fbc2f84ad3b8b2e1a449e61510cfd4dd7198",
+      "irContentHash": "81b94a92bc5c858a1f27c82ac1d07f359880a2eb47f42dfafd1392b88a2b150c",
+      "type": "vue"
+    }
+  ],
+  "tool": {
+    "name": "invariant",
+    "version": "0.0.0"
+  }
+}

@@ -1,0 +1,818 @@
+{
+  "capabilities": [
+    "buildTools",
+    "entryPoints",
+    "export.*",
+    "frameworks",
+    "package.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [
+    {
+      "code": "discovery.entry-pattern-unsupported",
+      "location": {
+        "path": "packages/ui-react/package.json"
+      },
+      "message": "Entry pattern ./icons/* in package:@acme/ui-react is not expanded",
+      "severity": "info",
+      "sourceId": "npm-acme-ui-react"
+    }
+  ],
+  "entities": [
+    {
+      "kind": "package",
+      "name": "@acme/ui-react",
+      "ref": "package:@acme/ui-react"
+    },
+    {
+      "kind": "export",
+      "name": "Button",
+      "ref": "package:@acme/ui-react#./button:Button"
+    },
+    {
+      "kind": "export",
+      "name": "ButtonProps",
+      "ref": "package:@acme/ui-react#./button:ButtonProps"
+    },
+    {
+      "kind": "export",
+      "name": "AcmeIcon",
+      "ref": "package:@acme/ui-react#.:AcmeIcon"
+    },
+    {
+      "kind": "export",
+      "name": "Button",
+      "ref": "package:@acme/ui-react#.:Button"
+    },
+    {
+      "kind": "export",
+      "name": "ButtonProps",
+      "ref": "package:@acme/ui-react#.:ButtonProps"
+    },
+    {
+      "kind": "export",
+      "name": "VERSION",
+      "ref": "package:@acme/ui-react#.:VERSION"
+    },
+    {
+      "kind": "export",
+      "name": "default",
+      "ref": "package:@acme/ui-react#.:default"
+    },
+    {
+      "kind": "export",
+      "name": "useMedia",
+      "ref": "package:@acme/ui-react#.:useMedia"
+    },
+    {
+      "kind": "export",
+      "name": "useTheme",
+      "ref": "package:@acme/ui-react#.:useTheme"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_16962dc0cf0184dd431712ca",
+      "location": {
+        "line": 3,
+        "path": "packages/ui-react/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/index.ts#AcmeIcon",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_4e9907564146f3ed3a0b55ae",
+      "location": {
+        "line": 6,
+        "path": "packages/ui-react/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/index.ts#default",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_54b78baab8996cbbfe4b70a4",
+      "location": {
+        "line": 2,
+        "path": "packages/ui-react/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/index.ts#ButtonProps",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_63d84e83a0d9f1c5362f0250",
+      "location": {
+        "path": "packages/ui-react/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/package.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_6909283cfba339caf97455b7",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-react/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/index.ts#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_7a8e9678187b6adedd66be6f",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-react/src/button.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/button.ts#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_b354f64ca5e58aadbde5c7ea",
+      "location": {
+        "line": 5,
+        "path": "packages/ui-react/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/index.ts#VERSION",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_d254c3edc2162ea1fc7816cf",
+      "location": {
+        "line": 2,
+        "path": "packages/ui-react/src/button.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/button.ts#ButtonProps",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_e0fc0589ad1cf046a5a5651f",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-react/src/hooks/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/hooks/index.ts#useTheme",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_e763f595598fd06b497f1607",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-react/src/hooks/useMedia.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/hooks/useMedia.ts#useMedia",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_edb466a5c766589636355e1a",
+      "location": {
+        "line": 12,
+        "path": "packages/ui-react/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui-react",
+      "sourceRef": "packages/ui-react/package.json",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_63d84e83a0d9f1c5362f0250"
+      ],
+      "origin": "extracted",
+      "path": "buildTools",
+      "subject": "package:@acme/ui-react",
+      "value": [
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-react/tsconfig.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-react/vite.config.ts",
+              "type": "config-file"
+            },
+            {
+              "ref": "vite",
+              "type": "dependency"
+            }
+          ],
+          "name": "vite"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_63d84e83a0d9f1c5362f0250"
+      ],
+      "origin": "extracted",
+      "path": "entryPoints",
+      "subject": "package:@acme/ui-react",
+      "value": [
+        {
+          "condition": "types",
+          "exportsComplete": true,
+          "file": "packages/ui-react/src/index.ts",
+          "resolution": "mapped",
+          "subpath": ".",
+          "target": "./dist/index.d.ts"
+        },
+        {
+          "condition": "types",
+          "exportsComplete": true,
+          "file": "packages/ui-react/src/button.ts",
+          "resolution": "mapped",
+          "subpath": "./button",
+          "target": "./dist/button.d.ts"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_edb466a5c766589636355e1a"
+      ],
+      "origin": "extracted",
+      "path": "frameworks",
+      "subject": "package:@acme/ui-react",
+      "value": [
+        {
+          "declaredRange": "^18.2.0",
+          "dependencyKind": "peerDependencies",
+          "line": 12,
+          "name": "react",
+          "package": "react"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_63d84e83a0d9f1c5362f0250"
+      ],
+      "origin": "extracted",
+      "path": "package.directory",
+      "subject": "package:@acme/ui-react",
+      "value": "packages/ui-react"
+    },
+    {
+      "evidenceIds": [
+        "ev_63d84e83a0d9f1c5362f0250"
+      ],
+      "origin": "extracted",
+      "path": "package.name",
+      "subject": "package:@acme/ui-react",
+      "value": "@acme/ui-react"
+    },
+    {
+      "evidenceIds": [
+        "ev_63d84e83a0d9f1c5362f0250"
+      ],
+      "origin": "extracted",
+      "path": "package.private",
+      "subject": "package:@acme/ui-react",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_63d84e83a0d9f1c5362f0250"
+      ],
+      "origin": "extracted",
+      "path": "package.version",
+      "subject": "package:@acme/ui-react",
+      "value": "2.3.1"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7a8e9678187b6adedd66be6f"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#./button:Button",
+      "value": "./button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7a8e9678187b6adedd66be6f"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#./button:Button",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7a8e9678187b6adedd66be6f"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#./button:Button",
+      "value": "Button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7a8e9678187b6adedd66be6f"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-react#./button:Button",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7a8e9678187b6adedd66be6f"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#./button:Button",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_d254c3edc2162ea1fc7816cf"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#./button:ButtonProps",
+      "value": "./button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_d254c3edc2162ea1fc7816cf"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#./button:ButtonProps",
+      "value": "type"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_d254c3edc2162ea1fc7816cf"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#./button:ButtonProps",
+      "value": "ButtonProps"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_d254c3edc2162ea1fc7816cf"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-react#./button:ButtonProps",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_d254c3edc2162ea1fc7816cf"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#./button:ButtonProps",
+      "value": true
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_16962dc0cf0184dd431712ca"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:AcmeIcon",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_16962dc0cf0184dd431712ca"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:AcmeIcon",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_16962dc0cf0184dd431712ca"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:AcmeIcon",
+      "value": "AcmeIcon"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_16962dc0cf0184dd431712ca"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-react#.:AcmeIcon",
+      "value": {
+        "external": false,
+        "module": "./Icon"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_16962dc0cf0184dd431712ca"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:AcmeIcon",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_6909283cfba339caf97455b7"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:Button",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_6909283cfba339caf97455b7"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:Button",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_6909283cfba339caf97455b7"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:Button",
+      "value": "Button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_6909283cfba339caf97455b7"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-react#.:Button",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_6909283cfba339caf97455b7"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:Button",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_54b78baab8996cbbfe4b70a4"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:ButtonProps",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_54b78baab8996cbbfe4b70a4"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:ButtonProps",
+      "value": "type"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_54b78baab8996cbbfe4b70a4"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:ButtonProps",
+      "value": "ButtonProps"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_54b78baab8996cbbfe4b70a4"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-react#.:ButtonProps",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_54b78baab8996cbbfe4b70a4"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:ButtonProps",
+      "value": true
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_b354f64ca5e58aadbde5c7ea"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:VERSION",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_b354f64ca5e58aadbde5c7ea"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:VERSION",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_b354f64ca5e58aadbde5c7ea"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:VERSION",
+      "value": "VERSION"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_b354f64ca5e58aadbde5c7ea"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:VERSION",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4e9907564146f3ed3a0b55ae"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:default",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4e9907564146f3ed3a0b55ae"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:default",
+      "value": "default"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4e9907564146f3ed3a0b55ae"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:default",
+      "value": "default"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4e9907564146f3ed3a0b55ae"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:default",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e763f595598fd06b497f1607"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:useMedia",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e763f595598fd06b497f1607"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:useMedia",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e763f595598fd06b497f1607"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:useMedia",
+      "value": "useMedia"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e763f595598fd06b497f1607"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:useMedia",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e0fc0589ad1cf046a5a5651f"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-react#.:useTheme",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e0fc0589ad1cf046a5a5651f"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-react#.:useTheme",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e0fc0589ad1cf046a5a5651f"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-react#.:useTheme",
+      "value": "useTheme"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e0fc0589ad1cf046a5a5651f"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-react#.:useTheme",
+      "value": false
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-npm",
+      "version": "0.1.0"
+    },
+    "id": "npm-acme-ui-react",
+    "inputHash": "93e513ff8e58254bf9cc567d8780037c2a3f3ded37050da68a446d9d07ce9e32",
+    "location": "packages/ui-react",
+    "type": "npm",
+    "version": {
+      "kind": "package-version",
+      "value": "2.3.1"
+    }
+  }
+}

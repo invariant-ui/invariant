@@ -1,0 +1,64 @@
+{
+  "artifacts": [
+    {
+      "bytes": 57,
+      "path": "invariant.diagnostics.json",
+      "sha256": "578473a4215c12b92fffa42ac861dd9eec52d9fad0be04d6b4880567a55d74a7"
+    },
+    {
+      "bytes": 7118,
+      "path": "invariant.project.json",
+      "sha256": "edce974ff1913e72242af4311a2985a44c962ecde69b7374d5712b637ffed970"
+    },
+    {
+      "bytes": 22146,
+      "path": "ir/angular-demo-angular-ui.ir.json",
+      "sha256": "384d4e419842d6f5e4092d304f4e7a6f013968a31c2c01f97cec33c70aa0ae02"
+    },
+    {
+      "bytes": 22055,
+      "path": "ir/react-demo-react-ui.ir.json",
+      "sha256": "8d16f7ec038a959438e269b5406294e3a1a29b860aa986d06361f5b4c5a58521"
+    },
+    {
+      "bytes": 20191,
+      "path": "ir/vue-demo-vue-ui.ir.json",
+      "sha256": "4cfd1de07458eb60c17e0206fec217951d91075338b5a1b01a9ffc9e45f9960d"
+    }
+  ],
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "manifestVersion": "1.0.0",
+  "sources": [
+    {
+      "adapterId": "angular",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "angular-demo-angular-ui",
+      "inputHash": "5838e0e45cb0b65619814f0d3c3dafb14890f8f14808cec3b011331639100a55",
+      "irContentHash": "d73373697a294226eedd61ae37c969be2a9013395a2f07445c3d64f639b02191",
+      "type": "angular"
+    },
+    {
+      "adapterId": "react",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "react-demo-react-ui",
+      "inputHash": "d2ab8db144694ce73344e43e63233788e80152611869f438d84251eab8acb7ac",
+      "irContentHash": "c5c82cb044dce9dec0c2090a25fbe3d95ced8b4a0560c140b126ec8bd5c37f84",
+      "type": "react"
+    },
+    {
+      "adapterId": "vue",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "vue-demo-vue-ui",
+      "inputHash": "f25da64044496dc2ea5619a0fd10fbc2f84ad3b8b2e1a449e61510cfd4dd7198",
+      "irContentHash": "81b94a92bc5c858a1f27c82ac1d07f359880a2eb47f42dfafd1392b88a2b150c",
+      "type": "vue"
+    }
+  ],
+  "tool": {
+    "name": "invariant",
+    "version": "0.0.0"
+  }
+}

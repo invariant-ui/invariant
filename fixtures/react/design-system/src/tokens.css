@@ -1,0 +1,6 @@
+:root {
+  --color-brand: #0057ff;
+  --color-action: var(--color-brand);
+  --space-md: 16px;
+}
+[data-theme="dark"] { --color-brand: #4d8dff; }

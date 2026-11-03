@@ -1,0 +1,111 @@
+{
+  "artifacts": [
+    {
+      "bytes": 4032,
+      "path": "invariant.diagnostics.json",
+      "sha256": "58518e885b7de947954bed73d990d85e6fcee1a80bfffc7a6daed09364d39924"
+    },
+    {
+      "bytes": 14928,
+      "path": "invariant.project.json",
+      "sha256": "2f7b24c828122cfadf0cdca43abfa1482344d9ee25213e0f486aee7f7af56574"
+    },
+    {
+      "bytes": 17093,
+      "path": "invariant.reconciliation.json",
+      "sha256": "84528a7ca5ddbac7396364adc82ac4413da718d6ba9a31514853fee11a3548cc"
+    },
+    {
+      "bytes": 1964,
+      "path": "ir/docs-acme-ui.ir.json",
+      "sha256": "7c88eaf0bd5af61c571d8aa3c61bcf4ac2b4a348f37280613dfb06393cb3e5b1"
+    },
+    {
+      "bytes": 38004,
+      "path": "ir/npm-acme-ui.ir.json",
+      "sha256": "1a6f9b81162eac25cc8f0f286e245729e8eda153360ba733226e9592fe4e0d76"
+    },
+    {
+      "bytes": 174115,
+      "path": "ir/react-acme-ui.ir.json",
+      "sha256": "40c41ea7204d97a259a23b80ace030c9187ee04d6a2d8e36dc1f3a1434b0ca29"
+    },
+    {
+      "bytes": 75995,
+      "path": "ir/stories-root.ir.json",
+      "sha256": "718d2457bd158d530b6d94d475425d759943ef09216aeaa0733ea5aa455e4623"
+    },
+    {
+      "bytes": 3937,
+      "path": "ir/storybook-root.ir.json",
+      "sha256": "a7988ac240ab3741595de4e5f1151b9cef7e4a9d2daf4ab5e4cb75a4132463b7"
+    },
+    {
+      "bytes": 1251,
+      "path": "ir/tokens-acme-ui.ir.json",
+      "sha256": "fa71cb0a73867f6a34d5001f29bae6967a5e9d61cca0a14076f3a53b0e2e12c2"
+    }
+  ],
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "manifestVersion": "1.0.0",
+  "sources": [
+    {
+      "adapterId": "inventory-markdown",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "docs-acme-ui",
+      "inputHash": "41135075ef486a1a4ca1039241b6f56f41269be903dd794f149e1492de277fb0",
+      "irContentHash": "0350e9d385a20d2a4bb9bfac545f8f4a5888b95f983717a407cde0dbb6bf1f74",
+      "type": "markdown"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-ui",
+      "inputHash": "e6aefb05f13f05b6aa3b365e83d3c510bd63d533719b84b1283a62a43330301a",
+      "irContentHash": "20de801a585c590d7d249e5489df114b08621811fed2c45e1bc24f20a194ef92",
+      "type": "npm"
+    },
+    {
+      "adapterId": "react",
+      "adapterVersion": "0.1.0",
+      "completeness": "partial",
+      "id": "react-acme-ui",
+      "inputHash": "a293f0243a9964d09e808e526cf67897cbf9b8f105de85f2d5c31af8d9dfbdd4",
+      "irContentHash": "21f9a97ffa7dc889128e9ac5f2d3519de8263d998cabce5448a5ca35e50b6897",
+      "type": "react"
+    },
+    {
+      "adapterId": "storybook",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "stories-root",
+      "inputHash": "286544e6ac4ba3720f1e2be8b377e2c728dcd0a2f08f5d6f47b6c3e4097e02ae",
+      "irContentHash": "7eb6e88234c7bff7918d41285aecf678648b9d11ed220ede05e578ef5477bcd2",
+      "type": "storybook"
+    },
+    {
+      "adapterId": "inventory-storybook",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "storybook-root",
+      "inputHash": "bad5ce9c7dbb97c3a86e508070cef62964a85cb876cfca7dfe348d9d3ac32826",
+      "irContentHash": "3e5f4c4909780ede523dc3a29d00056183dc3b47a9c49748eb5a88eed828bc20",
+      "type": "storybook"
+    },
+    {
+      "adapterId": "inventory-tokens",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "tokens-acme-ui",
+      "inputHash": "34e7e45713d86fcbe84d481f0c9acab55540d801acba6785b8b01f7c6125630a",
+      "irContentHash": "608d717662dc559b04f43ab38bca7c6e2da479f848d7f4a916fd5fdfb3a61c41",
+      "type": "tokens"
+    }
+  ],
+  "tool": {
+    "name": "invariant",
+    "version": "0.0.0"
+  }
+}

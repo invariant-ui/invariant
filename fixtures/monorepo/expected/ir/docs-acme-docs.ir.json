@@ -1,0 +1,157 @@
+{
+  "capabilities": [
+    "doc.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "doc-page",
+      "name": "Getting started",
+      "ref": "doc:apps/docs/docs/getting-started.md"
+    },
+    {
+      "kind": "doc-page",
+      "name": "Button guidelines",
+      "ref": "doc:apps/docs/docs/guidelines/buttons.md"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_2a056b3089708feeead8f3c6",
+      "location": {
+        "line": 1,
+        "path": "apps/docs/docs/guidelines/buttons.md",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-docs",
+      "sourceRef": "apps/docs/docs/guidelines/buttons.md",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_c402e0558bcc4a8fa9e2713c",
+      "location": {
+        "line": 1,
+        "path": "apps/docs/docs/getting-started.md",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-docs",
+      "sourceRef": "apps/docs/docs/getting-started.md",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_c402e0558bcc4a8fa9e2713c"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:apps/docs/docs/getting-started.md",
+      "value": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "Getting started"
+        },
+        {
+          "level": 2,
+          "line": 10,
+          "text": "Usage"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_c402e0558bcc4a8fa9e2713c"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:apps/docs/docs/getting-started.md",
+      "value": "markdown"
+    },
+    {
+      "evidenceIds": [
+        "ev_c402e0558bcc4a8fa9e2713c"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:apps/docs/docs/getting-started.md",
+      "value": 11
+    },
+    {
+      "evidenceIds": [
+        "ev_c402e0558bcc4a8fa9e2713c"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:apps/docs/docs/getting-started.md",
+      "value": "Getting started"
+    },
+    {
+      "evidenceIds": [
+        "ev_2a056b3089708feeead8f3c6"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:apps/docs/docs/guidelines/buttons.md",
+      "value": [
+        {
+          "level": 2,
+          "line": 7,
+          "text": "Sizes"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_2a056b3089708feeead8f3c6"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:apps/docs/docs/guidelines/buttons.md",
+      "value": "markdown"
+    },
+    {
+      "evidenceIds": [
+        "ev_2a056b3089708feeead8f3c6"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:apps/docs/docs/guidelines/buttons.md",
+      "value": 10
+    },
+    {
+      "evidenceIds": [
+        "ev_2a056b3089708feeead8f3c6"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:apps/docs/docs/guidelines/buttons.md",
+      "value": "Button guidelines"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-markdown",
+      "version": "0.1.0"
+    },
+    "id": "docs-acme-docs",
+    "inputHash": "226b3feab98620f47f1e749d12f3f37f81d3263bead88eaf6b9433fb341ce3b1",
+    "location": "apps/docs",
+    "type": "markdown"
+  }
+}

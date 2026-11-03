@@ -1,0 +1,493 @@
+{
+  "capabilities": [
+    "extensions.css.*",
+    "file.*",
+    "name"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "token",
+      "name": "--color-action-primary",
+      "ref": "css:packages/tokens/src/tokens.css#--color-action-primary@:root"
+    },
+    {
+      "kind": "token",
+      "name": "--color-brand",
+      "ref": "css:packages/tokens/src/tokens.css#--color-brand@:root"
+    },
+    {
+      "kind": "token",
+      "name": "--color-brand",
+      "ref": "css:packages/tokens/src/tokens.css#--color-brand@@media (prefers-color-scheme: dark) :root"
+    },
+    {
+      "kind": "token",
+      "name": "--color-brand",
+      "ref": "css:packages/tokens/src/tokens.css#--color-brand@[data-theme=\"dark\"]"
+    },
+    {
+      "kind": "token",
+      "name": "--font-sans",
+      "ref": "css:packages/tokens/src/tokens.css#--font-sans@:root"
+    },
+    {
+      "kind": "token",
+      "name": "--shadow-card",
+      "ref": "css:packages/tokens/src/tokens.css#--shadow-card@:root"
+    },
+    {
+      "kind": "token",
+      "name": "--space-md",
+      "ref": "css:packages/tokens/src/tokens.css#--space-md@:root"
+    },
+    {
+      "kind": "token-file",
+      "name": "packages/tokens/src/tokens.css",
+      "ref": "token-file:packages/tokens/src/tokens.css"
+    },
+    {
+      "kind": "token-file",
+      "name": "packages/tokens/src/tokens.json",
+      "ref": "token-file:packages/tokens/src/tokens.json"
+    },
+    {
+      "kind": "token-file",
+      "name": "packages/tokens/style-dictionary.config.json",
+      "ref": "token-file:packages/tokens/style-dictionary.config.json"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_0660a53b55eb0326fea4ce76",
+      "location": {
+        "line": 4,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-action-primary: var(--color-brand);",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--color-action-primary",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_0da8106cfb0f1c497176c125",
+      "location": {
+        "line": 12,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-brand: #4d8dff;",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--color-brand",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_2592425f8838bb8c88bae73f",
+      "location": {
+        "line": 6,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--font-sans: \"Inter\", sans-serif;",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--font-sans",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_2b737ae21f00f809b0aa4b63",
+      "location": {
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_5e0c95b10b52aed47f008a56",
+      "location": {
+        "path": "packages/tokens/style-dictionary.config.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/style-dictionary.config.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_5f3e90eb8bae3262ff55d401",
+      "location": {
+        "line": 3,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-brand: #0057ff;",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--color-brand",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_861ba53d4e84c34156f7a7e9",
+      "location": {
+        "path": "packages/tokens/src/tokens.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_ae2836e2ebab7e9b8d656a47",
+      "location": {
+        "line": 7,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--shadow-card: 0 1px 2px rgb(0 0 0 / 12%);",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--shadow-card",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_d8d1037115d88847c12f0b2a",
+      "location": {
+        "line": 5,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--space-md: 16px;",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--space-md",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_f1cc9e3feae7f55219fd2767",
+      "location": {
+        "line": 17,
+        "path": "packages/tokens/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--color-brand: #5c9aff;",
+      "sourceId": "tokens-acme-tokens",
+      "sourceRef": "packages/tokens/src/tokens.css#--color-brand",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_0660a53b55eb0326fea4ce76"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.aliasOf",
+      "subject": "css:packages/tokens/src/tokens.css#--color-action-primary@:root",
+      "value": "--color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_0660a53b55eb0326fea4ce76"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--color-action-primary@:root",
+      "value": "var(--color-brand)"
+    },
+    {
+      "evidenceIds": [
+        "ev_0660a53b55eb0326fea4ce76"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--color-action-primary@:root",
+      "value": ":root"
+    },
+    {
+      "evidenceIds": [
+        "ev_0660a53b55eb0326fea4ce76"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--color-action-primary@:root",
+      "value": "--color-action-primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_5f3e90eb8bae3262ff55d401"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@:root",
+      "value": "#0057ff"
+    },
+    {
+      "evidenceIds": [
+        "ev_5f3e90eb8bae3262ff55d401"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@:root",
+      "value": ":root"
+    },
+    {
+      "evidenceIds": [
+        "ev_5f3e90eb8bae3262ff55d401"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@:root",
+      "value": "--color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_f1cc9e3feae7f55219fd2767"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@@media (prefers-color-scheme: dark) :root",
+      "value": "#5c9aff"
+    },
+    {
+      "evidenceIds": [
+        "ev_f1cc9e3feae7f55219fd2767"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@@media (prefers-color-scheme: dark) :root",
+      "value": "@media (prefers-color-scheme: dark) :root"
+    },
+    {
+      "evidenceIds": [
+        "ev_f1cc9e3feae7f55219fd2767"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@@media (prefers-color-scheme: dark) :root",
+      "value": "--color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_0da8106cfb0f1c497176c125"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@[data-theme=\"dark\"]",
+      "value": "#4d8dff"
+    },
+    {
+      "evidenceIds": [
+        "ev_0da8106cfb0f1c497176c125"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@[data-theme=\"dark\"]",
+      "value": "[data-theme=\"dark\"]"
+    },
+    {
+      "evidenceIds": [
+        "ev_0da8106cfb0f1c497176c125"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--color-brand@[data-theme=\"dark\"]",
+      "value": "--color-brand"
+    },
+    {
+      "evidenceIds": [
+        "ev_2592425f8838bb8c88bae73f"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--font-sans@:root",
+      "value": "\"Inter\", sans-serif"
+    },
+    {
+      "evidenceIds": [
+        "ev_2592425f8838bb8c88bae73f"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--font-sans@:root",
+      "value": ":root"
+    },
+    {
+      "evidenceIds": [
+        "ev_2592425f8838bb8c88bae73f"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--font-sans@:root",
+      "value": "--font-sans"
+    },
+    {
+      "evidenceIds": [
+        "ev_ae2836e2ebab7e9b8d656a47"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--shadow-card@:root",
+      "value": "0 1px 2px rgb(0 0 0 / 12%)"
+    },
+    {
+      "evidenceIds": [
+        "ev_ae2836e2ebab7e9b8d656a47"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--shadow-card@:root",
+      "value": ":root"
+    },
+    {
+      "evidenceIds": [
+        "ev_ae2836e2ebab7e9b8d656a47"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--shadow-card@:root",
+      "value": "--shadow-card"
+    },
+    {
+      "evidenceIds": [
+        "ev_d8d1037115d88847c12f0b2a"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/tokens/src/tokens.css#--space-md@:root",
+      "value": "16px"
+    },
+    {
+      "evidenceIds": [
+        "ev_d8d1037115d88847c12f0b2a"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/tokens/src/tokens.css#--space-md@:root",
+      "value": ":root"
+    },
+    {
+      "evidenceIds": [
+        "ev_d8d1037115d88847c12f0b2a"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/tokens/src/tokens.css#--space-md@:root",
+      "value": "--space-md"
+    },
+    {
+      "evidenceIds": [
+        "ev_2b737ae21f00f809b0aa4b63"
+      ],
+      "origin": "extracted",
+      "path": "file.kind",
+      "subject": "token-file:packages/tokens/src/tokens.css",
+      "value": "css-custom-properties"
+    },
+    {
+      "evidenceIds": [
+        "ev_861ba53d4e84c34156f7a7e9"
+      ],
+      "origin": "extracted",
+      "path": "file.format",
+      "subject": "token-file:packages/tokens/src/tokens.json",
+      "value": "dtcg-like"
+    },
+    {
+      "evidenceIds": [
+        "ev_861ba53d4e84c34156f7a7e9"
+      ],
+      "origin": "extracted",
+      "path": "file.kind",
+      "subject": "token-file:packages/tokens/src/tokens.json",
+      "value": "json-tokens"
+    },
+    {
+      "evidenceIds": [
+        "ev_861ba53d4e84c34156f7a7e9"
+      ],
+      "origin": "extracted",
+      "path": "file.tokenCount",
+      "subject": "token-file:packages/tokens/src/tokens.json",
+      "value": 3
+    },
+    {
+      "evidenceIds": [
+        "ev_5e0c95b10b52aed47f008a56"
+      ],
+      "origin": "extracted",
+      "path": "file.kind",
+      "subject": "token-file:packages/tokens/style-dictionary.config.json",
+      "value": "style-dictionary-config"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-tokens",
+      "version": "0.1.0"
+    },
+    "id": "tokens-acme-tokens",
+    "inputHash": "e0ccb1b8247059941fd6edfe90838579915628ccf41aec361e2038bb536682b3",
+    "location": "packages/tokens",
+    "type": "tokens"
+  }
+}

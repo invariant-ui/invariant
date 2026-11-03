@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Fixture DS - Invariant report</title>
+<style>body{font:14px/1.5 system-ui,sans-serif;margin:2rem auto;max-width:72rem;padding:0 1rem;color:#1a1a1a}
+h1,h2{font-weight:600}table{border-collapse:collapse;width:100%;margin:.5rem 0 1.5rem}
+th,td{border:1px solid #d0d0d0;padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:#f3f3f3}
+code{font:12px ui-monospace,monospace}summary{cursor:pointer;margin:.5rem 0}.error{color:#a40000}.warning{color:#8a5a00}.info{color:#555}</style></head><body>
+<h1>Fixture DS</h1>
+<p>Contract <code>fixture-ds</code> v1.0.0, compiler 0.0.0, content hash <code>0eb2325e8548179afad685fc18f500cdab50afdf2325377916e898715da7b173</code>.</p>
+<table><thead><tr><th>Components</th><th>Tokens</th><th>Themes</th><th>Guidelines</th><th>Open conflicts</th><th>Inferred facts</th><th>Errors</th><th>Warnings</th></tr></thead><tbody>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>3</td><td>0</td><td>0</td></tr>
+</tbody></table>
+<h2>Sources</h2>
+<table><thead><tr><th>Id</th><th>Type</th><th>Location</th><th>Health</th><th>Diagnostics</th></tr></thead><tbody>
+<tr><td>angular-demo-angular-ui</td><td>angular</td><td>packages/angular-ui</td><td>ok</td><td>0</td></tr>
+<tr><td>npm-cross-framework-demo</td><td>npm</td><td>.</td><td>ok</td><td>0</td></tr>
+<tr><td>npm-demo-angular-ui</td><td>npm</td><td>packages/angular-ui</td><td>ok</td><td>0</td></tr>
+<tr><td>npm-demo-react-ui</td><td>npm</td><td>packages/react-ui</td><td>ok</td><td>0</td></tr>
+<tr><td>npm-demo-vue-ui</td><td>npm</td><td>packages/vue-ui</td><td>ok</td><td>0</td></tr>
+<tr><td>react-demo-react-ui</td><td>react</td><td>packages/react-ui</td><td>ok</td><td>0</td></tr>
+<tr><td>vue-demo-vue-ui</td><td>vue</td><td>packages/vue-ui</td><td>ok</td><td>0</td></tr>
+</tbody></table>
+<h2>Conflicts</h2>
+<table><thead><tr><th>Severity</th><th>Type</th><th>Subject</th><th>Path</th><th>Claims</th><th>State</th></tr></thead><tbody>
+<tr><td><span class="info">info</span></td><td>value-mismatch</td><td><a href="#c-component_button">component:button</a></td><td><code>events.press.payload.text</code></td><td>angular-demo-angular-ui: <code>&quot;MouseEvent&quot;</code> (discovered)<br>vue-demo-vue-ui: <code>&quot;event: MouseEvent&quot;</code> (discovered)</td><td>open</td></tr>
+</tbody></table>
+<h2>Components</h2>
+<table><thead><tr><th>Id</th><th>Name</th><th>Implementations</th><th>Props</th><th>Events</th><th>Slots</th><th>Variants</th></tr></thead><tbody>
+<tr><td><a id="c-component_button"></a><code>component:button</code></td><td>Button</td><td>angular, react, vue</td><td>7</td><td>1</td><td>2</td><td>2</td></tr>
+</tbody></table>
+<h2>Tokens</h2>
+<p>None.</p>
+<h2>Needs review</h2>
+<table><thead><tr><th>Priority</th><th>Kind</th><th>Subject</th><th>Path</th><th>Confidence</th><th>Reason</th></tr></thead><tbody>
+<tr><td>medium</td><td>inferred-fact</td><td>component:button</td><td><code>implementations.angular</code></td><td>0.75</td><td>DemoButton, Button, Button are in different frameworks and share the name &quot;button&quot; once the prefix &quot;Demo&quot; is removed</td></tr>
+<tr><td>medium</td><td>inferred-fact</td><td>component:button</td><td><code>implementations.react</code></td><td>0.75</td><td>DemoButton, Button, Button are in different frameworks and share the name &quot;button&quot; once the prefix &quot;Demo&quot; is removed</td></tr>
+<tr><td>medium</td><td>inferred-fact</td><td>component:button</td><td><code>implementations.vue</code></td><td>0.75</td><td>DemoButton, Button, Button are in different frameworks and share the name &quot;button&quot; once the prefix &quot;Demo&quot; is removed</td></tr>
+<tr><td>low</td><td>conflict</td><td>component:button</td><td><code>events.press.payload.text</code></td><td></td><td>value-mismatch: 2 claims disagree. Decide which events.press.payload.text is intended and align the other implementation, or accept the difference.</td></tr>
+</tbody></table>
+<h2>Diagnostics</h2>
+<p>None.</p>
+</body></html>

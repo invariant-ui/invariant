@@ -1,0 +1,204 @@
+{
+  "artifacts": [
+    {
+      "bytes": 692,
+      "path": "invariant.diagnostics.json",
+      "sha256": "868ca88db1a24dfbe90d43ad019192a1ca2c043ef8f6c30f5234c74351e9a761"
+    },
+    {
+      "bytes": 29933,
+      "path": "invariant.project.json",
+      "sha256": "ee7c0f0fd46d0bef06b5a82bb0d847a9ea2f0d0b7abdee994bbe6f9b86b81765"
+    },
+    {
+      "bytes": 1895,
+      "path": "ir/docs-acme-design-system.ir.json",
+      "sha256": "afb8ed9d64429fcbb6057994547f33fbf2695638e2dbb1fb377ca290223abb60"
+    },
+    {
+      "bytes": 3759,
+      "path": "ir/docs-acme-docs.ir.json",
+      "sha256": "b5f875496743ba21c72a3ece10fe7ce9b8a6f26612c9a571432fa676e5b4c8d0"
+    },
+    {
+      "bytes": 1989,
+      "path": "ir/docs-acme-tokens.ir.json",
+      "sha256": "45e1eacc92c85fc1c333f84c25b4df392851785863636eac43f47ae232375994"
+    },
+    {
+      "bytes": 3603,
+      "path": "ir/docs-acme-ui-react.ir.json",
+      "sha256": "44629c06629f542e5a31b8b4477b05e3b274f4fdade233cca4e7af3d9f50be51"
+    },
+    {
+      "bytes": 3171,
+      "path": "ir/npm-acme-design-system.ir.json",
+      "sha256": "8f8f1b08f52cd59694b78f1272c6ae0c780823f8827c12778a593d9f516166f3"
+    },
+    {
+      "bytes": 2268,
+      "path": "ir/npm-acme-docs.ir.json",
+      "sha256": "a0fd1be09e8b00d1cb699c9fd26615d36b639c7b89b49007ad5d650d28b1c607"
+    },
+    {
+      "bytes": 3115,
+      "path": "ir/npm-acme-tokens.ir.json",
+      "sha256": "b0d836032ce5744bca011eca98449f3bbab1c57141fd35a3e3b726d1b8699121"
+    },
+    {
+      "bytes": 5968,
+      "path": "ir/npm-acme-ui-angular.ir.json",
+      "sha256": "ca8bc98ec2d057893003aa76ae90dacb5f6252e513936f670b1a3d38ce101777"
+    },
+    {
+      "bytes": 20842,
+      "path": "ir/npm-acme-ui-react.ir.json",
+      "sha256": "03034b557c380b8e8f2106622a2a8abefadf7f758c9f2fa114e1e6b486a4d565"
+    },
+    {
+      "bytes": 9374,
+      "path": "ir/npm-acme-ui-vue.ir.json",
+      "sha256": "11b590473c0407c631cc5c38f860f6bae01bff98e396b503f5aa89b1dfdcafe9"
+    },
+    {
+      "bytes": 4126,
+      "path": "ir/storybook-packages-ui-react.ir.json",
+      "sha256": "7f1b80b0128e37b884e60db41ef51b7ce52f0858b07a67db0ffe6c2139e294bc"
+    },
+    {
+      "bytes": 14190,
+      "path": "ir/tokens-acme-tokens.ir.json",
+      "sha256": "047bb99375f471f9c32c834db84b2623177594832926b13dff24554980530a5b"
+    },
+    {
+      "bytes": 5047,
+      "path": "ir/tokens-acme-ui-react.ir.json",
+      "sha256": "2187b60ff02441b6fd4cf2771c2a37a91b20f1212eb916d2d739a2ac0928ad94"
+    }
+  ],
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "manifestVersion": "1.0.0",
+  "sources": [
+    {
+      "adapterId": "inventory-markdown",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "docs-acme-design-system",
+      "inputHash": "b126aead7ca39bb50637901dd38711e0abc12dd97b1b5446c099126a41311b7e",
+      "irContentHash": "7a34575c831c35965a53e66daff2f10bad053f950da47625cde7a50b2af1258f",
+      "type": "markdown"
+    },
+    {
+      "adapterId": "inventory-markdown",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "docs-acme-docs",
+      "inputHash": "226b3feab98620f47f1e749d12f3f37f81d3263bead88eaf6b9433fb341ce3b1",
+      "irContentHash": "f56506e1a05a6b0c8d500a9d0b602ddc2dc00294663e4cf384d4f5ed84e1aec2",
+      "type": "markdown"
+    },
+    {
+      "adapterId": "inventory-markdown",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "docs-acme-tokens",
+      "inputHash": "2f71e89432d18135eb9eccb1714ae1deebe1717fd934c9035b1380e1e74fe0e7",
+      "irContentHash": "755a574602d6b5620f39dbe8ee4dd480dad8d6da640711946dba4e7588a9ed13",
+      "type": "markdown"
+    },
+    {
+      "adapterId": "inventory-markdown",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "docs-acme-ui-react",
+      "inputHash": "675a92fe64900302084d4410ab33bb63600420f1a8c047946e79bbce1c0a1b21",
+      "irContentHash": "d9586493ce9483ef440775a6169f76e81c50e1e4eecb70be33a1f88884678b67",
+      "type": "markdown"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-design-system",
+      "inputHash": "209c6ff9f070e9c17210d385e71240cabf2e42cabb8d36cae54a05c0ba7ce64e",
+      "irContentHash": "577901607d848a344595fa2d06b1f56b185290229b173ce7a97fa7fabca16a7b",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-docs",
+      "inputHash": "c38946e5bb2076cd136a0b2ad95b84d2e0ff9fee7b8c95aabcdab01b85adfe25",
+      "irContentHash": "749b5fa53b03959656b96e196c2bce4d5008fb768e246e2cf936705cc54cc09d",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "partial",
+      "id": "npm-acme-tokens",
+      "inputHash": "ad2ee7917b4d90e7f9e30d6f89c84d068831af9def468d8e5f30598a3be04950",
+      "irContentHash": "872f3934c3892ae14c388e21fa554ac8dd9146a49dd75f27136bdf2e6ab8387a",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-ui-angular",
+      "inputHash": "e11ee3f2d40d604ff7f779cbff534f5e5ea59e3b4565233d2d97a6ed10d311c7",
+      "irContentHash": "69d9378bdec729a4b8a928a0e495f5e6c1520c2fee62088062afc690d57b1065",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-ui-react",
+      "inputHash": "93e513ff8e58254bf9cc567d8780037c2a3f3ded37050da68a446d9d07ce9e32",
+      "irContentHash": "c25ae4a4db7cd8c2e04403a3594ede0eb66da9beced0c46f68dbb6e2453f2af6",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-ui-vue",
+      "inputHash": "71d630f45e644f1bae9f60b05f47264adea726f3c0f1497ced015e07a244f1d6",
+      "irContentHash": "df9dad87efb949a745438fd16a70128ed41e5ae250ea41c50e9d840c6d55cc58",
+      "type": "npm"
+    },
+    {
+      "adapterId": "inventory-storybook",
+      "adapterVersion": "0.1.0",
+      "completeness": "partial",
+      "id": "storybook-packages-ui-react",
+      "inputHash": "4da846ca6e7effbd3f6fa036a53050a877e3696568a31010bae4b80bb83b9eff",
+      "irContentHash": "f735436fad630fee6bffc7dee8333d96ec3bfc91cedd0addc40d246462a5ea52",
+      "type": "storybook"
+    },
+    {
+      "adapterId": "inventory-tokens",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "tokens-acme-tokens",
+      "inputHash": "e0ccb1b8247059941fd6edfe90838579915628ccf41aec361e2038bb536682b3",
+      "irContentHash": "c84452b9ad0239aecc395c5edb03b040abfd4005d9a008083237e71876fdcb9e",
+      "type": "tokens"
+    },
+    {
+      "adapterId": "inventory-tokens",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "tokens-acme-ui-react",
+      "inputHash": "ecd81f174dfd01214de7645fe4034b4ab92d862f1067a43c9f939cc891c5ee89",
+      "irContentHash": "110773d848c458c7fc79fbcc20595dc4b17b26bee94b167d040799d309195c10",
+      "type": "tokens"
+    }
+  ],
+  "tool": {
+    "name": "invariant",
+    "version": "0.0.0"
+  }
+}

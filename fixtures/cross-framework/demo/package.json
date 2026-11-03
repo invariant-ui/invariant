@@ -1,0 +1,1 @@
+{ "name": "cross-framework-demo", "private": true, "workspaces": ["packages/*"] }

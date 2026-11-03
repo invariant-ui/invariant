@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invariant: the design system contract for AI agents</title>
+<meta name="description" content="Invariant compiles your React, Vue and Angular components, Storybook and design tokens into one machine-readable contract that AI agents can read and validate against.">
+<meta property="og:title" content="Invariant: the design system contract for AI agents">
+<meta property="og:description" content="Compile your design system into a contract. Give agents real context, not guesses.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://mcarlucci.github.io/invariant/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0b0d12">
+<style>
+:root{
+  --bg:#0b0d12; --panel:#12151c; --line:#222733; --text:#e8eaf0; --muted:#8d95a6;
+  --accent:#7c8cff; --accent2:#5eead4; --warn:#fbbf24; --bad:#f87171; --ok:#4ade80;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:10;background:rgba(11,13,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:700;letter-spacing:-.02em;text-decoration:none;font-size:20px}
+.logo span{color:var(--accent)}
+nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+nav ul a{text-decoration:none}
+nav ul a:hover{color:var(--text)}
+.btn{display:inline-block;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid var(--line)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#0b0d12}
+.btn.primary:hover{filter:brightness(1.1)}
+.toplink{display:inline-flex;color:var(--muted);text-decoration:none}
+.toplink:hover{color:var(--text)}
+.btn:not(.primary):hover{border-color:var(--muted)}
+.hero{padding:96px 0 72px;text-align:center}
+.eyebrow{display:inline-block;font:12px var(--mono);color:var(--accent2);border:1px solid var(--line);padding:4px 12px;border-radius:99px;margin-bottom:24px}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.08;letter-spacing:-.03em;margin:0 0 20px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:640px;margin:0 auto 32px;color:var(--muted);font-size:18px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+pre,code{font-family:var(--mono)}
+.term{max-width:640px;margin:0 auto;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.term-bar{padding:10px 14px;border-bottom:1px solid var(--line);font:12px var(--mono);color:var(--muted)}
+.term pre{margin:0;padding:16px 18px;font-size:13.5px;overflow-x:auto;line-height:1.7}
+.p{color:var(--accent2)} .c{color:var(--muted)} .ok{color:var(--ok)} .w{color:var(--warn)} .b{color:var(--bad)} .k{color:var(--accent)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+.label{font:12px var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;line-height:1.15;margin:8px 0 14px}
+.sub{color:var(--muted);max-width:640px;margin:0 0 36px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+.card h3{margin:0 0 8px;font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.tag{display:inline-block;font:11px var(--mono);padding:2px 8px;border-radius:99px;border:1px solid var(--line);margin-right:6px;color:var(--muted)}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center;margin-bottom:28px}
+.node{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center;font-size:14px}
+.node b{display:block;margin-bottom:4px}
+.node span{color:var(--muted);font-size:13px}
+.node.hl{border-color:var(--accent)}
+.arrow{color:var(--muted);font-size:20px}
+@media(max-width:720px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}nav ul{display:none}}
+.facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.fact{font:12px var(--mono);padding:4px 10px;border-radius:6px;background:#0e1118;border:1px solid var(--line)}
+.fact.d{color:var(--ok)} .fact.m{color:var(--accent2)} .fact.i{color:var(--warn)} .fact.a{color:var(--accent)}
+.code{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px;overflow-x:auto}
+.code pre{margin:0;font-size:13.5px;line-height:1.7}
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{display:grid;grid-template-columns:36px 1fr;gap:14px}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);font:600 14px var(--mono);color:var(--accent)}
+.step h3{margin:4px 0 6px;font-size:16px}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer a{text-decoration:none}
+footer a:hover{color:var(--text)}
+.links{display:flex;gap:20px;flex-wrap:wrap}
+
+/* ---------- motion & imagery ---------- */
+.hero{position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:2}
+.bg-grid{position:absolute;inset:0;z-index:0;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 30%,transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 30%,transparent 75%);
+  animation:gridmove 20s linear infinite}
+@keyframes gridmove{to{background-position:48px 48px}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);z-index:1;opacity:.45;pointer-events:none}
+.orb.o1{width:420px;height:420px;background:var(--accent);top:-120px;left:8%;animation:float1 14s ease-in-out infinite}
+.orb.o2{width:380px;height:380px;background:var(--accent2);top:40px;right:6%;animation:float2 17s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(70px,50px) scale(1.15)}}
+@keyframes float2{50%{transform:translate(-80px,40px) scale(.9)}}
+.eyebrow{position:relative}
+.eyebrow::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent2);margin-right:8px;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,234,212,.6)}100%{box-shadow:0 0 0 10px rgba(94,234,212,0)}}
+
+.stage{position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:18px;text-align:left;align-items:start}
+@media(max-width:760px){.stage{grid-template-columns:1fr}}
+.stage .term{margin:0;max-width:none}
+.term,.contract{box-shadow:0 30px 80px -30px rgba(124,140,255,.35)}
+.term{animation:bob 7s ease-in-out infinite}
+.contract{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;animation:bob 7s ease-in-out -3.5s infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.contract pre{margin:0;padding:16px 18px;font-size:13px;line-height:1.7;overflow-x:auto}
+.contract .term-bar{display:flex;justify-content:space-between}
+.tl{display:block;min-height:1.7em;white-space:pre}
+.tty{margin:0;min-height:calc(13 * 1.7em + 32px)}
+.ty{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;width:0}
+.cw{display:inline-block;vertical-align:bottom}
+.o,.pl2,.pl3,.dn,.spin{opacity:0}
+.sw{position:relative}
+.spin{position:absolute;left:0;top:0;color:var(--muted)}
+.spn{color:var(--accent2)}
+.spn::before{content:"\280B";animation:braille .8s steps(1) infinite}
+@keyframes braille{0%{content:"\280B"}10%{content:"\2819"}20%{content:"\2839"}30%{content:"\2838"}40%{content:"\283C"}50%{content:"\2834"}60%{content:"\2826"}70%{content:"\2827"}80%{content:"\2807"}90%{content:"\280F"}}
+.cl{display:block;white-space:pre;opacity:.12}
+.status{position:relative;display:inline-block;min-width:92px;height:16px;font:11px var(--mono);color:var(--muted)}
+.status>span{position:absolute;right:0;top:0;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block}
+.status .busy{color:var(--accent)}
+.status .busy i{background:transparent;border:2px solid var(--accent);border-top-color:transparent;animation:spin .7s linear infinite}
+.status .done{color:var(--ok)}
+.status .done i{background:var(--ok);animation:pulse2 1.6s infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}100%{box-shadow:0 0 0 8px rgba(74,222,128,0)}}
+/* demo:start (generated) */
+@keyframes ty1{0%{width:0}3.89%{width:0ch;animation-timing-function:steps(3)}5.56%{width:3ch;animation-timing-function:linear}7.22%{width:3ch;animation-timing-function:steps(6)}9.72%{width:9ch;animation-timing-function:linear}11.11%{width:9ch;animation-timing-function:steps(5)}13.06%,98.5%{width:14ch}98.6%,100%{width:0}}
+.t1{animation:ty1 18s infinite}
+@keyframes ty2{0%{width:0}22.78%{width:0ch;animation-timing-function:steps(3)}24.44%{width:3ch;animation-timing-function:linear}26.94%{width:3ch;animation-timing-function:steps(6)}29.17%{width:9ch;animation-timing-function:linear}30.83%{width:9ch;animation-timing-function:steps(8)}33.89%,98.5%{width:17ch}98.6%,100%{width:0}}
+.t2{animation:ty2 18s infinite}
+@keyframes w1{0%,0%{opacity:0}0.30%,13.89%{opacity:1}14.19%,100%{opacity:0}}
+.cw1{opacity:0;animation:w1 18s infinite}
+@keyframes w2{0%,21.67%{opacity:0}21.97%,35%{opacity:1}35.30%,100%{opacity:0}}
+.cw2{opacity:0;animation:w2 18s infinite}
+@keyframes w3{0%,55%{opacity:0}55.30%,96.67%{opacity:1}96.97%,100%{opacity:0}}
+.cw3{opacity:0;animation:w3 18s infinite}
+@keyframes ko1{0%,15%{opacity:0}15.30%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o1{opacity:0;animation:ko1 18s infinite}
+@keyframes ko2{0%,16.11%{opacity:0}16.41%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o2{opacity:0;animation:ko2 18s infinite}
+@keyframes ko3{0%,16.67%{opacity:0}16.97%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o3{opacity:0;animation:ko3 18s infinite}
+@keyframes ko4{0%,17.22%{opacity:0}17.52%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o4{opacity:0;animation:ko4 18s infinite}
+@keyframes ko6{0%,48.33%{opacity:0}48.63%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o6{opacity:0;animation:ko6 18s infinite}
+@keyframes ko7{0%,49.17%{opacity:0}49.47%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o7{opacity:0;animation:ko7 18s infinite}
+@keyframes ko8{0%,50.56%{opacity:0}50.86%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o8{opacity:0;animation:ko8 18s infinite}
+@keyframes ko9{0%,51.39%{opacity:0}51.69%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o9{opacity:0;animation:ko9 18s infinite}
+@keyframes ko10{0%,52.78%{opacity:0}53.08%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.o10{opacity:0;animation:ko10 18s infinite}
+@keyframes kpl2{0%,21.67%{opacity:0}21.97%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.pl2{opacity:0;animation:kpl2 18s infinite}
+@keyframes kpl3{0%,55%{opacity:0}55.30%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.pl3{opacity:0;animation:kpl3 18s infinite}
+@keyframes kdn{0%,47.22%{opacity:0}47.52%,98.5%{opacity:1}98.6%,100%{opacity:0}}
+.dn{opacity:0;animation:kdn 18s infinite}
+@keyframes kspin{0%,35.56%{opacity:0}35.86%,47.22%{opacity:1}47.52%,100%{opacity:0}}
+.spin{opacity:0;animation:kspin 18s infinite}
+@keyframes tfade{0%,96.5%{opacity:1}97.8%,99%{opacity:0}100%{opacity:1}}
+.tty{animation:tfade 18s infinite}
+@keyframes c0{0%,47.78%{opacity:.12;background:transparent}48.08%{opacity:1;background:rgba(124,140,255,.35)}53.78%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(1){animation:c0 18s infinite}
+@keyframes c1{0%,48.72%{opacity:.12;background:transparent}49.02%{opacity:1;background:rgba(124,140,255,.35)}54.72%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(2){animation:c1 18s infinite}
+@keyframes c2{0%,49.67%{opacity:.12;background:transparent}49.97%{opacity:1;background:rgba(124,140,255,.35)}55.67%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(3){animation:c2 18s infinite}
+@keyframes c3{0%,50.61%{opacity:.12;background:transparent}50.91%{opacity:1;background:rgba(124,140,255,.35)}56.61%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(4){animation:c3 18s infinite}
+@keyframes c4{0%,51.56%{opacity:.12;background:transparent}51.86%{opacity:1;background:rgba(124,140,255,.35)}57.56%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(5){animation:c4 18s infinite}
+@keyframes c5{0%,52.5%{opacity:.12;background:transparent}52.80%{opacity:1;background:rgba(124,140,255,.35)}58.50%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(6){animation:c5 18s infinite}
+@keyframes c6{0%,53.44%{opacity:.12;background:transparent}53.74%{opacity:1;background:rgba(124,140,255,.35)}59.44%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(7){animation:c6 18s infinite}
+@keyframes c7{0%,54.39%{opacity:.12;background:transparent}54.69%{opacity:1;background:rgba(94,234,212,.4)}60.39%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(8){animation:c7 18s infinite}
+@keyframes c8{0%,55.33%{opacity:.12;background:transparent}55.63%{opacity:1;background:rgba(124,140,255,.35)}61.33%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(9){animation:c8 18s infinite}
+@keyframes ks1{0%,0%{opacity:0}0.30%,35.56%{opacity:1}35.86%,100%{opacity:0}}
+.st .s1{opacity:0;animation:ks1 18s infinite}
+@keyframes ks2{0%,35.56%{opacity:0}35.86%,47.22%{opacity:1}47.52%,100%{opacity:0}}
+.st .s2{opacity:0;animation:ks2 18s infinite}
+@keyframes ks3{0%,47.22%{opacity:0}47.52%,96.67%{opacity:1}96.97%,100%{opacity:0}}
+.st .s3{opacity:0;animation:ks3 18s infinite}
+.st .s1{animation-name:ks1b}
+@keyframes ks1b{0%,35.56%{opacity:1}35.86%,96.67%{opacity:0}96.97%,100%{opacity:1}}
+.st .s1{opacity:1}
+@keyframes tglow{0%,3.33%{border-color:var(--line);box-shadow:0 30px 80px -30px rgba(124,140,255,.35)}4.44%,34.44%{border-color:var(--accent2);box-shadow:0 0 0 1px rgba(94,234,212,.35),0 30px 80px -30px rgba(94,234,212,.5)}36.67%,100%{border-color:var(--line);box-shadow:0 30px 80px -30px rgba(124,140,255,.35)}}
+@keyframes cglow{0%,35%{border-color:var(--line);box-shadow:0 30px 80px -30px rgba(124,140,255,.35)}36.67%,77.78%{border-color:var(--accent);box-shadow:0 0 0 1px rgba(124,140,255,.5),0 30px 90px -25px rgba(124,140,255,.7)}88.89%,100%{border-color:var(--line);box-shadow:0 30px 80px -30px rgba(124,140,255,.35)}}
+.stage .term{animation:bob 7s ease-in-out infinite,tglow 18s infinite}.stage .contract{animation:bob 7s ease-in-out -3.5s infinite,cglow 18s infinite}
+@keyframes c9{0%,56.28%{opacity:.12;background:transparent}56.58%{opacity:1;background:rgba(124,140,255,.35)}62.28%{background:transparent}98.5%{opacity:1}98.6%,100%{opacity:.12;background:transparent}}
+.cl:nth-child(10){animation:c9 18s infinite}
+/* demo:end */
+.cursor{display:inline-block;width:8px;height:15px;background:var(--accent2);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+.card{transition:opacity .7s ease,transform .25s ease,border-color .25s ease,box-shadow .25s ease;position:relative;overflow:hidden}
+.card.reveal:not(.in){transition:opacity .7s ease,transform .7s ease}
+.card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 18px 40px -20px rgba(124,140,255,.5)}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(300px circle at var(--mx,50%) var(--my,0%),rgba(124,140,255,.12),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::after{opacity:1}
+.icon{width:42px;height:42px;margin-bottom:14px}
+.icon *{vector-effect:non-scaling-stroke}
+
+.flow .arrow{position:relative;height:2px;background:var(--line);overflow:hidden;font-size:0;border-radius:2px}
+.flow .arrow::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(90deg,transparent,var(--accent2),transparent);animation:travel 2s linear infinite}
+@keyframes travel{to{left:100%}}
+@media(max-width:720px){.flow .arrow{width:2px;height:36px;margin:0 auto;transform:none}.flow .arrow::after{width:100%;height:40%;top:-40%;left:0;background:linear-gradient(180deg,transparent,var(--accent2),transparent);animation:travelv 2s linear infinite}@keyframes travelv{to{top:100%}}}
+.node.hl{animation:glow 3s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 30px -4px rgba(124,140,255,.55)}}
+
+.checks .ck{opacity:0;transform:translateX(-8px);display:block;transition:opacity .4s,transform .4s;transition-delay:calc(var(--i)*.25s)}
+.in .checks .ck,.checks.in .ck{opacity:1;transform:none}
+
+.fact{animation:chip 4s ease-in-out infinite}
+.fact:nth-child(2){animation-delay:.5s}.fact:nth-child(3){animation-delay:1s}.fact:nth-child(4){animation-delay:1.5s}
+@keyframes chip{50%{transform:translateY(-3px)}}
+
+.btn.primary{position:relative;overflow:hidden}
+
+.step::before{transition:background .3s,color .3s,box-shadow .3s}
+.step:hover::before{background:var(--accent);color:#0b0d12;box-shadow:0 0 20px rgba(124,140,255,.6)}
+
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:20}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal,.checks .ck,.o,.pl3,.dn,.cl{opacity:1!important;transform:none!important}.ty{width:auto!important}.spin,.cw,.pl2{opacity:0!important}.t2,.pl2{opacity:1!important}.status .s1,.status .s2{opacity:0!important}.status .s3{opacity:1!important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">invariant<span>.</span></a>
+    <ul>
+      <li><a href="#compile">Compile</a></li>
+      <li><a href="#verify">Verify</a></li>
+      <li><a href="#review">Review</a></li>
+      <li><a href="#connect">Connect</a></li>
+      <li><a href="#start">Get started</a></li>
+      <li><a href="docs/">Docs</a></li>
+    </ul>
+    <a class="toplink" href="https://github.com/mcarlucci/invariant" aria-label="Invariant on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</nav>
+
+<div class="progress" id="progress"></div>
+<header class="hero" id="top">
+  <div class="bg-grid"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="wrap">
+    <span class="eyebrow">source-available &middot; runs locally &middot; no account</span>
+    <h1>Your design system,<br><em>as a contract agents can trust.</em></h1>
+    <p class="lead">Invariant compiles your React, Vue and Angular components, Storybook and design tokens into one machine-readable contract. Agents get real context, not hallucinated props.</p>
+    <div class="cta">
+      <a class="btn primary" href="#start">Get started</a>
+      <a class="btn" href="docs/">Read the docs</a>
+    </div>
+    <div class="stage">
+      <div class="term">
+        <div class="term-bar">~/your-project</div>
+<pre class="tty" aria-label="Terminal demo: invariant init, then invariant compile"><span class="tl "><span class="p">$ </span><span class="ty t1">invariant init</span><span class="cw cw1"><span class="cursor"></span></span></span><span class="tl o o1"><span class="c">wrote invariant.config.json with 3 source(s):</span></span><span class="tl o o2"><span class="c">  ui-library  react  packages/ui</span></span><span class="tl o o3"><span class="c">  ui-stories  storybook  packages/ui</span></span><span class="tl o o4"><span class="c">  design-tokens  tokens</span></span><span class="tl pl2"><span class="p">$ </span><span class="ty t2">invariant compile</span><span class="cw cw2"><span class="cursor"></span></span></span><span class="tl sw"><span class="spin"><span class="spn"></span> compiling&hellip;</span><span class="dn"><span class="ok">&#10003; </span>compiled Acme Design System</span></span><span class="tl o o6"><span class="c">  ui-library (react packages/ui) -&gt; ui-library</span></span><span class="tl o o7"><span class="c">  ui-stories (storybook packages/ui) -&gt; ui-stories</span></span><span class="tl o o8">components 42, tokens 318, themes 2, guidelines 6</span><span class="tl o o9"><span class="w">conflicts 2, needs review 5</span></span><span class="tl o o10">wrote invariant/ (6 files)</span><span class="tl pl3"><span class="p">$ </span><span class="cw cw3"><span class="cursor"></span></span></span></pre>
+      </div>
+      <div class="contract" id="contract">
+        <div class="term-bar"><span>invariant.contract.json</span><span class="status st"><span class="s1"><i></i>waiting</span><span class="s2 busy"><i></i>compiling</span><span class="s3 done"><i></i>compiled</span></span></div>
+<pre><span class="cl c">// illustrative shape</span><span class="cl">{</span><span class="cl">  <span class="k">"component"</span>: <span class="ok">"Button"</span>,</span><span class="cl">  <span class="k">"props"</span>: [{</span><span class="cl">    <span class="k">"name"</span>: <span class="ok">"variant"</span>,</span><span class="cl">    <span class="k">"values"</span>: [<span class="ok">"solid"</span>, <span class="ok">"ghost"</span>],</span><span class="cl">    <span class="k">"status"</span>: <span class="ok">"discovered"</span>,</span><span class="cl hot">    <span class="k">"evidence"</span>: <span class="ok">"Button.tsx:14"</span></span><span class="cl">  }]</span><span class="cl">}</span></pre>
+      </div>
+    </div>
+    <p class="c" style="font:12px var(--mono);margin:18px 0 0;color:var(--muted)">Illustrative output. Names and numbers are examples.</p>
+  </div>
+</header>
+
+<section id="compile">
+  <div class="wrap">
+    <div class="label">Compile</div>
+    <h2>Extract the facts. Don't guess them.</h2>
+    <p class="sub">Source adapters read your code statically and normalize everything into a shared intermediate representation. A pure compiler turns that into the contract. Nothing from your project is executed.</p>
+    <div class="flow">
+      <div class="node"><b>Sources</b><span>React &middot; Vue &middot; Angular<br>Storybook &middot; tokens</span></div>
+      <div class="arrow">&rarr;</div>
+      <div class="node hl"><b>Invariant</b><span>discover &middot; extract<br>reconcile &middot; verify</span></div>
+      <div class="arrow">&rarr;</div>
+      <div class="node"><b>Contract</b><span>JSON + evidence<br>+ report</span></div>
+    </div>
+    <div class="grid g3">
+      <div class="card"><h3>Deterministic</h3><p>Props, events, defaults and token values come from static analysis. Recompiling unchanged sources gives identical bytes.</p></div>
+      <div class="card"><h3>Evidence for every fact</h3><p>Each fact links back to the file and line it came from, so you can always ask "why does the contract say this?"</p></div>
+      <div class="card"><h3>Framework-neutral</h3><p>The contract doesn't depend on a frontend framework or on MCP. Framework quirks live in extension metadata.</p></div>
+    </div>
+    <div class="facts" aria-label="Fact status labels">
+      <span class="fact d">discovered</span>
+      <span class="fact m">documented</span>
+      <span class="fact i">inferred</span>
+      <span class="fact a">approved</span>
+    </div>
+    <p class="sub" style="margin-top:14px">Every fact carries a status. Guesses are never passed off as discovered, and conflicting sources are reported, not hidden.</p>
+  </div>
+</section>
+
+<section id="verify">
+  <div class="wrap">
+    <div class="label">Verify</div>
+    <h2>Know when the contract is stale or tampered with.</h2>
+    <p class="sub">Verify checks the compiled output on its own. With <code>--fresh</code> it also recompiles, and if your sources have moved on it tells you which components, tokens and sources changed. Put it in CI.</p>
+    <div class="grid g2">
+      <div class="code"><pre class="checks"><span class="p">$</span> invariant verify
+<span class="ck" style="--i:1"><span class="ok">&#10003;</span> contract structure</span><span class="ck" style="--i:2"><span class="ok">&#10003;</span> cross-references</span><span class="ck" style="--i:3"><span class="ok">&#10003;</span> content hash</span><span class="ck" style="--i:4"><span class="ok">&#10003;</span> evidence ids</span><span class="ck" style="--i:5"><span class="ok">&#10003;</span> manifest file hashes</span>
+<span class="p">$</span> invariant verify --fresh
+<span class="ck" style="--i:7"><span class="b">&#10007;</span> verify.stale: sources changed</span><span class="ck" style="--i:8">components: +0 -0 ~1</span><span class="ck" style="--i:9"><span class="w">~</span> component:button (description)</span></pre></div>
+      <div class="code"><pre><span class="p">$</span> invariant validate src/
+<span class="w">!</span> Button.tsx:14 color rgb(104 86 224)
+<span class="c">  not the value of any token</span>
+<span class="w">!</span> Card.tsx:6 padding: 13px
+<span class="c">  not the value of any spacing token</span>
+<span class="b">&#10007;</span> Card.tsx:9 unknown prop "tone"
+<span class="c">  basis: discovered</span></pre></div>
+    </div>
+    <p class="sub">Validate checks component props and literal colors (hex, rgb, hsl, named), spacing and typography against your tokens. Only literal values are checked, and every finding says on what basis: discovered, documented, inferred or heuristic.</p>
+  </div>
+</section>
+
+<section id="review">
+  <div class="wrap">
+    <div class="label">Review</div>
+    <h2>Humans decide. Machines never self-approve.</h2>
+    <p class="sub">Conflicts and inferred facts land in a review queue. Your decisions are saved in a committed file and applied on every compile.</p>
+    <div class="grid g3">
+      <div class="card"><h3>Conflicts surfaced</h3><p>When Storybook and code disagree, both values stay in the contract with their evidence. Nothing is silently dropped.</p></div>
+      <div class="card"><h3>Inferred stays inferred</h3><p>Rules the engine infers are never promoted to approved policy automatically. You approve, reject or dismiss each one.</p></div>
+      <div class="card"><h3>Decisions in git</h3><p>Approvals live in <code>invariant.decisions.json</code> and are bound to a fingerprint of the fact, so they expire when the evidence changes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="connect">
+  <div class="wrap">
+    <div class="label">Connect</div>
+    <h2>One command to wire up your agent.</h2>
+    <p class="sub">Invariant serves the compiled contract over a read-only MCP server. Agents look up components, tokens and usage, and check their own code before they hand it back.</p>
+    <div class="code"><pre><span class="p">$</span> invariant agent init claude-code <span class="c">  # also: cursor, codex, windsurf, all</span></pre></div>
+    <div class="grid g3">
+      <div class="card"><h3>10 read-only tools</h3><p><code>get_component</code>, <code>get_design_tokens</code>, <code>search_design_system</code>, <code>validate_component_usage</code> and more.</p></div>
+      <div class="card"><h3>Always current</h3><p>The server reloads when you recompile. A missing or tampered contract is never partly served.</p></div>
+      <div class="card"><h3>Treats your text as untrusted</h3><p>Results are marked untrusted and returned as structured JSON. Generated agent config never includes free-form descriptions.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="label">Get started</div>
+    <h2>Run it on your own project.</h2>
+    <p class="sub">Needs Node 24+ and pnpm. Invariant isn't on npm yet, so build it from source and link it.</p>
+    <div class="steps">
+      <div class="step"><div>
+        <h3>Build Invariant</h3>
+        <div class="code"><pre>git clone https://github.com/mcarlucci/invariant.git
+cd invariant
+pnpm install &amp;&amp; pnpm build
+cd apps/cli &amp;&amp; pnpm link --global</pre></div>
+      </div></div>
+      <div class="step"><div>
+        <h3>Compile your design system</h3>
+        <div class="code"><pre>cd /path/to/your-project
+invariant init
+invariant compile
+invariant compile --watch   # optional: recompile on every change</pre></div>
+      </div></div>
+      <div class="step"><div>
+        <h3>Explore and connect</h3>
+        <div class="code"><pre>invariant components list
+invariant components inspect Button --evidence
+invariant agent init claude-code</pre></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="label">License</div>
+    <h2>Source-available, with a clock on it.</h2>
+    <p class="sub">Invariant uses the Functional Source License (FSL-1.1-ALv2). Read it, run it, modify it, use it inside your company. You can't use it to offer a competing product or service. Each version becomes Apache-2.0 two years after release.</p>
+    <a class="btn" href="https://github.com/mcarlucci/invariant/blob/main/LICENSE">Read the license</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 invariant. &middot; FSL-1.1-ALv2</div>
+    <div class="links">
+      <a href="https://github.com/mcarlucci/invariant">GitHub</a>
+      <a href="docs/">Docs</a>
+      <a href="https://github.com/mcarlucci/invariant/blob/main/docs/decisions/0001-architecture.md">Architecture</a>
+      <a href="https://github.com/mcarlucci/invariant/blob/main/LICENSE">License</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  var S = 'class="icon" viewBox="0 0 42 42" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  var A = 'stroke="#7c8cff"', B = 'stroke="#5eead4"';
+  var icons = {
+    'Deterministic': '<svg ' + S + '><rect x="6" y="6" width="30" height="30" rx="6" ' + A + '/><path d="M14 21l5 5 9-10" ' + B + '/></svg>',
+    'Evidence for every fact': '<svg ' + S + '><circle cx="18" cy="18" r="10" ' + A + '/><path d="M26 26l9 9" ' + B + '/></svg>',
+    'Framework-neutral': '<svg ' + S + '><path d="M21 5l14 8v16l-14 8-14-8V13z" ' + A + '/><path d="M21 21l14-8M21 21L7 13M21 21v16" ' + B + '/></svg>',
+    'Conflicts surfaced': '<svg ' + S + '><path d="M7 10h10l6 22h12" ' + A + '/><path d="M7 32h10l6-22h12" ' + B + '/></svg>',
+    'Inferred stays inferred': '<svg ' + S + '><path d="M6 21h6M30 21h6" ' + A + '/><circle cx="21" cy="21" r="8" stroke-dasharray="3 4" ' + B + '/></svg>',
+    'Decisions in git': '<svg ' + S + '><circle cx="12" cy="9" r="4" ' + A + '/><circle cx="12" cy="33" r="4" ' + A + '/><circle cx="31" cy="21" r="4" ' + B + '/><path d="M12 13v16M12 21h15" ' + A + '/></svg>',
+    '10 read-only tools': '<svg ' + S + '><rect x="6" y="6" width="13" height="13" rx="3" ' + A + '/><rect x="23" y="6" width="13" height="13" rx="3" ' + B + '/><rect x="6" y="23" width="13" height="13" rx="3" ' + B + '/><rect x="23" y="23" width="13" height="13" rx="3" ' + A + '/></svg>',
+    'Always current': '<svg ' + S + '><path d="M34 21a13 13 0 1 1-4-9.4" ' + A + '/><path d="M34 6v8h-8" ' + B + '/></svg>',
+    'Treats your text as untrusted': '<svg ' + S + '><path d="M21 5l13 5v10c0 8-6 14-13 17C14 34 8 28 8 20V10z" ' + A + '/><path d="M16 21l4 4 7-8" ' + B + '/></svg>'
+  };
+
+  document.querySelectorAll('.card').forEach((c) => {
+    var h = c.querySelector('h3');
+    if (h && icons[h.textContent.trim()]) c.insertAdjacentHTML('afterbegin', icons[h.textContent.trim()]);
+    c.addEventListener('mousemove', (e) => {
+      var r = c.getBoundingClientRect();
+      c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  var targets = document.querySelectorAll('section .label, section h2, section .sub, .card, .node, .code, .step, .facts, section .btn');
+  targets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.setProperty('--d', ((i % 4) * 0.08) + 's');
+  });
+  var io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  targets.forEach((el) => { io.observe(el); });
+  document.querySelectorAll('.checks').forEach((el) => { io.observe(el); });
+
+  var bar = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    var h = document.documentElement;
+    bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1566 @@
+{
+  "capabilities": [
+    "buildTools",
+    "entryPoints",
+    "export.*",
+    "frameworks",
+    "package.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "package",
+      "name": "@acme/ui",
+      "ref": "package:@acme/ui"
+    },
+    {
+      "kind": "export",
+      "name": "Button",
+      "ref": "package:@acme/ui#./button:Button"
+    },
+    {
+      "kind": "export",
+      "name": "AcmeIcon",
+      "ref": "package:@acme/ui#.:AcmeIcon"
+    },
+    {
+      "kind": "export",
+      "name": "Badge",
+      "ref": "package:@acme/ui#.:Badge"
+    },
+    {
+      "kind": "export",
+      "name": "Button",
+      "ref": "package:@acme/ui#.:Button"
+    },
+    {
+      "kind": "export",
+      "name": "ButtonProps",
+      "ref": "package:@acme/ui#.:ButtonProps"
+    },
+    {
+      "kind": "export",
+      "name": "Card",
+      "ref": "package:@acme/ui#.:Card"
+    },
+    {
+      "kind": "export",
+      "name": "CardProps",
+      "ref": "package:@acme/ui#.:CardProps"
+    },
+    {
+      "kind": "export",
+      "name": "IconButton",
+      "ref": "package:@acme/ui#.:IconButton"
+    },
+    {
+      "kind": "export",
+      "name": "LazyChart",
+      "ref": "package:@acme/ui#.:LazyChart"
+    },
+    {
+      "kind": "export",
+      "name": "Link",
+      "ref": "package:@acme/ui#.:Link"
+    },
+    {
+      "kind": "export",
+      "name": "Modal",
+      "ref": "package:@acme/ui#.:Modal"
+    },
+    {
+      "kind": "export",
+      "name": "Select",
+      "ref": "package:@acme/ui#.:Select"
+    },
+    {
+      "kind": "export",
+      "name": "Stack",
+      "ref": "package:@acme/ui#.:Stack"
+    },
+    {
+      "kind": "export",
+      "name": "StackProps",
+      "ref": "package:@acme/ui#.:StackProps"
+    },
+    {
+      "kind": "export",
+      "name": "Text",
+      "ref": "package:@acme/ui#.:Text"
+    },
+    {
+      "kind": "export",
+      "name": "Tooltip",
+      "ref": "package:@acme/ui#.:Tooltip"
+    },
+    {
+      "kind": "export",
+      "name": "VERSION",
+      "ref": "package:@acme/ui#.:VERSION"
+    },
+    {
+      "kind": "export",
+      "name": "useDisclosure",
+      "ref": "package:@acme/ui#.:useDisclosure"
+    },
+    {
+      "kind": "export",
+      "name": "withTheme",
+      "ref": "package:@acme/ui#.:withTheme"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_01480138c2e5fa1535cb617c",
+      "location": {
+        "line": 2,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#ButtonProps",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_0745f8ee81ebdba3231da2e1",
+      "location": {
+        "line": 1,
+        "path": "src/layout/Stack.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/layout/Stack.tsx#StackProps",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_07644286db7d3eccc5826ba0",
+      "location": {
+        "line": 10,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#LazyChart",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_1d8ca5111bdc013ec1f8e719",
+      "location": {
+        "path": "package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "package.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_23c4de31b86005580bc4ec86",
+      "location": {
+        "line": 13,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#AcmeIcon",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_303da145bd6d49f6d35adb39",
+      "location": {
+        "line": 12,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#useDisclosure",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_3520c08bbd6392a8c56e52e3",
+      "location": {
+        "line": 9,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Badge",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_455775c16a074ede0f6a114e",
+      "location": {
+        "line": 1,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_4b84004ab8901524b9fb5af9",
+      "location": {
+        "line": 7,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Text",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_5fb1b6ba956e47841ad1ee1c",
+      "location": {
+        "line": 5,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Select",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_623b442a628b13f0944ec5e8",
+      "location": {
+        "line": 3,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#IconButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_7084e72dfade612e6c8ae716",
+      "location": {
+        "line": 6,
+        "path": "src/layout/Stack.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/layout/Stack.tsx#Stack",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_782ec5b1dc1c6b02bc81b995",
+      "location": {
+        "line": 1,
+        "path": "src/button.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/button.ts#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_a1727484c1367c98964808da",
+      "location": {
+        "line": 6,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Modal",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_a2b0cbad860ba23bf0b9cc0b",
+      "location": {
+        "line": 5,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/Card.tsx#CardProps",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_a9e889e4384ec4b86957b1b3",
+      "location": {
+        "line": 26,
+        "path": "src/Card.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/Card.tsx#Card",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_ba9f29ea5307ff2edb934c36",
+      "location": {
+        "line": 8,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Link",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_c7b47ed4481b25f3985636ac",
+      "location": {
+        "line": 16,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#VERSION",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_e64ad40ac93e51e1a1952d62",
+      "location": {
+        "line": 14,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#Tooltip",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_e95a4a233e463ef5a65b93b2",
+      "location": {
+        "line": 20,
+        "path": "package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "package.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_f6e2c7631b5ceb743babb085",
+      "location": {
+        "line": 11,
+        "path": "src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui",
+      "sourceRef": "src/index.ts#withTheme",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "buildTools",
+      "subject": "package:@acme/ui",
+      "value": [
+        {
+          "evidence": [
+            {
+              "ref": "tsconfig.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "vite",
+              "type": "dependency"
+            }
+          ],
+          "name": "vite"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "entryPoints",
+      "subject": "package:@acme/ui",
+      "value": [
+        {
+          "condition": "types",
+          "exportsComplete": true,
+          "file": "src/index.ts",
+          "resolution": "mapped",
+          "subpath": ".",
+          "target": "./dist/index.d.ts"
+        },
+        {
+          "condition": "types",
+          "exportsComplete": true,
+          "file": "src/button.ts",
+          "resolution": "mapped",
+          "subpath": "./button",
+          "target": "./dist/button.d.ts"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_e95a4a233e463ef5a65b93b2"
+      ],
+      "origin": "extracted",
+      "path": "frameworks",
+      "subject": "package:@acme/ui",
+      "value": [
+        {
+          "declaredRange": "^18.2.0",
+          "dependencyKind": "peerDependencies",
+          "line": 20,
+          "name": "react",
+          "package": "react"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "package.directory",
+      "subject": "package:@acme/ui",
+      "value": "."
+    },
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "package.manager",
+      "subject": "package:@acme/ui",
+      "value": {
+        "evidence": [],
+        "name": "unknown"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "package.name",
+      "subject": "package:@acme/ui",
+      "value": "@acme/ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "package.private",
+      "subject": "package:@acme/ui",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_1d8ca5111bdc013ec1f8e719"
+      ],
+      "origin": "extracted",
+      "path": "package.version",
+      "subject": "package:@acme/ui",
+      "value": "3.0.0"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_782ec5b1dc1c6b02bc81b995"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#./button:Button",
+      "value": "./button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_782ec5b1dc1c6b02bc81b995"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#./button:Button",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_782ec5b1dc1c6b02bc81b995"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#./button:Button",
+      "value": "Button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_782ec5b1dc1c6b02bc81b995"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#./button:Button",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_782ec5b1dc1c6b02bc81b995"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#./button:Button",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_23c4de31b86005580bc4ec86"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:AcmeIcon",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_23c4de31b86005580bc4ec86"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:AcmeIcon",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_23c4de31b86005580bc4ec86"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:AcmeIcon",
+      "value": "AcmeIcon"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_23c4de31b86005580bc4ec86"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:AcmeIcon",
+      "value": {
+        "external": false,
+        "module": "./Icon"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_23c4de31b86005580bc4ec86"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:AcmeIcon",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_3520c08bbd6392a8c56e52e3"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Badge",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_3520c08bbd6392a8c56e52e3"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Badge",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_3520c08bbd6392a8c56e52e3"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Badge",
+      "value": "Badge"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_3520c08bbd6392a8c56e52e3"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Badge",
+      "value": {
+        "external": false,
+        "module": "./Badge"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_3520c08bbd6392a8c56e52e3"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Badge",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_455775c16a074ede0f6a114e"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Button",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_455775c16a074ede0f6a114e"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Button",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_455775c16a074ede0f6a114e"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Button",
+      "value": "Button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_455775c16a074ede0f6a114e"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Button",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_455775c16a074ede0f6a114e"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Button",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_01480138c2e5fa1535cb617c"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:ButtonProps",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_01480138c2e5fa1535cb617c"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:ButtonProps",
+      "value": "type"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_01480138c2e5fa1535cb617c"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:ButtonProps",
+      "value": "ButtonProps"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_01480138c2e5fa1535cb617c"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:ButtonProps",
+      "value": {
+        "external": false,
+        "module": "./Button"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_01480138c2e5fa1535cb617c"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:ButtonProps",
+      "value": true
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a9e889e4384ec4b86957b1b3"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Card",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a9e889e4384ec4b86957b1b3"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Card",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a9e889e4384ec4b86957b1b3"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Card",
+      "value": "Card"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a9e889e4384ec4b86957b1b3"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Card",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a2b0cbad860ba23bf0b9cc0b"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:CardProps",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a2b0cbad860ba23bf0b9cc0b"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:CardProps",
+      "value": "type"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a2b0cbad860ba23bf0b9cc0b"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:CardProps",
+      "value": "CardProps"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a2b0cbad860ba23bf0b9cc0b"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:CardProps",
+      "value": true
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_623b442a628b13f0944ec5e8"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:IconButton",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_623b442a628b13f0944ec5e8"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:IconButton",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_623b442a628b13f0944ec5e8"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:IconButton",
+      "value": "IconButton"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_623b442a628b13f0944ec5e8"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:IconButton",
+      "value": {
+        "external": false,
+        "module": "./IconButton"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_623b442a628b13f0944ec5e8"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:IconButton",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_07644286db7d3eccc5826ba0"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:LazyChart",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_07644286db7d3eccc5826ba0"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:LazyChart",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_07644286db7d3eccc5826ba0"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:LazyChart",
+      "value": "LazyChart"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_07644286db7d3eccc5826ba0"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:LazyChart",
+      "value": {
+        "external": false,
+        "module": "./LazyChart"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_07644286db7d3eccc5826ba0"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:LazyChart",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ba9f29ea5307ff2edb934c36"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Link",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ba9f29ea5307ff2edb934c36"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Link",
+      "value": "default"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ba9f29ea5307ff2edb934c36"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Link",
+      "value": "Link"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ba9f29ea5307ff2edb934c36"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Link",
+      "value": {
+        "external": false,
+        "module": "./Link"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ba9f29ea5307ff2edb934c36"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Link",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a1727484c1367c98964808da"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Modal",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a1727484c1367c98964808da"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Modal",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a1727484c1367c98964808da"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Modal",
+      "value": "Modal"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a1727484c1367c98964808da"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Modal",
+      "value": {
+        "external": false,
+        "module": "./Modal"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a1727484c1367c98964808da"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Modal",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_5fb1b6ba956e47841ad1ee1c"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Select",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_5fb1b6ba956e47841ad1ee1c"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Select",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_5fb1b6ba956e47841ad1ee1c"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Select",
+      "value": "Select"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_5fb1b6ba956e47841ad1ee1c"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Select",
+      "value": {
+        "external": false,
+        "module": "./Select"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_5fb1b6ba956e47841ad1ee1c"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Select",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7084e72dfade612e6c8ae716"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Stack",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7084e72dfade612e6c8ae716"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Stack",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7084e72dfade612e6c8ae716"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Stack",
+      "value": "Stack"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_7084e72dfade612e6c8ae716"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Stack",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_0745f8ee81ebdba3231da2e1"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:StackProps",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_0745f8ee81ebdba3231da2e1"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:StackProps",
+      "value": "type"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_0745f8ee81ebdba3231da2e1"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:StackProps",
+      "value": "StackProps"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_0745f8ee81ebdba3231da2e1"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:StackProps",
+      "value": true
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4b84004ab8901524b9fb5af9"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Text",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4b84004ab8901524b9fb5af9"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Text",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4b84004ab8901524b9fb5af9"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Text",
+      "value": "Text"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4b84004ab8901524b9fb5af9"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Text",
+      "value": {
+        "external": false,
+        "module": "./Text"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_4b84004ab8901524b9fb5af9"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Text",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e64ad40ac93e51e1a1952d62"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:Tooltip",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e64ad40ac93e51e1a1952d62"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:Tooltip",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e64ad40ac93e51e1a1952d62"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:Tooltip",
+      "value": "Tooltip"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e64ad40ac93e51e1a1952d62"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:Tooltip",
+      "value": {
+        "external": false,
+        "module": "./Tooltip"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_e64ad40ac93e51e1a1952d62"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:Tooltip",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c7b47ed4481b25f3985636ac"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:VERSION",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c7b47ed4481b25f3985636ac"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:VERSION",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c7b47ed4481b25f3985636ac"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:VERSION",
+      "value": "VERSION"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c7b47ed4481b25f3985636ac"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:VERSION",
+      "value": {
+        "external": false,
+        "module": "./version"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c7b47ed4481b25f3985636ac"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:VERSION",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_303da145bd6d49f6d35adb39"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:useDisclosure",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_303da145bd6d49f6d35adb39"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:useDisclosure",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_303da145bd6d49f6d35adb39"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:useDisclosure",
+      "value": "useDisclosure"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_303da145bd6d49f6d35adb39"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:useDisclosure",
+      "value": {
+        "external": false,
+        "module": "./hooks"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_303da145bd6d49f6d35adb39"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:useDisclosure",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_f6e2c7631b5ceb743babb085"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui#.:withTheme",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_f6e2c7631b5ceb743babb085"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui#.:withTheme",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_f6e2c7631b5ceb743babb085"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui#.:withTheme",
+      "value": "withTheme"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_f6e2c7631b5ceb743babb085"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui#.:withTheme",
+      "value": {
+        "external": false,
+        "module": "./withTheme"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_f6e2c7631b5ceb743babb085"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui#.:withTheme",
+      "value": false
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-npm",
+      "version": "0.1.0"
+    },
+    "id": "npm-acme-ui",
+    "inputHash": "e6aefb05f13f05b6aa3b365e83d3c510bd63d533719b84b1283a62a43330301a",
+    "location": ".",
+    "type": "npm",
+    "version": {
+      "kind": "package-version",
+      "value": "3.0.0"
+    }
+  }
+}

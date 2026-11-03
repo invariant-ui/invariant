@@ -1,0 +1,5495 @@
+{
+  "components": [
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "styling": {
+            "cssVariables": [
+              "--color-brand",
+              "--space-md"
+            ],
+            "libraries": [
+              "styled-components"
+            ]
+          },
+          "variants": {
+            "tone": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "extensions.invariant.styling.cssVariables": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.libraries": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.tone.extensions.react.source": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.styledLibrary": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_2c64276bf0ad3e8246a61b65"
+          ],
+          "status": "discovered"
+        },
+        "props.tone.allowedValues": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        },
+        "props.tone.extensions.react.role": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        },
+        "props.tone.required": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        },
+        "props.tone.type.kind": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        },
+        "props.tone.type.text": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        },
+        "variants.tone.values": {
+          "evidenceIds": [
+            "ev_b8eff882acfa64b73d4354c6"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:badge",
+      "implementations": [
+        {
+          "exportName": "Badge",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Badge",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Badge.tsx",
+              "forwardRef": false,
+              "kind": "styled",
+              "localName": "Badge",
+              "memo": false,
+              "propsComplete": true,
+              "styledLibrary": "styled-components"
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Badge",
+      "props": [
+        {
+          "allowedValues": [
+            "info",
+            "warn"
+          ],
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "tone",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"info\" | \"warn\""
+          }
+        }
+      ],
+      "slots": [],
+      "states": [],
+      "variants": [
+        {
+          "name": "tone",
+          "values": [
+            "info",
+            "warn"
+          ]
+        }
+      ]
+    },
+    {
+      "accessibility": {
+        "attributes": [
+          "aria-busy"
+        ],
+        "role": "button"
+      },
+      "composition": [],
+      "description": "Triggers an action.",
+      "events": [],
+      "examples": [
+        {
+          "code": "<Button variant=\"primary\">Save</Button>",
+          "id": "example-1",
+          "language": "tsx",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "extensions": {
+        "invariant": {
+          "styling": {
+            "cssModules": [
+              "src/Button.module.css"
+            ],
+            "cssVariables": [
+              "--color-action",
+              "--color-brand",
+              "--space-lg",
+              "--space-md"
+            ]
+          },
+          "usage": {
+            "combinations": [
+              {
+                "count": 2,
+                "props": [
+                  "children",
+                  "variant"
+                ]
+              },
+              {
+                "count": 1,
+                "props": [
+                  "aria-label",
+                  "children",
+                  "variant"
+                ]
+              },
+              {
+                "count": 1,
+                "props": [
+                  "children",
+                  "size",
+                  "variant"
+                ]
+              }
+            ],
+            "props": {
+              "aria-label": {
+                "count": 1,
+                "dynamicCount": 1
+              },
+              "children": {
+                "count": 4,
+                "declared": true,
+                "dynamicCount": 4
+              },
+              "size": {
+                "count": 1,
+                "declared": true,
+                "observedValues": [
+                  "lg"
+                ]
+              },
+              "variant": {
+                "count": 4,
+                "declared": true,
+                "dynamicCount": 1,
+                "observedValues": [
+                  "primary",
+                  "danger",
+                  "ghost"
+                ]
+              }
+            },
+            "sites": 4
+          },
+          "variants": {
+            "size": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            },
+            "variant": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "accessibility.attributes": {
+          "evidenceIds": [
+            "ev_577a1472804c20c5a68e0922"
+          ],
+          "status": "discovered"
+        },
+        "accessibility.role": {
+          "evidenceIds": [
+            "ev_577a1472804c20c5a68e0922"
+          ],
+          "status": "discovered"
+        },
+        "description": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "documented"
+        },
+        "examples.example-1.code": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "documented"
+        },
+        "examples.example-1.language": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "documented"
+        },
+        "extensions.invariant.styling.cssModules": {
+          "evidenceIds": [
+            "ev_577a1472804c20c5a68e0922"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.cssVariables": {
+          "evidenceIds": [
+            "ev_07dc315052bd18b39ad2ec47",
+            "ev_577a1472804c20c5a68e0922",
+            "ev_6ad69f4a5ed573f869aa687f",
+            "ev_ac344b00194a6c742dff7be4",
+            "ev_f889f406919d94ec3969ea70"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.aria-label.count": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.aria-label.dynamicCount": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.count": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.declared": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.dynamicCount": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.size.count": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.size.declared": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.size.observedValues": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.variant.count": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.variant.declared": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.variant.dynamicCount": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.variant.observedValues": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_0a1fea4aec0173552b495e27",
+            "ev_9eaed69d08f76997a7706bdd",
+            "ev_a57487f7be2e97500e7cd36c",
+            "ev_c2fabde247dda4bab5a71680"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.size.extensions.react.source": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.variant.extensions.react.source": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.inheritedPropsFrom": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.refType": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.wrappers": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_b7b15bbd11e87e6d826cca56"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_b7b15bbd11e87e6d826cca56"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_b7b15bbd11e87e6d826cca56"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_b7b15bbd11e87e6d826cca56"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.description": {
+          "evidenceIds": [
+            "ev_62f135cc7f748e3be51ff5e1"
+          ],
+          "status": "documented"
+        },
+        "props.data-testid.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_62f135cc7f748e3be51ff5e1"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.extensions.react.role": {
+          "evidenceIds": [
+            "ev_62f135cc7f748e3be51ff5e1"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.required": {
+          "evidenceIds": [
+            "ev_62f135cc7f748e3be51ff5e1"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.type.kind": {
+          "evidenceIds": [
+            "ev_62f135cc7f748e3be51ff5e1"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.type.text": {
+          "evidenceIds": [
+            "ev_62f135cc7f748e3be51ff5e1"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.description": {
+          "evidenceIds": [
+            "ev_bce9e11ae32a5242ba3efde6"
+          ],
+          "status": "documented"
+        },
+        "props.icon.extensions.react.role": {
+          "evidenceIds": [
+            "ev_bce9e11ae32a5242ba3efde6"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.required": {
+          "evidenceIds": [
+            "ev_bce9e11ae32a5242ba3efde6"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.type.kind": {
+          "evidenceIds": [
+            "ev_bce9e11ae32a5242ba3efde6"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.type.text": {
+          "evidenceIds": [
+            "ev_bce9e11ae32a5242ba3efde6"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.default": {
+          "evidenceIds": [
+            "ev_577a1472804c20c5a68e0922",
+            "ev_5a1f14afca915ec8e6697ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.extensions.react.role": {
+          "evidenceIds": [
+            "ev_5a1f14afca915ec8e6697ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.required": {
+          "evidenceIds": [
+            "ev_5a1f14afca915ec8e6697ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.type.kind": {
+          "evidenceIds": [
+            "ev_5a1f14afca915ec8e6697ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.type.text": {
+          "evidenceIds": [
+            "ev_5a1f14afca915ec8e6697ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.extensions.react.role": {
+          "evidenceIds": [
+            "ev_19ee1b6deed69bd6272ff1a9"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.required": {
+          "evidenceIds": [
+            "ev_19ee1b6deed69bd6272ff1a9"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.type.kind": {
+          "evidenceIds": [
+            "ev_19ee1b6deed69bd6272ff1a9"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.type.text": {
+          "evidenceIds": [
+            "ev_19ee1b6deed69bd6272ff1a9"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.deprecated": {
+          "evidenceIds": [
+            "ev_7afe28a2ad2f6931d7fc9e59"
+          ],
+          "status": "documented"
+        },
+        "props.plain.extensions.react.role": {
+          "evidenceIds": [
+            "ev_7afe28a2ad2f6931d7fc9e59"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.required": {
+          "evidenceIds": [
+            "ev_7afe28a2ad2f6931d7fc9e59"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.type.kind": {
+          "evidenceIds": [
+            "ev_7afe28a2ad2f6931d7fc9e59"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.type.text": {
+          "evidenceIds": [
+            "ev_7afe28a2ad2f6931d7fc9e59"
+          ],
+          "status": "discovered"
+        },
+        "props.size.allowedValues": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "props.size.default": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303",
+            "ev_577a1472804c20c5a68e0922"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.react.role": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "props.size.required": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.kind": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.text": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.allowedValues": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.default": {
+          "evidenceIds": [
+            "ev_577a1472804c20c5a68e0922",
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.description": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "documented"
+        },
+        "props.variant.extensions.react.role": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.required": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.type.kind": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.type.text": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.required": {
+          "evidenceIds": [
+            "ev_60d0b0aa4636db23cb8a64d1"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.default": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.values": {
+          "evidenceIds": [
+            "ev_4947d273ba1e2ed6b733d303"
+          ],
+          "status": "discovered"
+        },
+        "variants.variant.default": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        },
+        "variants.variant.values": {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:button",
+      "implementations": [
+        {
+          "exportName": "Button",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Button",
+                  "subpath": "."
+                },
+                {
+                  "name": "Button",
+                  "subpath": "./button"
+                }
+              ],
+              "file": "src/Button.tsx",
+              "forwardRef": true,
+              "inheritedPropsFrom": [
+                "React.ButtonHTMLAttributes<HTMLButtonElement>"
+              ],
+              "kind": "forwardRef",
+              "localName": "Button",
+              "memo": false,
+              "propsComplete": false,
+              "refType": "HTMLButtonElement",
+              "wrappers": [
+                "forwardRef"
+              ]
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Button",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": true,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "description": "Hook for tests and analytics.",
+          "extensions": {
+            "react": {
+              "inheritedFrom": "BaseProps",
+              "role": "prop"
+            }
+          },
+          "name": "data-testid",
+          "required": false,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "description": "Leading icon.",
+          "extensions": {
+            "react": {
+              "role": "slot"
+            }
+          },
+          "name": "icon",
+          "required": false,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactElement"
+          }
+        },
+        {
+          "default": false,
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "loading",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "event-handler"
+            }
+          },
+          "name": "onPress",
+          "required": false,
+          "type": {
+            "kind": "function",
+            "text": "(event: React.MouseEvent<HTMLButtonElement>) => void"
+          }
+        },
+        {
+          "deprecated": {
+            "reason": "Use `variant=\"ghost\"` instead."
+          },
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "plain",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "allowedValues": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "size",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"sm\" | \"md\" | \"lg\""
+          }
+        },
+        {
+          "allowedValues": [
+            "primary",
+            "secondary",
+            "ghost"
+          ],
+          "default": "primary",
+          "description": "Visual weight of the button.",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "variant",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"primary\" | \"secondary\" | \"ghost\""
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactNode"
+            }
+          },
+          "name": "default",
+          "required": true
+        },
+        {
+          "extensions": {
+            "react": {
+              "prop": "icon",
+              "typeText": "React.ReactElement"
+            }
+          },
+          "name": "icon",
+          "required": false
+        }
+      ],
+      "states": [],
+      "variants": [
+        {
+          "default": "md",
+          "name": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "default": "primary",
+          "name": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost"
+          ]
+        }
+      ]
+    },
+    {
+      "composition": [
+        {
+          "target": "component:card.body",
+          "type": "contains"
+        },
+        {
+          "target": "component:card.header",
+          "type": "contains"
+        }
+      ],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "composition": {
+            "subcomponents": [
+              {
+                "key": "Header",
+                "ref": "react:src/Card.tsx#CardHeader"
+              },
+              {
+                "key": "Body",
+                "ref": "react:src/Card.tsx#CardBody"
+              }
+            ]
+          },
+          "styling": {
+            "classNames": [
+              "card"
+            ],
+            "tailwind": true
+          },
+          "usage": {
+            "combinations": [
+              {
+                "count": 1,
+                "props": [
+                  "children",
+                  "elevated"
+                ]
+              },
+              {
+                "count": 1,
+                "props": [
+                  "shadow"
+                ]
+              }
+            ],
+            "props": {
+              "children": {
+                "count": 1,
+                "declared": true,
+                "dynamicCount": 1
+              },
+              "elevated": {
+                "count": 1,
+                "declared": true,
+                "observedValues": [
+                  true
+                ]
+              },
+              "shadow": {
+                "count": 1,
+                "declared": false,
+                "observedValues": [
+                  true
+                ]
+              }
+            },
+            "sites": 2,
+            "undeclaredProps": [
+              "shadow"
+            ]
+          }
+        }
+      },
+      "facts": {
+        "composition.0": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "composition.1": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.composition.subcomponents": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.classNames": {
+          "evidenceIds": [
+            "ev_3fd827d13ec6484bd47b7c51"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.tailwind": {
+          "evidenceIds": [
+            "ev_3fd827d13ec6484bd47b7c51"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.count": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.declared": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.dynamicCount": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.elevated.count": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.elevated.declared": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.elevated.observedValues": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.shadow.count": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.shadow.declared": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.shadow.observedValues": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.undeclaredProps": {
+          "evidenceIds": [
+            "ev_47d53f3a4f231e6ebbd33ca4",
+            "ev_9e78193da49080b922cc1aa6"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_f900dc0beb4f72d7b984d1c4"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_f900dc0beb4f72d7b984d1c4"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_f900dc0beb4f72d7b984d1c4"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_f900dc0beb4f72d7b984d1c4"
+          ],
+          "status": "discovered"
+        },
+        "props.elevated.default": {
+          "evidenceIds": [
+            "ev_3fd827d13ec6484bd47b7c51",
+            "ev_8b8f4086e2f21dc8f0b46c6f"
+          ],
+          "status": "discovered"
+        },
+        "props.elevated.extensions.react.role": {
+          "evidenceIds": [
+            "ev_8b8f4086e2f21dc8f0b46c6f"
+          ],
+          "status": "discovered"
+        },
+        "props.elevated.required": {
+          "evidenceIds": [
+            "ev_8b8f4086e2f21dc8f0b46c6f"
+          ],
+          "status": "discovered"
+        },
+        "props.elevated.type.kind": {
+          "evidenceIds": [
+            "ev_8b8f4086e2f21dc8f0b46c6f"
+          ],
+          "status": "discovered"
+        },
+        "props.elevated.type.text": {
+          "evidenceIds": [
+            "ev_8b8f4086e2f21dc8f0b46c6f"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:card",
+      "implementations": [
+        {
+          "exportName": "Card",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Card",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Card.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "Card",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Card",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": false,
+          "type": {
+            "kind": "component",
+            "text": "ReactNode"
+          }
+        },
+        {
+          "default": false,
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "elevated",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "ReactNode"
+            }
+          },
+          "name": "default",
+          "required": false
+        }
+      ],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "usage": {
+            "combinations": [
+              {
+                "count": 1,
+                "props": [
+                  "children"
+                ]
+              }
+            ],
+            "props": {
+              "children": {
+                "count": 1,
+                "declared": true,
+                "dynamicCount": 1
+              }
+            },
+            "sites": 1
+          }
+        }
+      },
+      "facts": {
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_9ed9f9102d54ef77d88bb06c"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.count": {
+          "evidenceIds": [
+            "ev_9ed9f9102d54ef77d88bb06c"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.declared": {
+          "evidenceIds": [
+            "ev_9ed9f9102d54ef77d88bb06c"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.dynamicCount": {
+          "evidenceIds": [
+            "ev_9ed9f9102d54ef77d88bb06c"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_9ed9f9102d54ef77d88bb06c"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.compoundParent": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_067eeeb1454c008e26a1b3fc"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_067eeeb1454c008e26a1b3fc"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_067eeeb1454c008e26a1b3fc"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_067eeeb1454c008e26a1b3fc"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_2de6306828e1b9135e2d580a"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:card.body",
+      "implementations": [
+        {
+          "extensions": {
+            "react": {
+              "compoundParent": "react:src/Card.tsx#Card",
+              "exports": [],
+              "file": "src/Card.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "CardBody",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Card.Body",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": true,
+          "type": {
+            "kind": "component",
+            "text": "ReactNode"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "ReactNode"
+            }
+          },
+          "name": "default",
+          "required": true
+        }
+      ],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "usage": {
+            "combinations": [
+              {
+                "count": 1,
+                "props": [
+                  "title"
+                ]
+              }
+            ],
+            "props": {
+              "title": {
+                "count": 1,
+                "declared": true,
+                "observedValues": [
+                  "Overview"
+                ]
+              }
+            },
+            "sites": 1
+          }
+        }
+      },
+      "facts": {
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_a24da36484acf8e358d0b353"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.title.count": {
+          "evidenceIds": [
+            "ev_a24da36484acf8e358d0b353"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.title.declared": {
+          "evidenceIds": [
+            "ev_a24da36484acf8e358d0b353"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.title.observedValues": {
+          "evidenceIds": [
+            "ev_a24da36484acf8e358d0b353"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_a24da36484acf8e358d0b353"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.compoundParent": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_289d97d85435d107db6fa15e"
+          ],
+          "status": "discovered"
+        },
+        "props.title.extensions.react.role": {
+          "evidenceIds": [
+            "ev_13e4f84a47499d0243a63993"
+          ],
+          "status": "discovered"
+        },
+        "props.title.required": {
+          "evidenceIds": [
+            "ev_13e4f84a47499d0243a63993"
+          ],
+          "status": "discovered"
+        },
+        "props.title.type.kind": {
+          "evidenceIds": [
+            "ev_13e4f84a47499d0243a63993"
+          ],
+          "status": "discovered"
+        },
+        "props.title.type.text": {
+          "evidenceIds": [
+            "ev_13e4f84a47499d0243a63993"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:card.header",
+      "implementations": [
+        {
+          "extensions": {
+            "react": {
+              "compoundParent": "react:src/Card.tsx#Card",
+              "exports": [],
+              "file": "src/Card.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "CardHeader",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Card.Header",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "title",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        }
+      ],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "accessibility": {
+        "attributes": [
+          "aria-hidden"
+        ],
+        "role": "img"
+      },
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "usage": {
+            "combinations": [
+              {
+                "count": 2,
+                "props": [
+                  "name"
+                ]
+              }
+            ],
+            "props": {
+              "name": {
+                "count": 2,
+                "declared": true,
+                "dynamicCount": 1,
+                "observedValues": [
+                  "gear"
+                ]
+              }
+            },
+            "sites": 2
+          }
+        }
+      },
+      "facts": {
+        "accessibility.attributes": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "accessibility.role": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_8b251bc782ed832049e3aa1d",
+            "ev_f7d687cfc931d1d83b09c55a"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.name.count": {
+          "evidenceIds": [
+            "ev_8b251bc782ed832049e3aa1d",
+            "ev_f7d687cfc931d1d83b09c55a"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.name.declared": {
+          "evidenceIds": [
+            "ev_8b251bc782ed832049e3aa1d",
+            "ev_f7d687cfc931d1d83b09c55a"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.name.dynamicCount": {
+          "evidenceIds": [
+            "ev_8b251bc782ed832049e3aa1d",
+            "ev_f7d687cfc931d1d83b09c55a"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.name.observedValues": {
+          "evidenceIds": [
+            "ev_8b251bc782ed832049e3aa1d",
+            "ev_f7d687cfc931d1d83b09c55a"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_8b251bc782ed832049e3aa1d",
+            "ev_f7d687cfc931d1d83b09c55a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "props.name.extensions.react.role": {
+          "evidenceIds": [
+            "ev_e24f2065291bc925c76eb028"
+          ],
+          "status": "discovered"
+        },
+        "props.name.required": {
+          "evidenceIds": [
+            "ev_e24f2065291bc925c76eb028"
+          ],
+          "status": "discovered"
+        },
+        "props.name.type.kind": {
+          "evidenceIds": [
+            "ev_e24f2065291bc925c76eb028"
+          ],
+          "status": "discovered"
+        },
+        "props.name.type.text": {
+          "evidenceIds": [
+            "ev_e24f2065291bc925c76eb028"
+          ],
+          "status": "discovered"
+        },
+        "props.size.default": {
+          "evidenceIds": [
+            "ev_784c15187c627e26f8b22be2",
+            "ev_9af85949c3817e85abf89a86"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.react.role": {
+          "evidenceIds": [
+            "ev_784c15187c627e26f8b22be2"
+          ],
+          "status": "discovered"
+        },
+        "props.size.required": {
+          "evidenceIds": [
+            "ev_784c15187c627e26f8b22be2"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.kind": {
+          "evidenceIds": [
+            "ev_784c15187c627e26f8b22be2"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.text": {
+          "evidenceIds": [
+            "ev_784c15187c627e26f8b22be2"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:icon",
+      "implementations": [
+        {
+          "exportName": "AcmeIcon",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "AcmeIcon",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Icon.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "Icon",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Icon",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "name",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "default": 16,
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "size",
+          "required": false,
+          "type": {
+            "kind": "number",
+            "text": "number"
+          }
+        }
+      ],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [
+        {
+          "target": "component:button",
+          "type": "contains"
+        },
+        {
+          "target": "component:icon",
+          "type": "contains"
+        }
+      ],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "composition": {
+            "renders": [
+              {
+                "count": 1,
+                "target": "react:src/Button.tsx#Button"
+              },
+              {
+                "count": 1,
+                "target": "react:src/Icon.tsx#Icon"
+              }
+            ]
+          },
+          "variants": {
+            "size": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            },
+            "variant": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "composition.0": {
+          "evidenceIds": [
+            "ev_f147342b4bc2065d2549e043"
+          ],
+          "status": "discovered"
+        },
+        "composition.1": {
+          "evidenceIds": [
+            "ev_f147342b4bc2065d2549e043"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.composition.renders": {
+          "evidenceIds": [
+            "ev_f147342b4bc2065d2549e043"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.size.extensions.react.source": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.variant.extensions.react.source": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.inheritedPropsFrom": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.wrappers": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_8e3c6446de18d664a20cad21"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.description": {
+          "evidenceIds": [
+            "ev_4c489d9dfeb5800505580c79"
+          ],
+          "status": "documented"
+        },
+        "props.data-testid.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_4c489d9dfeb5800505580c79"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.extensions.react.role": {
+          "evidenceIds": [
+            "ev_4c489d9dfeb5800505580c79"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.required": {
+          "evidenceIds": [
+            "ev_4c489d9dfeb5800505580c79"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.type.kind": {
+          "evidenceIds": [
+            "ev_4c489d9dfeb5800505580c79"
+          ],
+          "status": "discovered"
+        },
+        "props.data-testid.type.text": {
+          "evidenceIds": [
+            "ev_4c489d9dfeb5800505580c79"
+          ],
+          "status": "discovered"
+        },
+        "props.label.extensions.react.role": {
+          "evidenceIds": [
+            "ev_cb1b12ad6150756392175003"
+          ],
+          "status": "discovered"
+        },
+        "props.label.required": {
+          "evidenceIds": [
+            "ev_cb1b12ad6150756392175003"
+          ],
+          "status": "discovered"
+        },
+        "props.label.type.kind": {
+          "evidenceIds": [
+            "ev_cb1b12ad6150756392175003"
+          ],
+          "status": "discovered"
+        },
+        "props.label.type.text": {
+          "evidenceIds": [
+            "ev_cb1b12ad6150756392175003"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_4f2b07696e5d5e8903a6b8c8"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.extensions.react.role": {
+          "evidenceIds": [
+            "ev_4f2b07696e5d5e8903a6b8c8"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.required": {
+          "evidenceIds": [
+            "ev_4f2b07696e5d5e8903a6b8c8"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.type.kind": {
+          "evidenceIds": [
+            "ev_4f2b07696e5d5e8903a6b8c8"
+          ],
+          "status": "discovered"
+        },
+        "props.loading.type.text": {
+          "evidenceIds": [
+            "ev_4f2b07696e5d5e8903a6b8c8"
+          ],
+          "status": "discovered"
+        },
+        "props.name.extensions.react.role": {
+          "evidenceIds": [
+            "ev_e990ddfba7074b727e5c15bd"
+          ],
+          "status": "discovered"
+        },
+        "props.name.required": {
+          "evidenceIds": [
+            "ev_e990ddfba7074b727e5c15bd"
+          ],
+          "status": "discovered"
+        },
+        "props.name.type.kind": {
+          "evidenceIds": [
+            "ev_e990ddfba7074b727e5c15bd"
+          ],
+          "status": "discovered"
+        },
+        "props.name.type.text": {
+          "evidenceIds": [
+            "ev_e990ddfba7074b727e5c15bd"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_d3faae277ce98107338f5b89"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.extensions.react.role": {
+          "evidenceIds": [
+            "ev_d3faae277ce98107338f5b89"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.required": {
+          "evidenceIds": [
+            "ev_d3faae277ce98107338f5b89"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.type.kind": {
+          "evidenceIds": [
+            "ev_d3faae277ce98107338f5b89"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.type.text": {
+          "evidenceIds": [
+            "ev_d3faae277ce98107338f5b89"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.deprecated": {
+          "evidenceIds": [
+            "ev_67abf2d9e487576f8ea3efcd"
+          ],
+          "status": "documented"
+        },
+        "props.plain.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_67abf2d9e487576f8ea3efcd"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.extensions.react.role": {
+          "evidenceIds": [
+            "ev_67abf2d9e487576f8ea3efcd"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.required": {
+          "evidenceIds": [
+            "ev_67abf2d9e487576f8ea3efcd"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.type.kind": {
+          "evidenceIds": [
+            "ev_67abf2d9e487576f8ea3efcd"
+          ],
+          "status": "discovered"
+        },
+        "props.plain.type.text": {
+          "evidenceIds": [
+            "ev_67abf2d9e487576f8ea3efcd"
+          ],
+          "status": "discovered"
+        },
+        "props.size.allowedValues": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.react.role": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "props.size.required": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.kind": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.text": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.allowedValues": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.description": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "documented"
+        },
+        "props.variant.extensions.react.inheritedFrom": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.extensions.react.role": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.required": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.type.kind": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.type.text": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.values": {
+          "evidenceIds": [
+            "ev_18ca96969be14139161c706c"
+          ],
+          "status": "discovered"
+        },
+        "variants.variant.values": {
+          "evidenceIds": [
+            "ev_e18319969260512471225852"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:iconbutton",
+      "implementations": [
+        {
+          "exportName": "IconButton",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "IconButton",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/IconButton.tsx",
+              "forwardRef": false,
+              "inheritedPropsFrom": [
+                "React.ButtonHTMLAttributes<HTMLButtonElement>"
+              ],
+              "kind": "memo",
+              "localName": "IconButton",
+              "memo": true,
+              "propsComplete": false,
+              "wrappers": [
+                "memo"
+              ]
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "IconButton",
+      "props": [
+        {
+          "description": "Hook for tests and analytics.",
+          "extensions": {
+            "react": {
+              "inheritedFrom": "BaseProps",
+              "role": "prop"
+            }
+          },
+          "name": "data-testid",
+          "required": false,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "label",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "inheritedFrom": "ButtonProps",
+              "role": "prop"
+            }
+          },
+          "name": "loading",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "name",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "inheritedFrom": "ButtonProps",
+              "role": "event-handler"
+            }
+          },
+          "name": "onPress",
+          "required": false,
+          "type": {
+            "kind": "function",
+            "text": "(event: React.MouseEvent<HTMLButtonElement>) => void"
+          }
+        },
+        {
+          "deprecated": {
+            "reason": "Use `variant=\"ghost\"` instead."
+          },
+          "extensions": {
+            "react": {
+              "inheritedFrom": "ButtonProps",
+              "role": "prop"
+            }
+          },
+          "name": "plain",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "allowedValues": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "extensions": {
+            "react": {
+              "inheritedFrom": "ButtonProps",
+              "role": "prop"
+            }
+          },
+          "name": "size",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"sm\" | \"md\" | \"lg\""
+          }
+        },
+        {
+          "allowedValues": [
+            "primary",
+            "secondary",
+            "ghost"
+          ],
+          "description": "Visual weight of the button.",
+          "extensions": {
+            "react": {
+              "inheritedFrom": "ButtonProps",
+              "role": "prop"
+            }
+          },
+          "name": "variant",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"primary\" | \"secondary\" | \"ghost\""
+          }
+        }
+      ],
+      "slots": [],
+      "states": [],
+      "variants": [
+        {
+          "name": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "name": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost"
+          ]
+        }
+      ]
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.wrappers": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_56f20912a79af1ef318b8de7"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:lazychart",
+      "implementations": [
+        {
+          "exportName": "LazyChart",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "LazyChart",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/LazyChart.tsx",
+              "forwardRef": false,
+              "kind": "lazy",
+              "localName": "LazyChart",
+              "memo": false,
+              "propsComplete": false,
+              "wrappers": [
+                "lazy"
+              ]
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "LazyChart",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_0fedd533f002b751c0bb537e"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_0fedd533f002b751c0bb537e"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_0fedd533f002b751c0bb537e"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_0fedd533f002b751c0bb537e"
+          ],
+          "status": "discovered"
+        },
+        "props.href.extensions.react.role": {
+          "evidenceIds": [
+            "ev_fe391b1d721cedf5acb50a3d"
+          ],
+          "status": "discovered"
+        },
+        "props.href.required": {
+          "evidenceIds": [
+            "ev_fe391b1d721cedf5acb50a3d"
+          ],
+          "status": "discovered"
+        },
+        "props.href.type.kind": {
+          "evidenceIds": [
+            "ev_fe391b1d721cedf5acb50a3d"
+          ],
+          "status": "discovered"
+        },
+        "props.href.type.text": {
+          "evidenceIds": [
+            "ev_fe391b1d721cedf5acb50a3d"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_a376b6cbc018b067f70de9a5"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:link",
+      "implementations": [
+        {
+          "exportName": "Link",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Link",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Link.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "Link",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Link",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": true,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "href",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactNode"
+            }
+          },
+          "name": "default",
+          "required": true
+        }
+      ],
+      "states": [],
+      "variants": []
+    },
+    {
+      "accessibility": {
+        "attributes": [
+          "aria-modal"
+        ],
+        "role": "dialog"
+      },
+      "composition": [],
+      "description": "Blocks the page until dismissed.",
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "variants": {
+            "size": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "accessibility.attributes": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "accessibility.role": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "description": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "documented"
+        },
+        "extensions.invariant.variants.size.extensions.react.source": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_7c4e18fef65ed00f575259ec"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_7c4e18fef65ed00f575259ec"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_7c4e18fef65ed00f575259ec"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_7c4e18fef65ed00f575259ec"
+          ],
+          "status": "discovered"
+        },
+        "props.onClose.extensions.react.role": {
+          "evidenceIds": [
+            "ev_4e2dd3a0316e820e4fc524f3"
+          ],
+          "status": "discovered"
+        },
+        "props.onClose.required": {
+          "evidenceIds": [
+            "ev_4e2dd3a0316e820e4fc524f3"
+          ],
+          "status": "discovered"
+        },
+        "props.onClose.type.kind": {
+          "evidenceIds": [
+            "ev_4e2dd3a0316e820e4fc524f3"
+          ],
+          "status": "discovered"
+        },
+        "props.onClose.type.text": {
+          "evidenceIds": [
+            "ev_4e2dd3a0316e820e4fc524f3"
+          ],
+          "status": "discovered"
+        },
+        "props.open.extensions.react.role": {
+          "evidenceIds": [
+            "ev_a84a9b305f8e04133c192ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.open.required": {
+          "evidenceIds": [
+            "ev_a84a9b305f8e04133c192ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.open.type.kind": {
+          "evidenceIds": [
+            "ev_a84a9b305f8e04133c192ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.open.type.text": {
+          "evidenceIds": [
+            "ev_a84a9b305f8e04133c192ba9"
+          ],
+          "status": "discovered"
+        },
+        "props.size.allowedValues": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "props.size.default": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a",
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.react.role": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "props.size.required": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.kind": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.text": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "props.title.default": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a",
+            "ev_8de78f86b5dfcab9077b7940"
+          ],
+          "status": "discovered"
+        },
+        "props.title.extensions.react.role": {
+          "evidenceIds": [
+            "ev_8de78f86b5dfcab9077b7940"
+          ],
+          "status": "discovered"
+        },
+        "props.title.required": {
+          "evidenceIds": [
+            "ev_8de78f86b5dfcab9077b7940"
+          ],
+          "status": "discovered"
+        },
+        "props.title.type.kind": {
+          "evidenceIds": [
+            "ev_8de78f86b5dfcab9077b7940"
+          ],
+          "status": "discovered"
+        },
+        "props.title.type.text": {
+          "evidenceIds": [
+            "ev_8de78f86b5dfcab9077b7940"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.default": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.values": {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:modal",
+      "implementations": [
+        {
+          "exportName": "Modal",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Modal",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Modal.tsx",
+              "forwardRef": false,
+              "kind": "class",
+              "localName": "Modal",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Modal",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": false,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "event-handler"
+            }
+          },
+          "name": "onClose",
+          "required": false,
+          "type": {
+            "kind": "function",
+            "text": "() => void"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "open",
+          "required": true,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "allowedValues": [
+            "sm",
+            "lg"
+          ],
+          "default": "sm",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "size",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"sm\" | \"lg\""
+          }
+        },
+        {
+          "default": "Dialog",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "title",
+          "required": false,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactNode"
+            }
+          },
+          "name": "default",
+          "required": false
+        }
+      ],
+      "states": [],
+      "variants": [
+        {
+          "default": "sm",
+          "name": "size",
+          "values": [
+            "sm",
+            "lg"
+          ]
+        }
+      ]
+    },
+    {
+      "accessibility": {
+        "attributes": [
+          "aria-label"
+        ],
+        "role": "listbox"
+      },
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "usage": {
+            "combinations": [
+              {
+                "count": 1,
+                "props": [
+                  "getKey",
+                  "options"
+                ]
+              }
+            ],
+            "props": {
+              "getKey": {
+                "count": 1,
+                "declared": true,
+                "dynamicCount": 1
+              },
+              "options": {
+                "count": 1,
+                "declared": true,
+                "dynamicCount": 1
+              }
+            },
+            "sites": 1
+          }
+        }
+      },
+      "facts": {
+        "accessibility.attributes": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "accessibility.role": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.getKey.count": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.getKey.declared": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.getKey.dynamicCount": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.options.count": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.options.declared": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.options.dynamicCount": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_8f6fd8902d776541fc99c2f1"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.generics": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "props.getKey.extensions.react.role": {
+          "evidenceIds": [
+            "ev_177ea763eebae7a889c65da8"
+          ],
+          "status": "discovered"
+        },
+        "props.getKey.required": {
+          "evidenceIds": [
+            "ev_177ea763eebae7a889c65da8"
+          ],
+          "status": "discovered"
+        },
+        "props.getKey.type.kind": {
+          "evidenceIds": [
+            "ev_177ea763eebae7a889c65da8"
+          ],
+          "status": "discovered"
+        },
+        "props.getKey.type.text": {
+          "evidenceIds": [
+            "ev_177ea763eebae7a889c65da8"
+          ],
+          "status": "discovered"
+        },
+        "props.onChange.extensions.react.role": {
+          "evidenceIds": [
+            "ev_a29a4c5a3620f259272d6f55"
+          ],
+          "status": "discovered"
+        },
+        "props.onChange.required": {
+          "evidenceIds": [
+            "ev_a29a4c5a3620f259272d6f55"
+          ],
+          "status": "discovered"
+        },
+        "props.onChange.type.kind": {
+          "evidenceIds": [
+            "ev_a29a4c5a3620f259272d6f55"
+          ],
+          "status": "discovered"
+        },
+        "props.onChange.type.text": {
+          "evidenceIds": [
+            "ev_a29a4c5a3620f259272d6f55"
+          ],
+          "status": "discovered"
+        },
+        "props.options.extensions.react.role": {
+          "evidenceIds": [
+            "ev_c7565b2be520c2fd42897457"
+          ],
+          "status": "discovered"
+        },
+        "props.options.required": {
+          "evidenceIds": [
+            "ev_c7565b2be520c2fd42897457"
+          ],
+          "status": "discovered"
+        },
+        "props.options.type.kind": {
+          "evidenceIds": [
+            "ev_c7565b2be520c2fd42897457"
+          ],
+          "status": "discovered"
+        },
+        "props.options.type.text": {
+          "evidenceIds": [
+            "ev_c7565b2be520c2fd42897457"
+          ],
+          "status": "discovered"
+        },
+        "props.placeholder.default": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830",
+            "ev_d8dc700455a63d3d14ac4eae"
+          ],
+          "status": "discovered"
+        },
+        "props.placeholder.extensions.react.role": {
+          "evidenceIds": [
+            "ev_d8dc700455a63d3d14ac4eae"
+          ],
+          "status": "discovered"
+        },
+        "props.placeholder.required": {
+          "evidenceIds": [
+            "ev_d8dc700455a63d3d14ac4eae"
+          ],
+          "status": "discovered"
+        },
+        "props.placeholder.type.kind": {
+          "evidenceIds": [
+            "ev_d8dc700455a63d3d14ac4eae"
+          ],
+          "status": "discovered"
+        },
+        "props.placeholder.type.text": {
+          "evidenceIds": [
+            "ev_d8dc700455a63d3d14ac4eae"
+          ],
+          "status": "discovered"
+        },
+        "props.renderOption.extensions.react.role": {
+          "evidenceIds": [
+            "ev_5c381fcc83538765eb2aaace"
+          ],
+          "status": "discovered"
+        },
+        "props.renderOption.required": {
+          "evidenceIds": [
+            "ev_5c381fcc83538765eb2aaace"
+          ],
+          "status": "discovered"
+        },
+        "props.renderOption.type.kind": {
+          "evidenceIds": [
+            "ev_5c381fcc83538765eb2aaace"
+          ],
+          "status": "discovered"
+        },
+        "props.renderOption.type.text": {
+          "evidenceIds": [
+            "ev_5c381fcc83538765eb2aaace"
+          ],
+          "status": "discovered"
+        },
+        "props.value.extensions.react.role": {
+          "evidenceIds": [
+            "ev_bc52931c3ccd47b481270429"
+          ],
+          "status": "discovered"
+        },
+        "props.value.required": {
+          "evidenceIds": [
+            "ev_bc52931c3ccd47b481270429"
+          ],
+          "status": "discovered"
+        },
+        "props.value.type.kind": {
+          "evidenceIds": [
+            "ev_bc52931c3ccd47b481270429"
+          ],
+          "status": "discovered"
+        },
+        "props.value.type.text": {
+          "evidenceIds": [
+            "ev_bc52931c3ccd47b481270429"
+          ],
+          "status": "discovered"
+        },
+        "slots.renderOption": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "slots.renderOption.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "slots.renderOption.extensions.react.renderProp": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "slots.renderOption.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        },
+        "slots.renderOption.required": {
+          "evidenceIds": [
+            "ev_4806899dbe2d1d890706f830"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:select",
+      "implementations": [
+        {
+          "exportName": "Select",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Select",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Select.tsx",
+              "forwardRef": false,
+              "generics": [
+                "T"
+              ],
+              "kind": "function",
+              "localName": "Select",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Select",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "getKey",
+          "required": true,
+          "type": {
+            "kind": "function",
+            "text": "(option: T) => string"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "event-handler"
+            }
+          },
+          "name": "onChange",
+          "required": false,
+          "type": {
+            "kind": "function",
+            "text": "(value: T) => void"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "options",
+          "required": true,
+          "type": {
+            "kind": "array",
+            "text": "T[]"
+          }
+        },
+        {
+          "default": "Select…",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "placeholder",
+          "required": false,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "render-prop"
+            }
+          },
+          "name": "renderOption",
+          "required": false,
+          "type": {
+            "kind": "function",
+            "text": "(option: T) => React.ReactNode"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "value",
+          "required": false,
+          "type": {
+            "kind": "unknown",
+            "text": "T"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "renderOption",
+              "renderProp": true,
+              "typeText": "(option: T) => React.ReactNode"
+            }
+          },
+          "name": "renderOption",
+          "required": false
+        }
+      ],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "styling": {
+            "classNames": [
+              "flex",
+              "flex-col",
+              "gap-4"
+            ],
+            "tailwind": true
+          },
+          "variants": {
+            "gap": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "extensions.invariant.styling.classNames": {
+          "evidenceIds": [
+            "ev_15bb1f09df9ddead7eadc6ef"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.tailwind": {
+          "evidenceIds": [
+            "ev_15bb1f09df9ddead7eadc6ef"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.gap.extensions.react.source": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_f9a3c9f66f874314b55952b5"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_f9a3c9f66f874314b55952b5"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_f9a3c9f66f874314b55952b5"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_f9a3c9f66f874314b55952b5"
+          ],
+          "status": "discovered"
+        },
+        "props.gap.allowedValues": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "props.gap.default": {
+          "evidenceIds": [
+            "ev_15bb1f09df9ddead7eadc6ef",
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "props.gap.extensions.react.role": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "props.gap.required": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "props.gap.type.kind": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "props.gap.type.text": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_9efc1ddd4d137b2caa04a251"
+          ],
+          "status": "discovered"
+        },
+        "variants.gap.default": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        },
+        "variants.gap.values": {
+          "evidenceIds": [
+            "ev_92c4b385672040e2ab932f00"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:stack",
+      "implementations": [
+        {
+          "exportName": "Stack",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Stack",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/layout/Stack.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "Stack",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Stack",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": false,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "allowedValues": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "gap",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"sm\" | \"md\" | \"lg\""
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactNode"
+            }
+          },
+          "name": "default",
+          "required": false
+        }
+      ],
+      "states": [],
+      "variants": [
+        {
+          "default": "md",
+          "name": "gap",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        }
+      ]
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "usage": {
+            "combinations": [
+              {
+                "count": 1,
+                "props": [
+                  "children",
+                  "tone"
+                ]
+              }
+            ],
+            "props": {
+              "children": {
+                "count": 1,
+                "declared": true,
+                "dynamicCount": 1
+              },
+              "tone": {
+                "count": 1,
+                "declared": true,
+                "observedValues": [
+                  "danger"
+                ]
+              }
+            },
+            "sites": 1
+          },
+          "variants": {
+            "as": {
+              "extensions": {
+                "react": {
+                  "source": "prop-union"
+                }
+              }
+            },
+            "tone": {
+              "extensions": {
+                "react": {
+                  "source": "cva",
+                  "via": "text"
+                }
+              }
+            },
+            "weight": {
+              "extensions": {
+                "react": {
+                  "source": "cva",
+                  "via": "text"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "extensions.invariant.usage.combinations": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.count": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.declared": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.children.dynamicCount": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.tone.count": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.tone.declared": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.props.tone.observedValues": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.usage.sites": {
+          "evidenceIds": [
+            "ev_1c36eeac8a3c4046dfe5ff83"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.as.extensions.react.source": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.tone.extensions.react.source": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.tone.extensions.react.via": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.weight.extensions.react.source": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.weight.extensions.react.via": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.inheritedPropsFrom": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "props.as.allowedValues": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "props.as.default": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1",
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "props.as.extensions.react.role": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "props.as.required": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "props.as.type.kind": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "props.as.type.text": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_cf58de39c443c8cb298e7e63"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_cf58de39c443c8cb298e7e63"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_cf58de39c443c8cb298e7e63"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_cf58de39c443c8cb298e7e63"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_e36fd0b10ad34a1a4f21c581"
+          ],
+          "status": "discovered"
+        },
+        "variants.as.default": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "variants.as.values": {
+          "evidenceIds": [
+            "ev_80c1d0d59ce04db76a538ce1"
+          ],
+          "status": "discovered"
+        },
+        "variants.tone.default": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "variants.tone.values": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "variants.weight.default": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        },
+        "variants.weight.values": {
+          "evidenceIds": [
+            "ev_d7b616e08cb4484d8a6d1b7e"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:text",
+      "implementations": [
+        {
+          "exportName": "Text",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Text",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Text.tsx",
+              "forwardRef": false,
+              "inheritedPropsFrom": [
+                "VariantProps<typeof text>"
+              ],
+              "kind": "function",
+              "localName": "Text",
+              "memo": false,
+              "propsComplete": false
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Text",
+      "props": [
+        {
+          "allowedValues": [
+            "p",
+            "span"
+          ],
+          "default": "p",
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "as",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"p\" | \"span\""
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": true,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactNode"
+            }
+          },
+          "name": "default",
+          "required": true
+        }
+      ],
+      "states": [],
+      "variants": [
+        {
+          "default": "p",
+          "name": "as",
+          "values": [
+            "p",
+            "span"
+          ]
+        },
+        {
+          "default": "neutral",
+          "name": "tone",
+          "values": [
+            "neutral",
+            "danger"
+          ]
+        },
+        {
+          "default": "regular",
+          "name": "weight",
+          "values": [
+            "regular",
+            "bold"
+          ]
+        }
+      ]
+    },
+    {
+      "accessibility": {
+        "role": "tooltip"
+      },
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {
+        "accessibility.role": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_10f94f121146d27131c53032"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_10f94f121146d27131c53032"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_10f94f121146d27131c53032"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_10f94f121146d27131c53032"
+          ],
+          "status": "discovered"
+        },
+        "props.content.extensions.react.role": {
+          "evidenceIds": [
+            "ev_16287965e4c908eb4b5d61ec"
+          ],
+          "status": "discovered"
+        },
+        "props.content.required": {
+          "evidenceIds": [
+            "ev_16287965e4c908eb4b5d61ec"
+          ],
+          "status": "discovered"
+        },
+        "props.content.type.kind": {
+          "evidenceIds": [
+            "ev_16287965e4c908eb4b5d61ec"
+          ],
+          "status": "discovered"
+        },
+        "props.content.type.text": {
+          "evidenceIds": [
+            "ev_16287965e4c908eb4b5d61ec"
+          ],
+          "status": "discovered"
+        },
+        "props.open.extensions.react.role": {
+          "evidenceIds": [
+            "ev_03a3be72edf8fe063077c2b0"
+          ],
+          "status": "discovered"
+        },
+        "props.open.required": {
+          "evidenceIds": [
+            "ev_03a3be72edf8fe063077c2b0"
+          ],
+          "status": "discovered"
+        },
+        "props.open.type.kind": {
+          "evidenceIds": [
+            "ev_03a3be72edf8fe063077c2b0"
+          ],
+          "status": "discovered"
+        },
+        "props.open.type.text": {
+          "evidenceIds": [
+            "ev_03a3be72edf8fe063077c2b0"
+          ],
+          "status": "discovered"
+        },
+        "slots.content": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.content.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.content.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.content.required": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_eee80144c208e30849abc5d7"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:tooltip",
+      "implementations": [
+        {
+          "exportName": "Tooltip",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Tooltip",
+                  "subpath": "."
+                }
+              ],
+              "file": "src/Tooltip.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "Tooltip",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@acme/ui",
+          "packageName": "@acme/ui",
+          "sourceId": "react-acme-ui"
+        }
+      ],
+      "name": "Tooltip",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": true,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactElement"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "slot"
+            }
+          },
+          "name": "content",
+          "required": true,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "prop"
+            }
+          },
+          "name": "open",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "react": {
+              "prop": "content",
+              "typeText": "React.ReactNode"
+            }
+          },
+          "name": "content",
+          "required": true
+        },
+        {
+          "extensions": {
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactElement"
+            }
+          },
+          "name": "default",
+          "required": true
+        }
+      ],
+      "states": [],
+      "variants": []
+    }
+  ],
+  "conflicts": [
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_7afe28a2ad2f6931d7fc9e59"
+          ],
+          "sourceId": "react-acme-ui",
+          "status": "discovered",
+          "value": true
+        },
+        {
+          "evidenceIds": [
+            "ev_af08bd8e626fe3caebb0dcae",
+            "ev_e6e0e38c8f97c4f6b4743cdc"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered"
+        }
+      ],
+      "id": "conflict:deprecation-mismatch/button/props.plain.deprecated",
+      "path": "props.plain.deprecated",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:button",
+      "suggestedResolution": "Stop demonstrating the deprecated prop, or mark it as supported.",
+      "type": "deprecation-mismatch"
+    },
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_91047bbd55dcf47bd297396b"
+          ],
+          "sourceId": "react-acme-ui",
+          "status": "discovered"
+        },
+        {
+          "evidenceIds": [
+            "ev_2899ce270d703f2949d0c250",
+            "ev_45f46f1555f5ec477fec25be",
+            "ev_c378e7e13caf4816098960f6"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": true
+        }
+      ],
+      "id": "conflict:existence-mismatch/card/props.shadow",
+      "path": "props.shadow",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:card",
+      "suggestedResolution": "Remove the arg or control, or add the prop to the component.",
+      "type": "existence-mismatch"
+    },
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "sourceId": "react-acme-ui",
+          "status": "discovered",
+          "value": [
+            "primary",
+            "secondary",
+            "ghost"
+          ]
+        },
+        {
+          "evidenceIds": [
+            "ev_6ac2a6b93d2220184efeb761"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": "danger"
+        },
+        {
+          "evidenceIds": [
+            "ev_81ea3e7b5d3c11d27da5b250"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": [
+            "danger"
+          ]
+        }
+      ],
+      "id": "conflict:value-mismatch/button/props.variant.allowedvalues",
+      "path": "props.variant.allowedValues",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:button",
+      "suggestedResolution": "Change the story or control to a declared value, or add the value to the component.",
+      "type": "value-mismatch"
+    },
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_577a1472804c20c5a68e0922",
+            "ev_a0a6f17aa71a696bd547fd81"
+          ],
+          "sourceId": "react-acme-ui",
+          "status": "discovered",
+          "value": "primary"
+        },
+        {
+          "evidenceIds": [
+            "ev_81ea3e7b5d3c11d27da5b250"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": "secondary"
+        }
+      ],
+      "id": "conflict:value-mismatch/button/props.variant.default",
+      "path": "props.variant.default",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:button",
+      "suggestedResolution": "Update the documented default or the code default.",
+      "type": "value-mismatch"
+    },
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "sourceId": "react-acme-ui",
+          "status": "discovered",
+          "value": [
+            "sm",
+            "lg"
+          ]
+        },
+        {
+          "evidenceIds": [
+            "ev_d36bca3734045d6c6db90435"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": "xl"
+        },
+        {
+          "evidenceIds": [
+            "ev_333be2b3520d859a0277d256"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": [
+            "xl"
+          ]
+        }
+      ],
+      "id": "conflict:value-mismatch/modal/props.size.allowedvalues",
+      "path": "props.size.allowedValues",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:modal",
+      "suggestedResolution": "Change the story or control to a declared value, or add the value to the component.",
+      "type": "value-mismatch"
+    },
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_69e37e4c9abe2b2b5cebf83a",
+            "ev_a6029cd4f5f8393d673d223d"
+          ],
+          "sourceId": "react-acme-ui",
+          "status": "discovered",
+          "value": "sm"
+        },
+        {
+          "evidenceIds": [
+            "ev_333be2b3520d859a0277d256"
+          ],
+          "sourceId": "stories-root",
+          "status": "discovered",
+          "value": "lg"
+        }
+      ],
+      "id": "conflict:value-mismatch/modal/props.size.default",
+      "path": "props.size.default",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:modal",
+      "suggestedResolution": "Update the documented default or the code default.",
+      "type": "value-mismatch"
+    }
+  ],
+  "constraints": [],
+  "contractVersion": "1.0.0",
+  "guidelines": [
+    {
+      "appliesTo": [
+        "component:button"
+      ],
+      "examples": [],
+      "facts": {
+        "appliesTo.0": {
+          "confidence": 0.8,
+          "derivation": {
+            "inputs": [
+              "doc.title"
+            ],
+            "reasoning": "The file name \"Button\" is the component name \"Button\"",
+            "rule": "document.names-component"
+          },
+          "evidenceIds": [
+            "ev_7181d9d35d74513191a69c5f"
+          ],
+          "status": "inferred"
+        },
+        "kind": {
+          "confidence": 0.4,
+          "derivation": {
+            "inputs": [
+              "doc.title"
+            ],
+            "reasoning": "No keyword in the title or file name identifies a more specific kind of page",
+            "rule": "document.classify.fallback"
+          },
+          "evidenceIds": [
+            "ev_7181d9d35d74513191a69c5f"
+          ],
+          "status": "inferred"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_7181d9d35d74513191a69c5f"
+          ],
+          "status": "documented"
+        },
+        "references.0": {
+          "evidenceIds": [
+            "ev_7181d9d35d74513191a69c5f"
+          ],
+          "status": "discovered"
+        },
+        "statement": {
+          "evidenceIds": [
+            "ev_7181d9d35d74513191a69c5f"
+          ],
+          "status": "documented"
+        }
+      },
+      "id": "guideline:storybook-src/button",
+      "kind": "reference",
+      "name": "Button",
+      "references": [
+        {
+          "documentId": "storybook:src/Button.mdx",
+          "sourceId": "stories-root",
+          "title": "Button"
+        }
+      ],
+      "statement": "Button"
+    }
+  ],
+  "integrity": {
+    "algorithm": "sha256",
+    "contentHash": "1d21106b945b8a0bd90eb8b7193f98f8e2c4b133c94e0950f5448377880f48c6"
+  },
+  "metadata": {
+    "compiledAt": "2026-01-01T00:00:00.000Z",
+    "compilerVersion": "0.0.0",
+    "contractId": "fixture-ds",
+    "frameworks": [
+      "react"
+    ],
+    "name": "Fixture DS"
+  },
+  "patterns": [],
+  "policies": [],
+  "sources": [
+    {
+      "capabilities": [
+        "accessibility.*",
+        "composition.*",
+        "deprecated",
+        "description",
+        "examples.*",
+        "implementations.*",
+        "lifecycle",
+        "name",
+        "props.*",
+        "slots.*",
+        "styling.*",
+        "usage.*",
+        "variants.*"
+      ],
+      "health": {
+        "diagnosticCount": 2,
+        "status": "degraded"
+      },
+      "id": "react-acme-ui",
+      "location": ".",
+      "type": "react",
+      "version": {
+        "kind": "package-version",
+        "value": "3.0.0"
+      }
+    },
+    {
+      "capabilities": [
+        "doc.*",
+        "group.*",
+        "story.*"
+      ],
+      "health": {
+        "diagnosticCount": 11,
+        "status": "ok"
+      },
+      "id": "stories-root",
+      "location": ".",
+      "type": "storybook"
+    }
+  ],
+  "themes": [],
+  "tokens": []
+}

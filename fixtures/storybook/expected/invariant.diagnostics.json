@@ -1,0 +1,127 @@
+{
+  "diagnostics": [
+    {
+      "code": "react.props-unresolved",
+      "location": {
+        "line": 3,
+        "path": "src/LazyChart.tsx"
+      },
+      "message": "LazyChart: lazy component: props are defined by the dynamically imported module",
+      "severity": "warning",
+      "sourceId": "react-acme-ui"
+    },
+    {
+      "code": "storybook.index-stale",
+      "location": {
+        "path": "src/Removed.stories.tsx"
+      },
+      "message": "The built index lists ./src/Removed.stories.tsx, which no longer matches the story globs",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "react.higher-order-component",
+      "location": {
+        "line": 1,
+        "path": "src/withTheme.tsx"
+      },
+      "message": "withTheme returns a component (a higher-order component) and was not analyzed",
+      "severity": "info",
+      "sourceId": "react-acme-ui"
+    },
+    {
+      "code": "storybook.component-unresolved",
+      "location": {
+        "line": 3,
+        "path": "src/External.stories.tsx"
+      },
+      "message": "src/External.stories.tsx meta component AntButton could not be resolved to a project file (from package antd)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.component-unresolved",
+      "location": {
+        "line": 3,
+        "path": "src/Orphan.stories.tsx"
+      },
+      "message": "src/Orphan.stories.tsx meta component Missing could not be resolved to a project file (module ./Missing not found)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.dynamic-args",
+      "location": {
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "src/Button.stories.tsx has args that are not statically resolvable; they are listed as unresolved, not guessed",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.dynamic-args",
+      "location": {
+        "path": "src/Select.stories.tsx"
+      },
+      "message": "src/Select.stories.tsx has args that are not statically resolvable; they are listed as unresolved, not guessed",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/External.stories.tsx"
+      },
+      "message": "src/External.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/IconButton.stories.tsx"
+      },
+      "message": "src/IconButton.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "src/Modal.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/Orphan.stories.tsx"
+      },
+      "message": "src/Orphan.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/Select.stories.tsx"
+      },
+      "message": "src/Select.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.title-auto",
+      "location": {
+        "line": 4,
+        "path": "src/IconButton.stories.tsx"
+      },
+      "message": "src/IconButton.stories.tsx has no explicit title; Storybook infers it from the path, which is not reproduced here",
+      "severity": "info",
+      "sourceId": "stories-root"
+    }
+  ],
+  "diagnosticsVersion": "1.0.0"
+}

@@ -1,0 +1,385 @@
+{
+  "capabilities": [
+    "buildTools",
+    "entryPoints",
+    "export.*",
+    "frameworks",
+    "package.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "package",
+      "name": "@acme/ui-vue",
+      "ref": "package:@acme/ui-vue"
+    },
+    {
+      "kind": "export",
+      "name": "Button",
+      "ref": "package:@acme/ui-vue#.:Button"
+    },
+    {
+      "kind": "export",
+      "name": "Icon",
+      "ref": "package:@acme/ui-vue#.:Icon"
+    },
+    {
+      "kind": "export",
+      "name": "useToggle",
+      "ref": "package:@acme/ui-vue#.:useToggle"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_41fbb3afe2e937321fd3d48b",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-vue/src/composables/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-vue",
+      "sourceRef": "packages/ui-vue/src/composables/index.ts#useToggle",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_a19f057844acc4b355e9e78c",
+      "location": {
+        "line": 2,
+        "path": "packages/ui-vue/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-vue",
+      "sourceRef": "packages/ui-vue/src/index.ts#Icon",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_c3d8ea4b19071cbbd3509d6a",
+      "location": {
+        "line": 1,
+        "path": "packages/ui-vue/src/index.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-vue",
+      "sourceRef": "packages/ui-vue/src/index.ts#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_d55ca9379fd003805de13443",
+      "location": {
+        "line": 7,
+        "path": "packages/ui-vue/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui-vue",
+      "sourceRef": "packages/ui-vue/package.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_d5b91a982b899e35c657c900",
+      "location": {
+        "path": "packages/ui-vue/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui-vue",
+      "sourceRef": "packages/ui-vue/package.json",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_d5b91a982b899e35c657c900"
+      ],
+      "origin": "extracted",
+      "path": "buildTools",
+      "subject": "package:@acme/ui-vue",
+      "value": [
+        {
+          "evidence": [
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-vue/vite.config.ts",
+              "type": "config-file"
+            },
+            {
+              "ref": "vite",
+              "type": "dependency"
+            }
+          ],
+          "name": "vite"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_d5b91a982b899e35c657c900"
+      ],
+      "origin": "extracted",
+      "path": "entryPoints",
+      "subject": "package:@acme/ui-vue",
+      "value": [
+        {
+          "condition": "default",
+          "exportsComplete": true,
+          "file": "packages/ui-vue/src/index.ts",
+          "resolution": "declared",
+          "subpath": ".",
+          "target": "./src/index.ts"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_d55ca9379fd003805de13443"
+      ],
+      "origin": "extracted",
+      "path": "frameworks",
+      "subject": "package:@acme/ui-vue",
+      "value": [
+        {
+          "declaredRange": "^3.4.0",
+          "dependencyKind": "peerDependencies",
+          "line": 7,
+          "name": "vue",
+          "package": "vue"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_d5b91a982b899e35c657c900"
+      ],
+      "origin": "extracted",
+      "path": "package.directory",
+      "subject": "package:@acme/ui-vue",
+      "value": "packages/ui-vue"
+    },
+    {
+      "evidenceIds": [
+        "ev_d5b91a982b899e35c657c900"
+      ],
+      "origin": "extracted",
+      "path": "package.name",
+      "subject": "package:@acme/ui-vue",
+      "value": "@acme/ui-vue"
+    },
+    {
+      "evidenceIds": [
+        "ev_d5b91a982b899e35c657c900"
+      ],
+      "origin": "extracted",
+      "path": "package.private",
+      "subject": "package:@acme/ui-vue",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_d5b91a982b899e35c657c900"
+      ],
+      "origin": "extracted",
+      "path": "package.version",
+      "subject": "package:@acme/ui-vue",
+      "value": "2.1.0"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c3d8ea4b19071cbbd3509d6a"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-vue#.:Button",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c3d8ea4b19071cbbd3509d6a"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-vue#.:Button",
+      "value": "default"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c3d8ea4b19071cbbd3509d6a"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-vue#.:Button",
+      "value": "Button"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c3d8ea4b19071cbbd3509d6a"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-vue#.:Button",
+      "value": {
+        "external": false,
+        "module": "./Button.vue"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_c3d8ea4b19071cbbd3509d6a"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-vue#.:Button",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a19f057844acc4b355e9e78c"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-vue#.:Icon",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a19f057844acc4b355e9e78c"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-vue#.:Icon",
+      "value": "default"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a19f057844acc4b355e9e78c"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-vue#.:Icon",
+      "value": "Icon"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a19f057844acc4b355e9e78c"
+      ],
+      "origin": "extracted",
+      "path": "export.reexportOf",
+      "subject": "package:@acme/ui-vue#.:Icon",
+      "value": {
+        "external": false,
+        "module": "./Icon.vue"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_a19f057844acc4b355e9e78c"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-vue#.:Icon",
+      "value": false
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_41fbb3afe2e937321fd3d48b"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-vue#.:useToggle",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_41fbb3afe2e937321fd3d48b"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-vue#.:useToggle",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_41fbb3afe2e937321fd3d48b"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-vue#.:useToggle",
+      "value": "useToggle"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_41fbb3afe2e937321fd3d48b"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-vue#.:useToggle",
+      "value": false
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-npm",
+      "version": "0.1.0"
+    },
+    "id": "npm-acme-ui-vue",
+    "inputHash": "71d630f45e644f1bae9f60b05f47264adea726f3c0f1497ced015e07a244f1d6",
+    "location": "packages/ui-vue",
+    "type": "npm",
+    "version": {
+      "kind": "package-version",
+      "value": "2.1.0"
+    }
+  }
+}

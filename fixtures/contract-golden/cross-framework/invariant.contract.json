@@ -1,0 +1,1293 @@
+{
+  "components": [
+    {
+      "accessibility": {
+        "attributes": [
+          "aria-label"
+        ],
+        "role": "button"
+      },
+      "composition": [],
+      "events": [
+        {
+          "extensions": {
+            "angular": {
+              "kind": "signal-output",
+              "property": "press"
+            },
+            "vue": {
+              "emit": "press",
+              "kind": "emit",
+              "source": "type"
+            }
+          },
+          "name": "press",
+          "payload": {
+            "text": "MouseEvent"
+          }
+        }
+      ],
+      "examples": [],
+      "extensions": {
+        "invariant": {
+          "styling": {
+            "cssModules": [
+              "packages/react-ui/src/Button.module.css"
+            ],
+            "cssVariables": [
+              "--color-action"
+            ],
+            "scoped": true
+          },
+          "variants": {
+            "size": {
+              "extensions": {
+                "angular": {
+                  "source": "prop-union"
+                },
+                "react": {
+                  "source": "prop-union"
+                },
+                "vue": {
+                  "source": "prop-union"
+                }
+              }
+            },
+            "variant": {
+              "extensions": {
+                "angular": {
+                  "source": "prop-union"
+                },
+                "react": {
+                  "source": "prop-union"
+                },
+                "vue": {
+                  "source": "prop-union"
+                }
+              }
+            }
+          }
+        }
+      },
+      "facts": {
+        "accessibility.attributes": {
+          "evidenceIds": [
+            "ev_6366c9dd63ca0f3d8ce822b3",
+            "ev_813cbb6c3ce56f8c8ee643c8",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "accessibility.role": {
+          "evidenceIds": [
+            "ev_6366c9dd63ca0f3d8ce822b3",
+            "ev_813cbb6c3ce56f8c8ee643c8",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "events.press": {
+          "evidenceIds": [
+            "ev_7c3416182fba1f7d5a4f1a66",
+            "ev_f71bb1328104b9bc03e05d79"
+          ],
+          "status": "discovered"
+        },
+        "events.press.extensions.angular.kind": {
+          "evidenceIds": [
+            "ev_f71bb1328104b9bc03e05d79"
+          ],
+          "status": "discovered"
+        },
+        "events.press.extensions.angular.property": {
+          "evidenceIds": [
+            "ev_f71bb1328104b9bc03e05d79"
+          ],
+          "status": "discovered"
+        },
+        "events.press.extensions.vue.emit": {
+          "evidenceIds": [
+            "ev_7c3416182fba1f7d5a4f1a66"
+          ],
+          "status": "discovered"
+        },
+        "events.press.extensions.vue.kind": {
+          "evidenceIds": [
+            "ev_7c3416182fba1f7d5a4f1a66"
+          ],
+          "status": "discovered"
+        },
+        "events.press.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_7c3416182fba1f7d5a4f1a66"
+          ],
+          "status": "discovered"
+        },
+        "events.press.payload.text": {
+          "evidenceIds": [
+            "ev_f71bb1328104b9bc03e05d79"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.cssModules": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.cssVariables": {
+          "evidenceIds": [
+            "ev_6be532c4b3c7124c08c9fca3",
+            "ev_827aec999c867f2422f5504b",
+            "ev_cd3df462030c322d3ca5e521",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.styling.scoped": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.size.extensions.angular.source": {
+          "evidenceIds": [
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.size.extensions.react.source": {
+          "evidenceIds": [
+            "ev_5d449709a54138a316e881de"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.size.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.variant.extensions.angular.source": {
+          "evidenceIds": [
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.variant.extensions.react.source": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307"
+          ],
+          "status": "discovered"
+        },
+        "extensions.invariant.variants.variant.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_390312627b0fdd877e59e5d6"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular": {
+          "confidence": 0.75,
+          "derivation": {
+            "inputs": [
+              "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+              "react:packages/react-ui/src/Button.tsx#Button",
+              "vue:packages/vue-ui/src/Button.vue#Button"
+            ],
+            "reasoning": "DemoButton, Button, Button are in different frameworks and share the name \"button\" once the prefix \"Demo\" is removed",
+            "rule": "name-match.stripped-prefix"
+          },
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0",
+            "ev_d42f24c1a926987a17d07f17",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "inferred"
+        },
+        "implementations.angular.exportName": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.exports": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.file": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.kind": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.localName": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.propsComplete": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.selector": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.standalone": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.extensions.angular.templateSource": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.importPath": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.angular.packageName": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react": {
+          "confidence": 0.75,
+          "derivation": {
+            "inputs": [
+              "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+              "react:packages/react-ui/src/Button.tsx#Button",
+              "vue:packages/vue-ui/src/Button.vue#Button"
+            ],
+            "reasoning": "DemoButton, Button, Button are in different frameworks and share the name \"button\" once the prefix \"Demo\" is removed",
+            "rule": "name-match.stripped-prefix"
+          },
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0",
+            "ev_d42f24c1a926987a17d07f17",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "inferred"
+        },
+        "implementations.react.exportName": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.exports": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.file": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.forwardRef": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.kind": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.localName": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.memo": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.extensions.react.propsComplete": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.importPath": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.react.packageName": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue": {
+          "confidence": 0.75,
+          "derivation": {
+            "inputs": [
+              "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+              "react:packages/react-ui/src/Button.tsx#Button",
+              "vue:packages/vue-ui/src/Button.vue#Button"
+            ],
+            "reasoning": "DemoButton, Button, Button are in different frameworks and share the name \"button\" once the prefix \"Demo\" is removed",
+            "rule": "name-match.stripped-prefix"
+          },
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0",
+            "ev_d42f24c1a926987a17d07f17",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "inferred"
+        },
+        "implementations.vue.exportName": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.exports": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.file": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.kind": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.localName": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.optionsApi": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.propsComplete": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.scriptLang": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.extensions.vue.scriptSetup": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.importPath": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "implementations.vue.packageName": {
+          "evidenceIds": [
+            "ev_179b4e460b2774ec2ae55de0"
+          ],
+          "status": "discovered"
+        },
+        "name": {
+          "evidenceIds": [
+            "ev_d42f24c1a926987a17d07f17"
+          ],
+          "status": "discovered"
+        },
+        "props.children.extensions.react.role": {
+          "evidenceIds": [
+            "ev_542d754a17ee4de01b31a1a1"
+          ],
+          "status": "discovered"
+        },
+        "props.children.required": {
+          "evidenceIds": [
+            "ev_542d754a17ee4de01b31a1a1"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.kind": {
+          "evidenceIds": [
+            "ev_542d754a17ee4de01b31a1a1"
+          ],
+          "status": "discovered"
+        },
+        "props.children.type.text": {
+          "evidenceIds": [
+            "ev_542d754a17ee4de01b31a1a1"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.default": {
+          "evidenceIds": [
+            "ev_056606c2484f73bca4a77465",
+            "ev_16c1c9c9f44f1079026820ee",
+            "ev_29da61a18f4b6dbeb0791fbe",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.extensions.angular.kind": {
+          "evidenceIds": [
+            "ev_056606c2484f73bca4a77465"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.extensions.angular.property": {
+          "evidenceIds": [
+            "ev_056606c2484f73bca4a77465"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.extensions.react.role": {
+          "evidenceIds": [
+            "ev_29da61a18f4b6dbeb0791fbe"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.extensions.vue.kind": {
+          "evidenceIds": [
+            "ev_16c1c9c9f44f1079026820ee"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_16c1c9c9f44f1079026820ee"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.required": {
+          "evidenceIds": [
+            "ev_056606c2484f73bca4a77465",
+            "ev_16c1c9c9f44f1079026820ee",
+            "ev_29da61a18f4b6dbeb0791fbe"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.type.kind": {
+          "evidenceIds": [
+            "ev_056606c2484f73bca4a77465",
+            "ev_16c1c9c9f44f1079026820ee",
+            "ev_29da61a18f4b6dbeb0791fbe"
+          ],
+          "status": "discovered"
+        },
+        "props.disabled.type.text": {
+          "evidenceIds": [
+            "ev_056606c2484f73bca4a77465",
+            "ev_16c1c9c9f44f1079026820ee",
+            "ev_29da61a18f4b6dbeb0791fbe"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.extensions.react.role": {
+          "evidenceIds": [
+            "ev_a155c6834799638f7b3a1d88"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.required": {
+          "evidenceIds": [
+            "ev_a155c6834799638f7b3a1d88"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.type.kind": {
+          "evidenceIds": [
+            "ev_a155c6834799638f7b3a1d88"
+          ],
+          "status": "discovered"
+        },
+        "props.icon.type.text": {
+          "evidenceIds": [
+            "ev_a155c6834799638f7b3a1d88"
+          ],
+          "status": "discovered"
+        },
+        "props.label.extensions.angular.kind": {
+          "evidenceIds": [
+            "ev_269dae8914b928835a521009"
+          ],
+          "status": "discovered"
+        },
+        "props.label.extensions.angular.property": {
+          "evidenceIds": [
+            "ev_269dae8914b928835a521009"
+          ],
+          "status": "discovered"
+        },
+        "props.label.extensions.react.role": {
+          "evidenceIds": [
+            "ev_add45c21cc5b1bb8bda1de1a"
+          ],
+          "status": "discovered"
+        },
+        "props.label.extensions.vue.kind": {
+          "evidenceIds": [
+            "ev_de35d518f7794fc97e521208"
+          ],
+          "status": "discovered"
+        },
+        "props.label.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_de35d518f7794fc97e521208"
+          ],
+          "status": "discovered"
+        },
+        "props.label.required": {
+          "evidenceIds": [
+            "ev_269dae8914b928835a521009",
+            "ev_add45c21cc5b1bb8bda1de1a",
+            "ev_de35d518f7794fc97e521208"
+          ],
+          "status": "discovered"
+        },
+        "props.label.type.kind": {
+          "evidenceIds": [
+            "ev_269dae8914b928835a521009",
+            "ev_add45c21cc5b1bb8bda1de1a",
+            "ev_de35d518f7794fc97e521208"
+          ],
+          "status": "discovered"
+        },
+        "props.label.type.text": {
+          "evidenceIds": [
+            "ev_269dae8914b928835a521009",
+            "ev_add45c21cc5b1bb8bda1de1a",
+            "ev_de35d518f7794fc97e521208"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.extensions.react.role": {
+          "evidenceIds": [
+            "ev_24fa6fc8af907782d9c71839"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.required": {
+          "evidenceIds": [
+            "ev_24fa6fc8af907782d9c71839"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.type.kind": {
+          "evidenceIds": [
+            "ev_24fa6fc8af907782d9c71839"
+          ],
+          "status": "discovered"
+        },
+        "props.onPress.type.text": {
+          "evidenceIds": [
+            "ev_24fa6fc8af907782d9c71839"
+          ],
+          "status": "discovered"
+        },
+        "props.size.allowedValues": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "props.size.default": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.angular.kind": {
+          "evidenceIds": [
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.angular.property": {
+          "evidenceIds": [
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.react.role": {
+          "evidenceIds": [
+            "ev_5d449709a54138a316e881de"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.vue.kind": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961"
+          ],
+          "status": "discovered"
+        },
+        "props.size.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961"
+          ],
+          "status": "discovered"
+        },
+        "props.size.required": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.kind": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "props.size.type.text": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.allowedValues": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.default": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.extensions.angular.kind": {
+          "evidenceIds": [
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.extensions.angular.property": {
+          "evidenceIds": [
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.extensions.react.role": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.extensions.vue.kind": {
+          "evidenceIds": [
+            "ev_390312627b0fdd877e59e5d6"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_390312627b0fdd877e59e5d6"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.required": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.type.kind": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "props.variant.type.text": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "slots.default": {
+          "evidenceIds": [
+            "ev_2d19895f499192299a7dc6f0",
+            "ev_7c4b77f9af505da6cc661277",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.angular.source": {
+          "evidenceIds": [
+            "ev_2d19895f499192299a7dc6f0"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_7c4b77f9af505da6cc661277"
+          ],
+          "status": "discovered"
+        },
+        "slots.default.required": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon": {
+          "evidenceIds": [
+            "ev_aa608f5838da6e2a614b6888",
+            "ev_d56659843530d875b7164ad9",
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.angular.select": {
+          "evidenceIds": [
+            "ev_aa608f5838da6e2a614b6888"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.angular.source": {
+          "evidenceIds": [
+            "ev_aa608f5838da6e2a614b6888"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.react.prop": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.react.typeText": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.extensions.vue.source": {
+          "evidenceIds": [
+            "ev_d56659843530d875b7164ad9"
+          ],
+          "status": "discovered"
+        },
+        "slots.icon.required": {
+          "evidenceIds": [
+            "ev_f20753e66167d0259055fa54"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.default": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "variants.size.values": {
+          "evidenceIds": [
+            "ev_2c8241cec970db45539cd961",
+            "ev_5d449709a54138a316e881de",
+            "ev_d185247d964fe938dac2f7d0"
+          ],
+          "status": "discovered"
+        },
+        "variants.variant.default": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        },
+        "variants.variant.values": {
+          "evidenceIds": [
+            "ev_0120ad6e26bb504149ab4307",
+            "ev_390312627b0fdd877e59e5d6",
+            "ev_bbc76aa19c1e4bc56d807179"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:button",
+      "implementations": [
+        {
+          "exportName": "DemoButton",
+          "extensions": {
+            "angular": {
+              "exports": [
+                {
+                  "name": "DemoButton",
+                  "subpath": "."
+                }
+              ],
+              "file": "packages/angular-ui/src/lib/button.component.ts",
+              "kind": "component",
+              "localName": "DemoButton",
+              "propsComplete": true,
+              "selector": "demo-button",
+              "standalone": true,
+              "templateSource": "inline"
+            }
+          },
+          "framework": "angular",
+          "id": "angular",
+          "importPath": "@demo/angular-ui",
+          "packageName": "@demo/angular-ui",
+          "sourceId": "angular-demo-angular-ui"
+        },
+        {
+          "exportName": "Button",
+          "extensions": {
+            "react": {
+              "exports": [
+                {
+                  "name": "Button",
+                  "subpath": "."
+                }
+              ],
+              "file": "packages/react-ui/src/Button.tsx",
+              "forwardRef": false,
+              "kind": "function",
+              "localName": "Button",
+              "memo": false,
+              "propsComplete": true
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "importPath": "@demo/react-ui",
+          "packageName": "@demo/react-ui",
+          "sourceId": "react-demo-react-ui"
+        },
+        {
+          "exportName": "Button",
+          "extensions": {
+            "vue": {
+              "exports": [
+                {
+                  "name": "Button",
+                  "subpath": "."
+                }
+              ],
+              "file": "packages/vue-ui/src/Button.vue",
+              "kind": "sfc",
+              "localName": "Button",
+              "optionsApi": false,
+              "propsComplete": true,
+              "scriptLang": "ts",
+              "scriptSetup": true
+            }
+          },
+          "framework": "vue",
+          "id": "vue",
+          "importPath": "@demo/vue-ui",
+          "packageName": "@demo/vue-ui",
+          "sourceId": "vue-demo-vue-ui"
+        }
+      ],
+      "name": "Button",
+      "props": [
+        {
+          "extensions": {
+            "react": {
+              "role": "children"
+            }
+          },
+          "name": "children",
+          "required": false,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "default": false,
+          "extensions": {
+            "angular": {
+              "kind": "signal-input",
+              "property": "disabled"
+            },
+            "react": {
+              "role": "prop"
+            },
+            "vue": {
+              "kind": "prop",
+              "source": "type"
+            }
+          },
+          "name": "disabled",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "slot"
+            }
+          },
+          "name": "icon",
+          "required": false,
+          "type": {
+            "kind": "component",
+            "text": "React.ReactNode"
+          }
+        },
+        {
+          "extensions": {
+            "angular": {
+              "kind": "signal-input",
+              "property": "label"
+            },
+            "react": {
+              "role": "prop"
+            },
+            "vue": {
+              "kind": "prop",
+              "source": "type"
+            }
+          },
+          "name": "label",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        },
+        {
+          "extensions": {
+            "react": {
+              "role": "event-handler"
+            }
+          },
+          "name": "onPress",
+          "required": false,
+          "type": {
+            "kind": "function",
+            "text": "(event: MouseEvent) => void"
+          }
+        },
+        {
+          "allowedValues": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "extensions": {
+            "angular": {
+              "kind": "signal-input",
+              "property": "size"
+            },
+            "react": {
+              "role": "prop"
+            },
+            "vue": {
+              "kind": "prop",
+              "source": "type"
+            }
+          },
+          "name": "size",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"sm\" | \"md\" | \"lg\""
+          }
+        },
+        {
+          "allowedValues": [
+            "primary",
+            "secondary",
+            "ghost"
+          ],
+          "default": "primary",
+          "extensions": {
+            "angular": {
+              "kind": "signal-input",
+              "property": "variant"
+            },
+            "react": {
+              "role": "prop"
+            },
+            "vue": {
+              "kind": "prop",
+              "source": "type"
+            }
+          },
+          "name": "variant",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"primary\" | \"secondary\" | \"ghost\""
+          }
+        }
+      ],
+      "slots": [
+        {
+          "extensions": {
+            "angular": {
+              "source": "ng-content"
+            },
+            "react": {
+              "prop": "children",
+              "typeText": "React.ReactNode"
+            },
+            "vue": {
+              "source": "both"
+            }
+          },
+          "name": "default",
+          "required": false
+        },
+        {
+          "extensions": {
+            "angular": {
+              "select": "[slot=icon]",
+              "source": "ng-content"
+            },
+            "react": {
+              "prop": "icon",
+              "typeText": "React.ReactNode"
+            },
+            "vue": {
+              "source": "both"
+            }
+          },
+          "name": "icon",
+          "required": false
+        }
+      ],
+      "states": [],
+      "variants": [
+        {
+          "default": "md",
+          "name": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        {
+          "default": "primary",
+          "name": "variant",
+          "values": [
+            "primary",
+            "secondary",
+            "ghost"
+          ]
+        }
+      ]
+    }
+  ],
+  "conflicts": [
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_f71bb1328104b9bc03e05d79"
+          ],
+          "sourceId": "angular-demo-angular-ui",
+          "status": "discovered",
+          "value": "MouseEvent"
+        },
+        {
+          "evidenceIds": [
+            "ev_7c3416182fba1f7d5a4f1a66"
+          ],
+          "sourceId": "vue-demo-vue-ui",
+          "status": "discovered",
+          "value": "event: MouseEvent"
+        }
+      ],
+      "id": "conflict:value-mismatch/button/events.press.payload.text",
+      "path": "events.press.payload.text",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "info",
+      "subject": "component:button",
+      "suggestedResolution": "Decide which events.press.payload.text is intended and align the other implementation, or accept the difference.",
+      "type": "value-mismatch"
+    }
+  ],
+  "constraints": [],
+  "contractVersion": "1.0.0",
+  "guidelines": [],
+  "integrity": {
+    "algorithm": "sha256",
+    "contentHash": "a64c5718a79e60287229f8f35c87438656b243d64e14798da8e95340c83fe9fb"
+  },
+  "metadata": {
+    "compiledAt": "2026-01-01T00:00:00.000Z",
+    "compilerVersion": "0.0.0",
+    "contractId": "fixture-ds",
+    "frameworks": [
+      "angular",
+      "react",
+      "vue"
+    ],
+    "name": "Fixture DS"
+  },
+  "patterns": [],
+  "policies": [],
+  "sources": [
+    {
+      "capabilities": [
+        "accessibility.*",
+        "composition.*",
+        "events.*",
+        "implementations.*",
+        "module.*",
+        "name",
+        "props.*",
+        "slots.*",
+        "styling.*",
+        "variants.*"
+      ],
+      "health": {
+        "diagnosticCount": 0,
+        "status": "ok"
+      },
+      "id": "angular-demo-angular-ui",
+      "location": "packages/angular-ui",
+      "type": "angular",
+      "version": {
+        "kind": "package-version",
+        "value": "1.0.0"
+      }
+    },
+    {
+      "capabilities": [
+        "accessibility.*",
+        "composition.*",
+        "deprecated",
+        "description",
+        "examples.*",
+        "implementations.*",
+        "lifecycle",
+        "name",
+        "props.*",
+        "slots.*",
+        "styling.*",
+        "usage.*",
+        "variants.*"
+      ],
+      "health": {
+        "diagnosticCount": 0,
+        "status": "ok"
+      },
+      "id": "react-demo-react-ui",
+      "location": "packages/react-ui",
+      "type": "react",
+      "version": {
+        "kind": "package-version",
+        "value": "1.0.0"
+      }
+    },
+    {
+      "capabilities": [
+        "accessibility.*",
+        "composition.*",
+        "events.*",
+        "implementations.*",
+        "name",
+        "props.*",
+        "slots.*",
+        "styling.*",
+        "variants.*"
+      ],
+      "health": {
+        "diagnosticCount": 0,
+        "status": "ok"
+      },
+      "id": "vue-demo-vue-ui",
+      "location": "packages/vue-ui",
+      "type": "vue",
+      "version": {
+        "kind": "package-version",
+        "value": "1.0.0"
+      }
+    }
+  ],
+  "themes": [],
+  "tokens": []
+}

@@ -1,0 +1,523 @@
+{
+  "contractContentHash": "0eb2325e8548179afad685fc18f500cdab50afdf2325377916e898715da7b173",
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_0120ad6e26bb504149ab4307",
+      "location": {
+        "line": 4,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "variant?: \"primary\" | \"secondary\" | \"ghost\"",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_056606c2484f73bca4a77465",
+      "location": {
+        "line": 17,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "disabled = input<boolean>(false)",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_16c1c9c9f44f1079026820ee",
+      "location": {
+        "line": 6,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "disabled?: boolean",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_179b4e460b2774ec2ae55de0",
+      "location": {
+        "line": 1,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_24fa6fc8af907782d9c71839",
+      "location": {
+        "line": 8,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "onPress?: (event: MouseEvent) => void",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_269dae8914b928835a521009",
+      "location": {
+        "line": 18,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "label = input.required<string>()",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_29da61a18f4b6dbeb0791fbe",
+      "location": {
+        "line": 6,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "disabled?: boolean",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_2c8241cec970db45539cd961",
+      "location": {
+        "line": 5,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_2d19895f499192299a7dc6f0",
+      "location": {
+        "line": 9,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_390312627b0fdd877e59e5d6",
+      "location": {
+        "line": 4,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "variant?: \"primary\" | \"secondary\" | \"ghost\"",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_542d754a17ee4de01b31a1a1",
+      "location": {
+        "line": 10,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "children?: React.ReactNode",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_5d449709a54138a316e881de",
+      "location": {
+        "line": 5,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_6366c9dd63ca0f3d8ce822b3",
+      "location": {
+        "line": 6,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_6be532c4b3c7124c08c9fca3",
+      "location": {
+        "line": 12,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#--color-action",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_7c3416182fba1f7d5a4f1a66",
+      "location": {
+        "line": 11,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "{ (e: \"press\", event: MouseEvent): void }",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_7c4b77f9af505da6cc661277",
+      "location": {
+        "line": 12,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "default(): unknown;",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_813cbb6c3ce56f8c8ee643c8",
+      "location": {
+        "line": 15,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_827aec999c867f2422f5504b",
+      "location": {
+        "line": 1,
+        "path": "packages/react-ui/src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.module.css#--color-action",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_a155c6834799638f7b3a1d88",
+      "location": {
+        "line": 9,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "icon?: React.ReactNode",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_aa608f5838da6e2a614b6888",
+      "location": {
+        "line": 8,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_add45c21cc5b1bb8bda1de1a",
+      "location": {
+        "line": 7,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "label: string",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_bbc76aa19c1e4bc56d807179",
+      "location": {
+        "line": 15,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant = input<\"primary\" | \"secondary\" | \"ghost\">(\"primary\")",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_cd3df462030c322d3ca5e521",
+      "location": {
+        "line": 23,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d185247d964fe938dac2f7d0",
+      "location": {
+        "line": 16,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size = input<\"sm\" | \"md\" | \"lg\">(\"md\")",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d42f24c1a926987a17d07f17",
+      "location": {
+        "line": 3,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "@Component({",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_d56659843530d875b7164ad9",
+      "location": {
+        "line": 12,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "icon(): unknown",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "vue-sfc",
+        "version": "0.1.0"
+      },
+      "id": "ev_de35d518f7794fc97e521208",
+      "location": {
+        "line": 7,
+        "path": "packages/vue-ui/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "label: string",
+      "sourceId": "vue-demo-vue-ui",
+      "sourceRef": "packages/vue-ui/src/Button.vue#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "react-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f20753e66167d0259055fa54",
+      "location": {
+        "line": 13,
+        "path": "packages/react-ui/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "export function Button({ variant = \"primary\", size = \"md\", disabled = false, label, onPress, icon, children }: ButtonProps) {",
+      "sourceId": "react-demo-react-ui",
+      "sourceRef": "packages/react-ui/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f71bb1328104b9bc03e05d79",
+      "location": {
+        "line": 19,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "press = output<MouseEvent>()",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "evidenceVersion": "1.0.0"
+}

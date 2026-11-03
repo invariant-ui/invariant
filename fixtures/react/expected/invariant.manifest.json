@@ -1,0 +1,78 @@
+{
+  "artifacts": [
+    {
+      "bytes": 660,
+      "path": "invariant.diagnostics.json",
+      "sha256": "aedf0650d59a5afe3c82d0e9e872cf18737b2fcd815371fa4d47b304bf52cc68"
+    },
+    {
+      "bytes": 14067,
+      "path": "invariant.project.json",
+      "sha256": "6404305fa7c0db4c57b0b61c01ba427a75f28bb018b79491f251f7ec1786d5ae"
+    },
+    {
+      "bytes": 8979,
+      "path": "ir/design-tokens-acme-ui.ir.json",
+      "sha256": "39cc64cca37d56bf2444b51257c96c030e59f35a3fe28f4bcfe57b6901bac6dc"
+    },
+    {
+      "bytes": 38004,
+      "path": "ir/npm-acme-ui.ir.json",
+      "sha256": "a87d752d26087c5e53095e28c5d5d9733f8ceb62aa3ccf94e2a76d5b8d8462d8"
+    },
+    {
+      "bytes": 174115,
+      "path": "ir/react-acme-ui.ir.json",
+      "sha256": "6d1f8f66ac5b9ddb13c9507a76dda0a9d1ac3ca1d5d84cbf2ee0df064c92cb48"
+    },
+    {
+      "bytes": 8835,
+      "path": "ir/tokens-acme-ui.ir.json",
+      "sha256": "4e96d72bcdce7219736fc85d62461a7428d90fc0b7e835da6ea147c493dd2879"
+    }
+  ],
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "manifestVersion": "1.0.0",
+  "sources": [
+    {
+      "adapterId": "design-tokens",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "design-tokens-acme-ui",
+      "inputHash": "467a84e09dc35e93cfc2229c734d1b018715bdbbfcb44f3d00719ae263b79712",
+      "irContentHash": "b8f1f17987196d323d9cfcf46de9bd58030b5a73bf25c1bafcda5ca5e57b80d2",
+      "type": "tokens"
+    },
+    {
+      "adapterId": "inventory-npm",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "npm-acme-ui",
+      "inputHash": "c7b668805e5cdc823998b56787725fd5abe6e07f98a532896a306b328430012a",
+      "irContentHash": "5a0e8bcd15fdcb7b737b9718a4d04a8abf6b570c69df3e257be7805bdf4713cb",
+      "type": "npm"
+    },
+    {
+      "adapterId": "react",
+      "adapterVersion": "0.1.0",
+      "completeness": "partial",
+      "id": "react-acme-ui",
+      "inputHash": "b7c39515fb7eeaa75c62d7d98bf041a0c0c52cacb46d22b888453b0397749cf4",
+      "irContentHash": "421cc94f64fc25c9d048b3f8a4574372483b3990502e2723b59c5a22725818c7",
+      "type": "react"
+    },
+    {
+      "adapterId": "inventory-tokens",
+      "adapterVersion": "0.1.0",
+      "completeness": "complete",
+      "id": "tokens-acme-ui",
+      "inputHash": "86ad58acbde6adc54fe60c2136d1e9ad4cd1df75d7cf1db2d3a1dc00e95b2091",
+      "irContentHash": "9779f559c9100e2679526b8dd1a77c94df1d283d4cf0f14d61527acadcc0f125",
+      "type": "tokens"
+    }
+  ],
+  "tool": {
+    "name": "invariant",
+    "version": "0.0.0"
+  }
+}

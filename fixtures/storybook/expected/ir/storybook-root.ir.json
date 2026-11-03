@@ -1,0 +1,170 @@
+{
+  "capabilities": [
+    "config.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "config",
+      "name": "Storybook (.)",
+      "ref": "storybook:."
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-storybook",
+        "version": "0.1.0"
+      },
+      "id": "ev_ac38b4ded944046e7e2d9419",
+      "location": {
+        "path": ".storybook/main.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "storybook-root",
+      "sourceRef": ".storybook/main.ts",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.addons",
+      "subject": "storybook:.",
+      "value": [
+        "@storybook/addon-a11y",
+        "@storybook/addon-docs"
+      ]
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.builtOutput",
+      "subject": "storybook:.",
+      "value": {
+        "hasIndexJson": true,
+        "path": "storybook-static"
+      }
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.dynamicProperties",
+      "subject": "storybook:.",
+      "value": []
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.framework",
+      "subject": "storybook:.",
+      "value": "@storybook/react-vite"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.path",
+      "subject": "storybook:.",
+      "value": ".storybook/main.ts"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.staticDirs",
+      "subject": "storybook:.",
+      "value": []
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.stories",
+      "subject": "storybook:.",
+      "value": [
+        {
+          "pattern": "../src/**/*.mdx"
+        },
+        {
+          "pattern": "../src/**/*.stories.@(ts|tsx)"
+        }
+      ]
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.storyFileCount",
+      "subject": "storybook:.",
+      "value": 8
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.storyFiles",
+      "subject": "storybook:.",
+      "value": [
+        "src/Button.mdx",
+        "src/Button.stories.tsx",
+        "src/Card.stories.tsx",
+        "src/External.stories.tsx",
+        "src/IconButton.stories.tsx",
+        "src/Modal.stories.tsx",
+        "src/Orphan.stories.tsx",
+        "src/Select.stories.tsx"
+      ]
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_ac38b4ded944046e7e2d9419"
+      ],
+      "origin": "extracted",
+      "path": "config.version",
+      "subject": "storybook:.",
+      "value": {
+        "declaredRange": "^8.4.0",
+        "package": "storybook"
+      }
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-storybook",
+      "version": "0.1.0"
+    },
+    "id": "storybook-root",
+    "inputHash": "bad5ce9c7dbb97c3a86e508070cef62964a85cb876cfca7dfe348d9d3ac32826",
+    "location": ".",
+    "type": "storybook"
+  }
+}

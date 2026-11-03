@@ -1,0 +1,166 @@
+{
+  "capabilities": [
+    "implementations.*",
+    "props.*.allowedValues",
+    "props.*.default",
+    "props.*.extensions",
+    "props.*.required",
+    "props.*.type"
+  ],
+  "completeness": "partial",
+  "diagnostics": [
+    {
+      "code": "extract.unsupported-syntax",
+      "message": "Template-driven outputs were not analyzed",
+      "severity": "warning",
+      "sourceId": "ui-angular"
+    }
+  ],
+  "entities": [
+    {
+      "kind": "component",
+      "name": "AcmeButton",
+      "ref": "angular:packages/ui-angular/src/button.component.ts#AcmeButton"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "angular-inputs",
+        "version": "0.1.0"
+      },
+      "id": "ev_97c93e9d01f841a56d3a86dc",
+      "location": {
+        "line": 20,
+        "path": "packages/ui-angular/src/button.component.ts",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size = input<\"sm\" | \"md\" | \"lg\">(\"md\")",
+      "sourceId": "ui-angular",
+      "sourceRef": "packages/ui-angular/src/button.component.ts#AcmeButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "angular-component",
+        "version": "0.1.0"
+      },
+      "id": "ev_cd7bf933b4517edf24a25e68",
+      "location": {
+        "line": 8,
+        "path": "packages/ui-angular/src/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "@Component({ selector: 'acme-button', standalone: true })",
+      "sourceId": "ui-angular",
+      "sourceRef": "packages/ui-angular/src/button.component.ts#AcmeButton",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_cd7bf933b4517edf24a25e68"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.exportName",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "AcmeButton"
+    },
+    {
+      "evidenceIds": [
+        "ev_cd7bf933b4517edf24a25e68"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.selector",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "acme-button"
+    },
+    {
+      "evidenceIds": [
+        "ev_cd7bf933b4517edf24a25e68"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.framework",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "angular"
+    },
+    {
+      "evidenceIds": [
+        "ev_97c93e9d01f841a56d3a86dc"
+      ],
+      "origin": "extracted",
+      "path": "props.size.allowedValues",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_97c93e9d01f841a56d3a86dc"
+      ],
+      "origin": "extracted",
+      "path": "props.size.default",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_97c93e9d01f841a56d3a86dc"
+      ],
+      "origin": "extracted",
+      "path": "props.size.extensions.angular.kind",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "input"
+    },
+    {
+      "evidenceIds": [
+        "ev_97c93e9d01f841a56d3a86dc"
+      ],
+      "origin": "extracted",
+      "path": "props.size.required",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_97c93e9d01f841a56d3a86dc"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.kind",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_97c93e9d01f841a56d3a86dc"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.text",
+      "subject": "angular:packages/ui-angular/src/button.component.ts#AcmeButton",
+      "value": "\"sm\" | \"md\" | \"lg\""
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "angular-adapter",
+      "version": "0.1.0"
+    },
+    "id": "ui-angular",
+    "inputHash": "63880d204f8542e087f6c16acc571a36a9cbca23a42d4c4d059ed0084f44d0f5",
+    "location": "./packages/ui-angular",
+    "type": "angular",
+    "version": {
+      "kind": "git-commit",
+      "value": "9b95d2c"
+    }
+  }
+}

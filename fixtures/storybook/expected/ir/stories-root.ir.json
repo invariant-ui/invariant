@@ -1,0 +1,2883 @@
+{
+  "capabilities": [
+    "doc.*",
+    "group.*",
+    "story.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [
+    {
+      "code": "storybook.index-stale",
+      "location": {
+        "path": "src/Removed.stories.tsx"
+      },
+      "message": "The built index lists ./src/Removed.stories.tsx, which no longer matches the story globs",
+      "severity": "warning",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.component-unresolved",
+      "location": {
+        "line": 3,
+        "path": "src/External.stories.tsx"
+      },
+      "message": "src/External.stories.tsx meta component AntButton could not be resolved to a project file (from package antd)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.component-unresolved",
+      "location": {
+        "line": 3,
+        "path": "src/Orphan.stories.tsx"
+      },
+      "message": "src/Orphan.stories.tsx meta component Missing could not be resolved to a project file (module ./Missing not found)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.dynamic-args",
+      "location": {
+        "path": "src/Button.stories.tsx"
+      },
+      "message": "src/Button.stories.tsx has args that are not statically resolvable; they are listed as unresolved, not guessed",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.dynamic-args",
+      "location": {
+        "path": "src/Select.stories.tsx"
+      },
+      "message": "src/Select.stories.tsx has args that are not statically resolvable; they are listed as unresolved, not guessed",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/External.stories.tsx"
+      },
+      "message": "src/External.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/IconButton.stories.tsx"
+      },
+      "message": "src/IconButton.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/Modal.stories.tsx"
+      },
+      "message": "src/Modal.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/Orphan.stories.tsx"
+      },
+      "message": "src/Orphan.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.not-in-built-index",
+      "location": {
+        "path": "src/Select.stories.tsx"
+      },
+      "message": "src/Select.stories.tsx is not in the built index (the build may predate it)",
+      "severity": "info",
+      "sourceId": "stories-root"
+    },
+    {
+      "code": "storybook.title-auto",
+      "location": {
+        "line": 4,
+        "path": "src/IconButton.stories.tsx"
+      },
+      "message": "src/IconButton.stories.tsx has no explicit title; Storybook infers it from the path, which is not reproduced here",
+      "severity": "info",
+      "sourceId": "stories-root"
+    }
+  ],
+  "entities": [
+    {
+      "kind": "doc-page",
+      "name": "Button",
+      "ref": "storybook:src/Button.mdx"
+    },
+    {
+      "kind": "story-group",
+      "name": "Components/Button",
+      "ref": "storybook:src/Button.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "Danger",
+      "ref": "storybook:src/Button.stories.tsx#Danger"
+    },
+    {
+      "kind": "story",
+      "name": "Deprecated",
+      "ref": "storybook:src/Button.stories.tsx#Deprecated"
+    },
+    {
+      "kind": "story",
+      "name": "Primary",
+      "ref": "storybook:src/Button.stories.tsx#Primary"
+    },
+    {
+      "kind": "story",
+      "name": "With an icon",
+      "ref": "storybook:src/Button.stories.tsx#WithIcon"
+    },
+    {
+      "kind": "story-group",
+      "name": "Components/Card",
+      "ref": "storybook:src/Card.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "Basic",
+      "ref": "storybook:src/Card.stories.tsx#Basic"
+    },
+    {
+      "kind": "story",
+      "name": "Plain",
+      "ref": "storybook:src/Card.stories.tsx#Plain"
+    },
+    {
+      "kind": "story-group",
+      "name": "External/Ant",
+      "ref": "storybook:src/External.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "Plain",
+      "ref": "storybook:src/External.stories.tsx#Plain"
+    },
+    {
+      "kind": "story-group",
+      "name": "src/IconButton.stories.tsx",
+      "ref": "storybook:src/IconButton.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "Settings",
+      "ref": "storybook:src/IconButton.stories.tsx#Settings"
+    },
+    {
+      "kind": "story-group",
+      "name": "Components/Modal",
+      "ref": "storybook:src/Modal.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "Open",
+      "ref": "storybook:src/Modal.stories.tsx#Open"
+    },
+    {
+      "kind": "story-group",
+      "name": "Orphans/Missing",
+      "ref": "storybook:src/Orphan.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "One",
+      "ref": "storybook:src/Orphan.stories.tsx#One"
+    },
+    {
+      "kind": "story-group",
+      "name": "Components/Select",
+      "ref": "storybook:src/Select.stories.tsx"
+    },
+    {
+      "kind": "story",
+      "name": "Basic select",
+      "ref": "storybook:src/Select.stories.tsx#Basic"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_0278bc25ea1201b8ec0bf6bf",
+      "location": {
+        "line": 4,
+        "path": "src/External.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Plain = { args: { type: \"primary\" } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/External.stories.tsx#4",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_0f008a4291839370be4fbdc3",
+      "location": {
+        "line": 12,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Basic: StoryObj<typeof Card> = {",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#12",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_0fac16fad2017acc36cfd6e0",
+      "location": {
+        "line": 4,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.mdx#meta",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_10dd20f3ef8c46aa9dcdc3ad",
+      "location": {
+        "line": 40,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Danger: Story = { args: { ...Primary.args, variant: \"danger\" } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#40",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_1aa99e2b08b25f07e506c1d1",
+      "location": {
+        "line": 38,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Primary: Story = { args: { variant: \"primary\", size: \"lg\" } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#38",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_1bdef0261263d62226e5063d",
+      "location": {
+        "line": 3,
+        "path": "src/External.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: AntButton",
+      "sourceId": "stories-root",
+      "sourceRef": "src/External.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_1ea955f0e8b1682d54db199d",
+      "location": {
+        "line": 38,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant: \"primary\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#38",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_22d065b69001b406c729d5d5",
+      "location": {
+        "line": 44,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "WithIcon: Story = {",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#44",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_2610a69fa0d88b7ceb12a08c",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "open: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#11",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_2899ce270d703f2949d0c250",
+      "location": {
+        "line": 7,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "shadow: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#7",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_30313e3c14ab891f20cbdfa1",
+      "location": {
+        "line": 20,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size: { control: { type: \"radio\" }, options: sizes }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#20",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_333be2b3520d859a0277d256",
+      "location": {
+        "line": 7,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size: { control: \"radio\", options: [\"sm\", \"lg\", \"xl\"], table: { defaultValue: { summary: \"lg\" } } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#7",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_386f6e8c59a5d3d9bf05ba1c",
+      "location": {
+        "line": 3,
+        "path": "src/Select.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: Select",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Select.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_39413a48fd95c16fff588b50",
+      "location": {
+        "line": 4,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#4",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_39fd9673103e4410f9951e6c",
+      "location": {
+        "line": 8,
+        "path": "src/Select.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ options: [\"a\", \"b\"], getKey: (o: string) => o }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Select.stories.tsx#8",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_4293ac7d464d3b5fe87dec2e",
+      "location": {
+        "line": 3,
+        "path": "src/Orphan.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ title: \"Orphans/Missing\", component: Missing }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Orphan.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_4587847b50a9133e0198d719",
+      "location": {
+        "line": 6,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "original": "Button",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.mdx#6",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_458adcfc23976298e0f35e13",
+      "location": {
+        "line": 15,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "original": "Variants",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.mdx#15",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_45f46f1555f5ec477fec25be",
+      "location": {
+        "line": 8,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "shadow: { control: \"boolean\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#8",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_5014ae46d86e39624ef2d0aa",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "title: \"Hi\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#11",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_544d327100ec7090ac196b35",
+      "location": {
+        "line": 8,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#8",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_573807e0d645c61a226e01b9",
+      "location": {
+        "line": 12,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "Basic: StoryObj<typeof Card> = {",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#12",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_5ebe54bb13f19849dc604c92",
+      "location": {
+        "line": 12,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ children: \"Click me\", onPress: fn() }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#12",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_6080ad94ea8578f01aa33313",
+      "location": {
+        "line": 21,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Plain: StoryObj<typeof Card> = { args: { elevated: false, shadow: true } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#21",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_63b2fadcb33f9c0f5b9271a2",
+      "location": {
+        "line": 8,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "elevated: { control: \"boolean\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#8",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_65d05784b8f8b127bada2f28",
+      "location": {
+        "line": 7,
+        "path": "src/Select.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Basic = Template.bind({})",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Select.stories.tsx#7",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_66630f25e8ae5eb44bc86652",
+      "location": {
+        "line": 4,
+        "path": "src/IconButton.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ component: IconButton }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/IconButton.stories.tsx#4",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_6ac2a6b93d2220184efeb761",
+      "location": {
+        "line": 40,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant: \"danger\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#40",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_6e4381daa3847502e1aab522",
+      "location": {
+        "line": 6,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: Card",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#6",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_7181d9d35d74513191a69c5f",
+      "location": {
+        "line": 1,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.mdx",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_792e6827b94ec548e2845618",
+      "location": {
+        "line": 4,
+        "path": "src/External.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "type: \"primary\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/External.stories.tsx#4",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_7dac9519f0e6719a6612e92d",
+      "location": {
+        "line": 8,
+        "path": "src/Select.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "options: [\"a\", \"b\"]",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Select.stories.tsx#8",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_8157599501a6b2deb2e0fe17",
+      "location": {
+        "line": 5,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: Modal",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#5",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_81ea3e7b5d3c11d27da5b250",
+      "location": {
+        "line": 14,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant: {",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#14",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_8c10120108e435e091c6a237",
+      "location": {
+        "line": 10,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: Button",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#10",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_8dedd74ea704cd73c94ac21d",
+      "location": {
+        "line": 3,
+        "path": "src/Orphan.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: Missing",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Orphan.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_90bc8523623b685b64fe8061",
+      "location": {
+        "line": 3,
+        "path": "src/Select.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ title: \"Components/Select\", component: Select }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Select.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_922fe2c0b4cba5a26e634265",
+      "location": {
+        "line": 6,
+        "path": "src/IconButton.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Settings = { args: { ...baseArgs } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/IconButton.stories.tsx#6",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_9274df842f39a581c86616ff",
+      "location": {
+        "line": 21,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "icon: { control: \"select\", options: [\"none\", \"gear\"], mapping: { none: undefined, gear: <Icon name=\"gear\" /> } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#21",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_94ad7e5a65e99b28e1d7978b",
+      "location": {
+        "line": 7,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "elevated: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#7",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_991667ca579962d76fd34082",
+      "location": {
+        "line": 42,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Deprecated: Story = { args: { plain: true, bogus: \"x\" } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#42",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_9db85cf9cc629b7b9657a6f5",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "Open = { args: { open: true, size: \"xl\", title: \"Hi\" } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#11",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_9fdc405fcf986d3fabfe174d",
+      "location": {
+        "line": 40,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ ...Primary.args, variant: \"danger\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#40",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_a06eeb9dd8f2474c1556616d",
+      "location": {
+        "line": 4,
+        "path": "src/IconButton.stories.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "component: IconButton",
+      "sourceId": "stories-root",
+      "sourceRef": "src/IconButton.stories.tsx#4",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_a67a337ba95fad5b2b2a26aa",
+      "location": {
+        "line": 21,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "elevated: false",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#21",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_a983366a1d54d74db0d58262",
+      "location": {
+        "line": 38,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size: \"lg\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#38",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_ad4fc21fd5e9911eec557c93",
+      "location": {
+        "line": 24,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "loading: { table: { defaultValue: { summary: \"false\" } } }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#24",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_af08bd8e626fe3caebb0dcae",
+      "location": {
+        "line": 42,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "plain: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#42",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_b0ca5715c3c20b094f3cd9ab",
+      "location": {
+        "line": 3,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_b8b51b04bc8403e45bb55398",
+      "location": {
+        "line": 3,
+        "path": "src/External.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ title: \"External/Ant\", component: AntButton }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/External.stories.tsx#3",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_bf4c2806e08118e961ee0f63",
+      "location": {
+        "line": 19,
+        "path": "src/Button.mdx",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.mdx#stories",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_c378e7e13caf4816098960f6",
+      "location": {
+        "line": 21,
+        "path": "src/Card.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "shadow: true",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Card.stories.tsx#21",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_c72817b48a7d677eb71fe67c",
+      "location": {
+        "line": 46,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "icon: \"gear\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#46",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_c7334629524d83cf7a29c325",
+      "location": {
+        "path": "storybook-static/index.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "stories-root",
+      "sourceRef": "storybook-static/index.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_d36bca3734045d6c6db90435",
+      "location": {
+        "line": 11,
+        "path": "src/Modal.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size: \"xl\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Modal.stories.tsx#11",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_db6be83e99ab28c4d807804c",
+      "location": {
+        "line": 42,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "bogus: \"x\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#42",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_dc2fe7b8d00de90a9547a0e4",
+      "location": {
+        "line": 4,
+        "path": "src/Orphan.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "One = {}",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Orphan.stories.tsx#4",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_dd08df47d46488a908aa7d05",
+      "location": {
+        "line": 23,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "tone: { control: \"color\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#23",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_de01922736b98f6627c07b85",
+      "location": {
+        "line": 27,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "parameters: {",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#27",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_df66f4341e9c6eb8e25f604c",
+      "location": {
+        "line": 6,
+        "path": "src/IconButton.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "{ ...baseArgs }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/IconButton.stories.tsx#6",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_e52f8444cd120e3873e4f8e4",
+      "location": {
+        "line": 11,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "tags: [\"autodocs\"]",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#11",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_e6ab30b6365fa0be7c74f9a3",
+      "location": {
+        "line": 12,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "children: \"Click me\"",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#12",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "storybook-csf",
+        "version": "0.1.0"
+      },
+      "id": "ev_e6e0e38c8f97c4f6b4743cdc",
+      "location": {
+        "line": 22,
+        "path": "src/Button.stories.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "plain: { control: \"boolean\" }",
+      "sourceId": "stories-root",
+      "sourceRef": "src/Button.stories.tsx#22",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_7181d9d35d74513191a69c5f"
+      ],
+      "origin": "extracted",
+      "path": "doc.blocks",
+      "subject": "storybook:src/Button.mdx",
+      "value": [
+        "Canvas",
+        "Controls",
+        "Meta"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_7181d9d35d74513191a69c5f"
+      ],
+      "origin": "extracted",
+      "path": "doc.file",
+      "subject": "storybook:src/Button.mdx",
+      "value": "src/Button.mdx"
+    },
+    {
+      "evidenceIds": [
+        "ev_7181d9d35d74513191a69c5f"
+      ],
+      "origin": "extracted",
+      "path": "doc.kind",
+      "subject": "storybook:src/Button.mdx",
+      "value": "storybook-mdx"
+    },
+    {
+      "evidenceIds": [
+        "ev_0fac16fad2017acc36cfd6e0"
+      ],
+      "origin": "extracted",
+      "path": "doc.meta.of",
+      "subject": "storybook:src/Button.mdx",
+      "value": {
+        "file": "src/Button.stories.tsx",
+        "identifier": "ButtonStories"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_4587847b50a9133e0198d719"
+      ],
+      "origin": "authored",
+      "path": "doc.sections.s1",
+      "subject": "storybook:src/Button.mdx",
+      "value": {
+        "heading": "Button",
+        "level": 1,
+        "text": "Use one primary button per view."
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_458adcfc23976298e0f35e13"
+      ],
+      "origin": "authored",
+      "path": "doc.sections.s2",
+      "subject": "storybook:src/Button.mdx",
+      "value": {
+        "heading": "Variants",
+        "level": 2,
+        "text": "Prefer the primary variant for the main action."
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_bf4c2806e08118e961ee0f63"
+      ],
+      "origin": "extracted",
+      "path": "doc.stories",
+      "subject": "storybook:src/Button.mdx",
+      "value": [
+        {
+          "block": "Canvas",
+          "exportName": "Primary",
+          "file": "src/Button.stories.tsx"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_7181d9d35d74513191a69c5f"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "storybook:src/Button.mdx",
+      "value": "Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_9274df842f39a581c86616ff"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.icon.control",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "select"
+    },
+    {
+      "evidenceIds": [
+        "ev_9274df842f39a581c86616ff"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.icon.declared",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_9274df842f39a581c86616ff"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.icon.mappingKeys",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "gear",
+        "none"
+      ]
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_9274df842f39a581c86616ff"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.icon.options",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "none",
+        "gear"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_ad4fc21fd5e9911eec557c93"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.loading.declared",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_ad4fc21fd5e9911eec557c93"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.loading.defaultSummary",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "false"
+    },
+    {
+      "evidenceIds": [
+        "ev_e6e0e38c8f97c4f6b4743cdc"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.plain.control",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_e6e0e38c8f97c4f6b4743cdc"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.plain.declared",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_30313e3c14ab891f20cbdfa1"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.control",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "radio"
+    },
+    {
+      "evidenceIds": [
+        "ev_30313e3c14ab891f20cbdfa1"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.declared",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": true
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_30313e3c14ab891f20cbdfa1"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.options",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_dd08df47d46488a908aa7d05"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.tone.control",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "color"
+    },
+    {
+      "evidenceIds": [
+        "ev_dd08df47d46488a908aa7d05"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.tone.declared",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.variant.control",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "select"
+    },
+    {
+      "evidenceIds": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.variant.declared",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.variant.defaultSummary",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "secondary"
+    },
+    {
+      "evidenceIds": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ],
+      "origin": "authored",
+      "path": "group.argTypes.variant.description",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "Visual weight"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.variant.options",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost",
+        "danger"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_81ea3e7b5d3c11d27da5b250"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypesUnresolved",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "icon.mapping.gear"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_e6ab30b6365fa0be7c74f9a3"
+      ],
+      "origin": "extracted",
+      "path": "group.args.children",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "Click me"
+    },
+    {
+      "evidenceIds": [
+        "ev_5ebe54bb13f19849dc604c92"
+      ],
+      "origin": "extracted",
+      "path": "group.argsSpies",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "onPress"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_5ebe54bb13f19849dc604c92"
+      ],
+      "origin": "extracted",
+      "path": "group.argsUnresolved",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "onPress"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_8c10120108e435e091c6a237"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": {
+        "file": "src/Button.tsx",
+        "name": "Button",
+        "text": "Button",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_de01922736b98f6627c07b85"
+      ],
+      "origin": "authored",
+      "path": "group.docs.description",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "Triggers an action."
+    },
+    {
+      "evidenceIds": [
+        "ev_544d327100ec7090ac196b35"
+      ],
+      "origin": "extracted",
+      "path": "group.excludedExports",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "HiddenHelper"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_544d327100ec7090ac196b35"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        {
+          "id": "components-button--danger",
+          "name": "Danger",
+          "title": "Components/Button",
+          "type": "story"
+        },
+        {
+          "id": "components-button--primary",
+          "name": "Primary",
+          "title": "Components/Button",
+          "type": "story"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_de01922736b98f6627c07b85"
+      ],
+      "origin": "extracted",
+      "path": "group.parameters.a11y",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": {
+        "config": {
+          "rules": [
+            {
+              "enabled": false,
+              "id": "color-contrast"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_de01922736b98f6627c07b85"
+      ],
+      "origin": "extracted",
+      "path": "group.parameters.keys",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "a11y",
+        "docs",
+        "layout"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_de01922736b98f6627c07b85"
+      ],
+      "origin": "extracted",
+      "path": "group.parameters.layout",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "centered"
+    },
+    {
+      "evidenceIds": [
+        "ev_e52f8444cd120e3873e4f8e4"
+      ],
+      "origin": "extracted",
+      "path": "group.tags",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": [
+        "autodocs"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_544d327100ec7090ac196b35"
+      ],
+      "origin": "extracted",
+      "path": "group.title",
+      "subject": "storybook:src/Button.stories.tsx",
+      "value": "Components/Button"
+    },
+    {
+      "evidenceIds": [
+        "ev_9fdc405fcf986d3fabfe174d"
+      ],
+      "origin": "extracted",
+      "path": "story.args.size",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": "lg"
+    },
+    {
+      "evidenceIds": [
+        "ev_6ac2a6b93d2220184efeb761"
+      ],
+      "origin": "extracted",
+      "path": "story.args.variant",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": "danger"
+    },
+    {
+      "evidenceIds": [
+        "ev_10dd20f3ef8c46aa9dcdc3ad"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": "Danger"
+    },
+    {
+      "evidenceIds": [
+        "ev_10dd20f3ef8c46aa9dcdc3ad"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": "src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_10dd20f3ef8c46aa9dcdc3ad"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": "storybook:src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_10dd20f3ef8c46aa9dcdc3ad"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_10dd20f3ef8c46aa9dcdc3ad"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Button.stories.tsx#Danger",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_db6be83e99ab28c4d807804c"
+      ],
+      "origin": "extracted",
+      "path": "story.args.bogus",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": "x"
+    },
+    {
+      "evidenceIds": [
+        "ev_af08bd8e626fe3caebb0dcae"
+      ],
+      "origin": "extracted",
+      "path": "story.args.plain",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_991667ca579962d76fd34082"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": "Deprecated"
+    },
+    {
+      "evidenceIds": [
+        "ev_991667ca579962d76fd34082"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": "src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_991667ca579962d76fd34082"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": "storybook:src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_991667ca579962d76fd34082"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_991667ca579962d76fd34082"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Button.stories.tsx#Deprecated",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_a983366a1d54d74db0d58262"
+      ],
+      "origin": "extracted",
+      "path": "story.args.size",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "lg"
+    },
+    {
+      "evidenceIds": [
+        "ev_1ea955f0e8b1682d54db199d"
+      ],
+      "origin": "extracted",
+      "path": "story.args.variant",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_1aa99e2b08b25f07e506c1d1"
+      ],
+      "origin": "authored",
+      "path": "story.description",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "The default call to action."
+    },
+    {
+      "evidenceIds": [
+        "ev_1aa99e2b08b25f07e506c1d1"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "Primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_1aa99e2b08b25f07e506c1d1"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_1aa99e2b08b25f07e506c1d1"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "storybook:src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_1aa99e2b08b25f07e506c1d1"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_1aa99e2b08b25f07e506c1d1"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Button.stories.tsx#Primary",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_c72817b48a7d677eb71fe67c"
+      ],
+      "origin": "extracted",
+      "path": "story.args.icon",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": "gear"
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": "WithIcon"
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": "src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": "storybook:src/Button.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.name",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": "With an icon"
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.play.calls",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": [
+        "canvas.getByRole",
+        "expect",
+        "expect().toBeEnabled",
+        "step",
+        "userEvent.click",
+        "within"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.play.present",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.play.steps",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": [
+        "press the button"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_22d065b69001b406c729d5d5"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Button.stories.tsx#WithIcon",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_63b2fadcb33f9c0f5b9271a2"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.elevated.control",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_63b2fadcb33f9c0f5b9271a2"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.elevated.declared",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_45f46f1555f5ec477fec25be"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.shadow.control",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_45f46f1555f5ec477fec25be"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.shadow.declared",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_94ad7e5a65e99b28e1d7978b"
+      ],
+      "origin": "extracted",
+      "path": "group.args.elevated",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_2899ce270d703f2949d0c250"
+      ],
+      "origin": "extracted",
+      "path": "group.args.shadow",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_6e4381daa3847502e1aab522"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": {
+        "file": "src/Card.tsx",
+        "name": "Card",
+        "text": "Card",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_39413a48fd95c16fff588b50"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": "src/Card.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": [
+        {
+          "id": "components-card--basic",
+          "name": "Basic",
+          "title": "Components/Card",
+          "type": "story"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_39413a48fd95c16fff588b50"
+      ],
+      "origin": "extracted",
+      "path": "group.title",
+      "subject": "storybook:src/Card.stories.tsx",
+      "value": "Components/Card"
+    },
+    {
+      "evidenceIds": [
+        "ev_573807e0d645c61a226e01b9"
+      ],
+      "origin": "extracted",
+      "path": "story.composes",
+      "subject": "storybook:src/Card.stories.tsx#Basic",
+      "value": [
+        {
+          "count": 1,
+          "file": "src/Card.tsx",
+          "name": "Card"
+        },
+        {
+          "count": 1,
+          "file": "src/Card.tsx",
+          "name": "CardBody"
+        },
+        {
+          "count": 1,
+          "file": "src/Card.tsx",
+          "name": "CardHeader"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_0f008a4291839370be4fbdc3"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Card.stories.tsx#Basic",
+      "value": "Basic"
+    },
+    {
+      "evidenceIds": [
+        "ev_0f008a4291839370be4fbdc3"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Card.stories.tsx#Basic",
+      "value": "src/Card.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_0f008a4291839370be4fbdc3"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Card.stories.tsx#Basic",
+      "value": "storybook:src/Card.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_0f008a4291839370be4fbdc3"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Card.stories.tsx#Basic",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_0f008a4291839370be4fbdc3"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Card.stories.tsx#Basic",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_a67a337ba95fad5b2b2a26aa"
+      ],
+      "origin": "extracted",
+      "path": "story.args.elevated",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_c378e7e13caf4816098960f6"
+      ],
+      "origin": "extracted",
+      "path": "story.args.shadow",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_6080ad94ea8578f01aa33313"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": "Plain"
+    },
+    {
+      "evidenceIds": [
+        "ev_6080ad94ea8578f01aa33313"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": "src/Card.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_6080ad94ea8578f01aa33313"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": "storybook:src/Card.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_6080ad94ea8578f01aa33313"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_6080ad94ea8578f01aa33313"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Card.stories.tsx#Plain",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_1bdef0261263d62226e5063d"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/External.stories.tsx",
+      "value": {
+        "external": "antd",
+        "text": "AntButton",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_b8b51b04bc8403e45bb55398"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/External.stories.tsx",
+      "value": "src/External.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/External.stories.tsx",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_b8b51b04bc8403e45bb55398"
+      ],
+      "origin": "extracted",
+      "path": "group.title",
+      "subject": "storybook:src/External.stories.tsx",
+      "value": "External/Ant"
+    },
+    {
+      "evidenceIds": [
+        "ev_792e6827b94ec548e2845618"
+      ],
+      "origin": "extracted",
+      "path": "story.args.type",
+      "subject": "storybook:src/External.stories.tsx#Plain",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_0278bc25ea1201b8ec0bf6bf"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/External.stories.tsx#Plain",
+      "value": "Plain"
+    },
+    {
+      "evidenceIds": [
+        "ev_0278bc25ea1201b8ec0bf6bf"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/External.stories.tsx#Plain",
+      "value": "src/External.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_0278bc25ea1201b8ec0bf6bf"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/External.stories.tsx#Plain",
+      "value": "storybook:src/External.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_0278bc25ea1201b8ec0bf6bf"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/External.stories.tsx#Plain",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_0278bc25ea1201b8ec0bf6bf"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/External.stories.tsx#Plain",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_a06eeb9dd8f2474c1556616d"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/IconButton.stories.tsx",
+      "value": {
+        "file": "src/IconButton.tsx",
+        "name": "IconButton",
+        "text": "IconButton",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_66630f25e8ae5eb44bc86652"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/IconButton.stories.tsx",
+      "value": "src/IconButton.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/IconButton.stories.tsx",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_66630f25e8ae5eb44bc86652"
+      ],
+      "origin": "extracted",
+      "path": "group.titleAuto",
+      "subject": "storybook:src/IconButton.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_df66f4341e9c6eb8e25f604c"
+      ],
+      "origin": "extracted",
+      "path": "story.args.label",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": "Settings"
+    },
+    {
+      "evidenceIds": [
+        "ev_df66f4341e9c6eb8e25f604c"
+      ],
+      "origin": "extracted",
+      "path": "story.args.name",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": "gear"
+    },
+    {
+      "evidenceIds": [
+        "ev_922fe2c0b4cba5a26e634265"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": "Settings"
+    },
+    {
+      "evidenceIds": [
+        "ev_922fe2c0b4cba5a26e634265"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": "src/IconButton.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_922fe2c0b4cba5a26e634265"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": "storybook:src/IconButton.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_922fe2c0b4cba5a26e634265"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_922fe2c0b4cba5a26e634265"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/IconButton.stories.tsx#Settings",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_333be2b3520d859a0277d256"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.control",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": "radio"
+    },
+    {
+      "evidenceIds": [
+        "ev_333be2b3520d859a0277d256"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.declared",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_333be2b3520d859a0277d256"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.defaultSummary",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": "lg"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_333be2b3520d859a0277d256"
+      ],
+      "origin": "extracted",
+      "path": "group.argTypes.size.options",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": [
+        "sm",
+        "lg",
+        "xl"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_8157599501a6b2deb2e0fe17"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": {
+        "file": "src/Modal.tsx",
+        "name": "Modal",
+        "text": "Modal",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_b0ca5715c3c20b094f3cd9ab"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": "src/Modal.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_b0ca5715c3c20b094f3cd9ab"
+      ],
+      "origin": "extracted",
+      "path": "group.title",
+      "subject": "storybook:src/Modal.stories.tsx",
+      "value": "Components/Modal"
+    },
+    {
+      "evidenceIds": [
+        "ev_2610a69fa0d88b7ceb12a08c"
+      ],
+      "origin": "extracted",
+      "path": "story.args.open",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_d36bca3734045d6c6db90435"
+      ],
+      "origin": "extracted",
+      "path": "story.args.size",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": "xl"
+    },
+    {
+      "evidenceIds": [
+        "ev_5014ae46d86e39624ef2d0aa"
+      ],
+      "origin": "extracted",
+      "path": "story.args.title",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": "Hi"
+    },
+    {
+      "evidenceIds": [
+        "ev_9db85cf9cc629b7b9657a6f5"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": "Open"
+    },
+    {
+      "evidenceIds": [
+        "ev_9db85cf9cc629b7b9657a6f5"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": "src/Modal.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_9db85cf9cc629b7b9657a6f5"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": "storybook:src/Modal.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_9db85cf9cc629b7b9657a6f5"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_9db85cf9cc629b7b9657a6f5"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Modal.stories.tsx#Open",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_8dedd74ea704cd73c94ac21d"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/Orphan.stories.tsx",
+      "value": {
+        "text": "Missing",
+        "unresolvedModule": "./Missing",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_4293ac7d464d3b5fe87dec2e"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/Orphan.stories.tsx",
+      "value": "src/Orphan.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/Orphan.stories.tsx",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_4293ac7d464d3b5fe87dec2e"
+      ],
+      "origin": "extracted",
+      "path": "group.title",
+      "subject": "storybook:src/Orphan.stories.tsx",
+      "value": "Orphans/Missing"
+    },
+    {
+      "evidenceIds": [
+        "ev_dc2fe7b8d00de90a9547a0e4"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Orphan.stories.tsx#One",
+      "value": "One"
+    },
+    {
+      "evidenceIds": [
+        "ev_dc2fe7b8d00de90a9547a0e4"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Orphan.stories.tsx#One",
+      "value": "src/Orphan.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_dc2fe7b8d00de90a9547a0e4"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Orphan.stories.tsx#One",
+      "value": "storybook:src/Orphan.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_dc2fe7b8d00de90a9547a0e4"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Orphan.stories.tsx#One",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_dc2fe7b8d00de90a9547a0e4"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Orphan.stories.tsx#One",
+      "value": "object"
+    },
+    {
+      "evidenceIds": [
+        "ev_386f6e8c59a5d3d9bf05ba1c"
+      ],
+      "origin": "extracted",
+      "path": "group.component",
+      "subject": "storybook:src/Select.stories.tsx",
+      "value": {
+        "file": "src/Select.tsx",
+        "name": "Select",
+        "text": "Select",
+        "via": "component"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_90bc8523623b685b64fe8061"
+      ],
+      "origin": "extracted",
+      "path": "group.file",
+      "subject": "storybook:src/Select.stories.tsx",
+      "value": "src/Select.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_c7334629524d83cf7a29c325"
+      ],
+      "origin": "extracted",
+      "path": "group.index.entries",
+      "subject": "storybook:src/Select.stories.tsx",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_90bc8523623b685b64fe8061"
+      ],
+      "origin": "extracted",
+      "path": "group.title",
+      "subject": "storybook:src/Select.stories.tsx",
+      "value": "Components/Select"
+    },
+    {
+      "evidenceIds": [
+        "ev_7dac9519f0e6719a6612e92d"
+      ],
+      "origin": "extracted",
+      "path": "story.args.options",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "completeness": "partial",
+      "evidenceIds": [
+        "ev_39fd9673103e4410f9951e6c"
+      ],
+      "origin": "extracted",
+      "path": "story.argsUnresolved",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": [
+        "getKey"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_65d05784b8f8b127bada2f28"
+      ],
+      "origin": "extracted",
+      "path": "story.exportName",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": "Basic"
+    },
+    {
+      "evidenceIds": [
+        "ev_65d05784b8f8b127bada2f28"
+      ],
+      "origin": "extracted",
+      "path": "story.file",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": "src/Select.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_65d05784b8f8b127bada2f28"
+      ],
+      "origin": "extracted",
+      "path": "story.group",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": "storybook:src/Select.stories.tsx"
+    },
+    {
+      "evidenceIds": [
+        "ev_65d05784b8f8b127bada2f28"
+      ],
+      "origin": "extracted",
+      "path": "story.hasRender",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_65d05784b8f8b127bada2f28"
+      ],
+      "origin": "extracted",
+      "path": "story.name",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": "Basic select"
+    },
+    {
+      "evidenceIds": [
+        "ev_65d05784b8f8b127bada2f28"
+      ],
+      "origin": "extracted",
+      "path": "story.shape",
+      "subject": "storybook:src/Select.stories.tsx#Basic",
+      "value": "template"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "storybook",
+      "version": "0.1.0"
+    },
+    "id": "stories-root",
+    "inputHash": "286544e6ac4ba3720f1e2be8b377e2c728dcd0a2f08f5d6f47b6c3e4097e02ae",
+    "location": ".",
+    "type": "storybook"
+  }
+}

@@ -1,0 +1,748 @@
+{
+  "capabilities": [
+    "accessibility.*",
+    "composition.*",
+    "events.*",
+    "implementations.*",
+    "module.*",
+    "name",
+    "props.*",
+    "slots.*",
+    "styling.*",
+    "variants.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "component",
+      "name": "DemoButton",
+      "ref": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_056606c2484f73bca4a77465",
+      "location": {
+        "line": 17,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "disabled = input<boolean>(false)",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_269dae8914b928835a521009",
+      "location": {
+        "line": 18,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "label = input.required<string>()",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_2d19895f499192299a7dc6f0",
+      "location": {
+        "line": 9,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_6366c9dd63ca0f3d8ce822b3",
+      "location": {
+        "line": 6,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_6be532c4b3c7124c08c9fca3",
+      "location": {
+        "line": 12,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "var(--color-action)",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#--color-action",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_aa608f5838da6e2a614b6888",
+      "location": {
+        "line": 8,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_bbc76aa19c1e4bc56d807179",
+      "location": {
+        "line": 15,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "variant = input<\"primary\" | \"secondary\" | \"ghost\">(\"primary\")",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d185247d964fe938dac2f7d0",
+      "location": {
+        "line": 16,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "size = input<\"sm\" | \"md\" | \"lg\">(\"md\")",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_d42f24c1a926987a17d07f17",
+      "location": {
+        "line": 3,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "@Component({",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "angular-ts",
+        "version": "0.1.0"
+      },
+      "id": "ev_f71bb1328104b9bc03e05d79",
+      "location": {
+        "line": 19,
+        "path": "packages/angular-ui/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "press = output<MouseEvent>()",
+      "sourceId": "angular-demo-angular-ui",
+      "sourceRef": "packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_6366c9dd63ca0f3d8ce822b3"
+      ],
+      "origin": "extracted",
+      "path": "accessibility.attributes",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        "aria-label"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_6366c9dd63ca0f3d8ce822b3"
+      ],
+      "origin": "extracted",
+      "path": "accessibility.role",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "button"
+    },
+    {
+      "evidenceIds": [
+        "ev_f71bb1328104b9bc03e05d79"
+      ],
+      "origin": "extracted",
+      "path": "events.press.declared",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_f71bb1328104b9bc03e05d79"
+      ],
+      "origin": "extracted",
+      "path": "events.press.extensions.angular.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "signal-output"
+    },
+    {
+      "evidenceIds": [
+        "ev_f71bb1328104b9bc03e05d79"
+      ],
+      "origin": "extracted",
+      "path": "events.press.extensions.angular.property",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "press"
+    },
+    {
+      "evidenceIds": [
+        "ev_f71bb1328104b9bc03e05d79"
+      ],
+      "origin": "extracted",
+      "path": "events.press.payload.text",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "MouseEvent"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.exportName",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "DemoButton"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.exports",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        {
+          "name": "DemoButton",
+          "subpath": "."
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.file",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "packages/angular-ui/src/lib/button.component.ts"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "component"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.localName",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "DemoButton"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.propsComplete",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.selector",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "demo-button"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.standalone",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.extensions.angular.templateSource",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "inline"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.framework",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "angular"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.importPath",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "@demo/angular-ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "implementations.angular.packageName",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "@demo/angular-ui"
+    },
+    {
+      "evidenceIds": [
+        "ev_d42f24c1a926987a17d07f17"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "DemoButton"
+    },
+    {
+      "evidenceIds": [
+        "ev_056606c2484f73bca4a77465"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.default",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_056606c2484f73bca4a77465"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.extensions.angular.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "signal-input"
+    },
+    {
+      "evidenceIds": [
+        "ev_056606c2484f73bca4a77465"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.extensions.angular.property",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "disabled"
+    },
+    {
+      "evidenceIds": [
+        "ev_056606c2484f73bca4a77465"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.required",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_056606c2484f73bca4a77465"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.type.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_056606c2484f73bca4a77465"
+      ],
+      "origin": "extracted",
+      "path": "props.disabled.type.text",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "boolean"
+    },
+    {
+      "evidenceIds": [
+        "ev_269dae8914b928835a521009"
+      ],
+      "origin": "extracted",
+      "path": "props.label.extensions.angular.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "signal-input"
+    },
+    {
+      "evidenceIds": [
+        "ev_269dae8914b928835a521009"
+      ],
+      "origin": "extracted",
+      "path": "props.label.extensions.angular.property",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "label"
+    },
+    {
+      "evidenceIds": [
+        "ev_269dae8914b928835a521009"
+      ],
+      "origin": "extracted",
+      "path": "props.label.required",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_269dae8914b928835a521009"
+      ],
+      "origin": "extracted",
+      "path": "props.label.type.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "string"
+    },
+    {
+      "evidenceIds": [
+        "ev_269dae8914b928835a521009"
+      ],
+      "origin": "extracted",
+      "path": "props.label.type.text",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "string"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.allowedValues",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.default",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.extensions.angular.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "signal-input"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.extensions.angular.property",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "size"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.required",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "props.size.type.text",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "\"sm\" | \"md\" | \"lg\""
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.allowedValues",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.default",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.extensions.angular.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "signal-input"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.extensions.angular.property",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "variant"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.required",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.type.kind",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "enum"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "props.variant.type.text",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "\"primary\" | \"secondary\" | \"ghost\""
+    },
+    {
+      "evidenceIds": [
+        "ev_2d19895f499192299a7dc6f0"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.declared",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_2d19895f499192299a7dc6f0"
+      ],
+      "origin": "extracted",
+      "path": "slots.default.extensions.angular.source",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "ng-content"
+    },
+    {
+      "evidenceIds": [
+        "ev_aa608f5838da6e2a614b6888"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.declared",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": true
+    },
+    {
+      "evidenceIds": [
+        "ev_aa608f5838da6e2a614b6888"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.extensions.angular.select",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "[slot=icon]"
+    },
+    {
+      "evidenceIds": [
+        "ev_aa608f5838da6e2a614b6888"
+      ],
+      "origin": "extracted",
+      "path": "slots.icon.extensions.angular.source",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "ng-content"
+    },
+    {
+      "evidenceIds": [
+        "ev_6be532c4b3c7124c08c9fca3"
+      ],
+      "origin": "extracted",
+      "path": "styling.cssVariables",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        "--color-action"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.default",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "md"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.extensions.angular.source",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "prop-union"
+    },
+    {
+      "evidenceIds": [
+        "ev_d185247d964fe938dac2f7d0"
+      ],
+      "origin": "extracted",
+      "path": "variants.size.values",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.default",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.extensions.angular.source",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": "prop-union"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbc76aa19c1e4bc56d807179"
+      ],
+      "origin": "extracted",
+      "path": "variants.variant.values",
+      "subject": "angular:packages/angular-ui/src/lib/button.component.ts#DemoButton",
+      "value": [
+        "primary",
+        "secondary",
+        "ghost"
+      ]
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "angular",
+      "version": "0.1.0"
+    },
+    "id": "angular-demo-angular-ui",
+    "inputHash": "5838e0e45cb0b65619814f0d3c3dafb14890f8f14808cec3b011331639100a55",
+    "location": "packages/angular-ui",
+    "type": "angular",
+    "version": {
+      "kind": "package-version",
+      "value": "1.0.0"
+    }
+  }
+}

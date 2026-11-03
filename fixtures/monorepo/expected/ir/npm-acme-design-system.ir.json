@@ -1,0 +1,142 @@
+{
+  "capabilities": [
+    "buildTools",
+    "entryPoints",
+    "export.*",
+    "frameworks",
+    "package.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "package",
+      "name": "acme-design-system",
+      "ref": "package:acme-design-system"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_5a4c321b1939e0ce52d57904",
+      "location": {
+        "path": "package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-design-system",
+      "sourceRef": "package.json",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "buildTools",
+      "subject": "package:acme-design-system",
+      "value": [
+        {
+          "evidence": [
+            {
+              "ref": "turbo.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "turbo",
+              "type": "dependency"
+            }
+          ],
+          "name": "turbo"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "entryPoints",
+      "subject": "package:acme-design-system",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "frameworks",
+      "subject": "package:acme-design-system",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "package.directory",
+      "subject": "package:acme-design-system",
+      "value": "."
+    },
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "package.manager",
+      "subject": "package:acme-design-system",
+      "value": {
+        "evidence": [
+          "package.json#packageManager",
+          "lockfile:pnpm-lock.yaml"
+        ],
+        "name": "pnpm",
+        "version": "10.0.0"
+      }
+    },
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "package.name",
+      "subject": "package:acme-design-system",
+      "value": "acme-design-system"
+    },
+    {
+      "evidenceIds": [
+        "ev_5a4c321b1939e0ce52d57904"
+      ],
+      "origin": "extracted",
+      "path": "package.private",
+      "subject": "package:acme-design-system",
+      "value": true
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-npm",
+      "version": "0.1.0"
+    },
+    "id": "npm-acme-design-system",
+    "inputHash": "209c6ff9f070e9c17210d385e71240cabf2e42cabb8d36cae54a05c0ba7ce64e",
+    "location": ".",
+    "type": "npm"
+  }
+}

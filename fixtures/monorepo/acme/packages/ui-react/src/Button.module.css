@@ -1,0 +1,4 @@
+.root {
+  --acme-button-bg: var(--color-action-primary);
+  --acme-button-padding: var(--space-md);
+}

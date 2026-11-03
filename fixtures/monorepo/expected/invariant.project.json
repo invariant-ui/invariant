@@ -1,0 +1,1126 @@
+{
+  "diagnostics": [
+    {
+      "code": "discovery.storybook-dynamic-config",
+      "location": {
+        "path": "packages/ui-react/.storybook/main.ts"
+      },
+      "message": "Storybook 'viteFinal' in packages/ui-react/.storybook/main.ts is not statically determinable",
+      "severity": "warning"
+    },
+    {
+      "code": "discovery.entry-pattern-unsupported",
+      "location": {
+        "path": "packages/ui-react/package.json"
+      },
+      "message": "Entry pattern ./icons/* in package:@acme/ui-react is not expanded",
+      "severity": "info"
+    }
+  ],
+  "discoveryVersion": "1.0.0",
+  "docFiles": [
+    {
+      "contentHash": "893e480d22adc89617b51a29193b6ea79d5f5c2a2faa8003fd7f76661ff15b35",
+      "headings": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "Acme Design System"
+        }
+      ],
+      "kind": "readme",
+      "lineCount": 4,
+      "package": "package:acme-design-system",
+      "path": "README.md",
+      "title": "Acme Design System"
+    },
+    {
+      "contentHash": "8cb72d14455bbc7fdc27a687ac163d97b3f9340226e7e30867b7dd2cb0ac50cb",
+      "headings": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "Getting started"
+        },
+        {
+          "level": 2,
+          "line": 10,
+          "text": "Usage"
+        }
+      ],
+      "kind": "markdown",
+      "lineCount": 11,
+      "package": "package:@acme/docs",
+      "path": "apps/docs/docs/getting-started.md",
+      "title": "Getting started"
+    },
+    {
+      "contentHash": "edc26c750ce580f9d475d2f81c71a7e3d6687b919733964d6709fa22a3419a20",
+      "headings": [
+        {
+          "level": 2,
+          "line": 7,
+          "text": "Sizes"
+        }
+      ],
+      "kind": "markdown",
+      "lineCount": 10,
+      "package": "package:@acme/docs",
+      "path": "apps/docs/docs/guidelines/buttons.md",
+      "title": "Button guidelines"
+    },
+    {
+      "contentHash": "ceec0932c40db4e1ad6de044a27c1119dde592b8dd2099e0989c323a00ffbde8",
+      "headings": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "@acme/tokens"
+        }
+      ],
+      "kind": "readme",
+      "lineCount": 4,
+      "package": "package:@acme/tokens",
+      "path": "packages/tokens/README.md",
+      "title": "@acme/tokens"
+    },
+    {
+      "contentHash": "19246c3de3402a3ffd97504b9a5d83da857c215220c7a01ad23fbd8e78d09029",
+      "headings": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "@acme/ui-react"
+        }
+      ],
+      "kind": "readme",
+      "lineCount": 4,
+      "package": "package:@acme/ui-react",
+      "path": "packages/ui-react/README.md",
+      "title": "@acme/ui-react"
+    },
+    {
+      "contentHash": "cf15c1fc84fd688875e7b6935a64c1f41f6dcdded198c3415a571257f1c5e8e3",
+      "headings": [
+        {
+          "level": 1,
+          "line": 5,
+          "text": "Button usage"
+        }
+      ],
+      "kind": "mdx",
+      "lineCount": 8,
+      "package": "package:@acme/ui-react",
+      "path": "packages/ui-react/src/Button.mdx",
+      "title": "Button usage"
+    }
+  ],
+  "graph": {
+    "edges": [
+      {
+        "from": "package:@acme/docs",
+        "to": "doc:apps/docs/docs/getting-started.md",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/docs",
+        "to": "doc:apps/docs/docs/guidelines/buttons.md",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/docs",
+        "to": "package:@acme/ui-react",
+        "type": "depends-on"
+      },
+      {
+        "from": "package:@acme/tokens",
+        "to": "doc:packages/tokens/README.md",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/tokens",
+        "to": "tokens:packages/tokens/src/tokens.css",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/tokens",
+        "to": "tokens:packages/tokens/src/tokens.json",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/tokens",
+        "to": "tokens:packages/tokens/style-dictionary.config.json",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui-angular",
+        "to": "tool:angular-cli",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-angular",
+        "to": "tool:ng-packagr",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-angular",
+        "to": "tool:typescript",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-angular",
+        "to": "package:@acme/tokens",
+        "type": "depends-on"
+      },
+      {
+        "from": "package:@acme/ui-angular",
+        "to": "framework:angular",
+        "type": "uses-framework"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "tool:typescript",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "tool:vite",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "storybook:packages/ui-react",
+        "type": "configured-by"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "doc:packages/ui-react/README.md",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "doc:packages/ui-react/src/Button.mdx",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "tokens:packages/ui-react/src/Button.module.css",
+        "type": "contains"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "package:@acme/tokens",
+        "type": "depends-on"
+      },
+      {
+        "from": "package:@acme/ui-react",
+        "to": "framework:react",
+        "type": "uses-framework"
+      },
+      {
+        "from": "package:@acme/ui-vue",
+        "to": "tool:typescript",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-vue",
+        "to": "tool:vite",
+        "type": "built-with"
+      },
+      {
+        "from": "package:@acme/ui-vue",
+        "to": "package:@acme/tokens",
+        "type": "depends-on"
+      },
+      {
+        "from": "package:@acme/ui-vue",
+        "to": "framework:vue",
+        "type": "uses-framework"
+      },
+      {
+        "from": "package:acme-design-system",
+        "to": "tool:turbo",
+        "type": "built-with"
+      },
+      {
+        "from": "package:acme-design-system",
+        "to": "tool:typescript",
+        "type": "built-with"
+      },
+      {
+        "from": "package:acme-design-system",
+        "to": "doc:README.md",
+        "type": "contains"
+      },
+      {
+        "from": "storybook:packages/ui-react",
+        "to": "package:@acme/ui-react",
+        "type": "documents",
+        "weight": 2
+      }
+    ],
+    "nodes": [
+      {
+        "id": "doc:README.md",
+        "label": "README.md",
+        "type": "doc-file"
+      },
+      {
+        "id": "doc:apps/docs/docs/getting-started.md",
+        "label": "apps/docs/docs/getting-started.md",
+        "type": "doc-file"
+      },
+      {
+        "id": "doc:apps/docs/docs/guidelines/buttons.md",
+        "label": "apps/docs/docs/guidelines/buttons.md",
+        "type": "doc-file"
+      },
+      {
+        "id": "doc:packages/tokens/README.md",
+        "label": "packages/tokens/README.md",
+        "type": "doc-file"
+      },
+      {
+        "id": "doc:packages/ui-react/README.md",
+        "label": "packages/ui-react/README.md",
+        "type": "doc-file"
+      },
+      {
+        "id": "doc:packages/ui-react/src/Button.mdx",
+        "label": "packages/ui-react/src/Button.mdx",
+        "type": "doc-file"
+      },
+      {
+        "id": "framework:angular",
+        "label": "angular",
+        "type": "framework"
+      },
+      {
+        "id": "framework:react",
+        "label": "react",
+        "type": "framework"
+      },
+      {
+        "id": "framework:vue",
+        "label": "vue",
+        "type": "framework"
+      },
+      {
+        "id": "package:@acme/docs",
+        "label": "@acme/docs",
+        "type": "package"
+      },
+      {
+        "id": "package:@acme/tokens",
+        "label": "@acme/tokens",
+        "type": "package"
+      },
+      {
+        "id": "package:@acme/ui-angular",
+        "label": "@acme/ui-angular",
+        "type": "package"
+      },
+      {
+        "id": "package:@acme/ui-react",
+        "label": "@acme/ui-react",
+        "type": "package"
+      },
+      {
+        "id": "package:@acme/ui-vue",
+        "label": "@acme/ui-vue",
+        "type": "package"
+      },
+      {
+        "id": "package:acme-design-system",
+        "label": "acme-design-system",
+        "type": "package"
+      },
+      {
+        "id": "storybook:packages/ui-react",
+        "label": "packages/ui-react/.storybook/main.ts",
+        "type": "storybook-config"
+      },
+      {
+        "id": "tokens:packages/tokens/src/tokens.css",
+        "label": "packages/tokens/src/tokens.css",
+        "type": "token-file"
+      },
+      {
+        "id": "tokens:packages/tokens/src/tokens.json",
+        "label": "packages/tokens/src/tokens.json",
+        "type": "token-file"
+      },
+      {
+        "id": "tokens:packages/tokens/style-dictionary.config.json",
+        "label": "packages/tokens/style-dictionary.config.json",
+        "type": "token-file"
+      },
+      {
+        "id": "tokens:packages/ui-react/src/Button.module.css",
+        "label": "packages/ui-react/src/Button.module.css",
+        "type": "token-file"
+      },
+      {
+        "id": "tool:angular-cli",
+        "label": "angular-cli",
+        "type": "build-tool"
+      },
+      {
+        "id": "tool:ng-packagr",
+        "label": "ng-packagr",
+        "type": "build-tool"
+      },
+      {
+        "id": "tool:turbo",
+        "label": "turbo",
+        "type": "build-tool"
+      },
+      {
+        "id": "tool:typescript",
+        "label": "typescript",
+        "type": "build-tool"
+      },
+      {
+        "id": "tool:vite",
+        "label": "vite",
+        "type": "build-tool"
+      }
+    ]
+  },
+  "packageManager": {
+    "evidence": [
+      "package.json#packageManager",
+      "lockfile:pnpm-lock.yaml"
+    ],
+    "name": "pnpm",
+    "version": "10.0.0"
+  },
+  "packages": [
+    {
+      "buildTools": [
+        {
+          "evidence": [
+            {
+              "ref": "turbo.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "turbo",
+              "type": "dependency"
+            }
+          ],
+          "name": "turbo"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "devDependencies",
+          "name": "turbo",
+          "range": "^2.0.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "typescript",
+          "range": "^5.6.0"
+        }
+      ],
+      "dir": ".",
+      "entryPoints": [],
+      "frameworks": [],
+      "id": "package:acme-design-system",
+      "manifest": {
+        "contentHash": "d6cea4a8ad1d30170c014bc0e27e2853c9a1f7aeeeeda6442696d530112c2a9f",
+        "path": "package.json"
+      },
+      "name": "acme-design-system",
+      "private": true,
+      "scripts": [
+        "build",
+        "test"
+      ]
+    },
+    {
+      "buildTools": [],
+      "dependencies": [
+        {
+          "kind": "dependencies",
+          "name": "@acme/ui-react",
+          "range": "workspace:*"
+        }
+      ],
+      "dir": "apps/docs",
+      "entryPoints": [],
+      "frameworks": [],
+      "id": "package:@acme/docs",
+      "manifest": {
+        "contentHash": "3636ac48d0970271187c8caedd1c792fc8b872193693a2c8ee7e287a86025ec5",
+        "path": "apps/docs/package.json"
+      },
+      "name": "@acme/docs",
+      "private": true,
+      "scripts": []
+    },
+    {
+      "buildTools": [],
+      "dependencies": [
+        {
+          "kind": "devDependencies",
+          "name": "style-dictionary",
+          "range": "^4.0.0"
+        }
+      ],
+      "dir": "packages/tokens",
+      "entryPoints": [
+        {
+          "condition": "default",
+          "exports": [],
+          "exportsComplete": false,
+          "file": "packages/tokens/src/tokens.css",
+          "parsedFiles": [
+            {
+              "contentHash": "67135e7c3df8f80eae248a8192282fd954058e71b3afb232c6325d08f68bac1e",
+              "path": "packages/tokens/src/tokens.css"
+            }
+          ],
+          "resolution": "declared",
+          "subpath": "./css",
+          "target": "./src/tokens.css"
+        },
+        {
+          "condition": "default",
+          "exports": [],
+          "exportsComplete": false,
+          "file": "packages/tokens/src/tokens.json",
+          "parsedFiles": [
+            {
+              "contentHash": "0ba0ef5dc09202d4879734928a95b410a94aacef112aa8de86a28b51d096f633",
+              "path": "packages/tokens/src/tokens.json"
+            }
+          ],
+          "resolution": "declared",
+          "subpath": "./tokens.json",
+          "target": "./src/tokens.json"
+        }
+      ],
+      "frameworks": [],
+      "id": "package:@acme/tokens",
+      "manifest": {
+        "contentHash": "e714465ac32ac002bffe6ab1c1c016626829c64a19df51034f33977fe9be1496",
+        "path": "packages/tokens/package.json"
+      },
+      "name": "@acme/tokens",
+      "private": false,
+      "scripts": [],
+      "version": "1.2.0"
+    },
+    {
+      "buildTools": [
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-angular/angular.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "@angular/cli",
+              "type": "dependency"
+            }
+          ],
+          "name": "angular-cli"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "ng-packagr",
+              "type": "dependency"
+            }
+          ],
+          "name": "ng-packagr"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "dependencies",
+          "name": "@acme/tokens",
+          "range": "workspace:*"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "@angular/cli",
+          "range": "^18.0.0"
+        },
+        {
+          "kind": "peerDependencies",
+          "name": "@angular/core",
+          "range": "^18.0.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "ng-packagr",
+          "range": "^18.0.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "typescript",
+          "range": "^5.5.0"
+        }
+      ],
+      "dir": "packages/ui-angular",
+      "entryPoints": [
+        {
+          "condition": "typings",
+          "exports": [
+            {
+              "file": "packages/ui-angular/src/lib/button.component.ts",
+              "kind": "value",
+              "line": 3,
+              "name": "AcmeButton",
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/ui-angular/src/public-api.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "bd658ed8638755ed2b6384266122864180746653bd80c65861988ac2c6621c58",
+              "path": "packages/ui-angular/src/lib/button.component.ts"
+            },
+            {
+              "contentHash": "ae13e19bf83ea52d5dd2ab524c3857c020f22aba2e2f368ade4dc97f39fea852",
+              "path": "packages/ui-angular/src/public-api.ts"
+            }
+          ],
+          "resolution": "conventional",
+          "subpath": ".",
+          "target": "index.d.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^18.0.0",
+          "dependencyKind": "peerDependencies",
+          "line": 7,
+          "name": "angular",
+          "package": "@angular/core"
+        }
+      ],
+      "id": "package:@acme/ui-angular",
+      "manifest": {
+        "contentHash": "8bd70ebc44e366d739bd9ed2384ce6f337d75b2c6512343e4e9ad448d3b5290d",
+        "path": "packages/ui-angular/package.json"
+      },
+      "name": "@acme/ui-angular",
+      "private": false,
+      "scripts": [],
+      "version": "2.2.0"
+    },
+    {
+      "buildTools": [
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-react/tsconfig.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-react/vite.config.ts",
+              "type": "config-file"
+            },
+            {
+              "ref": "vite",
+              "type": "dependency"
+            }
+          ],
+          "name": "vite"
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "dependencies",
+          "name": "@acme/tokens",
+          "range": "workspace:*"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "@storybook/react-vite",
+          "range": "^8.4.0"
+        },
+        {
+          "kind": "peerDependencies",
+          "name": "react",
+          "range": "^18.2.0"
+        },
+        {
+          "kind": "peerDependencies",
+          "name": "react-dom",
+          "range": "^18.2.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "storybook",
+          "range": "^8.4.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "typescript",
+          "range": "^5.6.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "vite",
+          "range": "^5.4.0"
+        }
+      ],
+      "dir": "packages/ui-react",
+      "entryPoints": [
+        {
+          "condition": "types",
+          "exports": [
+            {
+              "file": "packages/ui-react/src/index.ts",
+              "kind": "value",
+              "line": 3,
+              "name": "AcmeIcon",
+              "reexportOf": {
+                "external": false,
+                "module": "./Icon"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-react/src/index.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-react/src/index.ts",
+              "kind": "type",
+              "line": 2,
+              "name": "ButtonProps",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": true
+            },
+            {
+              "file": "packages/ui-react/src/index.ts",
+              "kind": "value",
+              "line": 5,
+              "name": "VERSION",
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-react/src/index.ts",
+              "kind": "default",
+              "line": 6,
+              "name": "default",
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-react/src/hooks/useMedia.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "useMedia",
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-react/src/hooks/index.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "useTheme",
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/ui-react/src/index.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "ebd9039f9af6dd7132468b7f5f6f679648d52212af642f5ca202521d395ceb83",
+              "path": "packages/ui-react/src/Button.tsx"
+            },
+            {
+              "contentHash": "b332c5036d370725c8e21807584e9d794d91d47b9ad0b78540dff78ad4b06f91",
+              "path": "packages/ui-react/src/Icon.tsx"
+            },
+            {
+              "contentHash": "bee98d2c647f736569e8f71070437dbd7b1a39f96d041bdaddda65ef005479f6",
+              "path": "packages/ui-react/src/hooks/index.ts"
+            },
+            {
+              "contentHash": "461aca6bf6a5c250d3f86c13244cc6947e1f60da864f61299067c744f7f9a657",
+              "path": "packages/ui-react/src/hooks/useMedia.ts"
+            },
+            {
+              "contentHash": "c61e8ff7819eeb2a5471cad9dac3c274d5929e8e8f05f950d1fc9596bc483744",
+              "path": "packages/ui-react/src/index.ts"
+            }
+          ],
+          "resolution": "mapped",
+          "subpath": ".",
+          "target": "./dist/index.d.ts"
+        },
+        {
+          "condition": "types",
+          "exports": [
+            {
+              "file": "packages/ui-react/src/button.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-react/src/button.ts",
+              "kind": "type",
+              "line": 2,
+              "name": "ButtonProps",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button"
+              },
+              "typeOnly": true
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/ui-react/src/button.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "ebd9039f9af6dd7132468b7f5f6f679648d52212af642f5ca202521d395ceb83",
+              "path": "packages/ui-react/src/Button.tsx"
+            },
+            {
+              "contentHash": "7efb98861c89092197cc14524f98658669c5ac8296b9da056af502067b2a5694",
+              "path": "packages/ui-react/src/button.ts"
+            }
+          ],
+          "resolution": "mapped",
+          "subpath": "./button",
+          "target": "./dist/button.d.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^18.2.0",
+          "dependencyKind": "peerDependencies",
+          "line": 12,
+          "name": "react",
+          "package": "react"
+        }
+      ],
+      "id": "package:@acme/ui-react",
+      "manifest": {
+        "contentHash": "79146062cb731a0de4f2de17b90f97693af75c16f9b71b3ce8a88648db68ef08",
+        "path": "packages/ui-react/package.json"
+      },
+      "name": "@acme/ui-react",
+      "private": false,
+      "scripts": [
+        "build",
+        "storybook",
+        "test"
+      ],
+      "version": "2.3.1"
+    },
+    {
+      "buildTools": [
+        {
+          "evidence": [
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-vue/vite.config.ts",
+              "type": "config-file"
+            },
+            {
+              "ref": "vite",
+              "type": "dependency"
+            }
+          ],
+          "name": "vite"
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "dependencies",
+          "name": "@acme/tokens",
+          "range": "workspace:*"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "@vitejs/plugin-vue",
+          "range": "^5.0.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "typescript",
+          "range": "^5.6.0"
+        },
+        {
+          "kind": "devDependencies",
+          "name": "vite",
+          "range": "^5.4.0"
+        },
+        {
+          "kind": "peerDependencies",
+          "name": "vue",
+          "range": "^3.4.0"
+        }
+      ],
+      "dir": "packages/ui-vue",
+      "entryPoints": [
+        {
+          "condition": "default",
+          "exports": [
+            {
+              "file": "packages/ui-vue/src/index.ts",
+              "kind": "default",
+              "line": 1,
+              "name": "Button",
+              "reexportOf": {
+                "external": false,
+                "module": "./Button.vue"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-vue/src/index.ts",
+              "kind": "default",
+              "line": 2,
+              "name": "Icon",
+              "reexportOf": {
+                "external": false,
+                "module": "./Icon.vue"
+              },
+              "typeOnly": false
+            },
+            {
+              "file": "packages/ui-vue/src/composables/index.ts",
+              "kind": "value",
+              "line": 1,
+              "name": "useToggle",
+              "typeOnly": false
+            }
+          ],
+          "exportsComplete": true,
+          "file": "packages/ui-vue/src/index.ts",
+          "parsedFiles": [
+            {
+              "contentHash": "08695900ab763fcb00e389fdce8c339b1854bc1816e0722948ed763c8cedc706",
+              "path": "packages/ui-vue/src/composables/index.ts"
+            },
+            {
+              "contentHash": "bfcdaa2a98cf63642b20e46bea83895d3ed570a18b9cf97bf9822c56d1f0d148",
+              "path": "packages/ui-vue/src/index.ts"
+            }
+          ],
+          "resolution": "declared",
+          "subpath": ".",
+          "target": "./src/index.ts"
+        }
+      ],
+      "frameworks": [
+        {
+          "declaredRange": "^3.4.0",
+          "dependencyKind": "peerDependencies",
+          "line": 7,
+          "name": "vue",
+          "package": "vue"
+        }
+      ],
+      "id": "package:@acme/ui-vue",
+      "manifest": {
+        "contentHash": "b18c59d2b8ebbc3599d869d2f1c0af36b373931b91fbf9e854f5599f1906523a",
+        "path": "packages/ui-vue/package.json"
+      },
+      "name": "@acme/ui-vue",
+      "private": false,
+      "scripts": [],
+      "version": "2.1.0"
+    }
+  ],
+  "stats": {
+    "filesScanned": 38,
+    "truncated": false
+  },
+  "storybooks": [
+    {
+      "addons": [
+        "@storybook/addon-a11y",
+        "@storybook/addon-essentials"
+      ],
+      "configHash": "800bb84c3058cc0ec328c6ab6c89a3cfe5a06f86db71ac73344f9c45fa6b3764",
+      "configPath": "packages/ui-react/.storybook/main.ts",
+      "directory": "packages/ui-react",
+      "dynamicProperties": [
+        "viteFinal"
+      ],
+      "framework": "@storybook/react-vite",
+      "id": "storybook:packages/ui-react",
+      "package": "package:@acme/ui-react",
+      "staticDirs": [
+        "../public"
+      ],
+      "stories": [
+        {
+          "pattern": "../src/**/*.mdx"
+        },
+        {
+          "pattern": "../src/**/*.stories.@(ts|tsx)"
+        }
+      ],
+      "storyFileCount": 2,
+      "storyFiles": [
+        "packages/ui-react/src/Button.mdx",
+        "packages/ui-react/src/Button.stories.tsx"
+      ],
+      "storyFilesTruncated": false,
+      "version": {
+        "declaredRange": "^8.4.0",
+        "package": "storybook"
+      }
+    }
+  ],
+  "tokenFiles": [
+    {
+      "contentHash": "67135e7c3df8f80eae248a8192282fd954058e71b3afb232c6325d08f68bac1e",
+      "cssVariables": [
+        {
+          "line": 3,
+          "name": "--color-brand",
+          "scope": ":root",
+          "value": "#0057ff"
+        },
+        {
+          "aliasOf": "--color-brand",
+          "line": 4,
+          "name": "--color-action-primary",
+          "scope": ":root",
+          "value": "var(--color-brand)"
+        },
+        {
+          "line": 5,
+          "name": "--space-md",
+          "scope": ":root",
+          "value": "16px"
+        },
+        {
+          "line": 6,
+          "name": "--font-sans",
+          "scope": ":root",
+          "value": "\"Inter\", sans-serif"
+        },
+        {
+          "line": 7,
+          "name": "--shadow-card",
+          "scope": ":root",
+          "value": "0 1px 2px rgb(0 0 0 / 12%)"
+        },
+        {
+          "line": 12,
+          "name": "--color-brand",
+          "scope": "[data-theme=\"dark\"]",
+          "value": "#4d8dff"
+        },
+        {
+          "line": 17,
+          "name": "--color-brand",
+          "scope": "@media (prefers-color-scheme: dark) :root",
+          "value": "#5c9aff"
+        }
+      ],
+      "kind": "css-custom-properties",
+      "package": "package:@acme/tokens",
+      "path": "packages/tokens/src/tokens.css"
+    },
+    {
+      "contentHash": "0ba0ef5dc09202d4879734928a95b410a94aacef112aa8de86a28b51d096f633",
+      "format": "dtcg-like",
+      "kind": "json-tokens",
+      "package": "package:@acme/tokens",
+      "path": "packages/tokens/src/tokens.json",
+      "tokenCount": 3
+    },
+    {
+      "contentHash": "ca1349f790e952c6be1e9cd7277ca5f8cdf381f63012cfe4fbc8e132048e5f04",
+      "kind": "style-dictionary-config",
+      "package": "package:@acme/tokens",
+      "path": "packages/tokens/style-dictionary.config.json"
+    },
+    {
+      "contentHash": "32c7691a2abb818753278333dc8624beac9b9c1e62c24d5725cff999df7f8642",
+      "cssVariables": [
+        {
+          "aliasOf": "--color-action-primary",
+          "line": 2,
+          "name": "--acme-button-bg",
+          "scope": ".root",
+          "value": "var(--color-action-primary)"
+        },
+        {
+          "aliasOf": "--space-md",
+          "line": 3,
+          "name": "--acme-button-padding",
+          "scope": ".root",
+          "value": "var(--space-md)"
+        }
+      ],
+      "kind": "css-custom-properties",
+      "package": "package:@acme/ui-react",
+      "path": "packages/ui-react/src/Button.module.css"
+    }
+  ],
+  "workspaces": {
+    "kind": "pnpm-workspace",
+    "patterns": [
+      "packages/*",
+      "apps/*",
+      "!packages/legacy"
+    ],
+    "source": "pnpm-workspace.yaml"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "policies": [
+    {
+      "id": "icon-buttons-need-labels",
+      "name": "Icon-only buttons need an accessible name",
+      "statement": "A button without text content must have aria-label or aria-labelledby.",
+      "severity": "error",
+      "approval": { "approvedBy": "Jane Doe", "approvedAt": "2026-01-05T00:00:00.000Z", "role": "design-system lead", "reference": "RFC-7" },
+      "rule": { "kind": "require-attribute", "components": ["Button"], "anyOf": ["aria-label", "aria-labelledby"], "unlessChildren": true, "category": "accessibility" }
+    },
+    {
+      "id": "card-structure",
+      "name": "Cards contain only headers and bodies",
+      "statement": "Cards are built from Card.Header and Card.Body only.",
+      "severity": "error",
+      "approval": { "approvedBy": "Jane Doe", "approvedAt": "2026-01-05T00:00:00.000Z" },
+      "rule": { "kind": "allowed-children", "container": "Card", "children": ["Card.Header", "Card.Body"], "category": "layout" }
+    },
+    {
+      "id": "header-inside-card",
+      "name": "Card headers live in cards",
+      "statement": "Card.Header may only appear inside Card.",
+      "severity": "warning",
+      "enforcement": "warn",
+      "approval": { "approvedBy": "Jane Doe", "approvedAt": "2026-01-05T00:00:00.000Z" },
+      "rule": { "kind": "required-parent", "component": "Card.Header", "parents": ["Card"] }
+    },
+    {
+      "id": "retired-color-token",
+      "name": "The old brand color token is retired",
+      "statement": "--color-old must not be used.",
+      "severity": "error",
+      "approval": { "approvedBy": "Jane Doe", "approvedAt": "2026-01-05T00:00:00.000Z" },
+      "rule": { "kind": "forbid-token", "tokens": ["--color-old"], "replacedBy": "--color-brand" }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@invariant/compiler-storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@invariant/compiler-core": "workspace:*",
+    "@invariant/compiler-ir": "workspace:*",
+    "@invariant/contract": "workspace:*",
+    "@invariant/diagnostics": "workspace:*",
+    "@invariant/shared": "workspace:*",
+    "typescript": "5.9.3"
+  }
+}

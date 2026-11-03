@@ -1,0 +1,9 @@
+{
+  "name": "@acme/ui-angular",
+  "version": "2.2.0",
+  "module": "fesm2022/acme-ui-angular.mjs",
+  "typings": "index.d.ts",
+  "dependencies": { "@acme/tokens": "workspace:*" },
+  "peerDependencies": { "@angular/core": "^18.0.0" },
+  "devDependencies": { "@angular/cli": "^18.0.0", "ng-packagr": "^18.0.0", "typescript": "^5.5.0" }
+}

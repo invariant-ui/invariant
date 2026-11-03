@@ -1,0 +1,133 @@
+{
+  "capabilities": [
+    "buildTools",
+    "entryPoints",
+    "export.*",
+    "frameworks",
+    "package.*"
+  ],
+  "completeness": "partial",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "package",
+      "name": "@acme/tokens",
+      "ref": "package:@acme/tokens"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_bbd18b10f1fdba351e149db4",
+      "location": {
+        "path": "packages/tokens/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-tokens",
+      "sourceRef": "packages/tokens/package.json",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "buildTools",
+      "subject": "package:@acme/tokens",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "entryPoints",
+      "subject": "package:@acme/tokens",
+      "value": [
+        {
+          "condition": "default",
+          "exportsComplete": false,
+          "file": "packages/tokens/src/tokens.css",
+          "resolution": "declared",
+          "subpath": "./css",
+          "target": "./src/tokens.css"
+        },
+        {
+          "condition": "default",
+          "exportsComplete": false,
+          "file": "packages/tokens/src/tokens.json",
+          "resolution": "declared",
+          "subpath": "./tokens.json",
+          "target": "./src/tokens.json"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "frameworks",
+      "subject": "package:@acme/tokens",
+      "value": []
+    },
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "package.directory",
+      "subject": "package:@acme/tokens",
+      "value": "packages/tokens"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "package.name",
+      "subject": "package:@acme/tokens",
+      "value": "@acme/tokens"
+    },
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "package.private",
+      "subject": "package:@acme/tokens",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_bbd18b10f1fdba351e149db4"
+      ],
+      "origin": "extracted",
+      "path": "package.version",
+      "subject": "package:@acme/tokens",
+      "value": "1.2.0"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-npm",
+      "version": "0.1.0"
+    },
+    "id": "npm-acme-tokens",
+    "inputHash": "ad2ee7917b4d90e7f9e30d6f89c84d068831af9def468d8e5f30598a3be04950",
+    "location": "packages/tokens",
+    "type": "npm",
+    "version": {
+      "kind": "package-version",
+      "value": "1.2.0"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Invariant: the design system contract for AI agents">
+  <title>Invariant</title>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#222733" stroke-width="1"/></pattern>
+    <radialGradient id="fade" cx="50%" cy="35%" r="65%"><stop offset="0.2" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+    <mask id="m"><rect width="1200" height="630" fill="url(#fade)"/></mask>
+    <radialGradient id="o1" cx="0.5" cy="0.5" r="0.5"><stop stop-color="#7c8cff" stop-opacity=".45"/><stop offset="1" stop-color="#7c8cff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="o2" cx="0.5" cy="0.5" r="0.5"><stop stop-color="#5eead4" stop-opacity=".35"/><stop offset="1" stop-color="#5eead4" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b0d12"/>
+  <rect width="1200" height="630" fill="url(#grid)" mask="url(#m)"/>
+  <circle cx="230" cy="90" r="320" fill="url(#o1)"/>
+  <circle cx="1000" cy="150" r="300" fill="url(#o2)"/>
+  <text x="92" y="236" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="132" font-weight="700" letter-spacing="-2.6" textLength="640" lengthAdjust="spacingAndGlyphs" fill="#e8eaf0">invariant<tspan fill="#7c8cff">.</tspan></text>
+  <text x="96" y="372" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="58" font-weight="700" letter-spacing="-1.5" fill="#e8eaf0">The design system contract</text>
+  <text x="96" y="442" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="58" font-weight="700" letter-spacing="-1.5" fill="#5eead4">for AI agents.</text>
+  <text x="96" y="530" font-family="ui-monospace, Menlo, monospace" font-size="26" fill="#8d95a6">Compile. Verify. Review. Connect.</text>
+</svg>

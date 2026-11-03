@@ -1,0 +1,174 @@
+{
+  "capabilities": [
+    "extensions.css.*",
+    "file.*",
+    "name"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "token",
+      "name": "--acme-button-bg",
+      "ref": "css:packages/ui-react/src/Button.module.css#--acme-button-bg@.root"
+    },
+    {
+      "kind": "token",
+      "name": "--acme-button-padding",
+      "ref": "css:packages/ui-react/src/Button.module.css#--acme-button-padding@.root"
+    },
+    {
+      "kind": "token-file",
+      "name": "packages/ui-react/src/Button.module.css",
+      "ref": "token-file:packages/ui-react/src/Button.module.css"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_03470e6ab362e7e6a72abaa4",
+      "location": {
+        "path": "packages/ui-react/src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "tokens-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/Button.module.css",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_1a4212573cfeb3d3cc0ffb83",
+      "location": {
+        "line": 3,
+        "path": "packages/ui-react/src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--acme-button-padding: var(--space-md);",
+      "sourceId": "tokens-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/Button.module.css#--acme-button-padding",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-tokens",
+        "version": "0.1.0"
+      },
+      "id": "ev_29085811a9cd7880fc925eae",
+      "location": {
+        "line": 2,
+        "path": "packages/ui-react/src/Button.module.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--acme-button-bg: var(--color-action-primary);",
+      "sourceId": "tokens-acme-ui-react",
+      "sourceRef": "packages/ui-react/src/Button.module.css#--acme-button-bg",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_29085811a9cd7880fc925eae"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.aliasOf",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-bg@.root",
+      "value": "--color-action-primary"
+    },
+    {
+      "evidenceIds": [
+        "ev_29085811a9cd7880fc925eae"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-bg@.root",
+      "value": "var(--color-action-primary)"
+    },
+    {
+      "evidenceIds": [
+        "ev_29085811a9cd7880fc925eae"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-bg@.root",
+      "value": ".root"
+    },
+    {
+      "evidenceIds": [
+        "ev_29085811a9cd7880fc925eae"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-bg@.root",
+      "value": "--acme-button-bg"
+    },
+    {
+      "evidenceIds": [
+        "ev_1a4212573cfeb3d3cc0ffb83"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.aliasOf",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-padding@.root",
+      "value": "--space-md"
+    },
+    {
+      "evidenceIds": [
+        "ev_1a4212573cfeb3d3cc0ffb83"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.rawValue",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-padding@.root",
+      "value": "var(--space-md)"
+    },
+    {
+      "evidenceIds": [
+        "ev_1a4212573cfeb3d3cc0ffb83"
+      ],
+      "origin": "extracted",
+      "path": "extensions.css.scope",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-padding@.root",
+      "value": ".root"
+    },
+    {
+      "evidenceIds": [
+        "ev_1a4212573cfeb3d3cc0ffb83"
+      ],
+      "origin": "extracted",
+      "path": "name",
+      "subject": "css:packages/ui-react/src/Button.module.css#--acme-button-padding@.root",
+      "value": "--acme-button-padding"
+    },
+    {
+      "evidenceIds": [
+        "ev_03470e6ab362e7e6a72abaa4"
+      ],
+      "origin": "extracted",
+      "path": "file.kind",
+      "subject": "token-file:packages/ui-react/src/Button.module.css",
+      "value": "css-custom-properties"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-tokens",
+      "version": "0.1.0"
+    },
+    "id": "tokens-acme-ui-react",
+    "inputHash": "ecd81f174dfd01214de7645fe4034b4ab92d862f1067a43c9f939cc891c5ee89",
+    "location": "packages/ui-react",
+    "type": "tokens"
+  }
+}

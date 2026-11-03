@@ -1,0 +1,88 @@
+{
+  "capabilities": [
+    "doc.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "doc-page",
+      "name": "@acme/tokens",
+      "ref": "doc:packages/tokens/README.md"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_833e09ce13d9840d5218e7bb",
+      "location": {
+        "line": 1,
+        "path": "packages/tokens/README.md",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-tokens",
+      "sourceRef": "packages/tokens/README.md",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_833e09ce13d9840d5218e7bb"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:packages/tokens/README.md",
+      "value": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "@acme/tokens"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_833e09ce13d9840d5218e7bb"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:packages/tokens/README.md",
+      "value": "readme"
+    },
+    {
+      "evidenceIds": [
+        "ev_833e09ce13d9840d5218e7bb"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:packages/tokens/README.md",
+      "value": 4
+    },
+    {
+      "evidenceIds": [
+        "ev_833e09ce13d9840d5218e7bb"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:packages/tokens/README.md",
+      "value": "@acme/tokens"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-markdown",
+      "version": "0.1.0"
+    },
+    "id": "docs-acme-tokens",
+    "inputHash": "2f71e89432d18135eb9eccb1714ae1deebe1717fd934c9035b1380e1e74fe0e7",
+    "location": "packages/tokens",
+    "type": "markdown"
+  }
+}

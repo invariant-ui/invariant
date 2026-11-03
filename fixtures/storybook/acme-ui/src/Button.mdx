@@ -1,0 +1,21 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks"
+import * as ButtonStories from "./Button.stories"
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Use one primary button per view.
+
+```tsx
+// not a heading
+<Button />
+```
+
+## Variants
+
+Prefer the primary variant for the main action.
+
+<Canvas of={ButtonStories.Primary} />
+
+<Controls />

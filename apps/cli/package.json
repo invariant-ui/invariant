@@ -1,0 +1,42 @@
+{
+  "name": "@invariant/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "invariant": "./dist/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@invariant/agent-kit": "workspace:*",
+    "@invariant/artifact-generator": "workspace:*",
+    "@invariant/compiler-angular": "workspace:*",
+    "@invariant/compiler-core": "workspace:*",
+    "@invariant/compiler-ir": "workspace:*",
+    "@invariant/compiler-react": "workspace:*",
+    "@invariant/compiler-storybook": "workspace:*",
+    "@invariant/compiler-tokens": "workspace:*",
+    "@invariant/compiler-vue": "workspace:*",
+    "@invariant/contract": "workspace:*",
+    "@invariant/contract-query": "workspace:*",
+    "@invariant/diagnostics": "workspace:*",
+    "@invariant/governance": "workspace:*",
+    "@invariant/mcp": "workspace:*",
+    "@invariant/reconciliation": "workspace:*",
+    "@invariant/semantic-engine": "workspace:*",
+    "@invariant/shared": "workspace:*",
+    "@invariant/validation": "workspace:*",
+    "zod": "4.6.7"
+  }
+}

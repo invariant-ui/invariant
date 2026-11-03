@@ -1,0 +1,82 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "paths": {
+      "@invariant/shared": [
+        "./packages/shared/src/index.ts"
+      ],
+      "@invariant/diagnostics": [
+        "./packages/diagnostics/src/index.ts"
+      ],
+      "@invariant/contract": [
+        "./packages/contract/src/index.ts"
+      ],
+      "@invariant/compiler-ir": [
+        "./packages/compiler-ir/src/index.ts"
+      ],
+      "@invariant/compiler-core": [
+        "./packages/compiler-core/src/index.ts"
+      ],
+      "@invariant/compiler-core/testing": [
+        "./packages/compiler-core/src/testing/index.ts"
+      ],
+      "@invariant/artifact-generator": [
+        "./packages/artifact-generator/src/index.ts"
+      ],
+      "@invariant/compiler-tokens": [
+        "./packages/compiler-tokens/src/index.ts"
+      ],
+      "@invariant/compiler-react": [
+        "./packages/compiler-react/src/index.ts"
+      ],
+      "@invariant/compiler-storybook": [
+        "./packages/compiler-storybook/src/index.ts"
+      ],
+      "@invariant/reconciliation": [
+        "./packages/reconciliation/src/index.ts"
+      ],
+      "@invariant/compiler-vue": [
+        "./packages/compiler-vue/src/index.ts"
+      ],
+      "@invariant/compiler-angular": [
+        "./packages/compiler-angular/src/index.ts"
+      ],
+      "@invariant/semantic-engine": [
+        "./packages/semantic-engine/src/index.ts"
+      ],
+      "@invariant/cli": [
+        "./apps/cli/src/index.ts"
+      ],
+      "@invariant/contract-query": [
+        "./packages/contract-query/src/index.ts"
+      ],
+      "@invariant/mcp": [
+        "./packages/mcp/src/index.ts"
+      ],
+      "@invariant/agent-kit": [
+        "./packages/agent-kit/src/index.ts"
+      ],
+      "@invariant/validation": [
+        "./packages/validation/src/index.ts"
+      ],
+      "@invariant/governance": [
+        "./packages/governance/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "apps/*/src",
+    "apps/*/test",
+    "packages/*/src",
+    "packages/*/test",
+    "scripts",
+    "vitest.config.ts"
+  ]
+}

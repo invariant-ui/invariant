@@ -1,0 +1,5 @@
+.root {
+  color: var(--color-action);
+  padding: var(--space-md) var(--space-lg, 24px);
+}
+.primary { background: var(--color-brand); }

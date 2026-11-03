@@ -1,0 +1,88 @@
+{
+  "capabilities": [
+    "doc.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "doc-page",
+      "name": "Acme Design System",
+      "ref": "doc:README.md"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-markdown",
+        "version": "0.1.0"
+      },
+      "id": "ev_4a1f2db32ebd997af7a00efe",
+      "location": {
+        "line": 1,
+        "path": "README.md",
+        "type": "file"
+      },
+      "method": "document-parse",
+      "sourceId": "docs-acme-design-system",
+      "sourceRef": "README.md",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_4a1f2db32ebd997af7a00efe"
+      ],
+      "origin": "authored",
+      "path": "doc.headings",
+      "subject": "doc:README.md",
+      "value": [
+        {
+          "level": 1,
+          "line": 1,
+          "text": "Acme Design System"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_4a1f2db32ebd997af7a00efe"
+      ],
+      "origin": "authored",
+      "path": "doc.kind",
+      "subject": "doc:README.md",
+      "value": "readme"
+    },
+    {
+      "evidenceIds": [
+        "ev_4a1f2db32ebd997af7a00efe"
+      ],
+      "origin": "authored",
+      "path": "doc.lineCount",
+      "subject": "doc:README.md",
+      "value": 4
+    },
+    {
+      "evidenceIds": [
+        "ev_4a1f2db32ebd997af7a00efe"
+      ],
+      "origin": "authored",
+      "path": "doc.title",
+      "subject": "doc:README.md",
+      "value": "Acme Design System"
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-markdown",
+      "version": "0.1.0"
+    },
+    "id": "docs-acme-design-system",
+    "inputHash": "b126aead7ca39bb50637901dd38711e0abc12dd97b1b5446c099126a41311b7e",
+    "location": ".",
+    "type": "markdown"
+  }
+}

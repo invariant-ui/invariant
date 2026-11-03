@@ -1,0 +1,129 @@
+[
+  {
+    "id": "rv_2ec4b1553541f8c2",
+    "kind": "inferred-fact",
+    "subject": "guideline:storybook-src/button",
+    "path": "kind",
+    "priority": "high",
+    "reason": "No keyword in the title or file name identifies a more specific kind of page",
+    "confidence": 0.4,
+    "rule": "document.classify.fallback",
+    "evidenceIds": [
+      "ev_7181d9d35d74513191a69c5f"
+    ],
+    "approvalRequired": true,
+    "state": "pending"
+  },
+  {
+    "id": "rv_397ba47dc44cada3",
+    "kind": "conflict",
+    "conflictId": "conflict:deprecation-mismatch/button/props.plain.deprecated",
+    "subject": "component:button",
+    "path": "props.plain.deprecated",
+    "priority": "medium",
+    "reason": "deprecation-mismatch: 2 claims disagree. Stop demonstrating the deprecated prop, or mark it as supported.",
+    "evidenceIds": [
+      "ev_7afe28a2ad2f6931d7fc9e59",
+      "ev_af08bd8e626fe3caebb0dcae",
+      "ev_e6e0e38c8f97c4f6b4743cdc"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  },
+  {
+    "id": "rv_69a811fb69fd2499",
+    "kind": "conflict",
+    "conflictId": "conflict:value-mismatch/button/props.variant.allowedvalues",
+    "subject": "component:button",
+    "path": "props.variant.allowedValues",
+    "priority": "medium",
+    "reason": "value-mismatch: 3 claims disagree. Change the story or control to a declared value, or add the value to the component.",
+    "evidenceIds": [
+      "ev_6ac2a6b93d2220184efeb761",
+      "ev_81ea3e7b5d3c11d27da5b250",
+      "ev_a0a6f17aa71a696bd547fd81"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  },
+  {
+    "id": "rv_a96c8f57d35f1715",
+    "kind": "conflict",
+    "conflictId": "conflict:value-mismatch/button/props.variant.default",
+    "subject": "component:button",
+    "path": "props.variant.default",
+    "priority": "medium",
+    "reason": "value-mismatch: 2 claims disagree. Update the documented default or the code default.",
+    "evidenceIds": [
+      "ev_577a1472804c20c5a68e0922",
+      "ev_81ea3e7b5d3c11d27da5b250",
+      "ev_a0a6f17aa71a696bd547fd81"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  },
+  {
+    "id": "rv_81a66ccaaf069113",
+    "kind": "conflict",
+    "conflictId": "conflict:existence-mismatch/card/props.shadow",
+    "subject": "component:card",
+    "path": "props.shadow",
+    "priority": "medium",
+    "reason": "existence-mismatch: 2 claims disagree. Remove the arg or control, or add the prop to the component.",
+    "evidenceIds": [
+      "ev_2899ce270d703f2949d0c250",
+      "ev_45f46f1555f5ec477fec25be",
+      "ev_91047bbd55dcf47bd297396b",
+      "ev_c378e7e13caf4816098960f6"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  },
+  {
+    "id": "rv_68a0e44d988fed42",
+    "kind": "conflict",
+    "conflictId": "conflict:value-mismatch/modal/props.size.allowedvalues",
+    "subject": "component:modal",
+    "path": "props.size.allowedValues",
+    "priority": "medium",
+    "reason": "value-mismatch: 3 claims disagree. Change the story or control to a declared value, or add the value to the component.",
+    "evidenceIds": [
+      "ev_333be2b3520d859a0277d256",
+      "ev_a6029cd4f5f8393d673d223d",
+      "ev_d36bca3734045d6c6db90435"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  },
+  {
+    "id": "rv_c364843a7cc73866",
+    "kind": "conflict",
+    "conflictId": "conflict:value-mismatch/modal/props.size.default",
+    "subject": "component:modal",
+    "path": "props.size.default",
+    "priority": "medium",
+    "reason": "value-mismatch: 2 claims disagree. Update the documented default or the code default.",
+    "evidenceIds": [
+      "ev_333be2b3520d859a0277d256",
+      "ev_69e37e4c9abe2b2b5cebf83a",
+      "ev_a6029cd4f5f8393d673d223d"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  },
+  {
+    "id": "rv_0a0ad6c47cc421a9",
+    "kind": "inferred-fact",
+    "subject": "guideline:storybook-src/button",
+    "path": "appliesTo.0",
+    "priority": "medium",
+    "reason": "The file name \"Button\" is the component name \"Button\"",
+    "confidence": 0.8,
+    "rule": "document.names-component",
+    "evidenceIds": [
+      "ev_7181d9d35d74513191a69c5f"
+    ],
+    "approvalRequired": true,
+    "state": "pending"
+  }
+]

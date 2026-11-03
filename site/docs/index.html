@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs: Invariant</title>
+<meta name="description" content="Documentation for Invariant: install, compile your design system into a contract, serve it to AI agents over MCP, and validate code against it.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0b0d12">
+<style>
+:root{
+  --bg:#0b0d12; --panel:#12151c; --line:#222733; --text:#e8eaf0; --muted:#8d95a6;
+  --accent:#7c8cff; --accent2:#5eead4; --warn:#fbbf24; --bad:#f87171; --ok:#4ade80;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --side:268px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.88em;background:#171b25;border:1px solid var(--line);padding:1px 6px;border-radius:5px}
+pre{font-family:var(--mono)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:30;height:60px;display:flex;align-items:center;gap:16px;padding:0 20px;background:rgba(11,13,18,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-weight:700;letter-spacing:-.02em;text-decoration:none;color:var(--text);font-size:20px}
+.logo span{color:var(--accent)}
+.badge{font:11px var(--mono);color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:99px}
+.spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;width:280px;color:var(--muted);font-size:14px}
+.search input{all:unset;flex:1;color:var(--text);min-width:0}
+.search kbd{font:11px var(--mono);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.toplink{display:inline-flex;color:var(--muted);text-decoration:none}
+.toplink:hover{color:var(--text)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer}
+
+.searchbox{position:relative}
+.search:focus-within{border-color:var(--accent)}
+.results{position:absolute;top:calc(100% + 8px);right:0;width:min(560px,calc(100vw - 24px));max-height:min(70vh,520px);overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 24px 60px -12px rgba(0,0,0,.7);padding:6px;z-index:40}
+.results[hidden]{display:none}
+.res{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--text);cursor:pointer;border:1px solid transparent}
+.res[aria-selected=true]{background:#171c2b;border-color:var(--line)}
+.res .crumb{font:11px var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.08em}
+.res .ttl{font-weight:600;font-size:15px;margin:1px 0 2px}
+.res .snip{color:var(--muted);font-size:13.5px;line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.res mark{background:rgba(124,140,255,.28);color:var(--text);border-radius:3px;padding:0 1px}
+.rmsg{padding:14px 12px;color:var(--muted);font-size:14px}
+.rfoot{display:flex;gap:14px;padding:8px 12px 4px;border-top:1px solid var(--line);margin-top:4px;color:var(--muted);font:11px var(--mono)}
+.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{background:rgba(124,140,255,.28);box-shadow:0 0 0 8px rgba(124,140,255,.28)}100%{background:transparent;box-shadow:0 0 0 8px transparent}}
+
+
+/* contract diagram */
+.cmap{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:0 0 22px}
+.cfile{border:1px solid var(--line);border-radius:12px;background:#0e1118;overflow:hidden}
+.cfile-head{padding:8px 14px;border-bottom:1px solid var(--line);background:#10131a;font-size:13px}
+.cfile-head code{border:0;background:none;padding:0;color:var(--accent2)}
+.cgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}
+.cgroup{border-radius:10px;padding:8px;border:1px solid var(--line)}
+.cgroup.g1{background:rgba(124,140,255,.07);border-color:rgba(124,140,255,.35)}
+.cgroup.g2{background:rgba(251,191,36,.06);border-color:rgba(251,191,36,.3)}
+.cgroup.g3{background:rgba(94,234,212,.06);border-color:rgba(94,234,212,.3)}
+.cg-title{font:10.5px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2px 4px 8px}
+.ctile{background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:6px 9px;margin-bottom:6px}
+.ctile:last-child{margin-bottom:0}
+.ctile b{display:block;font:600 12.5px var(--mono);color:var(--text)}
+.ctile span{display:block;font-size:12px;line-height:1.4;color:var(--muted)}
+.clink{display:flex;align-items:center;justify-content:center;gap:10px;font-size:12.5px;color:var(--muted)}
+.clink i{font-style:normal;font-size:24px;color:var(--accent);transform:rotate(90deg)}
+.clink code{font-size:11.5px}
+.cevidence{border-color:rgba(94,234,212,.35)}
+.cev{padding:12px 14px}
+.cev b{display:block;font:600 12.5px var(--mono)}
+.cev span{font-size:12px;line-height:1.4;color:var(--muted)}
+@media(max-width:700px){.cgroups{grid-template-columns:1fr}}
+
+/* layout */
+.shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);max-width:1240px;margin:0 auto}
+aside{position:sticky;top:60px;height:calc(100vh - 60px);overflow-y:auto;padding:24px 16px 40px 20px;border-right:1px solid var(--line)}
+aside h4{margin:22px 0 6px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+aside h4:first-child{margin-top:0}
+aside a{display:block;padding:5px 10px;margin:1px 0;border-radius:6px;color:var(--muted);text-decoration:none;font-size:14.5px;border-left:2px solid transparent}
+aside a:hover{color:var(--text);background:#131722}
+aside a.active{color:var(--text);background:#151a28;border-left-color:var(--accent)}
+main{padding:40px 48px 120px;min-width:0}
+article{max-width:780px}
+section.doc{padding-bottom:56px;margin-bottom:56px;border-bottom:1px solid var(--line)}
+section.doc:last-child{border-bottom:0}
+.kicker{font:12px var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+h1{font-size:clamp(30px,5vw,44px);letter-spacing:-.03em;line-height:1.1;margin:8px 0 14px}
+h2{font-size:30px;letter-spacing:-.02em;line-height:1.2;margin:6px 0 14px}
+h3{font-size:19px;margin:34px 0 8px;letter-spacing:-.01em}
+p{margin:0 0 14px}
+.lead{font-size:18px;color:var(--muted)}
+ul,ol{padding-left:22px;margin:0 0 16px}
+li{margin:4px 0}
+li::marker{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+
+/* code blocks */
+.code{position:relative;margin:0 0 18px}
+.code pre{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.65}
+.code .lang{position:absolute;top:8px;right:62px;font:11px var(--mono);color:var(--muted)}
+.copy{position:absolute;top:6px;right:8px;background:#1a1f2b;border:1px solid var(--line);color:var(--muted);border-radius:6px;font:11px var(--mono);padding:3px 9px;cursor:pointer;opacity:0;transition:opacity .15s}
+.code:hover .copy,.copy:focus{opacity:1}
+.copy:hover{color:var(--text)}
+.p{color:var(--accent2)} .c{color:var(--muted)} .ok{color:var(--ok)} .w{color:var(--warn)} .b{color:var(--bad)} .k{color:var(--accent)}
+
+/* tables */
+.tbl{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#10131a;font:12px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td code{white-space:nowrap}
+
+/* callouts & cards */
+.note{border:1px solid var(--line);border-left:3px solid var(--accent);background:#10131a;border-radius:8px;padding:12px 16px;margin:0 0 18px;font-size:15px}
+.note.warn{border-left-color:var(--warn)}
+.note b:first-child{display:block;font:12px var(--mono);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:22px 0}
+.card{display:block;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card b{display:block;margin-bottom:4px}
+.card span{color:var(--muted);font-size:14.5px}
+.pill{display:inline-block;font:11px var(--mono);padding:1px 8px;border-radius:99px;border:1px solid var(--line);margin-right:4px}
+.pill.d{color:var(--ok)} .pill.m{color:var(--accent2)} .pill.i{color:var(--warn)} .pill.a{color:var(--accent)}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px}
+
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  aside{position:fixed;left:0;top:60px;bottom:0;width:var(--side);background:var(--bg);z-index:25;transform:translateX(-100%);transition:transform .2s;height:auto}
+  aside.open{transform:none}
+  main{padding:28px 20px 100px}
+  .menu{display:block}
+  .search{width:auto;flex:1;min-width:0}
+  .searchbox{flex:1;min-width:0}
+  .badge{display:none}
+  .results{position:fixed;left:12px;right:12px;top:68px;width:auto}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <button class="menu" id="menu" aria-label="Toggle navigation">Menu</button>
+  <a class="logo" href="../">invariant<span>.</span></a>
+  <span class="badge">docs</span>
+  <span class="spacer"></span>
+  <div class="searchbox">
+    <label class="search"><span aria-hidden="true">&#128269;</span><input id="q" type="search" role="combobox" aria-expanded="false" aria-controls="results" aria-autocomplete="list" placeholder="Search docs" aria-label="Search docs" autocomplete="off"><kbd id="kbd">/</kbd></label>
+    <div class="results" id="results" role="listbox" hidden></div>
+  </div>
+  <a class="toplink" href="https://github.com/mcarlucci/invariant" aria-label="Invariant on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+</div>
+
+<div class="shell">
+<aside id="nav">
+  <h4>Start</h4>
+  <a href="#introduction">Introduction</a>
+  <a href="#install">Install</a>
+  <a href="#quick-start">Quick start</a>
+  <h4>Concepts</h4>
+  <a href="#how-it-works">How it works</a>
+  <a href="#contract">The contract</a>
+  <a href="#facts">Facts and evidence</a>
+  <a href="#conflicts">Conflicts and review</a>
+  <h4>Sources</h4>
+  <a href="#source-react">React</a>
+  <a href="#source-vue-angular">Vue and Angular</a>
+  <a href="#source-storybook">Storybook</a>
+  <a href="#source-tokens">Design tokens</a>
+  <h4>Use it</h4>
+  <a href="#cli">CLI</a>
+  <a href="#configuration">Configuration</a>
+  <a href="#mcp">MCP server</a>
+  <a href="#agents">Agent setup</a>
+  <h4>Govern</h4>
+  <a href="#validate">Validate code</a>
+  <a href="#policies">Policies</a>
+  <a href="#decisions">Decisions</a>
+  <a href="#ci">Verify in CI</a>
+  <h4>Reference</h4>
+  <a href="#artifacts">Output files</a>
+  <a href="#safety">Safety model</a>
+  <a href="#limitations">Known limitations</a>
+  <a href="#contributing">Contributing</a>
+</aside>
+
+<main>
+<article>
+
+<section class="doc" id="introduction">
+  <div class="kicker">Start</div>
+  <h1>Introduction</h1>
+  <p class="lead">Invariant compiles your existing design system into one machine-readable contract that AI agents can read and validate against.</p>
+  <p>It reads React, Vue and Angular components, Storybook stories and design token files. It extracts what is actually there, keeps the evidence for every fact, reports where your sources disagree, and writes a framework-neutral JSON contract. Agents then use it over MCP to learn which components, props and tokens exist, and to check the code they write.</p>
+  <p>Everything runs locally. There is no account and no network access. Your code is analyzed statically and never executed.</p>
+  <div class="cards">
+    <a class="card" href="#install"><b>Install</b><span>Build the CLI from source.</span></a>
+    <a class="card" href="#quick-start"><b>Quick start</b><span>From zero to a compiled contract.</span></a>
+    <a class="card" href="#mcp"><b>MCP server</b><span>Give agents the contract.</span></a>
+    <a class="card" href="#validate"><b>Validate code</b><span>Check usage against the contract.</span></a>
+  </div>
+  <div class="note"><b>Status</b>React, Vue, Angular, Storybook and token files are supported. Figma and zeroheight are not supported yet, and the config rejects them with a message.</div>
+</section>
+
+<section class="doc" id="install">
+  <div class="kicker">Start</div>
+  <h2>Install</h2>
+  <p>Invariant is not published to npm yet. Build it from source. You need Node 24 or newer and <a href="https://pnpm.io">pnpm</a>.</p>
+  <div class="code"><span class="lang">bash</span><pre>git clone https://github.com/mcarlucci/invariant.git
+cd invariant
+nvm use                 # reads .nvmrc (Node 24)
+pnpm install
+pnpm build</pre></div>
+  <p>Run it from the checkout:</p>
+  <div class="code"><span class="lang">bash</span><pre>pnpm invariant --help     # same as: node apps/cli/dist/main.js</pre></div>
+  <p>Or link it so <code>invariant</code> works from any directory. The agent setup expects this.</p>
+  <div class="code"><span class="lang">bash</span><pre>cd apps/cli &amp;&amp; pnpm link --global</pre></div>
+  <p>Check your setup with <code>pnpm verify</code>. It runs lint, typecheck, package boundary checks, build and tests.</p>
+</section>
+
+<section class="doc" id="quick-start">
+  <div class="kicker">Start</div>
+  <h2>Quick start</h2>
+  <p>Run these inside the project that holds your design system.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant init                          # detect sources, write invariant.config.json
+invariant compile                       # write the contract to ./invariant
+invariant compile --watch               # or keep it up to date: recompile when sources change
+invariant components list               # browse what was found
+invariant components inspect Button --evidence
+invariant tokens list
+invariant conflicts list                # where sources disagree
+invariant agent init claude-code        # connect an AI tool</pre></div>
+  <p><code>init</code> detects a source for each framework package, for Storybook and for token files. If your layout is unusual, add sources by hand with <code>invariant source add &lt;type&gt; [path]</code> or edit the config.</p>
+  <p>Add <code>--cwd /path/to/project</code> to any command to run it against another directory.</p>
+  <p>With <code>--watch</code>, <code>compile</code> keeps running and recompiles after your changes settle, so a connected agent always sees a current contract. Press Ctrl+C to stop. Every cycle recompiles all sources.</p>
+  <div class="note"><b>Compile exit code</b><code>compile</code> exits 1 if any diagnostic is an error. The files are still written so you can inspect the problem.</div>
+</section>
+
+<section class="doc" id="how-it-works">
+  <div class="kicker">Concepts</div>
+  <h2>How it works</h2>
+  <p>Each stage has one job and a clear boundary.</p>
+  <div class="code"><span class="lang">text</span><pre>sources  ->  adapters  ->  IR  ->  reconcile  ->  enrich  ->  verify  ->  contract
+(code)       (extract)    (shared)  (merge,       (infer,      (check)      + evidence
+                                     conflicts)   with
+                                                  evidence)</pre></div>
+  <ol>
+    <li><b>Discover.</b> Find packages, entry points, Storybook configuration, token files and docs.</li>
+    <li><b>Extract.</b> Each adapter reads one kind of source and emits facts with evidence into an intermediate representation (IR). Adapters never merge or resolve, and do not know about each other.</li>
+    <li><b>Reconcile.</b> A pure compiler merges the IR from every source into one contract. Disagreements become conflicts, never silent overwrites.</li>
+    <li><b>Enrich.</b> A deterministic semantic engine adds clearly labeled <code>inferred</code> facts, such as a token's category.</li>
+    <li><b>Verify.</b> The output is checked for structure, references, hashes and evidence before it is written.</li>
+  </ol>
+  <p>Adapters must not independently generate the contract, and the contract is not coupled to any frontend framework or to MCP.</p>
+</section>
+
+<section class="doc" id="contract">
+  <div class="kicker">Concepts</div>
+  <h2>The contract</h2>
+  <p>The contract is one JSON file, <code>invariant.contract.json</code>. Think of it as a catalog of everything in your design system, where every entry points to the proof for it. The Zod schema in <code>packages/contract</code> defines it, and JSON Schemas generated from it are committed under <code>packages/contract/schema/</code>.</p>
+
+  <h3>What is inside</h3>
+  <div class="cmap" role="img" aria-label="Diagram: the contract file holds three groups of sections, and its facts point to the evidence file.">
+    <div class="cfile">
+      <div class="cfile-head"><code>invariant.contract.json</code></div>
+      <div class="cgroups">
+        <div class="cgroup g1">
+          <div class="cg-title">What your system has</div>
+          <div class="ctile"><b>components</b><span>props, events, slots, variants</span></div>
+          <div class="ctile"><b>tokens</b><span>values, aliases, per-theme modes</span></div>
+          <div class="ctile"><b>themes</b><span>the modes tokens vary by</span></div>
+          <div class="ctile"><b>patterns</b><span>repeatable layouts</span></div>
+          <div class="ctile"><b>guidelines</b><span>documents about usage</span></div>
+        </div>
+        <div class="cgroup g2">
+          <div class="cg-title">Rules about it</div>
+          <div class="ctile"><b>constraints</b><span>machine-checkable limits</span></div>
+          <div class="ctile"><b>policies</b><span>rules a person approved</span></div>
+        </div>
+        <div class="cgroup g3">
+          <div class="cg-title">Health and trust</div>
+          <div class="ctile"><b>sources</b><span>where facts came from, and how healthy</span></div>
+          <div class="ctile"><b>conflicts</b><span>where sources disagree</span></div>
+          <div class="ctile"><b>metadata</b><span>name, versions, frameworks</span></div>
+          <div class="ctile"><b>integrity</b><span>content hash</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="clink"><i aria-hidden="true">&rarr;</i><span>every fact lists <code>evidenceIds</code> that resolve here</span></div>
+    <div class="cfile cevidence">
+      <div class="cfile-head"><code>invariant.evidence.json</code></div>
+      <div class="cev"><b>evidence</b><span>file, line, method and original text for each id</span></div>
+    </div>
+  </div>
+
+  <div class="tbl"><table>
+    <tr><th>Section</th><th>What it holds</th><th>Example id</th></tr>
+    <tr><td><code>components</code></td><td>One entry per conceptual component, with one <code>implementation</code> per framework and source. Props (type, required, default, allowed values, deprecation), events, slots, variants, states, accessibility, examples, composition and lifecycle.</td><td><code>component:button</code></td></tr>
+    <tr><td><code>tokens</code></td><td>A category (color, typography, spacing, sizing, border, shadow, breakpoint, motion or other) and a value that is either a literal or <code>aliasOf</code> another token, plus per-theme <code>modes</code>.</td><td><code>token:color.brand.primary</code></td></tr>
+    <tr><td><code>themes</code></td><td>The modes that token values vary by, such as <code>dark</code>.</td><td><code>theme:dark</code></td></tr>
+    <tr><td><code>patterns</code>, <code>guidelines</code></td><td>References to entities and to documentation. Guidelines come from documents in your repo. Patterns are not produced yet.</td><td><code>pattern:form.login</code></td></tr>
+    <tr><td><code>constraints</code>, <code>policies</code></td><td>Checkable rules. A policy is a rule a named person approved, with severity and enforcement. A policy without approval cannot exist.</td><td><code>policy:icon-buttons-need-labels</code></td></tr>
+    <tr><td><code>conflicts</code></td><td>Where sources disagree: at least two claims, each with its source, status, evidence and value. The losing claim is never deleted.</td><td><code>conflict:value-mismatch/...</code></td></tr>
+    <tr><td><code>sources</code></td><td>Every input, its location, version when it has one, what it can supply, and its health (ok, degraded or failed).</td><td><code>ui-react</code></td></tr>
+    <tr><td><code>metadata</code>, <code>integrity</code></td><td>The design system's name and id, compiler version, frameworks and compile time, and the content hash.</td><td></td></tr>
+  </table></div>
+
+  <h3>Anatomy of one entry</h3>
+  <p>Every entity keeps plain values next to a <code>facts</code> map. The map says, for each field, how it is known and where the proof is. This sketch is illustrative and trimmed.</p>
+  <div class="code"><span class="lang">json</span><pre>{
+  <span class="k">"id"</span>: <span class="ok">"component:button"</span>,
+  <span class="k">"name"</span>: <span class="ok">"Button"</span>,
+  <span class="k">"props"</span>: [
+    { <span class="k">"name"</span>: <span class="ok">"variant"</span>, <span class="k">"allowedValues"</span>: [<span class="ok">"primary"</span>, <span class="ok">"secondary"</span>, <span class="ok">"ghost"</span>] }
+  ],
+  <span class="k">"implementations"</span>: [ { <span class="k">"framework"</span>: <span class="ok">"react"</span>, <span class="k">"exportName"</span>: <span class="ok">"Button"</span> } ],
+  <span class="k">"facts"</span>: {
+    <span class="k">"props.variant.allowedValues"</span>: {
+      <span class="k">"status"</span>: <span class="ok">"discovered"</span>,
+      <span class="k">"evidenceIds"</span>: [<span class="ok">"ev_3f9a..."</span>]      <span class="c">// resolves in invariant.evidence.json</span>
+    }
+  }
+}</pre></div>
+  <p>Fact paths are dot-separated (<code>props.size.default</code>, <code>modes.theme:dark.value</code>). On an array, a segment picks the item with that <code>name</code> or <code>id</code>. See <a href="#facts">Facts and evidence</a> for the four statuses.</p>
+
+  <h3>Rules the contract follows</h3>
+  <div class="tbl"><table>
+    <tr><th>Rule</th><th>What it means for you</th></tr>
+    <tr><td>Ids are <code>kind:name</code></td><td>Kinds are component, token, theme, pattern, guideline, constraint, policy and conflict. Names use lowercase letters, digits, <code>.</code>, <code>_</code> and <code>-</code>, with optional <code>/</code> segments.</td></tr>
+    <tr><td>One id, many implementations</td><td>A React and a Vue Button are one <code>component:button</code> with two implementations, so you compare frameworks in one place.</td></tr>
+    <tr><td>Strict objects</td><td>Unknown fields are rejected. Framework-specific data lives only under <code>extensions.react</code>, <code>extensions.vue</code> or <code>extensions.angular</code>, and the core model never reads it.</td></tr>
+    <tr><td>Sorted and deterministic</td><td>Collections are sorted by id and keys are canonical, so recompiling unchanged sources gives identical bytes and clean diffs.</td></tr>
+    <tr><td>Hash ignores timestamps</td><td><code>integrity.contentHash</code> is a SHA-256 of the contract without the <code>integrity</code> block, <code>metadata.compiledAt</code> and <code>sources[].lastSyncedAt</code>. Times are recorded but cannot change the hash.</td></tr>
+    <tr><td>Version is explicit</td><td><code>contractVersion</code> is <code>1.0.0</code>. Contract changes are versioned.</td></tr>
+  </table></div>
+</section>
+
+<section class="doc" id="facts">
+  <div class="kicker">Concepts</div>
+  <h2>Facts and evidence</h2>
+  <p>Every field of every entity has a <b>fact</b> that says how it is known. This is how Invariant keeps discovered information separate from guesses.</p>
+  <div class="tbl"><table>
+    <tr><th>Status</th><th>Meaning</th></tr>
+    <tr><td><span class="pill d">discovered</span></td><td>Machine-parsed from an artifact whose structure is the claim, such as a TypeScript prop type.</td></tr>
+    <tr><td><span class="pill m">documented</span></td><td>Written by a person in prose or guidance, such as a JSDoc description.</td></tr>
+    <tr><td><span class="pill i">inferred</span></td><td>Derived by a named deterministic rule. Always carries a <code>derivation</code> and a <code>confidence</code>. Adapters never emit it.</td></tr>
+    <tr><td><span class="pill a">approved</span></td><td>Accepted by a named person. Layered over the earlier status, which is kept as <code>priorStatus</code>.</td></tr>
+  </table></div>
+  <div class="code"><span class="lang">text</span><pre>status:      discovered | documented | inferred | approved
+evidenceIds: at least one id into invariant.evidence.json
+confidence:  0..1, required when inferred
+derivation:  { rule, reasoning, inputs }, required when inferred
+approval:    { approvedBy, approvedAt, role?, reference?, fingerprint, priorStatus }</pre></div>
+  <h3>Evidence</h3>
+  <p>Evidence lives in <code>invariant.evidence.json</code>, referenced by id. Each entry records the source, the location (file and line), the extraction method and the original text. Ids are <code>ev_</code> plus 24 hex characters of a SHA-256 over the immutable parts of the observation.</p>
+  <h3>Approvals expire</h3>
+  <p>An approval stores a fingerprint of the entity id, path and value at the time it was made. If the value changes, verification reports <code>contract.approval-stale</code>. An approval cannot silently outlive the thing it approved.</p>
+  <div class="note"><b>Rule</b>Inferred rules are never automatically promoted to approved policies, and LLMs are never the authority for extractable facts such as TypeScript APIs, props, exports, defaults or token values.</div>
+</section>
+
+<section class="doc" id="conflicts">
+  <div class="kicker">Concepts</div>
+  <h2>Conflicts and review</h2>
+  <p>When two sources disagree, both claims stay in the contract with their evidence. The losing claim is never deleted.</p>
+  <h3>Conflict types</h3>
+  <p><code>value-mismatch</code>, <code>existence-mismatch</code>, <code>deprecation-mismatch</code>, <code>identity-ambiguity</code> and <code>token-value-mismatch</code>. Ids look like <code>conflict:&lt;type&gt;/&lt;subject&gt;/&lt;path&gt;</code>. Resolution starts as <code>open</code>.</p>
+  <p>Storybook findings with evidence on both sides become conflicts, for example <code>arg-value-not-allowed</code> or <code>default-mismatch</code>. A story arg that a component's type does not allow is caught this way.</p>
+  <h3>Review queue</h3>
+  <p><code>invariant.review.json</code> lists every open conflict and every inferred fact that needs a person, each with evidence, a reason and <code>approvalRequired: true</code>. Work through it with the CLI:</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant review list
+invariant review show &lt;id&gt;
+invariant review approve &lt;id&gt; --as "Jane Doe" --role "design-system lead"
+invariant review reject &lt;id&gt; --as "Jane Doe"
+invariant review accept &lt;id&gt; --as "Jane Doe" --note "known difference"</pre></div>
+  <p>See <a href="#decisions">Decisions</a> for what each command does.</p>
+  <h3>The semantic engine</h3>
+  <p>All its rules emit <code>inferred</code> facts with a rule name, reasoning and confidence, citing existing evidence.</p>
+  <div class="tbl"><table>
+    <tr><th>Rule</th><th>Output</th><th>Confidence</th></tr>
+    <tr><td><code>token-category.dtcg-type</code></td><td>Token category from a declared DTCG <code>$type</code></td><td>0.95</td></tr>
+    <tr><td><code>token-category.value-kind</code></td><td>Category from a CSS value kind (color)</td><td>0.9</td></tr>
+    <tr><td><code>token-category.name-prefix</code></td><td>Category from a name prefix such as <code>color</code>, <code>space</code>, <code>font</code></td><td>0.7</td></tr>
+    <tr><td><code>token-category.fallback</code></td><td>Category stays <code>other</code></td><td>0.2</td></tr>
+    <tr><td><code>document.classify</code></td><td>Guideline kind from keywords in a page title or file name</td><td>0.6 to 0.7</td></tr>
+    <tr><td><code>document.names-component</code></td><td>Guideline <code>appliesTo</code> from a file stem or title that names a component</td><td>0.8 stem, 0.6 title</td></tr>
+    <tr><td><code>compound.name-prefix</code></td><td>Component <code>contains</code> child, from shared name prefixes</td><td>0.7 same file, 0.5 otherwise</td></tr>
+  </table></div>
+</section>
+
+<section class="doc" id="source-react">
+  <div class="kicker">Sources</div>
+  <h2>React</h2>
+  <p>Source type <code>react</code>. Uses the TypeScript compiler API and type checker. Nothing is executed or imported.</p>
+  <h3>What counts as a component</h3>
+  <p>Only components exported from a package's entry points are reported. Aliases, renames, <code>export *</code>, default exports and barrels are followed, so one component exported under several names is one entity.</p>
+  <div class="tbl"><table>
+    <tr><th>Form</th><th>Rule</th></tr>
+    <tr><td>Function or arrow</td><td>Pascal-case name and returns JSX</td></tr>
+    <tr><td>Annotated function</td><td>Pascal-case, declared <code>React.FC&lt;P&gt;</code>, <code>FunctionComponent&lt;P&gt;</code> or <code>VFC&lt;P&gt;</code></td></tr>
+    <tr><td>Class</td><td>Extends <code>Component</code> or <code>PureComponent</code></td></tr>
+    <tr><td>Wrappers</td><td><code>forwardRef</code>, <code>memo</code> (nesting allowed), <code>lazy</code> (props unknown)</td></tr>
+    <tr><td>CSS-in-JS</td><td>Tagged templates from <code>styled-components</code> or <code>@emotion/styled</code></td></tr>
+    <tr><td>Compound</td><td><code>Object.assign(Root, { Child })</code> and <code>Root.Child = Child</code></td></tr>
+  </table></div>
+  <p>Hooks, lowercase functions, constants and functions without JSX are not components. Higher-order components and unrecognized factory calls are reported with a diagnostic and not analyzed.</p>
+  <h3>Facts extracted</h3>
+  <ul>
+    <li><b>Props:</b> type text and kind, required, default, allowed values in declaration order (through aliases), JSDoc description and deprecation.</li>
+    <li><b>Variants:</b> string-literal union props and <code>cva</code> configs.</li>
+    <li><b>Slots:</b> <code>children</code>, renderable-typed props and render props.</li>
+    <li><b>Accessibility:</b> a static <code>role</code> and every <code>aria-*</code> attribute on native elements in the component's own body.</li>
+    <li><b>Styling:</b> CSS modules, <code>var(--x)</code> references, class names and Tailwind, recorded as written and never resolved to tokens.</li>
+    <li><b>Composition:</b> which public components this one renders.</li>
+    <li><b>Usage:</b> static counts of props across JSX sites. These are source counts, never runtime frequency.</li>
+  </ul>
+  <div class="note warn"><b>Completeness</b>When props cannot be fully listed (a base type from outside the project, <code>lazy</code>, an untyped parameter), the component is marked <code>propsComplete: false</code>. Treat an absent prop as unknown unless <code>propsComplete</code> is true.</div>
+</section>
+
+<section class="doc" id="source-vue-angular">
+  <div class="kicker">Sources</div>
+  <h2>Vue and Angular</h2>
+  <p>Source types <code>vue</code> and <code>angular</code>. Both produce the same neutral facts as React, so a component's contract looks the same whichever framework it came from. A test checks one Button implemented in all three.</p>
+  <h3>Vue</h3>
+  <p>Public components are the <code>.vue</code> files and <code>defineComponent(...)</code> declarations that entry points export. Extracted: <code>defineProps</code>, runtime props, <code>defineModel</code>, <code>defineEmits</code>, <code>defineSlots</code> merged with template <code>&lt;slot&gt;</code> outlets, and Options API props. Imports of <code>.vue</code> files resolve through virtual script modules, so a props type declared in another SFC works.</p>
+  <h3>Angular</h3>
+  <p>Public components and directives are the decorated classes that entry points export. Extracted: <code>@Input</code>, <code>input()</code>, <code>input.required()</code>, <code>model()</code>, <code>@Output</code> with <code>EventEmitter</code>, <code>output()</code>, and <code>&lt;ng-content&gt;</code> slots from the template. <code>@NgModule</code> classes become entities of kind <code>module</code>.</p>
+  <h3>Neutral mapping</h3>
+  <div class="tbl"><table>
+    <tr><th>Concept</th><th>React</th><th>Vue</th><th>Angular</th></tr>
+    <tr><td>Props</td><td>props</td><td>props</td><td>inputs</td></tr>
+    <tr><td>Events</td><td>callback props (kept as props)</td><td>emits</td><td>outputs</td></tr>
+    <tr><td>Slots</td><td><code>children</code>, render props</td><td>slots</td><td><code>ng-content</code></td></tr>
+  </table></div>
+  <p>Events differ on purpose: React callbacks stay props with <code>role: event-handler</code>, while Vue emits and Angular outputs are <code>events</code>.</p>
+  <p>Path aliases from <code>tsconfig</code> (<code>paths</code>, <code>baseUrl</code>, <code>extends</code>, <code>references</code>) are resolved for all adapters. Package-name <code>extends</code> is not followed.</p>
+</section>
+
+<section class="doc" id="source-storybook">
+  <div class="kicker">Sources</div>
+  <h2>Storybook</h2>
+  <p>Source type <code>storybook</code>. Stories are read statically from CSF files and MDX. No Storybook process is started and no story code runs.</p>
+  <h3>Supported forms</h3>
+  <p>CSF 3 object stories, CSF 2 function stories, <code>Template.bind({})</code> stories, and CSF 2 assignment annotations such as <code>Story.args = ...</code>. Meta can be an object literal, an identifier, or wrapped in <code>satisfies</code>, <code>as</code> or parentheses. When <code>component</code> is absent, <code>Meta&lt;typeof X&gt;</code> is used.</p>
+  <h3>Static evaluation</h3>
+  <p><code>args</code>, <code>argTypes</code> and <code>parameters</code> are evaluated by a small static evaluator. It resolves literals, objects, arrays, <code>const</code> identifiers (across files), property access and object spread. It never guesses. Functions, JSX, calls, template literals with substitutions and unresolvable identifiers are listed under an <code>...Unresolved</code> fact by key path.</p>
+  <h3>Linking stories to components</h3>
+  <p>A story links to its component through the <code>file</code> and <code>localName</code> pair the component adapter publishes. Display names are never used for linking. Because of that, the project root is the configuration's directory, so all sources share one set of project-relative paths.</p>
+  <h3>What reconciliation reports</h3>
+  <p>Conflicts: <code>arg-value-not-allowed</code>, <code>control-option-not-allowed</code>, <code>default-mismatch</code>, <code>arg-undeclared</code>, <code>control-undeclared</code> and <code>deprecated-demonstrated</code>. Coverage findings such as <code>prop-not-demonstrated</code> and <code>component-unlinked</code> stay diagnostics.</p>
+</section>
+
+<section class="doc" id="source-tokens">
+  <div class="kicker">Sources</div>
+  <h2>Design tokens</h2>
+  <p>Source type <code>tokens</code>, adapter id <code>design-tokens</code>. It is its own package because tokens are not React-specific.</p>
+  <h3>CSS custom properties</h3>
+  <p>Each declaration yields a name, raw value and line. Scope is classified conservatively:</p>
+  <ul>
+    <li><code>:root</code>, <code>html</code>, <code>:host</code> and <code>body</code> are the default value.</li>
+    <li><code>[data-theme="x"]</code> (also <code>data-mode</code>, <code>data-color-scheme</code>, <code>data-color-mode</code>), <code>.dark</code>, <code>.light</code>, <code>.theme-x</code>, and <code>@media (prefers-color-scheme: ...)</code> around a root selector are theme modes.</li>
+    <li>Anything else is component-private and gets no value or mode fact.</li>
+  </ul>
+  <h3>JSON</h3>
+  <p>W3C Design Tokens files (<code>$value</code>, <code>$type</code>, <code>{path}</code> aliases, <code>$description</code>, <code>$deprecated</code>) and Style Dictionary files (<code>value</code>, <code>type</code>, <code>comment</code>). Evidence carries the line of each token's key.</p>
+  <h3>What it does not decide</h3>
+  <p>Category, semantic name, and the mapping between a CSS variable name and a JSON token name are not decided here. Tokens from different files merge on a normalized name (<code>color.brand</code> equals <code>color-brand</code>), recorded as an <code>inferred</code> fact. A different literal or alias for the same token and theme is a <code>token-value-mismatch</code> conflict.</p>
+</section>
+
+<section class="doc" id="cli">
+  <div class="kicker">Use it</div>
+  <h2>CLI</h2>
+  <p>The CLI works from a local checkout with no account, network access or cloud service.</p>
+  <div class="tbl"><table>
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td><code>init</code></td><td>Runs discovery and writes <code>invariant.config.json</code>. A repository with more than five packages of one framework gets one whole-project entry for it. Refuses to overwrite without <code>--force</code>.</td></tr>
+    <tr><td><code>source add &lt;type&gt; [path] [--id id]</code></td><td>Adds a source entry. Checks the type, that the path is a directory inside the project, and that the id is unique.</td></tr>
+    <tr><td><code>source remove &lt;id&gt;</code></td><td>Removes a source entry from JSON configuration. An unknown id lists the configured ids.</td></tr>
+    <tr><td><code>source list</code></td><td>Lists configured sources.</td></tr>
+    <tr><td><code>analyze</code></td><td>Discovers and extracts every source, prints what was found and the diagnostics, writes the IR to <code>&lt;output&gt;/analysis/</code>. Builds no contract.</td></tr>
+    <tr><td><code>compile</code></td><td>Full pipeline: discover, extract, reconcile, enrich, verify. Writes the <a href="#artifacts">output files</a>. <code>--watch</code> compiles once, then again after changes settle, until Ctrl+C. It ignores the output directory, so writing files never triggers a cycle, and it keeps watching after a broken config.</td></tr>
+    <tr><td><code>components list</code>, <code>components inspect &lt;name|id&gt;</code></td><td>Read the compiled contract. <code>inspect</code> shows implementations, props with status, events, slots, variants, composition and conflicts. <code>--evidence</code> adds source locations.</td></tr>
+    <tr><td><code>tokens list</code>, <code>patterns list</code>, <code>conflicts list</code></td><td>Read the contract. Inferred token categories are marked <code>*</code>. <code>conflicts list</code> filters by <code>--severity</code>, <code>--type</code>, <code>--subject</code>.</td></tr>
+    <tr><td><code>validate &lt;path...&gt;</code></td><td>Checks application code against the contract. See <a href="#validate">Validate code</a>.</td></tr>
+    <tr><td><code>verify</code></td><td>Checks the compiled output without the sources: structure, references, approval fingerprints, content hash, evidence ids and every file hash. <code>--fresh</code> also recompiles. If sources changed it reports <code>verify.stale</code> and then what changed: counts per collection, and each entity with the fields that differ. <code>--json</code> adds this as <code>changes</code>.</td></tr>
+    <tr><td><code>rules</code>, <code>policy list</code></td><td>List validation rules and approved policies.</td></tr>
+    <tr><td><code>review list|show|approve|reject|resolve|accept|dismiss</code></td><td>Record human decisions. See <a href="#decisions">Decisions</a>.</td></tr>
+    <tr><td><code>mcp</code></td><td>Serve the contract to AI tools over stdio, read-only.</td></tr>
+    <tr><td><code>agent init &lt;client|all&gt;</code>, <code>agent list</code></td><td>Write MCP config, skills and rules for Claude Code, Cursor, Codex and Windsurf.</td></tr>
+    <tr><td><code>export --to &lt;dir&gt;</code></td><td>Verifies, then copies the artifacts plus <code>schema/</code> to a directory. Refuses an invalid output or a non-empty target unless <code>--force</code>.</td></tr>
+  </table></div>
+  <h3>Options and exit codes</h3>
+  <p>Read commands accept <code>--json</code>. Global options: <code>--cwd</code>, <code>--config</code>, <code>--dir</code> (output directory), <code>--trust-config</code>.</p>
+  <div class="tbl"><table>
+    <tr><th>Exit code</th><th>Meaning</th></tr>
+    <tr><td><code>0</code></td><td>Success</td></tr>
+    <tr><td><code>1</code></td><td>Findings or invalid output</td></tr>
+    <tr><td><code>2</code></td><td>Bad usage or input</td></tr>
+  </table></div>
+</section>
+
+<section class="doc" id="configuration">
+  <div class="kicker">Use it</div>
+  <h2>Configuration</h2>
+  <p><code>invariant.config.json</code> is read as data. <code>init</code> writes it for you.</p>
+  <div class="code"><span class="lang">json</span><pre>{
+  "name": "Acme Design System",
+  "contractId": "acme-design-system",
+  "sources": [
+    { "id": "ui-library", "type": "react", "path": "packages/ui" },
+    { "id": "storybook", "type": "storybook", "path": "packages/ui" },
+    { "id": "tokens", "type": "tokens" }
+  ],
+  "output": { "directory": "invariant" }
+}</pre></div>
+  <h3>Sources</h3>
+  <ul>
+    <li><code>type</code> is one of <code>react</code>, <code>vue</code>, <code>angular</code>, <code>storybook</code>, <code>tokens</code>. <code>zeroheight</code> and <code>figma</code> are rejected as not supported yet.</li>
+    <li><code>path</code> limits an entry to sources found at or below that directory. Without it, the entry covers the whole project. Several entries of one type are combined. A type with no entry is not run.</li>
+    <li><code>id</code> is a label. <code>compile</code> and <code>analyze</code> print which compiled sources each entry produced, and warn with <code>cli.source-matched-nothing</code> when an entry matched none.</li>
+    <li>All paths must be relative, with no <code>..</code>, no absolute paths and no backslashes. The output directory defaults to <code>invariant</code>.</li>
+    <li>The neutral inventory adapters (packages, Markdown documentation, token files, Storybook configuration) always run.</li>
+  </ul>
+  <h3>Other settings</h3>
+  <div class="tbl"><table>
+    <tr><th>Key</th><th>Purpose</th></tr>
+    <tr><td><code>validation.rules</code></td><td>Severity or <code>off</code> per rule code. Unknown codes are rejected with a suggestion.</td></tr>
+    <tr><td><code>validation.failOn</code></td><td>Default failing threshold for <code>validate</code>.</td></tr>
+    <tr><td><code>validation.ignore</code></td><td>Globs <code>validate</code> skips.</td></tr>
+    <tr><td><code>governance.policiesFile</code></td><td>Path to the policies file. Default <code>invariant.policies.json</code>.</td></tr>
+    <tr><td><code>governance.approvers</code></td><td>Optional list of names allowed to record and apply decisions.</td></tr>
+  </table></div>
+  <h3>Code configuration</h3>
+  <p><code>invariant.config.ts</code>, <code>.mts</code>, <code>.mjs</code> or <code>.js</code> with a default export also works, but loading one executes it. It is only loaded with <code>--trust-config</code>. <code>source add</code> and <code>source remove</code> never edit it, because that would mean running it. They tell you to edit it by hand or to run <code>invariant init</code>, which writes <code>invariant.config.json</code>. A JSON file wins over code files when both exist.</p>
+</section>
+
+<section class="doc" id="mcp">
+  <div class="kicker">Use it</div>
+  <h2>MCP server</h2>
+  <p><code>invariant mcp</code> serves the compiled contract over stdio, read-only. The contract does not know MCP exists: the server only reads the files <code>compile</code> wrote.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant compile
+invariant mcp [--dir invariant]     # serves until stdin closes</pre></div>
+  <h3>Tools</h3>
+  <p>All ten are read-only and deterministic. Results are JSON in <code>structuredContent</code> and in the text content, always with <code>contractHash</code>. Lists take <code>offset</code> and <code>limit</code> (default 50, at most 200). Results over 400,000 characters are refused with advice to narrow the request.</p>
+  <div class="tbl"><table>
+    <tr><th>Tool</th><th>Returns</th></tr>
+    <tr><td><code>get_design_system_overview</code></td><td>Name, frameworks, sources and health, counts, open conflicts, inferred-fact count, and what is not covered.</td></tr>
+    <tr><td><code>search_design_system</code></td><td>Lexical hits over components, tokens and guidelines with score and what matched. Handles plurals, prefixes and one-letter typos. Fixed ranking; no model or embeddings.</td></tr>
+    <tr><td><code>get_component</code></td><td>Implementations (with <code>apiComplete</code>), props with type, default, allowed values, status and source line, events, slots, variants, accessibility, conflicts, guidelines.</td></tr>
+    <tr><td><code>get_component_usage</code></td><td>How to import, required props, variants and defaults, deprecated props, source examples, observed prop combinations (React only).</td></tr>
+    <tr><td><code>get_component_composition</code></td><td>What it contains and what contains it, with discovered or inferred status; slots.</td></tr>
+    <tr><td><code>get_design_tokens</code></td><td>Tokens filtered by category, text and theme, with alias chains and resolved values. Cycles and missing targets are reported, not guessed.</td></tr>
+    <tr><td><code>get_design_patterns</code></td><td>Patterns, or an explicit statement that none exist.</td></tr>
+    <tr><td><code>get_design_guidelines</code></td><td>Guideline titles, kinds and referenced documents. Page bodies are not included.</td></tr>
+    <tr><td><code>validate_component_usage</code></td><td>Checks one intended use: unknown component or prop, disallowed value, type mismatch, deprecations, missing required props.</td></tr>
+    <tr><td><code>validate_design_system_compliance</code></td><td>Checks a snippet (React, Vue, Angular or HTML; at most 200,000 characters): props and values, literal colors and CSS variables against tokens.</td></tr>
+  </table></div>
+  <h3>Resources</h3>
+  <p><code>invariant://manifest</code>, <code>invariant://metadata</code>, <code>invariant://components</code>, <code>invariant://tokens</code>, <code>invariant://patterns</code>, <code>invariant://guidelines</code>, and the template <code>invariant://component/{id}</code>. All are <code>application/json</code>.</p>
+  <h3>Protocol</h3>
+  <p>Transport is newline-delimited JSON-RPC on stdio. Only protocol messages go to stdout; logs go to stderr. The server supports the modern stateless revision (2026-07-28) and legacy revisions 2025-11-25, 2025-06-18, 2025-03-26 and 2024-11-05. Methods: <code>initialize</code>, <code>ping</code>, <code>server/discover</code>, <code>tools/list</code>, <code>tools/call</code>, <code>resources/list</code>, <code>resources/templates/list</code>, <code>resources/read</code>. Prompts, logging, completions, subscriptions, tasks, sampling, elicitation, pagination and HTTP transports are not supported.</p>
+  <h3>Loading and reload</h3>
+  <p>The server verifies the contract (structure, references, content hash, evidence) before serving and reloads when file modification times or sizes change, so a recompile is picked up without a restart. Pair it with <code>invariant compile --watch</code> to keep the contract current as you edit. A missing, invalid or tampered contract is never partly served: tools report what is wrong and to run <code>invariant compile</code>.</p>
+  <div class="note warn"><b>Treat contract text as untrusted</b>Names, descriptions and examples are copied from your source and documents, and can contain instructions aimed at a model. The server says so in its instructions, marks every result as untrusted content, and returns structured JSON instead of prose. It has no network listener, no authentication surface, no write path, and never runs customer code.</div>
+</section>
+
+<section class="doc" id="agents">
+  <div class="kicker">Use it</div>
+  <h2>Agent setup</h2>
+  <p>One command writes MCP configuration, skills and rules for your AI tool.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant agent init claude-code     # also: cursor, codex, windsurf, all
+invariant agent list</pre></div>
+  <p>The entry it writes launches <code>invariant mcp --dir &lt;output dir&gt;</code>. The default command is <code>invariant</code>, so it must be on your <code>PATH</code> (see <a href="#install">Install</a>). Otherwise point at the built file:</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant agent init claude-code \
+  --command node --command-arg /abs/path/to/invariant/apps/cli/dist/main.js</pre></div>
+  <p><code>--dry-run</code> shows what would be written. <code>--force</code> replaces differing entries.</p>
+  <div class="note"><b>Safe by construction</b>Generated skills and rules only include identifiers matching <code>[A-Za-z][A-Za-z0-9._-]{0,63}</code> (at most 60 component names) and a short title. A hostile description in your source cannot be written into committed agent configuration.</div>
+</section>
+
+<section class="doc" id="validate">
+  <div class="kicker">Govern</div>
+  <h2>Validate code</h2>
+  <p><code>invariant validate &lt;path...&gt;</code> checks application code against the compiled contract. Paths are files or directories inside the project. Directories are walked, skipping <code>node_modules</code>, build output, symbolic links, <code>.d.ts</code> files and <code>validation.ignore</code> globs. Recognized files: <code>.tsx .jsx .ts .js .mjs .cjs .vue .html</code>.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant validate src                                 # text report, exit 1 on any error
+invariant validate src --format json|github|sarif      # machine-readable output
+invariant validate src --fail-on warning|never         # change the failing threshold</pre></div>
+  <p>The framework comes from the file name, then <code>--framework</code>, then the contract's only framework, then React. Nothing is executed or imported. Only literal values are verified. Expressions and bindings are counted as unverified and never guessed.</p>
+  <h3>What a violation says</h3>
+  <div class="code"><span class="lang">text</span><pre>app/App.tsx:4:5 error prop-value-not-allowed
+  Button.variant is "danger", which is not one of "primary", "secondary", "ghost"
+  fix: Use one of "primary", "secondary", "ghost" (closest: "primary").
+  evidence src/Button.tsx:28 (discovered); subject component:button</pre></div>
+  <p>Every violation has file, line and column, a rule code, a subject, an explanation, a suggested fix, evidence (or the approved policy) and a <code>basis</code>: <code>discovered</code>, <code>documented</code>, <code>inferred</code>, <code>approved</code> or <code>heuristic</code>.</p>
+  <h3>The eleven rules</h3>
+  <div class="tbl"><table>
+    <tr><th>Rule</th><th>Codes</th><th>Severity</th></tr>
+    <tr><td>Unknown component</td><td><code>component-unknown</code>, <code>framework-not-implemented</code></td><td>error</td></tr>
+    <tr><td>Unknown property</td><td><code>unknown-prop</code>, <code>unverifiable-prop</code></td><td>warning, info</td></tr>
+    <tr><td>Invalid property value</td><td><code>prop-value-not-allowed</code>, <code>prop-type-mismatch</code></td><td>error, warning</td></tr>
+    <tr><td>Deprecated component</td><td><code>component-deprecated</code></td><td>warning</td></tr>
+    <tr><td>Deprecated property</td><td><code>prop-deprecated</code></td><td>warning</td></tr>
+    <tr><td>Unsupported composition</td><td><code>composition-parent-required</code>, <code>composition-not-allowed</code></td><td>error</td></tr>
+    <tr><td>Missing required property</td><td><code>required-prop-missing</code></td><td>error</td></tr>
+    <tr><td>Hardcoded color</td><td><code>color-not-in-tokens</code>, <code>color-matches-token</code></td><td>warning, info</td></tr>
+    <tr><td>Unapproved token</td><td><code>unknown-css-variable</code>, <code>token-deprecated</code>, <code>token-forbidden</code></td><td>warning, warning, error</td></tr>
+    <tr><td>Missing accessibility requirement</td><td><code>accessibility-requirement-missing</code></td><td>error</td></tr>
+    <tr><td>Invalid layout pattern</td><td><code>layout-pattern-invalid</code></td><td>error</td></tr>
+  </table></div>
+  <p>Run <code>invariant rules</code> for every code with its default severity and origin. Set a severity or <code>off</code> per code in <code>validation.rules</code>. Helper findings such as <code>component-ambiguous</code> and <code>native-element-has-equivalent</code> (a name match such as <code>&lt;button&gt;</code> and <code>Button</code>, always <code>heuristic</code> at confidence 0.5) are reported once per file.</p>
+  <h3>Literal values</h3>
+  <p>Invariant also compares literal values with tokens of the matching category. A check needs at least one token of that category with a literal value, otherwise it is skipped and the report says so. Anything containing <code>var(</code>, <code>calc(</code> or a binding is skipped, never guessed.</p>
+  <div class="tbl"><table>
+    <tr><th>Kind</th><th>Codes</th><th>Reads</th></tr>
+    <tr><td>Color</td><td><code>color-not-in-tokens</code>, <code>color-matches-token</code></td><td>Hex, <code>rgb()</code>/<code>rgba()</code>, <code>hsl()</code>/<code>hsla()</code> and CSS named colors. Hex and functional colors compare by value, so <code>rgb(0 87 255)</code> equals <code>#0057ff</code>. Names are read only as the value of a color property and match a token by name.</td></tr>
+    <tr><td>Spacing</td><td><code>spacing-not-in-tokens</code>, <code>spacing-matches-token</code></td><td>Lengths in <code>margin*</code>, <code>padding*</code> and <code>gap</code>, in CSS or style objects. <code>rem</code> and <code>em</code> use a 16px root. Zero, <code>auto</code> and percentages are skipped.</td></tr>
+    <tr><td>Typography</td><td><code>typography-not-in-tokens</code>, <code>typography-matches-token</code></td><td><code>font-size</code>, <code>font-weight</code>, <code>line-height</code>, <code>letter-spacing</code> and the first <code>font-family</code> name, including the parts of composite typography tokens.</td></tr>
+  </table></div>
+  <div class="note warn"><b>Care with false claims</b>Unknown-component detection for React depends on imports: a tag without an import from a package the contract publishes is never called unknown. Standard HTML attributes, <code>aria-*</code>, <code>data-*</code> and event or slot names are never flagged as unknown props.</div>
+</section>
+
+<section class="doc" id="policies">
+  <div class="kicker">Govern</div>
+  <h2>Policies</h2>
+  <p>Organizational rules are written by people in <code>invariant.policies.json</code>, kept in version control.</p>
+  <div class="code"><span class="lang">json</span><pre>{ "version": 1, "policies": [ {
+  "id": "icon-buttons-need-labels",
+  "name": "Icon-only buttons need an accessible name",
+  "statement": "A button without text content must have aria-label or aria-labelledby.",
+  "severity": "error",
+  "enforcement": "block",
+  "approval": {
+    "approvedBy": "Jane Doe",
+    "approvedAt": "2026-01-05T00:00:00.000Z",
+    "role": "design-system lead",
+    "reference": "RFC-7"
+  },
+  "rule": {
+    "kind": "require-attribute",
+    "components": ["Button"],
+    "anyOf": ["aria-label", "aria-labelledby"],
+    "unlessChildren": true,
+    "category": "accessibility"
+  }
+} ] }</pre></div>
+  <p>Rule kinds: <code>require-attribute</code>, <code>forbid-prop</code>, <code>forbid-prop-value</code>, <code>forbid-component</code>, <code>forbid-token</code>, <code>allowed-children</code> and <code>required-parent</code>.</p>
+  <ul>
+    <li>A policy without <code>approval</code> is rejected. Nothing infers or auto-approves a policy.</li>
+    <li>Policies take their severity from the file, lowered by enforcement: <code>warn</code> caps at warning, <code>report-only</code> is info.</li>
+    <li><code>compile</code> adds each policy to the contract, so <code>validate</code> reads only the contract.</li>
+    <li>A policy that names a component or token the contract lacks is kept and reported as <code>governance.policy-unknown-component</code>. That part cannot fire.</li>
+    <li>Composition checks are conservative: <code>required-parent</code> only fires when the element sits inside other design-system components and none is an allowed parent.</li>
+  </ul>
+  <p>List approved policies with <code>invariant policy list</code>. There is no <code>policy add</code> yet; write the file by hand.</p>
+</section>
+
+<section class="doc" id="decisions">
+  <div class="kicker">Govern</div>
+  <h2>Decisions</h2>
+  <p>Decisions are written to <code>invariant.decisions.json</code> and applied on every <code>compile</code>.</p>
+  <div class="tbl"><table>
+    <tr><th>Command</th><th>Effect at compile</th></tr>
+    <tr><td><code>review approve &lt;id&gt;</code></td><td>The fact becomes <code>approved</code>, layered over its prior status, with a fingerprint and your <code>--role</code>, <code>--reference</code> and <code>--note</code>.</td></tr>
+    <tr><td><code>review reject &lt;id&gt;</code></td><td>Removes an inferred containment link, guideline link or token category. Other inferred facts cannot be rejected; the reason says how to fix it at the source.</td></tr>
+    <tr><td><code>review resolve|accept|dismiss &lt;id&gt; [--source s]</code></td><td>Records the conflict's resolution: <code>resolved</code> (fixed at the source), <code>accepted</code> (a known difference) or <code>dismissed</code> (not a real conflict). The conflict disappears on recompile once the source is fixed.</td></tr>
+  </table></div>
+  <p>Every decision needs <code>--as &lt;name&gt;</code> (or the <code>INVARIANT_USER</code> environment variable) and records when it was made.</p>
+  <h3>Stale decisions</h3>
+  <p>A decision records the value or claims it was made about. If they change, the decision is <b>stale</b>: it is not applied, <code>compile</code> reports <code>governance.decision-stale</code>, and the item returns to the queue. A decision whose target is gone is reported as <code>governance.decision-target-missing</code>.</p>
+  <div class="note warn"><b>Authorization is not authentication</b>The recorded name is asserted, not proven. <code>governance.approvers</code> restricts which names the CLI will record and <code>compile</code> will apply. Real enforcement is your repository's review process over <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>, for example CODEOWNERS.</div>
+</section>
+
+<section class="doc" id="ci">
+  <div class="kicker">Govern</div>
+  <h2>Verify in CI</h2>
+  <p>Exit codes plus output formats are the integration. <code>--format github</code> prints workflow annotations, <code>--format sarif</code> prints SARIF 2.1.0 for code scanning, and <code>--format json</code> is for scripts.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant compile
+invariant verify --fresh                       # fails if stale or tampered with, and says what changed
+invariant validate src --format github         # annotate pull requests</pre></div>
+  <p>Commit the <code>invariant/</code> folder, <code>invariant.config.json</code>, <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>. Compiling unchanged sources gives identical bytes, so diffs are meaningful.</p>
+  <div class="note"><b>No workflow file is generated</b>Invariant is not published, so an install step in a generated workflow would be invented. Write the install step to match how you build it.</div>
+</section>
+
+<section class="doc" id="artifacts">
+  <div class="kicker">Reference</div>
+  <h2>Output files</h2>
+  <p><code>compile</code> writes these to the output directory (default <code>invariant/</code>).</p>
+  <div class="tbl"><table>
+    <tr><th>File</th><th>Contents</th></tr>
+    <tr><td><code>invariant.contract.json</code></td><td>The canonical contract.</td></tr>
+    <tr><td><code>invariant.evidence.json</code></td><td>Evidence cited by the contract.</td></tr>
+    <tr><td><code>invariant.diagnostics.json</code></td><td>Every diagnostic from discovery, extraction, reconciliation, enrichment and verification.</td></tr>
+    <tr><td><code>invariant.review.json</code></td><td>Open conflicts and inferred facts that need a decision.</td></tr>
+    <tr><td><code>invariant.report.html</code></td><td>A static summary for people.</td></tr>
+    <tr><td><code>invariant.manifest.json</code></td><td>Tool version, build time, compiled sources with input hashes, and the SHA-256 and size of every other file.</td></tr>
+  </table></div>
+  <p><code>--keep-ir</code> adds <code>ir/</code> and <code>invariant.project.json</code>. Only the manifest holds the build time, so all other files are reproducible.</p>
+  <p>The report is self-contained: no scripts, no external requests, a restrictive Content-Security-Policy, and every value from your source is HTML-escaped. Every table lists every row: the first 200 are visible and the rest are folded into a <code>&lt;details&gt;</code> block.</p>
+  <p>The contract stays valid and useful alone. If the evidence file is missing, facts keep their status and you get a diagnostic, not an invalid contract.</p>
+</section>
+
+<section class="doc" id="safety">
+  <div class="kicker">Reference</div>
+  <h2>Safety model</h2>
+  <ul>
+    <li><b>No code execution.</b> Source is parsed, never run. The one exception is an explicitly trusted code configuration (<code>--trust-config</code>).</li>
+    <li><b>Writes stay inside the output directory.</b> <code>export</code> writes only inside its <code>--to</code> directory. Artifact paths are checked against escaping.</li>
+    <li><b>No secrets.</b> The configuration has no credential fields, so there is nowhere to put one.</li>
+    <li><b>No absolute paths.</b> Absolute paths and hostnames never enter the contract or evidence. Paths are POSIX-relative to a recorded source root.</li>
+    <li><b>Untrusted text.</b> Anything copied from your source is treated as data by the MCP server and agent kit.</li>
+  </ul>
+</section>
+
+<section class="doc" id="limitations">
+  <div class="kicker">Reference</div>
+  <h2>Known limitations</h2>
+  <p>What Invariant does not do today. Where it cannot tell, it says so in the output instead of guessing.</p>
+
+  <h3>Sources and extraction</h3>
+  <ul>
+    <li>Figma and zeroheight are not supported. The config rejects them with a message.</li>
+    <li>Third-party types are not loaded. Props inherited from library types (HTML attributes, other design systems, <code>VariantProps</code>) are listed as inherited, not enumerated, and the component is marked <code>propsComplete: false</code>. Because of that, many Storybook arg and control checks end as <code>unverifiable-names</code>.</li>
+    <li>React components made by factory functions, and higher-order components, are reported but not analyzed. Accessibility facts cover only static attributes on native elements in the component&rsquo;s own body.</li>
+    <li>Vue: components registered only through a plugin, components exported under a different local name than their import, <code>&lt;script src&gt;</code> and <code>&lt;template src&gt;</code> blocks, and non-HTML template languages such as pug are not read (each is reported). Generic components are marked incomplete.</li>
+    <li>Angular: template semantics such as structural directives, pipes and template references are not modeled. Members from <code>hostDirectives</code> are not enumerated, and types from <code>inject()</code> stay <code>unknown</code>.</li>
+    <li>Usage statistics (<code>usage.*</code> and observed prop combinations) exist for React only.</li>
+    <li>Storybook is read statically. Global <code>preview</code> args, parameters and decorators, URL args and dynamically generated stories are not read, MDX is scanned and not compiled, and stories for components that are not public are reported as unlinked.</li>
+    <li>Extraction was validated on a small set of real libraries, including one Vue and one Angular library. Treat other libraries as unvalidated.</li>
+  </ul>
+
+  <h3>Contract and inference</h3>
+  <ul>
+    <li>Patterns are not produced. A pattern needs a description of intent, which static facts do not supply, so <code>patterns list</code> says none exist.</li>
+    <li><code>requires-parent</code> relationships, accessibility requirements and layout patterns are not produced by any compiler. They work only through approved policies.</li>
+    <li>Name-based identity is a heuristic, marked as such. It cannot link <code>Buttons</code> to <code>Button</code> or <code>Button / Primary</code> to <code>Button</code>.</li>
+    <li>Compound inference is naming-based and proposes some wrong parents, for example <code>Button</code> and <code>ButtonGroup</code>. These get confidence 0.4 to 0.7 and sit in the review queue.</li>
+    <li>A guideline&rsquo;s kind is read from its title and file name only. Developer documents such as changelogs and contributing guides also become <code>reference</code> guidelines.</li>
+    <li>The token model is a literal or an alias, per theme. Composite values are kept as JSON. Token values are compared as the adapter reports them, so a whitespace-only difference is a mismatch.</li>
+    <li>When sources conflict, the entity keeps one value. Read the conflict list to see the others.</li>
+    <li>Evidence excerpts are capped at 2,000 characters.</li>
+    <li>The review queue lists every inferred fact, so it is long on large libraries (437 items for Radix). It is ordered by priority, with no filtering or batch approval.</li>
+  </ul>
+
+  <h3>Validation and governance</h3>
+  <ul>
+    <li><code>validate</code> sees one file at a time: no cross-file data flow, no resolution of wrapper components, and no knowledge of which package an unimported tag comes from. React unknown-component detection depends on imports. Vue and Angular detect components by name or selector only.</li>
+    <li>Name-based findings (<code>native-element-has-equivalent</code> and ambiguity) are heuristics.</li>
+    <li>Colors are compared by value after converting to hex. <code>hsl()</code> conversion rounds, so a hex token and an hsl literal can differ by one step. Named colors match only a token with the same name. <code>oklch()</code>, <code>color()</code>, <code>lab()</code> and Tailwind class names are not read.</li>
+    <li><code>rem</code> and <code>em</code> literals are compared against a 16px root font size.</li>
+    <li>Policies have seven rule kinds and cannot express arbitrary logic. They are written by hand: there is no <code>policy add</code>.</li>
+    <li>Approver names are asserted, not authenticated. Enforce who may approve through your repository review process.</li>
+    <li>Rejecting an inferred identity cannot split it between implementations, and a conflict decision does not change the contract&rsquo;s kept value.</li>
+  </ul>
+
+  <h3>CLI and MCP</h3>
+  <ul>
+    <li>No incremental compile. Every run, including each <code>compile --watch</code> cycle, recompiles all sources.</li>
+    <li><code>source add</code> and <code>source remove</code> cannot edit a code configuration, by design, because editing it would mean running it.</li>
+    <li><code>init</code> detects by package manifests and discovery. Unusual layouts need <code>source add</code> or a hand edit.</li>
+    <li>The MCP server speaks a protocol subset: no HTTP transport, authentication, subscriptions or pagination. Search is lexical: it matches words, plural and <code>-ing</code> stems, prefixes and one-letter typos (labeled approximate), but not synonyms or meaning.</li>
+    <li>The MCP validators check literal values in one snippet. They do not resolve imports or follow props through wrappers.</li>
+    <li>The server cannot record decisions. People record them with <code>invariant review</code>.</li>
+    <li>Windsurf&rsquo;s MCP configuration could not be verified, so <code>agent init windsurf</code> prints the entry instead of writing it.</li>
+  </ul>
+</section>
+
+<section class="doc" id="contributing">
+  <div class="kicker">Reference</div>
+  <h2>Contributing</h2>
+  <p>The repo is a pnpm workspace with explicit package boundaries. <code>apps/cli</code> is the command, and <code>packages/*</code> hold the adapters, compiler, contract, validation, governance, MCP server and agent kit.</p>
+  <div class="code"><span class="lang">bash</span><pre>pnpm build             # tsc -b
+pnpm test              # vitest
+pnpm lint              # biome
+pnpm typecheck
+pnpm check:boundaries  # enforce package boundaries
+pnpm verify            # lint + typecheck + boundaries + build + test
+pnpm update:golden     # regenerate golden fixtures</pre></div>
+  <h3>Engineering rules</h3>
+  <ul>
+    <li>TypeScript strict mode, small composable modules, deterministic compilation, structured diagnostics.</li>
+    <li>Unit tests for extraction logic, integration tests for adapters, golden fixtures for regressions.</li>
+    <li>Contract changes are versioned: update the schema and runtime validation, add migration logic when needed, and update fixtures and tests.</li>
+    <li>Significant architecture decisions are recorded as ADRs in <code>docs/decisions/</code>.</li>
+  </ul>
+  <p>The detailed specifications live in <a href="https://github.com/mcarlucci/invariant/tree/main/docs/specifications"><code>docs/specifications/</code></a>.</p>
+  <h3>License</h3>
+  <p>Invariant is source-available under the <a href="https://github.com/mcarlucci/invariant/blob/main/LICENSE">Functional Source License, Version 1.1, ALv2 Future License</a>. Each version converts to Apache-2.0 two years after release.</p>
+</section>
+
+</article>
+</main>
+</div>
+
+<script>
+(() => {
+  var nav = document.getElementById('nav');
+  var links = Array.prototype.slice.call(nav.querySelectorAll('a'));
+  var sections = links.map((a) => document.querySelector(a.getAttribute('href')));
+
+  /* copy buttons */
+  document.querySelectorAll('.code').forEach((box) => {
+    var b = document.createElement('button');
+    b.className = 'copy';
+    b.type = 'button';
+    b.textContent = 'Copy';
+    b.addEventListener('click', () => {
+      var t = box.querySelector('pre').innerText;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => {
+        b.textContent = 'Copied';
+      }, () => { b.textContent = 'Press Ctrl+C'; });
+      setTimeout(() => { b.textContent = 'Copy'; }, 1400);
+    });
+    box.appendChild(b);
+  });
+
+  /* scrollspy */
+  var spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((a) => { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin: '-80px 0px -70% 0px' });
+  sections.forEach((s) => { if (s) spy.observe(s); });
+
+  /* mobile menu */
+  var menu = document.getElementById('menu');
+  menu.addEventListener('click', () => { nav.classList.toggle('open'); });
+  links.forEach((a) => { a.addEventListener('click', () => { nav.classList.remove('open'); }); });
+
+  /* search: a ranked index of every section and sub-heading, built from the page itself */
+  var q = document.getElementById('q');
+  var box = document.getElementById('results');
+  var kbd = document.getElementById('kbd');
+  var isMac = /Mac|iPhone|iPad/.test(navigator.platform);
+  kbd.textContent = isMac ? '⌘K' : 'Ctrl K';
+
+  var slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  var entries = [];
+  document.querySelectorAll('section.doc').forEach((sec) => {
+    var kids = Array.prototype.slice.call(sec.children).filter((el) => el.tagName !== 'DIV' || !el.classList.contains('kicker'));
+    var group = (sec.querySelector('.kicker') || {}).textContent || '';
+    var h2 = sec.querySelector('h1, h2');
+    var cur = { id: sec.id, title: h2.textContent, crumb: group, text: '' };
+    entries.push(cur);
+    kids.forEach((el) => {
+      if (el === h2) return;
+      if (el.tagName === 'H3') {
+        if (!el.id) el.id = sec.id + '-' + slug(el.textContent);
+        cur = { id: el.id, title: el.textContent, crumb: group + ' / ' + h2.textContent, text: '' };
+        entries.push(cur);
+      } else cur.text += ' ' + el.textContent.replace(/\s+/g, ' ');
+    });
+  });
+  entries.forEach((e) => {
+    e.t = e.title.toLowerCase();
+    e.c = e.crumb.toLowerCase();
+    e.b = e.text.toLowerCase();
+    e.words = new Set((e.t + ' ' + e.b).match(/[a-z0-9]+/g) || []);
+  });
+
+  function lev1(a, b) {
+    if (Math.abs(a.length - b.length) > 1) return false;
+    var i = 0, j = 0, miss = 0;
+    while (i < a.length && j < b.length) {
+      if (a[i] === b[j]) { i++; j++; continue; }
+      if (++miss > 1) return false;
+      if (a.length > b.length) i++;
+      else if (a.length < b.length) j++;
+      else { i++; j++; }
+    }
+    return miss + (a.length - i) + (b.length - j) <= 1;
+  }
+
+  function score(e, toks, fuzzy) {
+    var total = 0;
+    for (var k = 0; k < toks.length; k++) {
+      var t = toks[k], s = 0;
+      if (e.t === t) s += 120;
+      else if (e.t.indexOf(t) === 0) s += 80;
+      else if (e.t.indexOf(t) !== -1) s += 55;
+      if (e.c.indexOf(t) !== -1) s += 12;
+      var at = e.b.indexOf(t);
+      if (at !== -1) {
+        s += 10;
+        var n = 0, from = at;
+        while (n < 5 && (from = e.b.indexOf(t, from + 1)) !== -1) n++;
+        s += n * 2;
+      }
+      if (s === 0 && fuzzy && t.length >= 4) {
+        for (var tw of e.t.match(/[a-z0-9]+/g) || []) if (lev1(t, tw)) { s = 24; break; }
+        if (s === 0) for (var w of e.words) if (lev1(t, w)) { s = 6; break; }
+      }
+      if (s === 0) return 0;
+      total += s;
+    }
+    return total;
+  }
+
+  var esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function mark(text, toks) {
+    var out = esc(text);
+    toks.slice().sort((a, b) => b.length - a.length).forEach((t) => {
+      var re = new RegExp('(' + esc(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      out = out.replace(re, '<mark>$1</mark>');
+    });
+    return out;
+  }
+  function snippet(e, toks) {
+    var src = e.text.trim();
+    if (!src) return '';
+    var low = src.toLowerCase(), at = -1;
+    for (var t of toks) { at = low.indexOf(t); if (at !== -1) break; }
+    if (at === -1) return mark(src.slice(0, 140) + (src.length > 140 ? '…' : ''), toks);
+    var from = Math.max(0, at - 50), to = Math.min(src.length, at + 110);
+    return (from > 0 ? '…' : '') + mark(src.slice(from, to), toks) + (to < src.length ? '…' : '');
+  }
+
+  var shown = [], active = 0;
+  function render(query) {
+    var toks = query.toLowerCase().split(/\s+/).filter(Boolean);
+    if (toks.length === 0) {
+      shown = [];
+      box.innerHTML = '<div class="rmsg">Search the docs. Try <b>verify</b>, <b>--fresh</b>, <b>policies</b> or <b>storybook</b>.</div>';
+      return;
+    }
+    var rank = (fuzzy) => entries.map((e) => ({ e: e, s: score(e, toks, fuzzy) })).filter((x) => x.s > 0).sort((a, b) => b.s - a.s);
+    var hits = rank(false);
+    var note = '';
+    if (hits.length === 0) { hits = rank(true); if (hits.length) note = 'No exact matches. Showing close ones.'; }
+    shown = hits.slice(0, 8).map((x) => x.e);
+    active = 0;
+    if (shown.length === 0) {
+      box.innerHTML = '<div class="rmsg">No results for “' + esc(query.trim()) + '”. Try fewer or different words.</div>';
+      return;
+    }
+    box.innerHTML = (note ? '<div class="rmsg">' + note + '</div>' : '') +
+      shown.map((e, i) =>
+        '<a class="res" role="option" id="r' + i + '" href="#' + e.id + '" data-i="' + i + '" aria-selected="' + (i === 0) + '">' +
+        '<div class="crumb">' + esc(e.crumb) + '</div>' +
+        '<div class="ttl">' + mark(e.title, toks) + '</div>' +
+        '<div class="snip">' + snippet(e, toks) + '</div></a>').join('') +
+      '<div class="rfoot"><span>↑↓ move</span><span>Enter open</span><span>Esc close</span></div>';
+  }
+  function open() { box.hidden = false; q.setAttribute('aria-expanded', 'true'); }
+  function close() { box.hidden = true; q.setAttribute('aria-expanded', 'false'); }
+  function select(i) {
+    if (shown.length === 0) return;
+    active = (i + shown.length) % shown.length;
+    box.querySelectorAll('.res').forEach((el, n) => el.setAttribute('aria-selected', n === active));
+    var el = document.getElementById('r' + active);
+    q.setAttribute('aria-activedescendant', 'r' + active);
+    if (el) el.scrollIntoView({ block: 'nearest' });
+  }
+  function go(e) {
+    close();
+    q.blur();
+    var target = document.getElementById(e.id);
+    history.replaceState(null, '', '#' + e.id);
+    if (target) {
+      target.scrollIntoView();
+      target.classList.remove('flash');
+      void target.offsetWidth;
+      target.classList.add('flash');
+    }
+  }
+
+  q.addEventListener('input', () => { render(q.value); open(); });
+  q.addEventListener('focus', () => { render(q.value); open(); });
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); select(active + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); select(active - 1); }
+    else if (e.key === 'Enter' && shown[active]) { e.preventDefault(); go(shown[active]); }
+    else if (e.key === 'Escape') { if (q.value) { q.value = ''; render(''); } else { close(); q.blur(); } }
+  });
+  box.addEventListener('mousedown', (e) => e.preventDefault());
+  box.addEventListener('click', (e) => {
+    var el = e.target.closest('.res');
+    if (!el) return;
+    e.preventDefault();
+    go(shown[Number(el.getAttribute('data-i'))]);
+  });
+  box.addEventListener('mousemove', (e) => {
+    var el = e.target.closest('.res');
+    if (el && Number(el.getAttribute('data-i')) !== active) select(Number(el.getAttribute('data-i')));
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.searchbox')) close(); });
+  addEventListener('keydown', (e) => {
+    var tag = (document.activeElement || {}).tagName;
+    var typing = tag === 'INPUT' || tag === 'TEXTAREA';
+    if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
+      e.preventDefault();
+      q.focus();
+      q.select();
+    }
+  });
+})();
+</script>
+</body>
+</html>

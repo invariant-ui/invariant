@@ -1,0 +1,244 @@
+{
+  "capabilities": [
+    "buildTools",
+    "entryPoints",
+    "export.*",
+    "frameworks",
+    "package.*"
+  ],
+  "completeness": "complete",
+  "diagnostics": [],
+  "entities": [
+    {
+      "kind": "package",
+      "name": "@acme/ui-angular",
+      "ref": "package:@acme/ui-angular"
+    },
+    {
+      "kind": "export",
+      "name": "AcmeButton",
+      "ref": "package:@acme/ui-angular#.:AcmeButton"
+    }
+  ],
+  "evidence": [
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_2dd007073e25b9eeaec17d19",
+      "location": {
+        "path": "packages/ui-angular/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui-angular",
+      "sourceRef": "packages/ui-angular/package.json",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_96ddf57346324e55a67afb3f",
+      "location": {
+        "line": 3,
+        "path": "packages/ui-angular/src/lib/button.component.ts",
+        "type": "file"
+      },
+      "method": "ast",
+      "sourceId": "npm-acme-ui-angular",
+      "sourceRef": "packages/ui-angular/src/lib/button.component.ts#AcmeButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-01-01T00:00:00.000Z",
+      "extractor": {
+        "name": "inventory-npm",
+        "version": "0.1.0"
+      },
+      "id": "ev_b8b80704998bddb16bec1cb1",
+      "location": {
+        "line": 7,
+        "path": "packages/ui-angular/package.json",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "sourceId": "npm-acme-ui-angular",
+      "sourceRef": "packages/ui-angular/package.json",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "facts": [
+    {
+      "evidenceIds": [
+        "ev_2dd007073e25b9eeaec17d19"
+      ],
+      "origin": "extracted",
+      "path": "buildTools",
+      "subject": "package:@acme/ui-angular",
+      "value": [
+        {
+          "evidence": [
+            {
+              "ref": "packages/ui-angular/angular.json",
+              "type": "config-file"
+            },
+            {
+              "ref": "@angular/cli",
+              "type": "dependency"
+            }
+          ],
+          "name": "angular-cli"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "ng-packagr",
+              "type": "dependency"
+            }
+          ],
+          "name": "ng-packagr"
+        },
+        {
+          "evidence": [
+            {
+              "ref": "typescript",
+              "type": "dependency"
+            }
+          ],
+          "name": "typescript"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_2dd007073e25b9eeaec17d19"
+      ],
+      "origin": "extracted",
+      "path": "entryPoints",
+      "subject": "package:@acme/ui-angular",
+      "value": [
+        {
+          "condition": "typings",
+          "exportsComplete": true,
+          "file": "packages/ui-angular/src/public-api.ts",
+          "resolution": "conventional",
+          "subpath": ".",
+          "target": "index.d.ts"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_b8b80704998bddb16bec1cb1"
+      ],
+      "origin": "extracted",
+      "path": "frameworks",
+      "subject": "package:@acme/ui-angular",
+      "value": [
+        {
+          "declaredRange": "^18.0.0",
+          "dependencyKind": "peerDependencies",
+          "line": 7,
+          "name": "angular",
+          "package": "@angular/core"
+        }
+      ]
+    },
+    {
+      "evidenceIds": [
+        "ev_2dd007073e25b9eeaec17d19"
+      ],
+      "origin": "extracted",
+      "path": "package.directory",
+      "subject": "package:@acme/ui-angular",
+      "value": "packages/ui-angular"
+    },
+    {
+      "evidenceIds": [
+        "ev_2dd007073e25b9eeaec17d19"
+      ],
+      "origin": "extracted",
+      "path": "package.name",
+      "subject": "package:@acme/ui-angular",
+      "value": "@acme/ui-angular"
+    },
+    {
+      "evidenceIds": [
+        "ev_2dd007073e25b9eeaec17d19"
+      ],
+      "origin": "extracted",
+      "path": "package.private",
+      "subject": "package:@acme/ui-angular",
+      "value": false
+    },
+    {
+      "evidenceIds": [
+        "ev_2dd007073e25b9eeaec17d19"
+      ],
+      "origin": "extracted",
+      "path": "package.version",
+      "subject": "package:@acme/ui-angular",
+      "value": "2.2.0"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_96ddf57346324e55a67afb3f"
+      ],
+      "origin": "extracted",
+      "path": "export.entry",
+      "subject": "package:@acme/ui-angular#.:AcmeButton",
+      "value": "."
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_96ddf57346324e55a67afb3f"
+      ],
+      "origin": "extracted",
+      "path": "export.kind",
+      "subject": "package:@acme/ui-angular#.:AcmeButton",
+      "value": "value"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_96ddf57346324e55a67afb3f"
+      ],
+      "origin": "extracted",
+      "path": "export.name",
+      "subject": "package:@acme/ui-angular#.:AcmeButton",
+      "value": "AcmeButton"
+    },
+    {
+      "completeness": "complete",
+      "evidenceIds": [
+        "ev_96ddf57346324e55a67afb3f"
+      ],
+      "origin": "extracted",
+      "path": "export.typeOnly",
+      "subject": "package:@acme/ui-angular#.:AcmeButton",
+      "value": false
+    }
+  ],
+  "irVersion": "1.3.0",
+  "source": {
+    "adapter": {
+      "name": "inventory-npm",
+      "version": "0.1.0"
+    },
+    "id": "npm-acme-ui-angular",
+    "inputHash": "e11ee3f2d40d604ff7f779cbff534f5e5ea59e3b4565233d2d97a6ed10d311c7",
+    "location": "packages/ui-angular",
+    "type": "npm",
+    "version": {
+      "kind": "package-version",
+      "value": "2.2.0"
+    }
+  }
+}

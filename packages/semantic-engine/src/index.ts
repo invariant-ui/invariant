@@ -1,0 +1,6 @@
+export { assertAdditive } from "./additive.js"
+export { inferCompounds } from "./compounds.js"
+export { classifyDocuments, type DocumentResult } from "./documents.js"
+export { type EnrichInput, type EnrichResult, enrich } from "./enrich.js"
+export { type Inference, inferredFact } from "./infer.js"
+export { classifyTokens } from "./tokens.js"

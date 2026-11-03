@@ -1,0 +1,29 @@
+{
+  "name": "invariant",
+  "private": true,
+  "license": "FSL-1.1-ALv2",
+  "type": "module",
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc -p tsconfig.typecheck.json",
+    "test": "vitest run",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "check:boundaries": "node scripts/check-boundaries.ts",
+    "verify": "pnpm lint && pnpm typecheck && pnpm check:boundaries && pnpm build && pnpm test",
+    "update:golden": "UPDATE_GOLDEN=1 vitest run",
+    "dev:compile": "pnpm build && node scripts/compile-dev.ts",
+    "invariant": "node apps/cli/dist/main.js"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.4",
+    "@types/node": "^24.0.0",
+    "ajv": "^8.17.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5"
+  }
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "rv_64f4f6c02ca2bbdb",
+    "kind": "inferred-fact",
+    "subject": "component:button",
+    "path": "implementations.angular",
+    "priority": "medium",
+    "reason": "DemoButton, Button, Button are in different frameworks and share the name \"button\" once the prefix \"Demo\" is removed",
+    "confidence": 0.75,
+    "rule": "name-match.stripped-prefix",
+    "evidenceIds": [
+      "ev_179b4e460b2774ec2ae55de0",
+      "ev_d42f24c1a926987a17d07f17",
+      "ev_f20753e66167d0259055fa54"
+    ],
+    "approvalRequired": true,
+    "state": "pending"
+  },
+  {
+    "id": "rv_0104c7077c78f45d",
+    "kind": "inferred-fact",
+    "subject": "component:button",
+    "path": "implementations.react",
+    "priority": "medium",
+    "reason": "DemoButton, Button, Button are in different frameworks and share the name \"button\" once the prefix \"Demo\" is removed",
+    "confidence": 0.75,
+    "rule": "name-match.stripped-prefix",
+    "evidenceIds": [
+      "ev_179b4e460b2774ec2ae55de0",
+      "ev_d42f24c1a926987a17d07f17",
+      "ev_f20753e66167d0259055fa54"
+    ],
+    "approvalRequired": true,
+    "state": "pending"
+  },
+  {
+    "id": "rv_e4c60f8c0f9886a9",
+    "kind": "inferred-fact",
+    "subject": "component:button",
+    "path": "implementations.vue",
+    "priority": "medium",
+    "reason": "DemoButton, Button, Button are in different frameworks and share the name \"button\" once the prefix \"Demo\" is removed",
+    "confidence": 0.75,
+    "rule": "name-match.stripped-prefix",
+    "evidenceIds": [
+      "ev_179b4e460b2774ec2ae55de0",
+      "ev_d42f24c1a926987a17d07f17",
+      "ev_f20753e66167d0259055fa54"
+    ],
+    "approvalRequired": true,
+    "state": "pending"
+  },
+  {
+    "id": "rv_193750695c4f9cc8",
+    "kind": "conflict",
+    "conflictId": "conflict:value-mismatch/button/events.press.payload.text",
+    "subject": "component:button",
+    "path": "events.press.payload.text",
+    "priority": "low",
+    "reason": "value-mismatch: 2 claims disagree. Decide which events.press.payload.text is intended and align the other implementation, or accept the difference.",
+    "evidenceIds": [
+      "ev_7c3416182fba1f7d5a4f1a66",
+      "ev_f71bb1328104b9bc03e05d79"
+    ],
+    "approvalRequired": true,
+    "state": "open"
+  }
+]

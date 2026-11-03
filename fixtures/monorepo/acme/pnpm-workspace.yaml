@@ -1,0 +1,5 @@
+# Workspace layout
+packages:
+  - "packages/*"
+  - 'apps/*'   # applications
+  - "!packages/legacy"
