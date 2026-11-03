@@ -1,6 +1,12 @@
-# Invariant
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="site/assets/logo-wordmark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="site/assets/logo-wordmark-light.svg">
+    <img alt="Invariant" src="site/assets/logo-wordmark-light.svg" width="280">
+  </picture>
+</p>
 
-**Turn your design system into a contract that AI agents can read and check.**
+<p align="center"><strong>Turn your design system into a contract that AI agents can read and check.</strong></p>
 
 Invariant scans your existing design system (React, Vue, Angular, Storybook, design tokens) and compiles it into one machine-readable file: the **contract**. AI coding tools then use that contract to learn which components, props and tokens really exist, and to check that generated code follows them.
 
