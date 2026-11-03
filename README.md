@@ -8,6 +8,12 @@
 
 <p align="center"><strong>Turn your design system into a contract that AI agents can read and check.</strong></p>
 
+<p align="center">
+  <a href="https://mcarlucci.github.io/invariant/">Website</a> &middot;
+  <a href="https://mcarlucci.github.io/invariant/docs/">Documentation</a> &middot;
+  <a href="docs/specifications">Specifications</a>
+</p>
+
 Invariant scans your existing design system (React, Vue, Angular, Storybook, design tokens) and compiles it into one machine-readable file: the **contract**. AI coding tools then use that contract to learn which components, props and tokens really exist, and to check that generated code follows them.
 
 No cloud service, no account, no network access. Everything runs locally.
@@ -173,6 +179,7 @@ pnpm update:golden     # regenerate golden fixtures
 
 ## Documentation
 
+- [Website](https://mcarlucci.github.io/invariant/) and [documentation site](https://mcarlucci.github.io/invariant/docs/)
 - [System architecture](docs/architecture/system-architecture.md)
 - [ADR 0001: Foundational architecture](docs/decisions/0001-architecture.md)
 - Specifications in [`docs/specifications/`](docs/specifications): [CLI](docs/specifications/cli-v1.md), [contract](docs/specifications/contract-v1.md), [MCP and agents](docs/specifications/mcp-and-agents-v1.md), [validation and governance](docs/specifications/validation-and-governance-v1.md), and more
