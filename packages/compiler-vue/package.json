@@ -19,9 +19,8 @@
     "@invariant/compiler-core": "workspace:*",
     "@invariant/compiler-ir": "workspace:*",
     "@invariant/contract": "workspace:*",
-    "@invariant/diagnostics": "workspace:*",
     "@invariant/shared": "workspace:*",
-    "typescript": "5.9.3",
-    "@vue/compiler-sfc": "3.5.44"
+    "@vue/compiler-sfc": "3.5.44",
+    "typescript": "5.9.3"
   }
 }

@@ -1,6 +1,5 @@
 import { irDocumentSchema, serializeIrDocument, verifyIrDocument } from "@invariant/compiler-ir"
-import { hasErrors } from "@invariant/diagnostics"
-import { canonicalStringify } from "@invariant/shared"
+import { canonicalStringify, hasErrors } from "@invariant/shared"
 import type { SourceAdapter } from "../adapter.js"
 import { type CompileOptions, compile } from "../compile.js"
 import { discoverProject } from "../discovery/index.js"

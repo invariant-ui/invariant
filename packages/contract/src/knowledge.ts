@@ -1,6 +1,16 @@
 import { z } from "zod"
 import { approvalSchema, factsSchema } from "./facts.js"
 import {
+  behaviorSchema,
+  compositionSchema,
+  layoutSchema,
+  PATTERN_CATEGORIES,
+  PATTERN_CONSTRAINT_KINDS,
+  patternAccessibilitySchema,
+  patternRelationshipSchema,
+  patternVariationSchema
+} from "./patterns.js"
+import {
   componentIdSchema,
   constraintIdSchema,
   entityIdSchema,
@@ -23,20 +33,37 @@ export const documentRefSchema = z.strictObject({
 export const patternSchema = z.strictObject({
   id: patternIdSchema,
   name: z.string().min(1),
-  category: z.enum([
-    "layout",
-    "navigation",
-    "form",
-    "data-table",
-    "card",
-    "dialog",
-    "workflow",
-    "composition",
-    "other"
-  ]),
+  category: z.enum(PATTERN_CATEGORIES),
   description: z.string().min(1),
+  /** What the pattern is for, in one sentence (1.1.0). */
+  intent: z.string().min(1).optional(),
   components: z.array(componentIdSchema),
   guidelines: z.array(guidelineIdSchema),
+  /** The named parts a pattern is made of (1.1.0). */
+  composition: compositionSchema.optional(),
+  /** Named, approved ways the composition may differ (1.1.0). */
+  variations: z.array(patternVariationSchema).optional(),
+  /** Regions and their structure (1.1.0). */
+  layout: layoutSchema.optional(),
+  /** States and transitions (1.1.0). */
+  behavior: behaviorSchema.optional(),
+  accessibility: patternAccessibilitySchema.optional(),
+  /** Typed edges to other patterns and components (1.1.0). */
+  relationships: z.array(patternRelationshipSchema).optional(),
+  /** Constraints this pattern owns. Policies make them enforceable (1.1.0). */
+  constraints: z.array(constraintIdSchema).optional(),
+  /** Where the pattern applies: the files and frameworks that are instances of it (1.1.0). */
+  appliesTo: z
+    .strictObject({
+      paths: z.array(z.string().min(1)).min(1).optional(),
+      frameworks: z.array(frameworkSchema).min(1).optional()
+    })
+    .optional(),
+  /**
+   * Opt in: files in `appliesTo.paths` are also held to the constraints of every pattern this one composes (1.1.0).
+   * It has effect only while both this flag and `appliesTo` are approved.
+   */
+  inheritsConstraints: z.boolean().optional(),
   facts: factsSchema,
   extensions: extensionsSchema.optional()
 })
@@ -64,7 +91,8 @@ export const constraintSchema = z.strictObject({
     "required-prop",
     "deprecated-api",
     "approved-alternative",
-    "framework-restriction"
+    "framework-restriction",
+    ...PATTERN_CONSTRAINT_KINDS
   ]),
   description: z.string().min(1),
   subjects: z.array(entityIdSchema).min(1),

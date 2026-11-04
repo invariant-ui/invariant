@@ -1,4 +1,4 @@
-import type { Component, Contract } from "@invariant/contract"
+import { type Component, type Contract, isPatternConstraintKind } from "@invariant/contract"
 import { type DesignSystem, normalize } from "@invariant/contract-query"
 import { z } from "zod"
 import type { Severity } from "./rules.js"
@@ -80,6 +80,8 @@ export function activePolicies(contract: Contract): { active: ActivePolicy[]; pr
   for (const policy of contract.policies) {
     for (const id of policy.basedOn) {
       const constraint = contract.constraints.find((c) => c.id === id)
+      // Structural pattern constraints are evaluated by `pattern-rules.ts`, not as component-level rules.
+      if (constraint && isPatternConstraintKind(constraint.kind)) continue
       const raw =
         (constraint?.extensions?.invariant as { rule?: unknown; source?: unknown } | undefined) ?? {}
       const parsed = policyRuleSchema.safeParse(raw.rule)

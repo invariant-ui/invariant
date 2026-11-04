@@ -46,13 +46,22 @@ Each source adapter turns what it finds into a shared intermediate representatio
 
 ## Requirements
 
-- Node.js 24 or newer (see `.nvmrc`)
-- [pnpm](https://pnpm.io)
+- Node.js 20 or newer to run it. To work on Invariant itself: Node 24 (see `.nvmrc`) and [pnpm](https://pnpm.io).
 
 ## Quick start
 
+Fastest path, with nothing to install first. In your project:
+
 ```bash
-# 1. Install and build
+npx invariant-ui setup
+```
+
+It compiles your design system, proposes patterns from your code, connects your AI tool and records a baseline, asking a few questions. Nothing is approved until you confirm the contract. To keep the command, run `npm install -g invariant-ui`, then `invariant setup`.
+
+From a source checkout, or one step at a time:
+
+```bash
+# 1. Install and build (from a source checkout)
 pnpm install
 pnpm build
 
@@ -113,8 +122,13 @@ Add sources from the command line with `invariant source add <type> [path]`.
 | `analyze` | Extract and print what was found, without building a contract |
 | `compile` | Run the full pipeline and write the contract and other files (`--watch` recompiles on change) |
 | `components list` / `components inspect <name>` | Browse components (add `--evidence` to see source locations) |
-| `tokens list`, `patterns list`, `conflicts list` | Browse tokens, patterns and conflicts |
-| `validate <path...>` | Check your application code against the contract |
+| `tokens list`, `conflicts list` | Browse tokens and conflicts |
+| `patterns list` / `inspect` / `resolve` / `search` / `relationships` | Browse patterns: parts, states, constraints, relationships, approval status and evidence; `resolve` reads a page archetype with everything it composes |
+| `browser run` | Opt-in: check a running app in a headless browser (needs Playwright in your project). Runtime results, kept apart from `validate` |
+| `setup` | One command: detect sources, compile, show what was found, propose patterns from your code, connect your AI tool, baseline existing violations and offer a GitHub Action that checks every pull request commit. Asks a few questions; nothing is approved until you confirm the contract |
+| `discover <path...>` | Find structures that recur in your application code and write them as candidates to review. Nothing it finds is approved or enforced |
+| `candidates list\|show\|accept\|reject\|defer\|promote` | Review candidates; `promote` adds an accepted one to `invariant.patterns.json` without approving it |
+| `validate <path...>` | Check your application code against the contract and the structural rules of approved patterns |
 | `verify` | Check the compiled output is intact (add `--fresh` to also detect stale sources and see what changed) |
 | `rules`, `policy list` | List validation rules and approved policies |
 | `review list\|show\|approve\|reject\|resolve\|accept\|dismiss` | Record human decisions on conflicts and inferred facts |
@@ -154,13 +168,13 @@ packages/
   contract-query/        Read API over a compiled contract
   reconciliation/        Merging sources and surfacing conflicts
   semantic-engine/       Classification and inference, with evidence
-  validation/            Usage validators and rules
+  validation/            Usage validators and rules, and pattern discovery
+  browser-verify/        Opt-in runtime checks in a browser
   governance/            Approvals, policies and decisions
   artifact-generator/    Writes the output files
   mcp/                   MCP server
   agent-kit/             Client configs, skills and rules
-  diagnostics/           Structured diagnostics
-  shared/                Shared utilities
+  shared/                Shared utilities and structured diagnostics
 fixtures/                Test projects and golden files
 docs/                    Architecture, ADRs and specifications
 ```
@@ -181,6 +195,9 @@ pnpm update:golden     # regenerate golden fixtures
 
 - [Website](https://mcarlucci.github.io/invariant/) and [documentation site](https://mcarlucci.github.io/invariant/docs/)
 - [System architecture](docs/architecture/system-architecture.md)
+- [Pattern definitions](docs/specifications/pattern-definitions-v1.md): write layouts, interactions and page archetypes in `invariant.patterns.json`
+- [Browser verification](docs/specifications/browser-verification-v1.md): opt-in runtime checks for focus, keyboard order, rendered composition and responsive layout
+- [Pattern discovery](docs/specifications/pattern-discovery-v1.md): find recurring structures in your code and review them as candidates
 - [ADR 0001: Foundational architecture](docs/decisions/0001-architecture.md)
 - Specifications in [`docs/specifications/`](docs/specifications): [CLI](docs/specifications/cli-v1.md), [contract](docs/specifications/contract-v1.md), [MCP and agents](docs/specifications/mcp-and-agents-v1.md), [validation and governance](docs/specifications/validation-and-governance-v1.md), and more
 

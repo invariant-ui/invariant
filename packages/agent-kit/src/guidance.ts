@@ -23,6 +23,9 @@ export interface Facts {
   components: string[]
   omittedComponents: number
   tokenCategories: string[]
+  /** Ids (without `pattern:`) of page archetypes whose every fact is approved. Names and text never reach files. */
+  approvedArchetypes: string[]
+  omittedArchetypes: number
   hash: string
 }
 
@@ -34,12 +37,23 @@ export interface Facts {
 export function safeFacts(contract: Contract): Facts {
   const idents = contract.components.map((c) => c.name).filter((n) => IDENT.test(n))
   const shown = idents.slice(0, 60)
+  const archetypes = contract.patterns
+    .filter((p) => p.category === "page")
+    .filter((p) => {
+      const facts = Object.values(p.facts)
+      return facts.length > 0 && facts.every((f) => f.status === "approved")
+    })
+    .map((p) => p.id.replace(/^pattern:/, ""))
+    .filter((id) => IDENT.test(id))
+    .sort()
   return {
     name: TITLE.test(contract.metadata.name) ? contract.metadata.name : contract.metadata.contractId,
     frameworks: contract.metadata.frameworks.filter((f) => IDENT.test(f)),
     components: shown,
     omittedComponents: contract.components.length - shown.length,
     tokenCategories: [...new Set(contract.tokens.map((t) => t.category))].sort(),
+    approvedArchetypes: archetypes.slice(0, 20),
+    omittedArchetypes: Math.max(0, archetypes.length - 20),
     hash: contract.integrity.contentHash
   }
 }
@@ -52,8 +66,15 @@ const groundRules = (f: Facts): string => `## Ground rules
 - If a component's \`apiComplete\` is false, a prop missing from its list may still exist. Check the source before concluding it does not.
 - Never invent props, variants, tokens or components. If the contract lacks something you need, say so and ask.
 - Prefer tokens over literal colors and sizes. Use \`get_design_tokens\` for values.
-- The contract has no organizational policies and usually no patterns. Absence of a rule here is not permission.
+- Patterns carry a status too. Follow approved patterns. Treat documented, inferred or mixed ones as proposals and say so. Candidates from \`invariant discover\` are not in the contract and are not patterns: do not rely on them.
+- Absence of a pattern or policy here is not permission, and an empty pattern list means none is defined, not that none applies.
+- Validation covers what can be read from code. Anything reported \`not-verifiable\` or \`skipped\` is unresolved, not passed. Runtime behavior (focus, keyboard, responsive layout) is checked only by \`invariant browser run\`, which the user runs.
 - If \`contractHash\` changes during a task, fetch again. To refresh the contract, the user runs \`invariant compile\`.`
+
+const archetypes = (f: Facts): string =>
+  f.approvedArchetypes.length === 0
+    ? "No page archetype is fully approved in the contract. Any archetype you find is a proposal."
+    : `Approved page archetypes: ${f.approvedArchetypes.join(", ")}${f.omittedArchetypes > 0 ? `, and ${f.omittedArchetypes} more (use \`get_design_patterns\` with category page)` : ""}.`
 
 const tools = (names: string[]): string => names.map((n) => `\`${n}\``).join(", ")
 
@@ -71,10 +92,12 @@ interface Skill {
 export const SKILLS: Record<SkillName, Skill> = {
   "invariant-build-ui": {
     description:
-      "Build or change UI with this design system's real components and tokens. Use when writing screens, forms, or components that should follow the design system.",
+      "Build or change UI with this design system's real components, tokens and approved page patterns. Use when writing screens, forms, dialogs or components that should follow the design system.",
     tools: [
       "get_design_system_overview",
       "search_design_system",
+      "get_design_patterns",
+      "get_pattern_relationships",
       "get_component",
       "get_component_usage",
       "get_component_composition",
@@ -86,13 +109,19 @@ export const SKILLS: Record<SkillName, Skill> = {
 
 ${components(f)}
 
-1. Call \`get_design_system_overview\` once to learn what is covered and what is not.
-2. For each piece of UI, find the component with \`search_design_system\`, then read \`get_component\` and \`get_component_usage\` before writing code.
-3. Use only listed props and values. Required props and allowed values come from the contract.
-4. Take colors, spacing and type from \`get_design_tokens\`; do not write literal values.
-5. For compound components, read \`get_component_composition\` to see what goes inside what.
-6. Check your code: \`validate_component_usage\` for one component, \`validate_design_system_compliance\` for a snippet. Fix errors. Treat info-level and heuristic findings as suggestions.
-7. Tell the user what you could not verify (dynamic values, incomplete APIs).
+${archetypes(f)}
+
+Fetch only what the task needs. Do not load the whole contract.
+
+1. **Understand the task.** Name the page or screen type, the interactions (submit, delete, search) and the components it needs.
+2. **Find the page archetype.** \`get_design_patterns\` with \`category: "page"\`, or \`query\` with the user's words. Read the match in full with \`name\` and \`resolve: true\` (add \`variation\` if one fits). It lists regions, parts, required interaction states, constraints and the status of everything it builds on. If none fits, say so and build from components alone.
+3. **Find interaction and layout patterns.** For each interaction the task needs, \`get_design_patterns\` with \`category: "interaction"\` (form submission, destructive confirmation, search results). For layout, \`category: "layout"\`. \`get_pattern_relationships\` shows what a pattern composes and uses.
+4. **Check status before following.** Follow approved patterns. A documented, inferred or mixed pattern is a proposal: follow it only if the user agrees, and say it is not approved. A pattern that builds on unapproved patterns is reported as such.
+5. **Get components and tokens.** \`search_design_system\`, then \`get_component\`, \`get_component_usage\` and \`get_component_composition\`. Use only listed props and values. Colors, spacing and type come from \`get_design_tokens\`.
+6. **Generate** the implementation following the archetype's parts and regions, and showing each required interaction state it lists.
+7. **Validate.** Run \`validate_design_system_compliance\` on the code with \`framework\` and a project-relative \`filename\`, so path-scoped pattern rules apply. \`validate_component_usage\` checks one component.
+8. **Correct.** Fix errors and warnings, then validate again. Fix what the finding says; do not weaken the code to silence it.
+9. **Report.** List what passed, what you fixed, and what is unresolved: any violation you could not fix, every check reported \`not-verifiable\` or \`skipped\` (with its reason), dynamic values, incomplete APIs, and patterns you followed that are not approved. Say that static checks do not show runtime behavior; the user can run \`invariant browser run\` for that.
 
 ${groundRules(f)}
 `
@@ -127,6 +156,7 @@ ${groundRules(f)}
       "get_component_composition",
       "get_design_tokens",
       "get_design_patterns",
+      "get_pattern_relationships",
       "search_design_system",
       "validate_design_system_compliance"
     ],
@@ -137,7 +167,7 @@ ${components(f)}
 1. For each container, read \`get_component_composition\`: what it contains and what contains it, with whether each link is discovered or inferred.
 2. Fill named slots only with what the contract lists. Check \`get_component\` for slots and required children.
 3. Use spacing and sizing tokens from \`get_design_tokens\`, with the \`spacing\` or \`sizing\` category.
-4. \`get_design_patterns\` is often empty. An empty list means no pattern is documented, not that none applies.
+4. Call \`get_design_patterns\` (filter by category, or pass a name for one pattern in full) and \`get_pattern_relationships\`. Each pattern says whether it is approved: follow approved patterns, and treat documented, inferred or mixed ones as proposals. An empty list means no pattern is defined, not that none applies.
 5. Inferred containment is a name-based guess; confirm it in the source when it matters.
 6. Validate the result with \`validate_design_system_compliance\`.
 
@@ -152,16 +182,17 @@ ${groundRules(f)}
       "get_component",
       "get_design_tokens",
       "get_design_guidelines",
+      "get_design_patterns",
       "validate_component_usage",
       "validate_design_system_compliance"
     ],
     body: (f) => `# Review code against ${f.name}
 
-1. Run \`validate_design_system_compliance\` on each changed snippet, with the right \`framework\`.
+1. Run \`validate_design_system_compliance\` on each changed snippet, with the right \`framework\` and a project-relative \`filename\`.
 2. Group findings by basis. discovered and documented findings rest on the contract. inferred findings are guesses. heuristic findings are name matches, not rules; report them as suggestions.
 3. Report each finding with its file line (from the snippet), the contract fact it rests on (the \`source\` field), and a fix.
 4. List what was not verified: dynamic values, components outside the contract, and incomplete APIs.
-5. Do not state that code violates organizational policy: the contract has no approved policies.
+5. Pattern findings carry the policy and pattern they come from. Report a pattern violation only when the result says fail or warning; \`not-verifiable\` and \`skipped\` are open questions, not violations and not passes. Do not state that code violates organizational policy unless an approved policy is named.
 6. Check \`get_design_guidelines\` for documents relevant to the components used and point the user to them.
 
 ${groundRules(f)}
@@ -211,11 +242,14 @@ export const rulesBody = (f: Facts): string => `# ${f.name}: design system rules
 
 ${components(f)}
 
-When writing or changing UI for ${f.name}, use the ${SERVER_NAME} MCP server (${tools(["get_design_system_overview", "search_design_system", "get_component", "get_component_usage", "get_component_composition", "get_design_tokens", "validate_component_usage", "validate_design_system_compliance"])}).
+When writing or changing UI for ${f.name}, use the ${SERVER_NAME} MCP server (${tools(["get_design_system_overview", "search_design_system", "get_design_patterns", "get_component", "get_component_usage", "get_component_composition", "get_design_tokens", "validate_component_usage", "validate_design_system_compliance"])}).
 
-1. Find the component, then read its contract and usage before writing code.
-2. Use only listed props and values; use tokens, not literal colors or sizes.
-3. Validate your code with the validation tools and fix errors.
+${archetypes(f)}
+
+1. Find the page archetype and the interaction patterns the task needs with \`get_design_patterns\` (filter by category, or resolve one by name). Follow approved patterns; treat the rest as proposals and say so.
+2. Find the component, then read its contract and usage before writing code.
+3. Use only listed props and values; use tokens, not literal colors or sizes.
+4. Validate your code with the validation tools (pass \`filename\`), fix errors, and report anything unresolved or \`not-verifiable\`.
 
 ${groundRules(f)}
 `

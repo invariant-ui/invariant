@@ -508,7 +508,14 @@ describe("reporters", () => {
   const summary = summarize(violations, 3, 2)
 
   it("summarizes and decides failure by threshold", () => {
-    expect(summary).toEqual({ files: 3, errors: 2, warnings: 1, info: 1, componentsChecked: 2 })
+    expect(summary).toEqual({
+      files: 3,
+      errors: 2,
+      warnings: 1,
+      info: 1,
+      componentsChecked: 2,
+      patternRules: { pass: 0, fail: 0, warning: 0, notVerifiable: 0, skipped: 0 }
+    })
     expect(shouldFail(summary, "error")).toBe(true)
     expect(shouldFail({ ...summary, errors: 0 }, "error")).toBe(false)
     expect(shouldFail({ ...summary, errors: 0 }, "warning")).toBe(true)

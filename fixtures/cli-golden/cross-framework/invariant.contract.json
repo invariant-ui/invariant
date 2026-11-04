@@ -1190,15 +1190,15 @@
     }
   ],
   "constraints": [],
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "guidelines": [],
   "integrity": {
     "algorithm": "sha256",
-    "contentHash": "0eb2325e8548179afad685fc18f500cdab50afdf2325377916e898715da7b173"
+    "contentHash": "51db990bfdd19a944bdec4d85d72b393c2bcdc1e5fa17872c6dd05c03c8a3f5a"
   },
   "metadata": {
     "compiledAt": "2026-01-01T00:00:00.000Z",
-    "compilerVersion": "0.0.0",
+    "compilerVersion": "0.1.0",
     "contractId": "fixture-ds",
     "frameworks": [
       "angular",

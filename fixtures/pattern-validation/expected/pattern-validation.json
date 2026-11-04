@@ -1,0 +1,334 @@
+{
+  "summary": {
+    "files": 5,
+    "errors": 12,
+    "warnings": 1,
+    "info": 0,
+    "componentsChecked": 8,
+    "patternRules": {
+      "pass": 10,
+      "fail": 6,
+      "warning": 0,
+      "notVerifiable": 4,
+      "skipped": 2
+    }
+  },
+  "violations": [
+    {
+      "code": "pattern-order-violated",
+      "severity": "error",
+      "message": "Card at line 4: Card.Body (line 5) comes before Card.Header (line 8); Card.Header must come first (pattern pattern:page.settings)",
+      "subject": "pattern:page.settings",
+      "line": 5,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:page.settings.header-first",
+      "source": "invariant.patterns.json",
+      "suggestion": "Move Card.Header before Card.Body.",
+      "file": "app/pages/Bad.tsx"
+    },
+    {
+      "code": "pattern-parent-required",
+      "severity": "error",
+      "message": "IconButton at line 6 must be inside Stack, but sits inside Card.Body instead (pattern pattern:page.settings)",
+      "subject": "pattern:page.settings",
+      "line": 6,
+      "column": 7,
+      "basis": "approved",
+      "policy": "policy:page.settings.iconbutton-in-stack",
+      "source": "invariant.patterns.json",
+      "suggestion": "Wrap it in Stack.",
+      "file": "app/pages/Bad.tsx"
+    },
+    {
+      "code": "pattern-child-forbidden",
+      "severity": "warning",
+      "message": "Card at line 4 contains Card at line 9, which is not allowed there (pattern pattern:page.settings)",
+      "subject": "pattern:page.settings",
+      "line": 9,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:page.settings.no-nested-card",
+      "source": "invariant.patterns.json",
+      "suggestion": "Remove Card from inside Card.",
+      "file": "app/pages/Bad.tsx"
+    },
+    {
+      "code": "pattern-required-child-missing",
+      "severity": "error",
+      "message": "Modal at line 12 has no Button (pattern pattern:page.settings)",
+      "subject": "pattern:page.settings",
+      "line": 12,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:page.settings.modal-confirm",
+      "source": "invariant.patterns.json",
+      "suggestion": "Add Button inside Modal.",
+      "file": "app/pages/Bad.tsx"
+    },
+    {
+      "code": "pattern-cardinality-violated",
+      "severity": "error",
+      "message": "this file has 2 Modal, but at most 1 are allowed (pattern pattern:page.settings)",
+      "subject": "pattern:page.settings",
+      "line": 13,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:page.settings.one-modal",
+      "source": "invariant.patterns.json",
+      "suggestion": "Keep at most 1 Modal.",
+      "file": "app/pages/Bad.tsx"
+    },
+    {
+      "code": "pattern-region-missing",
+      "severity": "error",
+      "message": "region content is missing (pattern pattern:page.settings)",
+      "subject": "pattern:page.settings",
+      "line": 1,
+      "column": 1,
+      "basis": "approved",
+      "policy": "policy:page.settings.needs-content",
+      "source": "invariant.patterns.json",
+      "suggestion": "Add the components that make up region content.",
+      "file": "app/pages/Empty.tsx"
+    }
+  ],
+  "evaluations": [
+    {
+      "rule": "pattern-order-violated",
+      "status": "fail",
+      "reason": "Card at line 4: Card.Body (line 5) comes before Card.Header (line 8); Card.Header must come first",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.header-first",
+      "policy": "policy:page.settings.header-first",
+      "file": "app/pages/Bad.tsx",
+      "line": 5,
+      "column": 5
+    },
+    {
+      "rule": "pattern-region-missing",
+      "status": "pass",
+      "reason": "region content is present",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.needs-content",
+      "policy": "policy:page.settings.needs-content",
+      "file": "app/pages/Bad.tsx",
+      "line": 5,
+      "column": 5
+    },
+    {
+      "rule": "pattern-parent-required",
+      "status": "fail",
+      "reason": "IconButton at line 6 must be inside Stack, but sits inside Card.Body instead",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.iconbutton-in-stack",
+      "policy": "policy:page.settings.iconbutton-in-stack",
+      "file": "app/pages/Bad.tsx",
+      "line": 6,
+      "column": 7
+    },
+    {
+      "rule": "pattern-order-violated",
+      "status": "skipped",
+      "reason": "Card at line 9: no Card.Header to order",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.header-first",
+      "policy": "policy:page.settings.header-first",
+      "file": "app/pages/Bad.tsx",
+      "line": 9,
+      "column": 5
+    },
+    {
+      "rule": "pattern-child-forbidden",
+      "status": "fail",
+      "reason": "Card at line 4 contains Card at line 9, which is not allowed there",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.no-nested-card",
+      "policy": "policy:page.settings.no-nested-card",
+      "file": "app/pages/Bad.tsx",
+      "line": 9,
+      "column": 5
+    },
+    {
+      "rule": "pattern-child-forbidden",
+      "status": "pass",
+      "reason": "Card at line 9 does not contain Card",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.no-nested-card",
+      "policy": "policy:page.settings.no-nested-card",
+      "file": "app/pages/Bad.tsx",
+      "line": 9,
+      "column": 5
+    },
+    {
+      "rule": "pattern-required-child-missing",
+      "status": "fail",
+      "reason": "Modal at line 12 has no Button",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.modal-confirm",
+      "policy": "policy:page.settings.modal-confirm",
+      "file": "app/pages/Bad.tsx",
+      "line": 12,
+      "column": 5
+    },
+    {
+      "rule": "pattern-required-child-missing",
+      "status": "pass",
+      "reason": "Modal at line 13 contains Button",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.modal-confirm",
+      "policy": "policy:page.settings.modal-confirm",
+      "file": "app/pages/Bad.tsx",
+      "line": 13,
+      "column": 5
+    },
+    {
+      "rule": "pattern-cardinality-violated",
+      "status": "fail",
+      "reason": "this file has 2 Modal, but at most 1 are allowed",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.one-modal",
+      "policy": "policy:page.settings.one-modal",
+      "file": "app/pages/Bad.tsx",
+      "line": 13,
+      "column": 5
+    },
+    {
+      "rule": "pattern-cardinality-violated",
+      "status": "pass",
+      "reason": "this file has 0 Modal, within the limit of 1",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.one-modal",
+      "policy": "policy:page.settings.one-modal",
+      "file": "app/pages/Empty.tsx"
+    },
+    {
+      "rule": "pattern-region-missing",
+      "status": "fail",
+      "reason": "region content is missing",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.needs-content",
+      "policy": "policy:page.settings.needs-content",
+      "file": "app/pages/Empty.tsx",
+      "line": 1,
+      "column": 1
+    },
+    {
+      "rule": "pattern-cardinality-violated",
+      "status": "pass",
+      "reason": "this file has 1 Modal, within the limit of 1",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.one-modal",
+      "policy": "policy:page.settings.one-modal",
+      "file": "app/pages/Good.tsx"
+    },
+    {
+      "rule": "pattern-order-violated",
+      "status": "pass",
+      "reason": "Card at line 5: Card.Header comes before Card.Body",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.header-first",
+      "policy": "policy:page.settings.header-first",
+      "file": "app/pages/Good.tsx",
+      "line": 5,
+      "column": 5
+    },
+    {
+      "rule": "pattern-child-forbidden",
+      "status": "pass",
+      "reason": "Card at line 5 does not contain Card",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.no-nested-card",
+      "policy": "policy:page.settings.no-nested-card",
+      "file": "app/pages/Good.tsx",
+      "line": 5,
+      "column": 5
+    },
+    {
+      "rule": "pattern-region-missing",
+      "status": "pass",
+      "reason": "region content is present",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.needs-content",
+      "policy": "policy:page.settings.needs-content",
+      "file": "app/pages/Good.tsx",
+      "line": 7,
+      "column": 7
+    },
+    {
+      "rule": "pattern-parent-required",
+      "status": "pass",
+      "reason": "IconButton at line 8 is inside Stack",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.iconbutton-in-stack",
+      "policy": "policy:page.settings.iconbutton-in-stack",
+      "file": "app/pages/Good.tsx",
+      "line": 8,
+      "column": 9
+    },
+    {
+      "rule": "pattern-required-child-missing",
+      "status": "pass",
+      "reason": "Modal at line 11 contains Button",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.modal-confirm",
+      "policy": "policy:page.settings.modal-confirm",
+      "file": "app/pages/Good.tsx",
+      "line": 11,
+      "column": 5
+    },
+    {
+      "rule": "pattern-cardinality-violated",
+      "status": "not-verifiable",
+      "reason": "this file: 1 Modal seen (at most 1 allowed), but <Actions> at line 6 comes from outside the design system and may render more",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.one-modal",
+      "policy": "policy:page.settings.one-modal",
+      "file": "app/pages/Open.tsx"
+    },
+    {
+      "rule": "pattern-region-missing",
+      "status": "not-verifiable",
+      "reason": "cannot tell whether region content is present; <Actions> at line 6 comes from outside the design system and may render more",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.needs-content",
+      "policy": "policy:page.settings.needs-content",
+      "file": "app/pages/Open.tsx",
+      "line": 1,
+      "column": 1
+    },
+    {
+      "rule": "pattern-order-violated",
+      "status": "skipped",
+      "reason": "Card at line 5: no Card.Header to order",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.header-first",
+      "policy": "policy:page.settings.header-first",
+      "file": "app/pages/Open.tsx",
+      "line": 5,
+      "column": 3
+    },
+    {
+      "rule": "pattern-child-forbidden",
+      "status": "not-verifiable",
+      "reason": "Card at line 5: cannot tell whether it avoids Card; <Actions> at line 6 comes from outside the design system and may render more",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.no-nested-card",
+      "policy": "policy:page.settings.no-nested-card",
+      "file": "app/pages/Open.tsx",
+      "line": 5,
+      "column": 3
+    },
+    {
+      "rule": "pattern-required-child-missing",
+      "status": "not-verifiable",
+      "reason": "Modal at line 7: cannot tell whether it contains Button; <Modal> at line 7 gets content from outside what this file shows (children, a spread or an expression)",
+      "pattern": "pattern:page.settings",
+      "constraint": "constraint:page.settings.modal-confirm",
+      "policy": "policy:page.settings.modal-confirm",
+      "file": "app/pages/Open.tsx",
+      "line": 7,
+      "column": 5
+    }
+  ]
+}

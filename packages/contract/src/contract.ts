@@ -6,7 +6,12 @@ import { frameworkSchema, isoTimestampSchema, sha256HexSchema, slugSchema } from
 import { sourceSchema } from "./sources.js"
 import { themeSchema, tokenSchema } from "./tokens.js"
 
-export const CONTRACT_VERSION = "1.0.0"
+/**
+ * 1.1.0 added pattern contracts. Every new field is optional, so a 1.0.0 document is also a valid 1.1.0 document:
+ * nothing is rewritten when one is read, and its content hash stays valid. Writers emit the current version.
+ */
+export const SUPPORTED_CONTRACT_VERSIONS = ["1.0.0", "1.1.0"] as const
+export const CONTRACT_VERSION = "1.1.0"
 
 export const contractMetadataSchema = z.strictObject({
   /** Stable identity of the design system across contract versions. */
@@ -29,7 +34,7 @@ export const integritySchema = z.strictObject({
  * `sources[].version`. Evidence is stored in a separate evidence file and referenced by id.
  */
 export const contractSchema = z.strictObject({
-  contractVersion: z.literal(CONTRACT_VERSION),
+  contractVersion: z.enum(SUPPORTED_CONTRACT_VERSIONS),
   metadata: contractMetadataSchema,
   sources: z.array(sourceSchema),
   themes: z.array(themeSchema),

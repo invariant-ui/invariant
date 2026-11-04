@@ -8,7 +8,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@invariant/shared": src("shared"),
-      "@invariant/diagnostics": src("diagnostics"),
       "@invariant/contract": src("contract"),
       "@invariant/compiler-ir": src("compiler-ir"),
       "@invariant/compiler-core/testing": fileURLToPath(
@@ -24,6 +23,7 @@ export default defineConfig({
       "@invariant/contract-query": src("contract-query"),
       "@invariant/mcp": src("mcp"),
       "@invariant/validation": src("validation"),
+      "@invariant/browser-verify": src("browser-verify"),
       "@invariant/governance": src("governance"),
       "@invariant/agent-kit": src("agent-kit"),
       "@invariant/cli": fileURLToPath(new URL("./apps/cli/src/index.ts", import.meta.url)),

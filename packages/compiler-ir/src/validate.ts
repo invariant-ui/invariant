@@ -1,6 +1,5 @@
 import { computeEvidenceId } from "@invariant/contract"
-import { type Diagnostic, sortDiagnostics } from "@invariant/diagnostics"
-import { canonicalStringify, hashJson } from "@invariant/shared"
+import { canonicalStringify, type Diagnostic, hashJson, sortDiagnostics } from "@invariant/shared"
 import type { z } from "zod"
 import { IR_VERSION, type IrDocument, irDocumentSchema } from "./ir.js"
 

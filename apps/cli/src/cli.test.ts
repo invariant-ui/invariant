@@ -21,7 +21,7 @@ const fixture = (name: string): string => path.join(root, "fixtures", name)
 const made: string[] = []
 
 function project(from: string): string {
-  const dir = mkdtempSync(path.join(tmpdir(), "invariant-cli-"))
+  const dir = mkdtempSync(path.join(tmpdir(), "invariant-ui-"))
   made.push(dir)
   cpSync(fixture(from), dir, { recursive: true, filter: (src) => !src.includes("storybook-static") })
   return dir
@@ -313,7 +313,7 @@ describe("source management", () => {
 
 describe("init on a large repository", () => {
   it("writes one whole-project entry per framework when there are many packages", async () => {
-    const dir = mkdtempSync(path.join(tmpdir(), "invariant-cli-"))
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-ui-"))
     made.push(dir)
     writeFileSync(
       path.join(dir, "package.json"),
@@ -375,7 +375,7 @@ describe("usage and exit codes", () => {
     expect((await cli(dir, "--help")).out).toMatch(/usage: invariant/)
     expect((await cli(dir, "help")).code).toBe(0)
     expect((await cli(dir)).code).toBe(2)
-    expect((await cli(dir, "--version")).out.trim()).toBe("0.0.0")
+    expect((await cli(dir, "--version")).out.trim()).toBe("0.1.0")
     const unknownFlag = await cli(dir, "compile", "--nope")
     expect(unknownFlag.code).toBe(2)
     expect(unknownFlag.err).toMatch(/Unknown option/)

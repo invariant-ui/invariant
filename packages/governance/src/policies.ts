@@ -1,6 +1,6 @@
 import type { Constraint, ContractDraft, Policy } from "@invariant/contract"
-import { type Diagnostic, DiagnosticCollector } from "@invariant/diagnostics"
 import type { JsonValue } from "@invariant/shared"
+import { type Diagnostic, DiagnosticCollector } from "@invariant/shared"
 import { type PolicyRule, policyRuleSchema } from "@invariant/validation"
 import { z } from "zod"
 

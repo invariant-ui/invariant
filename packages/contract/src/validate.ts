@@ -1,16 +1,18 @@
-import { type Diagnostic, sortDiagnostics } from "@invariant/diagnostics"
+import { type Diagnostic, sortDiagnostics } from "@invariant/shared"
 import type { z } from "zod"
-import { CONTRACT_VERSION, type Contract, contractSchema } from "./contract.js"
+import { CONTRACT_VERSION, type Contract, contractSchema, SUPPORTED_CONTRACT_VERSIONS } from "./contract.js"
 import { computeEvidenceId, type EvidenceFile } from "./evidence.js"
 import { resolveFactPath } from "./fact-path.js"
 import { computeFactFingerprint, type FactRecord } from "./facts.js"
 import { computeContentHash } from "./integrity.js"
+import { checkPatterns, constraintReferences, newInOnePointOne, patternReferences } from "./pattern-checks.js"
 
 export type ParseResult<T> = { ok: true; value: T } | { ok: false; diagnostics: Diagnostic[] }
 
 /**
- * Structural validation. Major-version mismatches are reported before schema errors. A migration
- * registry will be added with the first breaking schema change; v1 has nothing to migrate from.
+ * Structural validation. Major-version mismatches are reported before schema errors. Minor versions
+ * are additive (1.1.0 only added optional fields), so older documents are read as they are and there is
+ * nothing to migrate; a migration registry is added with the first breaking schema change.
  */
 export function parseContract(input: unknown): ParseResult<Contract> {
   const version = declaredVersion(input)
@@ -21,7 +23,7 @@ export function parseContract(input: unknown): ParseResult<Contract> {
         {
           code: "contract.unsupported-version",
           severity: "error",
-          message: `Contract version ${version} is not supported; this build reads ${CONTRACT_VERSION}`
+          message: `Contract version ${version} is not supported; this build reads ${SUPPORTED_CONTRACT_VERSIONS.join(" and ")}`
         }
       ]
     }
@@ -78,6 +80,15 @@ export function verifyContract(contract: Contract, evidenceFile?: EvidenceFile):
       }
     }
   }
+
+  checkPatterns(contract, report, found)
+  if (contract.contractVersion === "1.0.0")
+    for (const { entityId, reason } of newInOnePointOne(contract))
+      report(
+        "contract.field-newer-than-version",
+        `${entityId} ${reason}, which contract 1.0.0 cannot contain; the document must declare 1.1.0`,
+        entityId
+      )
 
   const evidenceIdsUsed = new Set<string>()
   for (const entity of factBearingEntities(contract)) {
@@ -245,6 +256,8 @@ function entityReferences(contract: Contract): Array<{ from: string; to: string 
   for (const p of contract.patterns) for (const to of [...p.components, ...p.guidelines]) add(p.id, to)
   for (const g of contract.guidelines) for (const to of g.appliesTo) add(g.id, to)
   for (const c of contract.constraints) for (const to of c.subjects) add(c.id, to)
+  for (const { from, to } of [...patternReferences(contract), ...constraintReferences(contract)])
+    add(from, to)
   for (const p of contract.policies)
     for (const to of [...(p.scope.entities ?? []), ...p.basedOn]) add(p.id, to)
   for (const c of contract.conflicts) add(c.id, c.subject)

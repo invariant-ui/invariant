@@ -1,6 +1,6 @@
 import type { Contract } from "@invariant/contract"
-import type { Diagnostic } from "@invariant/diagnostics"
 import type { ReviewItem } from "@invariant/reconciliation"
+import type { Diagnostic } from "@invariant/shared"
 
 const ESCAPES: Record<string, string> = {
   "&": "&amp;",

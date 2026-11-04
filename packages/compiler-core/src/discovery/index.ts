@@ -1,4 +1,4 @@
-import { DiagnosticCollector } from "@invariant/diagnostics"
+import { DiagnosticCollector } from "@invariant/shared"
 import type { ReadonlyFs } from "../fs.js"
 import { DEFAULT_IGNORED_DIRS, walk } from "../walk.js"
 import { discoverDocFiles } from "./docs.js"

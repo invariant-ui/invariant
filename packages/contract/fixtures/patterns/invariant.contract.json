@@ -1,0 +1,1055 @@
+{
+  "components": [
+    {
+      "accessibility": {
+        "keyboard": [
+          "Enter",
+          "Space"
+        ],
+        "role": "button"
+      },
+      "composition": [
+        {
+          "target": "component:icon",
+          "type": "commonly-used-with"
+        }
+      ],
+      "description": "Triggers an action.",
+      "events": [
+        {
+          "extensions": {
+            "angular": {
+              "output": "pressed"
+            },
+            "react": {
+              "prop": "onPress"
+            },
+            "vue": {
+              "emit": "press"
+            }
+          },
+          "name": "press",
+          "payload": {
+            "kind": "object",
+            "text": "MouseEvent"
+          }
+        }
+      ],
+      "examples": [
+        {
+          "code": "<Button size=\"md\">Save</Button>",
+          "id": "primary",
+          "language": "tsx",
+          "sourceId": "ui-react",
+          "title": "Primary"
+        }
+      ],
+      "facts": {
+        "composition.0": {
+          "confidence": 0.7,
+          "derivation": {
+            "inputs": [
+              "ev_4de10ec09dcaa53db7eb1134"
+            ],
+            "reasoning": "Icon appears inside Button in 1 of 1 observed JSX usages.",
+            "rule": "co-usage"
+          },
+          "evidenceIds": [
+            "ev_4de10ec09dcaa53db7eb1134"
+          ],
+          "status": "inferred"
+        },
+        "props.size.allowedValues": {
+          "approval": {
+            "approvedAt": "2026-10-30T13:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "215d09199d8e1a32a1f9c845ddef96bf73acda68be5f07a3c1eed7b812887331",
+            "priorStatus": "discovered",
+            "reference": "DS-142",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_07161ae3f037b3a6d58d4ee5",
+            "ev_97c93e9d01f841a56d3a86dc",
+            "ev_e7a8ae962ac83cdea3c9c1e4"
+          ],
+          "status": "approved"
+        },
+        "props.size.default": {
+          "evidenceIds": [
+            "ev_07161ae3f037b3a6d58d4ee5",
+            "ev_97c93e9d01f841a56d3a86dc",
+            "ev_e7a8ae962ac83cdea3c9c1e4"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "component:button",
+      "implementations": [
+        {
+          "exportName": "AcmeButton",
+          "extensions": {
+            "angular": {
+              "inputKinds": {
+                "size": "signal-input"
+              },
+              "selector": "acme-button",
+              "standalone": true
+            }
+          },
+          "framework": "angular",
+          "id": "angular",
+          "packageName": "@acme/ui-angular",
+          "sourceId": "ui-angular"
+        },
+        {
+          "exportName": "Button",
+          "extensions": {
+            "react": {
+              "forwardRef": true,
+              "polymorphic": false
+            }
+          },
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        },
+        {
+          "exportName": "default",
+          "extensions": {
+            "vue": {
+              "api": "script-setup"
+            }
+          },
+          "framework": "vue",
+          "id": "vue",
+          "importPath": "@acme/ui-vue/Button.vue",
+          "packageName": "@acme/ui-vue",
+          "sourceId": "ui-vue"
+        }
+      ],
+      "lifecycle": "stable",
+      "name": "Button",
+      "props": [
+        {
+          "default": false,
+          "name": "disabled",
+          "required": false,
+          "type": {
+            "kind": "boolean",
+            "text": "boolean"
+          }
+        },
+        {
+          "allowedValues": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md",
+          "extensions": {
+            "angular": {
+              "kind": "input"
+            },
+            "react": {
+              "kind": "prop"
+            },
+            "vue": {
+              "kind": "prop"
+            }
+          },
+          "name": "size",
+          "required": false,
+          "type": {
+            "kind": "enum",
+            "text": "\"sm\" | \"md\" | \"lg\""
+          }
+        }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "required": false
+        },
+        {
+          "accepts": [
+            "component:icon"
+          ],
+          "name": "icon"
+        }
+      ],
+      "states": [
+        {
+          "name": "disabled"
+        },
+        {
+          "name": "loading"
+        }
+      ],
+      "variants": [
+        {
+          "default": "md",
+          "name": "size",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ]
+        }
+      ]
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:confirm-dialog",
+      "implementations": [
+        {
+          "exportName": "ConfirmDialog",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "ConfirmDialog",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:data-table",
+      "implementations": [
+        {
+          "exportName": "DataTable",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "DataTable",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:empty-state",
+      "implementations": [
+        {
+          "exportName": "EmptyState",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "EmptyState",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:icon",
+      "implementations": [
+        {
+          "exportName": "Icon",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "Icon",
+      "props": [
+        {
+          "name": "name",
+          "required": true,
+          "type": {
+            "kind": "string",
+            "text": "string"
+          }
+        }
+      ],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:page-header",
+      "implementations": [
+        {
+          "exportName": "PageHeader",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "PageHeader",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:pagination",
+      "implementations": [
+        {
+          "exportName": "Pagination",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "Pagination",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    },
+    {
+      "composition": [],
+      "events": [],
+      "examples": [],
+      "facts": {},
+      "id": "component:search-field",
+      "implementations": [
+        {
+          "exportName": "SearchField",
+          "framework": "react",
+          "id": "react",
+          "packageName": "@acme/ui-react",
+          "sourceId": "ui-react"
+        }
+      ],
+      "name": "SearchField",
+      "props": [],
+      "slots": [],
+      "states": [],
+      "variants": []
+    }
+  ],
+  "conflicts": [
+    {
+      "claims": [
+        {
+          "evidenceIds": [
+            "ev_e7a8ae962ac83cdea3c9c1e4"
+          ],
+          "sourceId": "ui-react",
+          "status": "discovered",
+          "value": "md"
+        },
+        {
+          "evidenceIds": [
+            "ev_fab10a5ec234dda095db7c9a"
+          ],
+          "sourceId": "zeroheight",
+          "status": "documented",
+          "value": "lg"
+        }
+      ],
+      "id": "conflict:button.size-default",
+      "path": "props.size.default",
+      "resolution": {
+        "state": "open"
+      },
+      "severity": "warning",
+      "subject": "component:button",
+      "suggestedResolution": "Update the documentation or the component default so they agree.",
+      "type": "value-mismatch"
+    }
+  ],
+  "constraints": [
+    {
+      "description": "Button size must be one of the declared sizes.",
+      "details": {
+        "allowed": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "prop": "size"
+      },
+      "facts": {
+        "description": {
+          "evidenceIds": [
+            "ev_fab10a5ec234dda095db7c9a"
+          ],
+          "status": "documented"
+        }
+      },
+      "id": "constraint:button.size-values",
+      "kind": "required-prop",
+      "name": "Button size values",
+      "subjects": [
+        "component:button"
+      ]
+    },
+    {
+      "description": "A data management page must have a results region.",
+      "details": {
+        "region": "region:results"
+      },
+      "facts": {
+        "description": {
+          "evidenceIds": [
+            "ev_0c12e30f2d064b1446480ad0"
+          ],
+          "status": "documented"
+        }
+      },
+      "id": "constraint:data-management.results-required",
+      "kind": "required-region",
+      "name": "Results region is required",
+      "subjects": [
+        "pattern:page.data-management"
+      ]
+    },
+    {
+      "description": "A data management page shows exactly one table.",
+      "details": {
+        "max": 1,
+        "min": 1,
+        "target": "component:data-table",
+        "within": "region:results"
+      },
+      "facts": {},
+      "id": "constraint:data-management.single-table",
+      "kind": "cardinality",
+      "name": "One table per page",
+      "subjects": [
+        "pattern:page.data-management",
+        "component:data-table"
+      ]
+    },
+    {
+      "description": "The table toolbar precedes the table in the results region.",
+      "details": {
+        "after": "component:data-table",
+        "before": "pattern:composition.table-toolbar",
+        "within": "region:results"
+      },
+      "facts": {
+        "description": {
+          "evidenceIds": [
+            "ev_0c12e30f2d064b1446480ad0"
+          ],
+          "status": "documented"
+        }
+      },
+      "id": "constraint:data-management.toolbar-before-table",
+      "kind": "ordering",
+      "name": "Toolbar comes before the table",
+      "subjects": [
+        "pattern:page.data-management"
+      ]
+    }
+  ],
+  "contractVersion": "1.1.0",
+  "guidelines": [
+    {
+      "appliesTo": [
+        "component:button"
+      ],
+      "examples": [
+        {
+          "kind": "do",
+          "text": "Pair one primary with secondary actions."
+        }
+      ],
+      "facts": {
+        "statement": {
+          "evidenceIds": [
+            "ev_15e9cf41cefccab4fd5aee9c"
+          ],
+          "status": "documented"
+        }
+      },
+      "id": "guideline:button.usage",
+      "kind": "usage",
+      "name": "Button usage",
+      "references": [
+        {
+          "documentId": "buttons",
+          "sourceId": "zeroheight",
+          "title": "Buttons"
+        }
+      ],
+      "statement": "Use one primary button per view."
+    }
+  ],
+  "integrity": {
+    "algorithm": "sha256",
+    "contentHash": "1eec1d812bd305c0026f7e7a117526f35b8472d6454f038b2093372da6fccc46"
+  },
+  "metadata": {
+    "compiledAt": "2026-10-30T12:30:00.000Z",
+    "compilerVersion": "0.0.0",
+    "contractId": "acme-design-system",
+    "description": "Sample contract spanning React, Angular, and Vue.",
+    "frameworks": [
+      "angular",
+      "react",
+      "vue"
+    ],
+    "name": "Acme Design System"
+  },
+  "patterns": [
+    {
+      "category": "composition",
+      "components": [
+        "component:button",
+        "component:search-field"
+      ],
+      "composition": {
+        "parts": [
+          {
+            "name": "search",
+            "ref": "component:search-field",
+            "role": "required"
+          },
+          {
+            "name": "actions",
+            "ref": "component:button",
+            "role": "optional"
+          }
+        ]
+      },
+      "description": "Search and actions above a table.",
+      "facts": {
+        "intent": {
+          "evidenceIds": [
+            "ev_0c12e30f2d064b1446480ad0"
+          ],
+          "status": "documented"
+        }
+      },
+      "guidelines": [],
+      "id": "pattern:composition.table-toolbar",
+      "intent": "Keep filtering and bulk actions next to the data they act on.",
+      "name": "Table toolbar"
+    },
+    {
+      "category": "form",
+      "components": [
+        "component:button",
+        "component:icon"
+      ],
+      "description": "Credentials form with a single primary action.",
+      "facts": {},
+      "guidelines": [
+        "guideline:button.usage"
+      ],
+      "id": "pattern:form.login",
+      "name": "Login form"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          {
+            "id": "focus-moves",
+            "statement": "Focus moves into the dialog and returns on close.",
+            "verifiableBy": "runtime"
+          }
+        ]
+      },
+      "behavior": {
+        "initial": "idle",
+        "states": [
+          {
+            "name": "idle"
+          },
+          {
+            "feedback": "Name what will be deleted and offer Cancel.",
+            "name": "confirming",
+            "verifiableBy": "static"
+          },
+          {
+            "feedback": "Show progress.",
+            "name": "deleting",
+            "verifiableBy": "runtime"
+          },
+          {
+            "feedback": "Confirm the result.",
+            "name": "done",
+            "terminal": true
+          },
+          {
+            "feedback": "Explain the failure and allow a retry.",
+            "name": "failed"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "idle",
+            "id": "ask",
+            "to": "confirming",
+            "trigger": "user chooses Delete"
+          },
+          {
+            "from": "confirming",
+            "id": "cancel",
+            "to": "idle",
+            "trigger": "user chooses Cancel"
+          },
+          {
+            "from": "confirming",
+            "id": "confirm",
+            "to": "deleting",
+            "trigger": "user confirms"
+          },
+          {
+            "from": "deleting",
+            "id": "succeed",
+            "to": "done"
+          },
+          {
+            "from": "deleting",
+            "id": "fail",
+            "to": "failed"
+          },
+          {
+            "from": "failed",
+            "id": "retry",
+            "to": "deleting",
+            "trigger": "user chooses Retry"
+          },
+          {
+            "from": "failed",
+            "id": "dismiss",
+            "to": "idle"
+          }
+        ]
+      },
+      "category": "interaction",
+      "components": [
+        "component:button",
+        "component:confirm-dialog"
+      ],
+      "description": "Ask before deleting, then report the result.",
+      "facts": {},
+      "guidelines": [],
+      "id": "pattern:interaction.destructive-confirmation",
+      "intent": "Stop accidental data loss.",
+      "name": "Destructive confirmation"
+    },
+    {
+      "category": "layout",
+      "components": [
+        "component:page-header"
+      ],
+      "description": "Navigation, content and an optional footer.",
+      "facts": {
+        "intent": {
+          "evidenceIds": [
+            "ev_0c12e30f2d064b1446480ad0"
+          ],
+          "status": "documented"
+        }
+      },
+      "guidelines": [],
+      "id": "pattern:layout.application-shell",
+      "intent": "Give every screen the same frame.",
+      "layout": {
+        "regions": [
+          {
+            "name": "nav",
+            "required": true
+          },
+          {
+            "name": "content",
+            "required": true,
+            "spacing": "token:spacing.md",
+            "width": {
+              "max": {
+                "unit": "px",
+                "value": 1200
+              }
+            }
+          },
+          {
+            "name": "footer",
+            "parent": "content",
+            "required": false
+          }
+        ]
+      },
+      "name": "Application shell"
+    },
+    {
+      "behavior": {
+        "initial": "loading",
+        "states": [
+          {
+            "feedback": "Show a loading indicator.",
+            "name": "loading",
+            "verifiableBy": "runtime"
+          },
+          {
+            "name": "ready"
+          },
+          {
+            "feedback": "Explain that nothing matches.",
+            "name": "empty"
+          },
+          {
+            "feedback": "Explain the failure and offer a retry.",
+            "name": "error"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "loading",
+            "id": "found",
+            "to": "ready"
+          },
+          {
+            "from": "loading",
+            "id": "none",
+            "to": "empty"
+          },
+          {
+            "from": "loading",
+            "id": "broke",
+            "to": "error"
+          },
+          {
+            "from": "ready",
+            "id": "search",
+            "to": "loading",
+            "trigger": "search or page change"
+          },
+          {
+            "from": "error",
+            "id": "retry",
+            "to": "loading",
+            "trigger": "user chooses Retry"
+          }
+        ]
+      },
+      "category": "page",
+      "components": [
+        "component:data-table",
+        "component:empty-state",
+        "component:page-header",
+        "component:pagination"
+      ],
+      "composition": {
+        "parts": [
+          {
+            "name": "header",
+            "ref": "component:page-header",
+            "region": "header",
+            "role": "required"
+          },
+          {
+            "name": "toolbar",
+            "ref": "pattern:composition.table-toolbar",
+            "region": "results",
+            "role": "required"
+          },
+          {
+            "name": "table",
+            "ref": "component:data-table",
+            "region": "results",
+            "role": "required"
+          },
+          {
+            "name": "pagination",
+            "ref": "component:pagination",
+            "region": "results",
+            "role": "optional"
+          },
+          {
+            "name": "empty",
+            "ref": "component:empty-state",
+            "region": "results",
+            "role": "required"
+          }
+        ]
+      },
+      "constraints": [
+        "constraint:data-management.results-required",
+        "constraint:data-management.single-table",
+        "constraint:data-management.toolbar-before-table"
+      ],
+      "description": "A page to find, review and act on a collection of records.",
+      "facts": {
+        "intent": {
+          "evidenceIds": [
+            "ev_0c12e30f2d064b1446480ad0"
+          ],
+          "status": "documented"
+        },
+        "layout.regions.results.required": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "a69c44a6edab8f9da0944184e16a7d1645ebc2f3521a7eabca3effe6fe763926",
+            "priorStatus": "documented",
+            "reference": "DS-201",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_0c12e30f2d064b1446480ad0"
+          ],
+          "status": "approved"
+        },
+        "relationships.delete": {
+          "confidence": 0.6,
+          "derivation": {
+            "inputs": [
+              "ev_28f5f586337664e2e78ab3d3"
+            ],
+            "reasoning": "A confirmation dialog follows the delete action in 1 of 1 observed pages.",
+            "rule": "co-usage"
+          },
+          "evidenceIds": [
+            "ev_28f5f586337664e2e78ab3d3"
+          ],
+          "status": "inferred"
+        },
+        "relationships.tools": {
+          "evidenceIds": [
+            "ev_7c9db74469fbda5ec2d147d7"
+          ],
+          "status": "discovered"
+        }
+      },
+      "guidelines": [],
+      "id": "pattern:page.data-management",
+      "intent": "Let a person search a collection and act on what they find.",
+      "layout": {
+        "regions": [
+          {
+            "name": "header",
+            "required": true
+          },
+          {
+            "name": "results",
+            "required": true,
+            "responsive": [
+              {
+                "behavior": "stack",
+                "breakpoint": "token:breakpoint.md"
+              }
+            ]
+          }
+        ]
+      },
+      "name": "Data management page",
+      "relationships": [
+        {
+          "id": "frame",
+          "target": "pattern:layout.application-shell",
+          "type": "composes"
+        },
+        {
+          "id": "tools",
+          "target": "pattern:composition.table-toolbar",
+          "type": "composes"
+        },
+        {
+          "id": "delete",
+          "target": "pattern:interaction.destructive-confirmation",
+          "type": "uses"
+        },
+        {
+          "id": "actions",
+          "target": "component:button",
+          "type": "uses"
+        }
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "approval": {
+        "approvedAt": "2026-10-30T13:00:00.000Z",
+        "approvedBy": "design-system-owners",
+        "reference": "DS-143",
+        "role": "owner"
+      },
+      "basedOn": [
+        "guideline:button.usage"
+      ],
+      "enforcement": "warn",
+      "id": "policy:button.single-primary",
+      "name": "Single primary button",
+      "scope": {
+        "entities": [
+          "component:button"
+        ],
+        "frameworks": [
+          "react",
+          "vue",
+          "angular"
+        ]
+      },
+      "severity": "warning",
+      "statement": "A view must contain at most one primary button."
+    }
+  ],
+  "sources": [
+    {
+      "capabilities": [
+        "props.*.required",
+        "props.*.allowedValues"
+      ],
+      "health": {
+        "diagnosticCount": 0,
+        "status": "ok"
+      },
+      "id": "ui-angular",
+      "lastSyncedAt": "2026-10-30T12:00:00.000Z",
+      "location": "./packages/ui-angular",
+      "type": "angular",
+      "version": {
+        "kind": "git-commit",
+        "value": "9b95d2c"
+      }
+    },
+    {
+      "capabilities": [
+        "props.*.required",
+        "props.*.allowedValues"
+      ],
+      "health": {
+        "diagnosticCount": 0,
+        "status": "ok"
+      },
+      "id": "ui-react",
+      "lastSyncedAt": "2026-10-30T12:00:00.000Z",
+      "location": "./packages/ui-react",
+      "type": "react",
+      "version": {
+        "kind": "git-commit",
+        "value": "9b95d2c"
+      }
+    },
+    {
+      "capabilities": [
+        "props.*.required",
+        "props.*.allowedValues"
+      ],
+      "health": {
+        "diagnosticCount": 0,
+        "status": "ok"
+      },
+      "id": "ui-vue",
+      "lastSyncedAt": "2026-10-30T12:00:00.000Z",
+      "location": "./packages/ui-vue",
+      "type": "vue",
+      "version": {
+        "kind": "git-commit",
+        "value": "9b95d2c"
+      }
+    },
+    {
+      "authentication": {
+        "credentialRef": "env:ZEROHEIGHT_ACCESS_TOKEN",
+        "method": "token"
+      },
+      "capabilities": [
+        "guidelines.*"
+      ],
+      "health": {
+        "diagnosticCount": 1,
+        "status": "degraded"
+      },
+      "id": "zeroheight",
+      "lastSyncedAt": "2026-10-30T12:00:00.000Z",
+      "location": "zeroheight://styleguide/acme",
+      "type": "zeroheight"
+    }
+  ],
+  "themes": [
+    {
+      "id": "theme:dark",
+      "name": "Dark"
+    },
+    {
+      "default": true,
+      "id": "theme:light",
+      "name": "Light"
+    }
+  ],
+  "tokens": [
+    {
+      "category": "breakpoint",
+      "facts": {},
+      "id": "token:breakpoint.md",
+      "name": "breakpoint.md",
+      "value": {
+        "value": "768px"
+      }
+    },
+    {
+      "category": "color",
+      "facts": {},
+      "id": "token:color.action.primary",
+      "name": "color.action.primary",
+      "value": {
+        "aliasOf": "token:color.brand.primary"
+      }
+    },
+    {
+      "category": "color",
+      "facts": {
+        "value.value": {
+          "evidenceIds": [
+            "ev_5e8e0f7394c3dbed4794cd2a"
+          ],
+          "status": "discovered"
+        }
+      },
+      "id": "token:color.brand.primary",
+      "modes": {
+        "theme:dark": {
+          "value": "#4d8dff"
+        }
+      },
+      "name": "color.brand.primary",
+      "value": {
+        "value": "#0057ff"
+      }
+    },
+    {
+      "category": "spacing",
+      "facts": {},
+      "id": "token:spacing.md",
+      "name": "spacing.md",
+      "value": {
+        "value": "16px"
+      }
+    }
+  ]
+}

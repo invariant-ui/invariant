@@ -1,6 +1,6 @@
 {
   "name": "@invariant/cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "bin": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "@invariant/agent-kit": "workspace:*",
     "@invariant/artifact-generator": "workspace:*",
+    "@invariant/browser-verify": "workspace:*",
     "@invariant/compiler-angular": "workspace:*",
     "@invariant/compiler-core": "workspace:*",
     "@invariant/compiler-ir": "workspace:*",
@@ -30,7 +31,6 @@
     "@invariant/compiler-vue": "workspace:*",
     "@invariant/contract": "workspace:*",
     "@invariant/contract-query": "workspace:*",
-    "@invariant/diagnostics": "workspace:*",
     "@invariant/governance": "workspace:*",
     "@invariant/mcp": "workspace:*",
     "@invariant/reconciliation": "workspace:*",

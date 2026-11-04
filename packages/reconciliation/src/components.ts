@@ -1,6 +1,5 @@
 import type { Component, Conflict, FactRecord } from "@invariant/contract"
-import type { DiagnosticCollector } from "@invariant/diagnostics"
-import type { JsonValue } from "@invariant/shared"
+import type { DiagnosticCollector, JsonValue } from "@invariant/shared"
 import type { Implementation, ResolvedComponent } from "./resolve.js"
 import { cmp, sameDomain, sameValue, setNested, slug, unique } from "./util.js"
 

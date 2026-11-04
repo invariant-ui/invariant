@@ -8,7 +8,7 @@ import {
   resolveSymbol,
   tsconfigPaths
 } from "@invariant/compiler-core"
-import type { Diagnostic } from "@invariant/diagnostics"
+import type { Diagnostic } from "@invariant/shared"
 import ts from "typescript"
 import { type AngularInput, type AngularOutput, type ClassMetadata, readClass } from "./classes.js"
 import {

@@ -1,7 +1,6 @@
 import type { IrDocument, IrFact } from "@invariant/compiler-ir"
 import type { Conflict, FactRecord, Theme, Token } from "@invariant/contract"
-import type { DiagnosticCollector } from "@invariant/diagnostics"
-import type { JsonValue } from "@invariant/shared"
+import type { DiagnosticCollector, JsonValue } from "@invariant/shared"
 import type { ConflictDraft } from "./components.js"
 import type { IdentityLink } from "./resolve.js"
 import { cmp, normalizeName, sameValue, setNested, slug, unique } from "./util.js"

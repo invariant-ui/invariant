@@ -1,6 +1,10 @@
 import type { IrDocument } from "@invariant/compiler-ir"
 import type { Source, SourceType } from "@invariant/contract"
-import type { Diagnostic } from "@invariant/diagnostics"
+
+/** Source types an adapter can report. `patterns` is a human-authored file compiled by governance, not an adapter. */
+export type AdapterSourceType = Exclude<SourceType, "patterns">
+
+import type { Diagnostic } from "@invariant/shared"
 import type { ProjectDiscovery } from "./discovery/index.js"
 import type { ReadonlyFs } from "./fs.js"
 
@@ -17,7 +21,7 @@ export interface DiscoveryContext {
 export interface DiscoveredSource<TConfig = unknown> {
   /** Unique across the whole compilation. Slug: `[a-z0-9][a-z0-9._-]*`. */
   id: string
-  type: SourceType
+  type: AdapterSourceType
   /** Project-relative location. */
   location: string
   config: TConfig
@@ -59,7 +63,7 @@ export interface ValidationContext {
 export interface SourceAdapter<TConfig = unknown> {
   id: string
   version: string
-  type: SourceType
+  type: AdapterSourceType
   discover(context: DiscoveryContext): Promise<DiscoveryResult<TConfig>>
   extract(context: ExtractionContext, config: TConfig): Promise<ExtractionResult>
   validate(context: ValidationContext): Promise<Diagnostic[]>

@@ -12,7 +12,7 @@ import {
 import { compile, nodeFs, toArtifactEntries } from "@invariant/compiler-core"
 import { checkCompileDeterminism, FIXED_CLOCK } from "@invariant/compiler-core/testing"
 import { parseIrDocument, verifyIrDocument } from "@invariant/compiler-ir"
-import { diagnosticsFileSchema } from "@invariant/diagnostics"
+import { diagnosticsFileSchema } from "@invariant/shared"
 import { afterAll, describe, expect, it } from "vitest"
 
 const root = fileURLToPath(new URL("..", import.meta.url))

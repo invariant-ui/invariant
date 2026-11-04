@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Invariant: the design system contract for AI agents</title>
-<meta name="description" content="Invariant compiles your React, Vue and Angular components, Storybook and design tokens into one machine-readable contract that AI agents can read and validate against.">
-<meta property="og:title" content="Invariant: the design system contract for AI agents">
-<meta property="og:description" content="Compile your design system into a contract. Give agents real context, not guesses.">
+<title>Invariant: make AI agents follow your design system</title>
+<meta name="description" content="Invariant compiles your components, tokens, UX patterns and page layouts into one machine-readable contract that AI agents can read, and checks code against it in CI and, opt-in, in a browser.">
+<meta property="og:title" content="Invariant: make AI agents follow your design system">
+<meta property="og:description" content="Turn your components, tokens and approved UX patterns into a contract agents read and CI enforces.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://mcarlucci.github.io/invariant/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -36,6 +36,9 @@ nav ul a:hover{color:var(--text)}
 .btn{display:inline-block;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid var(--line)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#0b0d12}
 .btn.primary:hover{filter:brightness(1.1)}
+.navright{display:flex;align-items:center;gap:18px}
+.doclink{font-size:14px;color:var(--muted);text-decoration:none}
+.doclink:hover{color:var(--text)}
 .toplink{display:inline-flex;color:var(--muted);text-decoration:none}
 .toplink:hover{color:var(--text)}
 .btn:not(.primary):hover{border-color:var(--muted)}
@@ -249,14 +252,17 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <a class="logo" href="#top">invariant<span>.</span></a>
     <ul>
-      <li><a href="#compile">Compile</a></li>
-      <li><a href="#verify">Verify</a></li>
-      <li><a href="#review">Review</a></li>
-      <li><a href="#connect">Connect</a></li>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#patterns">Patterns</a></li>
+      <li><a href="#proof">Proof</a></li>
+      <li><a href="#trust">Trust</a></li>
       <li><a href="#start">Get started</a></li>
-      <li><a href="docs/">Docs</a></li>
     </ul>
-    <a class="toplink" href="https://github.com/mcarlucci/invariant" aria-label="Invariant on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <div class="navright">
+      <a class="doclink" href="docs/">Docs</a>
+      <a class="toplink" href="https://github.com/mcarlucci/invariant" aria-label="Invariant on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    </div>
   </div>
 </nav>
 
@@ -266,12 +272,12 @@ footer a:hover{color:var(--text)}
   <div class="orb o1"></div>
   <div class="orb o2"></div>
   <div class="wrap">
-    <span class="eyebrow">source-available &middot; runs locally &middot; no account</span>
-    <h1>Your design system,<br><em>as a contract agents can trust.</em></h1>
-    <p class="lead">Invariant compiles your React, Vue and Angular components, Storybook and design tokens into one machine-readable contract. Agents get real context, not hallucinated props.</p>
+    <!-- <span class="eyebrow">source-available &middot; runs locally &middot; no account</span> -->
+    <h1>Make AI agents follow<br><em>your design system</em></h1>
+    <p class="lead">Invariant turns your design system components, tokens and approved UX patterns into a contract that AI agents read and enforce.</p>
     <div class="cta">
       <a class="btn primary" href="#start">Get started</a>
-      <a class="btn" href="docs/">Read the docs</a>
+      <a class="btn" href="#problem">See the problem</a>
     </div>
     <div class="stage">
       <div class="term">
@@ -283,68 +289,161 @@ footer a:hover{color:var(--text)}
 <pre><span class="cl c">// illustrative shape</span><span class="cl">{</span><span class="cl">  <span class="k">"component"</span>: <span class="ok">"Button"</span>,</span><span class="cl">  <span class="k">"props"</span>: [{</span><span class="cl">    <span class="k">"name"</span>: <span class="ok">"variant"</span>,</span><span class="cl">    <span class="k">"values"</span>: [<span class="ok">"solid"</span>, <span class="ok">"ghost"</span>],</span><span class="cl">    <span class="k">"status"</span>: <span class="ok">"discovered"</span>,</span><span class="cl hot">    <span class="k">"evidence"</span>: <span class="ok">"Button.tsx:14"</span></span><span class="cl">  }]</span><span class="cl">}</span></pre>
       </div>
     </div>
-    <p class="c" style="font:12px var(--mono);margin:18px 0 0;color:var(--muted)">Illustrative output. Names and numbers are examples.</p>
   </div>
 </header>
 
-<section id="compile">
+<section id="problem">
   <div class="wrap">
-    <div class="label">Compile</div>
-    <h2>Extract the facts. Don't guess them.</h2>
-    <p class="sub">Source adapters read your code statically and normalize everything into a shared intermediate representation. A pure compiler turns that into the contract. Nothing from your project is executed.</p>
-    <div class="flow">
-      <div class="node"><b>Sources</b><span>React &middot; Vue &middot; Angular<br>Storybook &middot; tokens</span></div>
-      <div class="arrow">&rarr;</div>
-      <div class="node hl"><b>Invariant</b><span>discover &middot; extract<br>reconcile &middot; verify</span></div>
-      <div class="arrow">&rarr;</div>
-      <div class="node"><b>Contract</b><span>JSON + evidence<br>+ report</span></div>
-    </div>
+    <div class="label">The problem</div>
+    <h2>Your design system rules are annotated across docs and code. Agents miss the big picture.</h2>
+    <p class="sub">Teams adopt AI coding tools and watch the design system erode one pull request at a time. The agent never saw your rules, so it guesses, and a person has to catch every guess.</p>
     <div class="grid g3">
-      <div class="card"><h3>Deterministic</h3><p>Props, events, defaults and token values come from static analysis. Recompiling unchanged sources gives identical bytes.</p></div>
-      <div class="card"><h3>Evidence for every fact</h3><p>Each fact links back to the file and line it came from, so you can always ask "why does the contract say this?"</p></div>
-      <div class="card"><h3>Framework-neutral</h3><p>The contract doesn't depend on a frontend framework or on MCP. Framework quirks live in extension metadata.</p></div>
+      <div class="card"><h3>Invented APIs</h3><p>Props, variants and components that don't exist. The code looks right and fails in review, or worse, in production.</p></div>
+      <div class="card"><h3>Hard-coded values</h3><p>A hex color here, 13px of padding there. Your tokens are bypassed and theming quietly breaks.</p></div>
+      <div class="card"><h3>Off-pattern pages</h3><p>Every generated page is laid out a little differently, and the loading, error and confirm states your team requires are forgotten.</p></div>
     </div>
-    <div class="facts" aria-label="Fact status labels">
+    <p style="margin:22px 0 0"><b style="color:var(--text)">Invariant fixes this at the source.</b> It turns the design system into something an agent can read and a pipeline can check.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="label">How it works</div>
+    <h2>Compile it. Approve it. Enforce it.</h2>
+    <div class="grid g3">
+      <div class="card"><h3>1. Compile</h3><p>Read your React, Vue or Angular components, Storybook and tokens. Every component, prop and token is extracted from source with the file and line behind it. Nothing is executed.</p></div>
+      <div class="card"><h3>2. Approve</h3><p>Add the UX patterns and page layouts your team has decided on. People approve them. Nothing is promoted to a rule automatically.</p></div>
+      <div class="card"><h3>3. Enforce</h3><p>Agents read the contract over MCP before they write. CI checks the result, and an opt-in browser run confirms behavior.</p></div>
+    </div>
+    <div class="facts" aria-label="Fact status labels" style="margin-top:22px">
       <span class="fact d">discovered</span>
       <span class="fact m">documented</span>
       <span class="fact i">inferred</span>
       <span class="fact a">approved</span>
     </div>
-    <p class="sub" style="margin-top:14px">Every fact carries a status. Guesses are never passed off as discovered, and conflicting sources are reported, not hidden.</p>
+    <p style="margin-top:14px">Every fact carries a status. A guess is never passed off as a fact, and sources that disagree are reported, not hidden.</p>
   </div>
 </section>
 
-<section id="verify">
+<section id="patterns">
   <div class="wrap">
-    <div class="label">Verify</div>
-    <h2>Know when the contract is stale or tampered with.</h2>
-    <p class="sub">Verify checks the compiled output on its own. With <code>--fresh</code> it also recompiles, and if your sources have moved on it tells you which components, tokens and sources changed. Put it in CI.</p>
+    <div class="label">UX patterns &amp; layouts</div>
+    <h2>The part no component library captures: how your pages are put together.</h2>
+    <p class="sub">Knowing which components exist is not enough. Invariant records your page archetypes, layout regions, interaction states and the rules between them as plain JSON. You approve them, and it checks real code against them.</p>
     <div class="grid g2">
-      <div class="code"><pre class="checks"><span class="p">$</span> invariant verify
-<span class="ck" style="--i:1"><span class="ok">&#10003;</span> contract structure</span><span class="ck" style="--i:2"><span class="ok">&#10003;</span> cross-references</span><span class="ck" style="--i:3"><span class="ok">&#10003;</span> content hash</span><span class="ck" style="--i:4"><span class="ok">&#10003;</span> evidence ids</span><span class="ck" style="--i:5"><span class="ok">&#10003;</span> manifest file hashes</span>
-<span class="p">$</span> invariant verify --fresh
-<span class="ck" style="--i:7"><span class="b">&#10007;</span> verify.stale: sources changed</span><span class="ck" style="--i:8">components: +0 -0 ~1</span><span class="ck" style="--i:9"><span class="w">~</span> component:button (description)</span></pre></div>
+      <div class="code"><pre><span class="c">// invariant.patterns.json</span>
+{
+  <span class="k">"id"</span>: <span class="ok">"page.detail"</span>,
+  <span class="k">"category"</span>: <span class="ok">"page"</span>,
+  <span class="k">"layout"</span>: { <span class="k">"regions"</span>: [
+    { <span class="k">"name"</span>: <span class="ok">"header"</span>,  <span class="k">"required"</span>: true },
+    { <span class="k">"name"</span>: <span class="ok">"summary"</span>, <span class="k">"required"</span>: true }
+  ]},
+  <span class="k">"variations"</span>: [{ <span class="k">"name"</span>: <span class="ok">"read-only"</span> }],
+  <span class="k">"constraints"</span>: [{
+    <span class="k">"kind"</span>: <span class="ok">"required-state"</span>,
+    <span class="k">"details"</span>: { <span class="k">"workflow"</span>: <span class="ok">"form-submission"</span>,
+                <span class="k">"state"</span>: <span class="ok">"error"</span> }
+  }]
+}</pre></div>
+      <div class="code"><pre><span class="p">$</span> invariant validate src/pages
+<span class="b">&#10007;</span> Settings.tsx:12 <span class="c">pattern-cardinality-violated</span>
+<span class="c">  a settings page has at most one modal</span>
+<span class="w">?</span> Settings.tsx:1 <span class="c">pattern-region-missing: not verifiable</span>
+<span class="c">  Actions comes from another file; not passed</span>
+<span class="ok">&#10003;</span> Settings.tsx:20 <span class="c">form shows an error state</span>
+<span class="c">  structural, line 31</span></pre></div>
+    </div>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card"><h3>Page archetypes</h3><p>A data page, a detail page, an edit form. Each composes shared patterns, names its regions and lists the variations it allows.</p></div>
+      <div class="card"><h3>Layout and interaction rules</h3><p>Required children, ordering, counts and regions, plus required states like loading, error and confirm for forms, deletes and search.</p></div>
+      <div class="card"><h3>Enforced, not just documented</h3><p>Approved rules become policies that <code>validate</code> checks in CI. A page can opt in to inherit the rules of everything it composes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <div class="label">Proof</div>
+    <h2>Catch it before it merges. Confirm it in a browser.</h2>
+    <p class="sub">Static checks run in CI on every change. When you need to know it actually works, opt in to browser checks for focus, keyboard order and responsive layout.</p>
+    <div class="grid g2">
       <div class="code"><pre><span class="p">$</span> invariant validate src/
 <span class="w">!</span> Button.tsx:14 color rgb(104 86 224)
 <span class="c">  not the value of any token</span>
-<span class="w">!</span> Card.tsx:6 padding: 13px
-<span class="c">  not the value of any spacing token</span>
 <span class="b">&#10007;</span> Card.tsx:9 unknown prop "tone"
-<span class="c">  basis: discovered</span></pre></div>
+<span class="c">  basis: discovered</span>
+<span class="b">&#10007;</span> Settings.tsx:12 one modal allowed, found 2
+<span class="c">  pattern page.settings, policy approved</span></pre></div>
+      <div class="code"><pre><span class="p">$</span> invariant browser run
+chromium 1.2.3: 4 passed, 1 failed, 0 could not run
+<span class="b">&#10007;</span> edit-form-saves  expect 2  375x700
+<span class="c">  Tab 1 should reach #save, but focus is on</span>
+<span class="c">  &lt;input#name&gt;</span></pre></div>
     </div>
-    <p class="sub">Validate checks component props and literal colors (hex, rgb, hsl, named), spacing and typography against your tokens. Only literal values are checked, and every finding says on what basis: discovered, documented, inferred or heuristic.</p>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card"><h3>Honest results</h3><p>Pass, fail, warning, not verifiable, skipped. What it can't establish is said out loud and never counted as a pass.</p></div>
+      <div class="card"><h3>Static and runtime, labeled</h3><p>Browser results record the browser, version, viewport and URL, and stay apart from static ones.</p></div>
+      <div class="card"><h3>Opt-in and contained</h3><p>Playwright is yours to install. Fresh context per scenario, requests limited to origins you list, specs are data with no code.</p></div>
+    </div>
+    <p style="margin:18px 0 0">Browser verification is early: the Playwright driver is new, so try it on your app before relying on it.</p>
   </div>
 </section>
 
-<section id="review">
+<section id="ci">
   <div class="wrap">
-    <div class="label">Review</div>
-    <h2>Humans decide. Machines never self-approve.</h2>
-    <p class="sub">Conflicts and inferred facts land in a review queue. Your decisions are saved in a committed file and applied on every compile.</p>
+    <div class="label">Every pull request</div>
+    <h2>Setup adds the check to your repo. Every commit gets verified.</h2>
+    <p class="sub">Say yes when <code>setup</code> asks and it writes a GitHub Action for you. From then on, each commit on an open pull request is checked against your contract, with annotations on the lines that break it.</p>
+    <div class="grid g2">
+      <div class="code"><pre><span class="p">$</span> npx invariant-ui setup
+<span class="c">...</span>
+7. Add a GitHub Action that checks every
+   commit on pull requests? [Y/n] y
+7. wrote .github/workflows/invariant.yml</pre></div>
+      <div class="code"><pre><span class="c"># .github/workflows/invariant.yml</span>
+<span class="k">on</span>:
+  <span class="k">pull_request</span>:
+    <span class="k">types</span>: [opened, synchronize, reopened]
+<span class="k">jobs</span>:
+  <span class="k">invariant</span>:
+    <span class="k">steps</span>:
+      - <span class="k">run</span>: npx invariant-ui@0.1.0 verify --fresh
+      - <span class="k">run</span>: npx invariant-ui@0.1.0 validate 'src' --format github</pre></div>
+    </div>
+    <div class="grid g3" style="margin-top:16px">
+      <div class="card"><h3>New problems only</h3><p>Existing violations are baselined, so the check fails on what a pull request adds, not on history.</p></div>
+      <div class="card"><h3>Stale contract caught</h3><p><code>verify --fresh</code> fails when the committed contract no longer matches your sources, or was edited by hand.</p></div>
+      <div class="card"><h3>Pinned and read-only</h3><p>The job pins the exact version and asks for read access only. A later release can't change what your CI does.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="discover">
+  <div class="wrap">
+    <div class="label">Adopt</div>
+    <h2>Don't start from a blank page. Start from what your apps already do.</h2>
+    <p class="sub">Point Invariant at your application code. It finds the structures that recur, shows the files and lines, and explains why it flagged them. You accept, reject or defer each one, and promote the good ones into your patterns.</p>
     <div class="grid g3">
-      <div class="card"><h3>Conflicts surfaced</h3><p>When Storybook and code disagree, both values stay in the contract with their evidence. Nothing is silently dropped.</p></div>
-      <div class="card"><h3>Inferred stays inferred</h3><p>Rules the engine infers are never promoted to approved policy automatically. You approve, reject or dismiss each one.</p></div>
-      <div class="card"><h3>Decisions in git</h3><p>Approvals live in <code>invariant.decisions.json</code> and are bound to a fingerprint of the fact, so they expire when the evidence changes.</p></div>
+      <div class="card"><h3>Candidates only</h3><p>Nothing discovered is approved or enforced. Promotion adds an unapproved definition with its provenance, and no rules.</p></div>
+      <div class="card"><h3>Similar is not the same</h3><p>Structural overlap is measured and reported. It never claims two pages serve the same purpose.</p></div>
+      <div class="card"><h3>Deterministic</h3><p>No model in the loop. The same code gives the same candidates, and your decisions stay attached as files change.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="label">Trust</div>
+    <h2>Built so you can trust the answer, not just the tone.</h2>
+    <p class="sub">An agent that sounds sure and is wrong is worse than no agent. Everything here is designed to be checkable.</p>
+    <div class="grid g3">
+      <div class="card"><h3>Evidence for every fact</h3><p>Each fact links to the file and line it came from, so you can always ask "why does the contract say this?"</p></div>
+      <div class="card"><h3>Humans decide</h3><p>Conflicts and inferred facts go to a review queue. Approvals live in git and expire when the evidence changes.</p></div>
+      <div class="card"><h3>Deterministic</h3><p>Recompiling unchanged sources gives identical bytes. <code>verify --fresh</code> tells you what drifted, so you can run it in CI.</p></div>
+      <div class="card"><h3>Local and inspectable</h3><p>No account, no cloud, no network. Plain JSON in your repo, and source you can read.</p></div>
+      <div class="card"><h3>Framework-neutral</h3><p>React, Vue, Angular, Storybook and tokens compile into one contract that doesn't depend on a framework or on MCP.</p></div>
+      <div class="card"><h3>Treats your text as untrusted</h3><p>Results are marked untrusted and generated agent config never includes free-form descriptions from your docs.</p></div>
     </div>
   </div>
 </section>
@@ -352,13 +451,13 @@ footer a:hover{color:var(--text)}
 <section id="connect">
   <div class="wrap">
     <div class="label">Connect</div>
-    <h2>One command to wire up your agent.</h2>
-    <p class="sub">Invariant serves the compiled contract over a read-only MCP server. Agents look up components, tokens and usage, and check their own code before they hand it back.</p>
+    <h2>One command wires up your agent.</h2>
+    <p class="sub">A read-only MCP server gives agents your components, tokens and approved patterns. A skill walks them from task to archetype to validated code, and has them report what is still unresolved.</p>
     <div class="code"><pre><span class="p">$</span> invariant agent init claude-code <span class="c">  # also: cursor, codex, windsurf, all</span></pre></div>
     <div class="grid g3">
-      <div class="card"><h3>10 read-only tools</h3><p><code>get_component</code>, <code>get_design_tokens</code>, <code>search_design_system</code>, <code>validate_component_usage</code> and more.</p></div>
+      <div class="card"><h3>Scoped, not dumped</h3><p>Agents fetch the one archetype and the few patterns a task needs, never the whole contract.</p></div>
+      <div class="card"><h3>Approved vs proposed</h3><p>Agents follow approved patterns, treat the rest as proposals to confirm, and say which they used.</p></div>
       <div class="card"><h3>Always current</h3><p>The server reloads when you recompile. A missing or tampered contract is never partly served.</p></div>
-      <div class="card"><h3>Treats your text as untrusted</h3><p>Results are marked untrusted and returned as structured JSON. Generated agent config never includes free-form descriptions.</p></div>
     </div>
   </div>
 </section>
@@ -366,28 +465,23 @@ footer a:hover{color:var(--text)}
 <section id="start">
   <div class="wrap">
     <div class="label">Get started</div>
-    <h2>Run it on your own project.</h2>
-    <p class="sub">Needs Node 24+ and pnpm. Invariant isn't on npm yet, so build it from source and link it.</p>
+    <h2>One command. Nothing to install first.</h2>
+    <p class="sub">Needs Node 20 or newer. Run it in the project that holds your design system.</p>
     <div class="steps">
       <div class="step"><div>
-        <h3>Build Invariant</h3>
-        <div class="code"><pre>git clone https://github.com/mcarlucci/invariant.git
-cd invariant
-pnpm install &amp;&amp; pnpm build
-cd apps/cli &amp;&amp; pnpm link --global</pre></div>
+        <h3>Run setup</h3>
+        <div class="code"><pre>npx invariant-ui setup</pre></div>
+        <p class="c" style="margin:10px 0 0">Compiles your design system, shows what it found and asks you to confirm it, proposes patterns from your app code, connects your AI tool, and baselines existing violations. Nothing is approved until you say so.</p>
       </div></div>
       <div class="step"><div>
-        <h3>Compile your design system</h3>
-        <div class="code"><pre>cd /path/to/your-project
-invariant init
-invariant compile
-invariant compile --watch   # optional: recompile on every change</pre></div>
+        <h3>Enforce it</h3>
+        <div class="code"><pre>npx invariant-ui validate src/
+npx invariant-ui verify --fresh   # put both in CI</pre></div>
       </div></div>
       <div class="step"><div>
-        <h3>Explore and connect</h3>
-        <div class="code"><pre>invariant components list
-invariant components inspect Button --evidence
-invariant agent init claude-code</pre></div>
+        <h3>Keep the command</h3>
+        <div class="code"><pre>npm install -g invariant-ui
+invariant --help</pre></div>
       </div></div>
     </div>
   </div>
@@ -396,7 +490,7 @@ invariant agent init claude-code</pre></div>
 <section>
   <div class="wrap">
     <div class="label">License</div>
-    <h2>Source-available, with a clock on it.</h2>
+    <h2>Source-available.</h2>
     <p class="sub">Invariant uses the Functional Source License (FSL-1.1-ALv2). Read it, run it, modify it, use it inside your company. You can't use it to offer a competing product or service. Each version becomes Apache-2.0 two years after release.</p>
     <a class="btn" href="https://github.com/mcarlucci/invariant/blob/main/LICENSE">Read the license</a>
   </div>
@@ -418,16 +512,27 @@ invariant agent init claude-code</pre></div>
 (() => {
   var S = 'class="icon" viewBox="0 0 42 42" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
   var A = 'stroke="#7c8cff"', B = 'stroke="#5eead4"';
+  var ic = {
+    check: '<svg ' + S + '><rect x="6" y="6" width="30" height="30" rx="6" ' + A + '/><path d="M14 21l5 5 9-10" ' + B + '/></svg>',
+    search: '<svg ' + S + '><circle cx="18" cy="18" r="10" ' + A + '/><path d="M26 26l9 9" ' + B + '/></svg>',
+    cube: '<svg ' + S + '><path d="M21 5l14 8v16l-14 8-14-8V13z" ' + A + '/><path d="M21 21l14-8M21 21L7 13M21 21v16" ' + B + '/></svg>',
+    cross: '<svg ' + S + '><path d="M7 10h10l6 22h12" ' + A + '/><path d="M7 32h10l6-22h12" ' + B + '/></svg>',
+    dash: '<svg ' + S + '><path d="M6 21h6M30 21h6" ' + A + '/><circle cx="21" cy="21" r="8" stroke-dasharray="3 4" ' + B + '/></svg>',
+    git: '<svg ' + S + '><circle cx="12" cy="9" r="4" ' + A + '/><circle cx="12" cy="33" r="4" ' + A + '/><circle cx="31" cy="21" r="4" ' + B + '/><path d="M12 13v16M12 21h15" ' + A + '/></svg>',
+    grid: '<svg ' + S + '><rect x="6" y="6" width="13" height="13" rx="3" ' + A + '/><rect x="23" y="6" width="13" height="13" rx="3" ' + B + '/><rect x="6" y="23" width="13" height="13" rx="3" ' + B + '/><rect x="23" y="23" width="13" height="13" rx="3" ' + A + '/></svg>',
+    cycle: '<svg ' + S + '><path d="M34 21a13 13 0 1 1-4-9.4" ' + A + '/><path d="M34 6v8h-8" ' + B + '/></svg>',
+    shield: '<svg ' + S + '><path d="M21 5l13 5v10c0 8-6 14-13 17C14 34 8 28 8 20V10z" ' + A + '/><path d="M16 21l4 4 7-8" ' + B + '/></svg>'
+  };
   var icons = {
-    'Deterministic': '<svg ' + S + '><rect x="6" y="6" width="30" height="30" rx="6" ' + A + '/><path d="M14 21l5 5 9-10" ' + B + '/></svg>',
-    'Evidence for every fact': '<svg ' + S + '><circle cx="18" cy="18" r="10" ' + A + '/><path d="M26 26l9 9" ' + B + '/></svg>',
-    'Framework-neutral': '<svg ' + S + '><path d="M21 5l14 8v16l-14 8-14-8V13z" ' + A + '/><path d="M21 21l14-8M21 21L7 13M21 21v16" ' + B + '/></svg>',
-    'Conflicts surfaced': '<svg ' + S + '><path d="M7 10h10l6 22h12" ' + A + '/><path d="M7 32h10l6-22h12" ' + B + '/></svg>',
-    'Inferred stays inferred': '<svg ' + S + '><path d="M6 21h6M30 21h6" ' + A + '/><circle cx="21" cy="21" r="8" stroke-dasharray="3 4" ' + B + '/></svg>',
-    'Decisions in git': '<svg ' + S + '><circle cx="12" cy="9" r="4" ' + A + '/><circle cx="12" cy="33" r="4" ' + A + '/><circle cx="31" cy="21" r="4" ' + B + '/><path d="M12 13v16M12 21h15" ' + A + '/></svg>',
-    '10 read-only tools': '<svg ' + S + '><rect x="6" y="6" width="13" height="13" rx="3" ' + A + '/><rect x="23" y="6" width="13" height="13" rx="3" ' + B + '/><rect x="6" y="23" width="13" height="13" rx="3" ' + B + '/><rect x="23" y="23" width="13" height="13" rx="3" ' + A + '/></svg>',
-    'Always current': '<svg ' + S + '><path d="M34 21a13 13 0 1 1-4-9.4" ' + A + '/><path d="M34 6v8h-8" ' + B + '/></svg>',
-    'Treats your text as untrusted': '<svg ' + S + '><path d="M21 5l13 5v10c0 8-6 14-13 17C14 34 8 28 8 20V10z" ' + A + '/><path d="M16 21l4 4 7-8" ' + B + '/></svg>'
+    'Invented APIs': ic.cross, 'Hard-coded values': ic.dash, 'Off-pattern pages': ic.grid, 'Review is the bottleneck': ic.git,
+    '1. Compile': ic.search, '2. Approve': ic.shield, '3. Enforce': ic.check,
+    'Page archetypes': ic.grid, 'Layout and interaction rules': ic.cube, 'Enforced, not just documented': ic.check,
+    'Honest results': ic.check, 'Static and runtime, labeled': ic.cross, 'Opt-in and contained': ic.shield,
+    'Candidates only': ic.dash, 'Similar is not the same': ic.cross, 'Deterministic': ic.check,
+    'Evidence for every fact': ic.search, 'Humans decide': ic.git, 'Local and inspectable': ic.cube,
+    'Framework-neutral': ic.cube, 'Treats your text as untrusted': ic.shield,
+    'New problems only': ic.dash, 'Stale contract caught': ic.cycle, 'Pinned and read-only': ic.shield,
+    'Scoped, not dumped': ic.grid, 'Approved vs proposed': ic.shield, 'Always current': ic.cycle
   };
 
   document.querySelectorAll('.card').forEach((c) => {

@@ -19,7 +19,6 @@
     "@invariant/compiler-core": "workspace:*",
     "@invariant/compiler-ir": "workspace:*",
     "@invariant/contract": "workspace:*",
-    "@invariant/diagnostics": "workspace:*",
     "@invariant/shared": "workspace:*"
   }
 }

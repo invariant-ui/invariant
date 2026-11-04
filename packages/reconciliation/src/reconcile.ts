@@ -12,7 +12,7 @@ import {
   type Source,
   verifyContract
 } from "@invariant/contract"
-import { type Diagnostic, DiagnosticCollector } from "@invariant/diagnostics"
+import { type Diagnostic, DiagnosticCollector } from "@invariant/shared"
 import { buildComponent, type ConflictDraft } from "./components.js"
 import { ambiguityConflicts, mintConflicts, storybookConflicts } from "./conflicts.js"
 import { type IdentityLink, type Implementation, resolveComponents } from "./resolve.js"

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Docs: Invariant</title>
-<meta name="description" content="Documentation for Invariant: install, compile your design system into a contract, serve it to AI agents over MCP, and validate code against it.">
+<meta name="description" content="Documentation for Invariant: compile your design system and UX patterns into a contract, serve it to AI agents, and enforce it in CI and in a browser.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -174,16 +174,20 @@ td code{white-space:nowrap}
   <a href="#source-vue-angular">Vue and Angular</a>
   <a href="#source-storybook">Storybook</a>
   <a href="#source-tokens">Design tokens</a>
+  <h4>Patterns</h4>
+  <a href="#pattern-definitions">Pattern definitions</a>
+  <a href="#pattern-discovery">Pattern discovery</a>
+  <h4>Enforce</h4>
+  <a href="#validate">Validate code</a>
+  <a href="#policies">Policies</a>
+  <a href="#browser-verification">Browser verification</a>
+  <a href="#decisions">Decisions</a>
+  <a href="#ci">Verify in CI</a>
   <h4>Use it</h4>
   <a href="#cli">CLI</a>
   <a href="#configuration">Configuration</a>
   <a href="#mcp">MCP server</a>
   <a href="#agents">Agent setup</a>
-  <h4>Govern</h4>
-  <a href="#validate">Validate code</a>
-  <a href="#policies">Policies</a>
-  <a href="#decisions">Decisions</a>
-  <a href="#ci">Verify in CI</a>
   <h4>Reference</h4>
   <a href="#artifacts">Output files</a>
   <a href="#safety">Safety model</a>
@@ -197,50 +201,76 @@ td code{white-space:nowrap}
 <section class="doc" id="introduction">
   <div class="kicker">Start</div>
   <h1>Introduction</h1>
-  <p class="lead">Invariant compiles your existing design system into one machine-readable contract that AI agents can read and validate against.</p>
-  <p>It reads React, Vue and Angular components, Storybook stories and design token files. It extracts what is actually there, keeps the evidence for every fact, reports where your sources disagree, and writes a framework-neutral JSON contract. Agents then use it over MCP to learn which components, props and tokens exist, and to check the code they write.</p>
-  <p>Everything runs locally. There is no account and no network access. Your code is analyzed statically and never executed.</p>
+  <p class="lead">AI agents write UI that ignores your design system. Invariant gives them the rules, then checks what they wrote.</p>
+  <p>Your design system lives in docs, Storybook and people's heads. An agent has none of that, so it invents props, hard-codes colors, lays pages out differently every time and forgets the loading and error states your team requires. A person ends up catching every one of those in review.</p>
+  <p>Invariant compiles the design system into one machine-readable <b>contract</b>: your components, props and tokens, extracted from source with the file and line behind each fact, plus the <b>UX patterns and page layouts</b> your team approves. Agents read the contract before they write. <code>invariant validate</code> checks the result in CI, and an opt-in browser run confirms behavior. Everything runs locally, with no account and no network, and your code is analyzed statically and never executed.</p>
+  <h3>What you get</h3>
+  <ul>
+    <li><b>A contract you can trust.</b> Every fact has evidence and a status: discovered, documented, inferred or approved. Conflicts are reported, never hidden.</li>
+    <li><b>Pattern contracts.</b> Page archetypes, layout regions, interaction states and rules, written as JSON and approved by people.</li>
+    <li><b>Enforcement.</b> Checks in CI that say pass, fail, not verifiable or skipped, and never count what they can't establish as a pass.</li>
+    <li><b>Runtime proof.</b> Opt-in browser checks for focus, keyboard order and responsive layout, labeled apart from static results.</li>
+    <li><b>Agents that follow a workflow.</b> An MCP server and skills that take an agent from task to approved pattern to validated code.</li>
+  </ul>
+  <h3>Where to start</h3>
   <div class="cards">
-    <a class="card" href="#install"><b>Install</b><span>Build the CLI from source.</span></a>
-    <a class="card" href="#quick-start"><b>Quick start</b><span>From zero to a compiled contract.</span></a>
-    <a class="card" href="#mcp"><b>MCP server</b><span>Give agents the contract.</span></a>
-    <a class="card" href="#validate"><b>Validate code</b><span>Check usage against the contract.</span></a>
+    <a class="card" href="#install"><b>Install</b><span>One npx command.</span></a>
+    <a class="card" href="#quick-start"><b>Quick start</b><span>Compile a contract, then enforce it.</span></a>
+    <a class="card" href="#pattern-definitions"><b>Define patterns</b><span>Describe your pages and interactions.</span></a>
+    <a class="card" href="#agents"><b>Connect an agent</b><span>One command, read-only.</span></a>
   </div>
-  <div class="note"><b>Status</b>React, Vue, Angular, Storybook and token files are supported. Figma and zeroheight are not supported yet, and the config rejects them with a message.</div>
+  <div class="note"><b>Status</b>React, Vue, Angular, Storybook and token files are supported. Figma and zeroheight are not supported yet, and the config rejects them with a message. Pattern checks and discovery read React only. Browser verification is early.</div>
 </section>
 
 <section class="doc" id="install">
   <div class="kicker">Start</div>
   <h2>Install</h2>
-  <p>Invariant is not published to npm yet. Build it from source. You need Node 24 or newer and <a href="https://pnpm.io">pnpm</a>.</p>
+  <p>You need Node 20 or newer. There is nothing to install first: run it with <code>npx</code>.</p>
+  <div class="code"><span class="lang">bash</span><pre>npx invariant-ui setup</pre></div>
+  <p>To keep the command, install it globally. It is then called <code>invariant</code>, which is what the rest of these docs use.</p>
+  <div class="code"><span class="lang">bash</span><pre>npm install -g invariant-ui
+invariant --help</pre></div>
+  <p>Without a global install, write <code>npx invariant-ui</code> where the docs say <code>invariant</code>. <code>invariant agent init</code> notices when <code>invariant</code> is not on your <code>PATH</code> and writes an MCP entry that starts the server with <code>npx -y invariant-ui mcp</code> instead.</p>
+  <h3>From source</h3>
+  <p>To work on Invariant itself you need Node 24 and <a href="https://pnpm.io">pnpm</a>.</p>
   <div class="code"><span class="lang">bash</span><pre>git clone https://github.com/mcarlucci/invariant.git
 cd invariant
 nvm use                 # reads .nvmrc (Node 24)
 pnpm install
-pnpm build</pre></div>
-  <p>Run it from the checkout:</p>
-  <div class="code"><span class="lang">bash</span><pre>pnpm invariant --help     # same as: node apps/cli/dist/main.js</pre></div>
-  <p>Or link it so <code>invariant</code> works from any directory. The agent setup expects this.</p>
-  <div class="code"><span class="lang">bash</span><pre>cd apps/cli &amp;&amp; pnpm link --global</pre></div>
-  <p>Check your setup with <code>pnpm verify</code>. It runs lint, typecheck, package boundary checks, build and tests.</p>
+pnpm build
+pnpm invariant --help   # same as: node apps/cli/dist/main.js</pre></div>
+  <p><code>pnpm verify</code> runs lint, typecheck, package boundary checks, build and tests. <code>pnpm build:npm</code> assembles the single package that is published.</p>
 </section>
 
 <section class="doc" id="quick-start">
   <div class="kicker">Start</div>
   <h2>Quick start</h2>
   <p>Run these inside the project that holds your design system.</p>
+  <h3>Fastest path: one command</h3>
+  <div class="code"><span class="lang">bash</span><pre>invariant setup</pre></div>
+  <p>It detects your sources, compiles the contract and shows what it found. It asks whether that looks like your design system, then finds structures that recur in your app code and offers the top ones as patterns. It connects any AI tool it finds (<code>.claude</code>, <code>.cursor</code>, <code>.codex</code>, <code>.windsurf</code>), offers to hide existing violations so only new ones fail, and offers to add a GitHub Action that checks every commit on pull requests.</p>
+  <div class="note"><b>Nothing is approved until you say so</b>Patterns are approved only after you confirm the contract and agree a second time. Without that they are added as proposals. <code>--yes</code> answers the other questions with their defaults and never confirms the contract; <code>--confirm-contract --as "Your Name"</code> does it for scripts. Approved patterns guide agents. No rule is enforced until you write one.</div>
+  <p>The steps below do the same thing one at a time.</p>
+  <h3>1. Compile the contract</h3>
   <div class="code"><span class="lang">bash</span><pre>invariant init                          # detect sources, write invariant.config.json
 invariant compile                       # write the contract to ./invariant
-invariant compile --watch               # or keep it up to date: recompile when sources change
-invariant components list               # browse what was found
 invariant components inspect Button --evidence
-invariant tokens list
-invariant conflicts list                # where sources disagree
-invariant agent init claude-code        # connect an AI tool</pre></div>
-  <p><code>init</code> detects a source for each framework package, for Storybook and for token files. If your layout is unusual, add sources by hand with <code>invariant source add &lt;type&gt; [path]</code> or edit the config.</p>
-  <p>Add <code>--cwd /path/to/project</code> to any command to run it against another directory.</p>
-  <p>With <code>--watch</code>, <code>compile</code> keeps running and recompiles after your changes settle, so a connected agent always sees a current contract. Press Ctrl+C to stop. Every cycle recompiles all sources.</p>
-  <div class="note"><b>Compile exit code</b><code>compile</code> exits 1 if any diagnostic is an error. The files are still written so you can inspect the problem.</div>
+invariant conflicts list                # where sources disagree</pre></div>
+  <p><code>init</code> detects a source for each framework package, for Storybook and for token files. If your layout is unusual, add sources with <code>invariant source add &lt;type&gt; [path]</code> or edit the config. Add <code>--cwd /path/to/project</code> to any command to run it elsewhere.</p>
+  <h3>2. Add your patterns</h3>
+  <p>Start from what your apps already do, or write a definition by hand. Both end up in <code>invariant.patterns.json</code>, and nothing is enforced until a person approves it.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant discover src/                 # propose patterns from your code
+invariant candidates list
+invariant candidates accept &lt;id&gt; --as "Your Name"
+invariant candidates promote &lt;id&gt; --id composition.confirm-dialog --as "Your Name"
+invariant compile
+invariant review approve &lt;id&gt; --as "Your Name"   # approve what you have read</pre></div>
+  <h3>3. Enforce</h3>
+  <div class="code"><span class="lang">bash</span><pre>invariant validate src/                 # components, tokens and approved patterns
+invariant verify --fresh                # is the contract stale or tampered with?
+invariant agent init claude-code        # give your AI tool the contract</pre></div>
+  <p>Put <code>validate</code> and <code>verify --fresh</code> in CI. To start clean on an existing codebase, run <code>invariant validate src/ --update-baseline</code>: existing violations are hidden (with a note), and new ones still fail. <code>--no-baseline</code> shows everything. To check behavior in a browser, see <a href="#browser-verification">Browser verification</a>.</p>
+  <div class="note"><b>Compile exit code</b><code>compile</code> exits 1 if any diagnostic is an error. The files are still written so you can inspect the problem. <code>compile --watch</code> recompiles after changes settle, so a connected agent always sees a current contract.</div>
 </section>
 
 <section class="doc" id="how-it-works">
@@ -305,7 +335,7 @@ invariant agent init claude-code        # connect an AI tool</pre></div>
     <tr><td><code>components</code></td><td>One entry per conceptual component, with one <code>implementation</code> per framework and source. Props (type, required, default, allowed values, deprecation), events, slots, variants, states, accessibility, examples, composition and lifecycle.</td><td><code>component:button</code></td></tr>
     <tr><td><code>tokens</code></td><td>A category (color, typography, spacing, sizing, border, shadow, breakpoint, motion or other) and a value that is either a literal or <code>aliasOf</code> another token, plus per-theme <code>modes</code>.</td><td><code>token:color.brand.primary</code></td></tr>
     <tr><td><code>themes</code></td><td>The modes that token values vary by, such as <code>dark</code>.</td><td><code>theme:dark</code></td></tr>
-    <tr><td><code>patterns</code>, <code>guidelines</code></td><td>References to entities and to documentation. Guidelines come from documents in your repo. Patterns are not produced yet.</td><td><code>pattern:form.login</code></td></tr>
+    <tr><td><code>patterns</code>, <code>guidelines</code></td><td>Patterns are layouts, interactions, pages and compositions that you define (see <a href="#pattern-definitions">Pattern definitions</a>): parts, regions, states, relationships and constraints. Guidelines are references to documents in your repo.</td><td><code>pattern:form.login</code></td></tr>
     <tr><td><code>constraints</code>, <code>policies</code></td><td>Checkable rules. A policy is a rule a named person approved, with severity and enforcement. A policy without approval cannot exist.</td><td><code>policy:icon-buttons-need-labels</code></td></tr>
     <tr><td><code>conflicts</code></td><td>Where sources disagree: at least two claims, each with its source, status, evidence and value. The losing claim is never deleted.</td><td><code>conflict:value-mismatch/...</code></td></tr>
     <tr><td><code>sources</code></td><td>Every input, its location, version when it has one, what it can supply, and its health (ok, degraded or failed).</td><td><code>ui-react</code></td></tr>
@@ -338,7 +368,7 @@ invariant agent init claude-code        # connect an AI tool</pre></div>
     <tr><td>Strict objects</td><td>Unknown fields are rejected. Framework-specific data lives only under <code>extensions.react</code>, <code>extensions.vue</code> or <code>extensions.angular</code>, and the core model never reads it.</td></tr>
     <tr><td>Sorted and deterministic</td><td>Collections are sorted by id and keys are canonical, so recompiling unchanged sources gives identical bytes and clean diffs.</td></tr>
     <tr><td>Hash ignores timestamps</td><td><code>integrity.contentHash</code> is a SHA-256 of the contract without the <code>integrity</code> block, <code>metadata.compiledAt</code> and <code>sources[].lastSyncedAt</code>. Times are recorded but cannot change the hash.</td></tr>
-    <tr><td>Version is explicit</td><td><code>contractVersion</code> is <code>1.0.0</code>. Contract changes are versioned.</td></tr>
+    <tr><td>Version is explicit</td><td><code>contractVersion</code> is <code>1.1.0</code>, which added optional pattern fields. Contracts written as <code>1.0.0</code> are still read as they are. Contract changes are versioned.</td></tr>
   </table></div>
 </section>
 
@@ -473,10 +503,320 @@ invariant review accept &lt;id&gt; --as "Jane Doe" --note "known difference"</pr
   <p>Category, semantic name, and the mapping between a CSS variable name and a JSON token name are not decided here. Tokens from different files merge on a normalized name (<code>color.brand</code> equals <code>color-brand</code>), recorded as an <code>inferred</code> fact. A different literal or alias for the same token and theme is a <code>token-value-mismatch</code> conflict.</p>
 </section>
 
+<section class="doc" id="pattern-definitions">
+  <div class="kicker">Patterns</div>
+  <h2>Pattern definitions</h2>
+  <p>Patterns describe how your organization assembles interfaces: a page layout, an interaction such as confirming a delete, a page archetype, or a composition like a card with actions. You write them in <code>invariant.patterns.json</code>, with no code, and <code>compile</code> turns them into patterns in the contract. Agents then find them with <code>get_design_patterns</code>.</p>
+  <div class="code"><span class="lang">json</span><pre>{
+  "$schema": "./schema/patterns-file-v1.schema.json",
+  "version": 1,
+  "patterns": [
+    {
+      "id": "page.data-management",
+      "name": "Data management page",
+      "category": "page",
+      "description": "A page to find, review and act on a collection of records.",
+      "intent": "Let a person search a collection and act on what they find.",
+      "layout": { "regions": [{ "name": "header", "required": true }, { "name": "results", "required": true }] },
+      "composition": {
+        "parts": [
+          { "name": "toolbar", "ref": "Table toolbar", "role": "required", "region": "results" },
+          { "name": "table", "ref": "DataTable", "role": "required", "region": "results" }
+        ]
+      },
+      "relationships": [{ "id": "tools", "type": "composes", "target": "composition.table-toolbar" }],
+      "constraints": [
+        {
+          "id": "single-table",
+          "kind": "cardinality",
+          "description": "A data management page shows exactly one table.",
+          "details": { "target": "DataTable", "min": 1, "max": 1, "within": "region:results" },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        }
+      ],
+      "approval": { "approvedBy": "design-system-owners", "approvedAt": "2026-11-03T10:00:00.000Z" }
+    }
+  ]
+}</pre></div>
+  <p><code>invariant export --to &lt;dir&gt;</code> writes the JSON Schema to <code>schema/patterns-file-v1.schema.json</code>. Point <code>$schema</code> at it and your editor validates the file as you type.</p>
+  <h3>What you can describe</h3>
+  <div class="tbl"><table>
+    <tr><th>Field</th><th>Describes</th></tr>
+    <tr><td><code>composition.parts</code></td><td>The named parts of the pattern, each a component or another pattern, and whether it is required, optional or prohibited.</td></tr>
+    <tr><td><code>layout.regions</code></td><td>Named regions with hierarchy, width, grid, spacing tokens and responsive behavior.</td></tr>
+    <tr><td><code>behavior</code></td><td>States, the initial state and transitions, with required feedback.</td></tr>
+    <tr><td><code>variations</code></td><td>Named, approved ways a pattern may differ: a part's role changes (required to optional or prohibited) or a part exists only in the variation. Each says when to use it.</td></tr>
+    <tr><td><code>relationships</code></td><td>How it relates to other patterns: <code>composes</code>, <code>contains</code>, <code>requires</code>, <code>uses</code>, <code>extends</code>, <code>alternative-to</code>, <code>prohibited-with</code>, <code>supersedes</code>.</td></tr>
+    <tr><td><code>constraints</code></td><td>Checkable rules: <code>required-child</code>, <code>forbidden-child</code>, <code>requires-parent</code>, <code>required-region</code>, <code>ordering</code>, <code>cardinality</code>.</td></tr>
+  </table></div>
+  <h3>References by name</h3>
+  <p>Write a component or pattern by id or by name (<code>DataTable</code>, <code>data table</code>, <code>component:data-table</code>). Compiling resolves it. An exact id wins, then a name, then the part of a pattern id after its category. If a name matches several things at the same level, you get an error and write the full id. A name that matches nothing gets the nearest suggestions.</p>
+  <h3>Page archetypes</h3>
+  <p>A page archetype is a definition with <code>category: "page"</code> that composes other patterns. A data management page, a detail page and a create or edit form can share an application shell, a page header, a toolbar, a delete confirmation and a form workflow, and each says what may differ.</p>
+  <ul>
+    <li><b>Regions and parts:</b> place each part in a region. A required region nothing fills gets a warning.</li>
+    <li><b>Variations:</b> <code>read-only</code> makes an actions part prohibited, <code>create</code> prohibits a remove button, <code>bulk-actions</code> adds a part. They are named and carry a <code>when</code>, instead of becoming extra patterns.</li>
+    <li><b>Required interaction states:</b> <code>required-state</code> constraints on the archetype, or on the interaction patterns it uses.</li>
+    <li><b>Followed to any depth:</b> compiling rejects a circular reference, two patterns declared prohibited together that one page composes, and a prohibition that a composed pattern defeats. It warns about a pattern that another supersedes.</li>
+    <li><b>A part is a slot:</b> prohibiting one part does not clash with another part of the same pattern that uses the same component. Only what a composed pattern brings in does.</li>
+  </ul>
+  <div class="code"><span class="lang">bash</span><pre>invariant patterns resolve page.detail
+invariant patterns resolve page.detail --variation read-only</pre></div>
+  <p><code>resolve</code> shows the regions, the composition expanded through every pattern it builds on, the variations, the interaction states it requires and whether a policy enforces each, responsive expectations, and prohibited combinations. Agents get the same through <code>get_design_patterns</code> with <code>name</code> and <code>resolve</code> (or <code>variation</code>).</p>
+  <div class="note warn"><b>Approval is not inherited</b>An approved archetype does not approve the patterns it builds on. Resolving lists the ones that are not approved.</div>
+  <h3>Constraint inheritance</h3>
+  <p>By default each constraint is enforced by its own policy, with its own paths. To hold a whole page file to the constraints of everything its archetype composes, opt in on the archetype:</p>
+  <div class="code"><span class="lang">json</span><pre>"appliesTo": { "paths": ["src/pages/**"], "frameworks": ["react"] },
+"inheritsConstraints": true</pre></div>
+  <p>It follows parts and variation parts through every pattern they use, and puts each rule that an approved policy already carries onto those paths. It creates no policy and approves nothing, and it has effect only while <code>appliesTo</code> and the opt-in are both approved. A file covered by a policy's own paths and by the archetype's is checked once, under the policy's own scope. Results of inherited rules say <code>inheritedFrom</code>.</p>
+  <h3>Approval</h3>
+  <ul>
+    <li><b>No <code>approval</code> block:</b> the pattern is <code>documented</code>. <code>patterns list</code> marks it as not approved, and each of its facts appears in <code>invariant review list</code> as a <code>pattern-fact</code>. Approve one with <code>invariant review approve &lt;id&gt; --as "Your Name"</code>.</li>
+    <li><b>With <code>approval</code>:</b> the pattern's facts are <code>approved</code>. Change the definition without updating the approval and verification reports it as stale.</li>
+  </ul>
+  <p>A file in the repository is not an approval by itself, and approver names are asserted, not authenticated.</p>
+  <h3>Enforcement</h3>
+  <p>Add <code>enforce</code> to a constraint to make it a policy. That needs an approved pattern, because nothing infers an approval. On an unapproved pattern, compiling warns and adds the constraint without a policy.</p>
+  <div class="note"><b>How it is checked</b><code>invariant validate</code> checks React files against these policies and reports what it cannot establish as not verifiable. See <a href="#validate">Validate code</a>, "Pattern rules". A whole-file constraint (<code>required-region</code>, or <code>ordering</code> and <code>cardinality</code> without <code>within</code>) needs <code>appliesTo.paths</code>, because the paths mark which files are instances of the pattern.</div>
+  <h3>Problems are reported, not guessed</h3>
+  <p>If a definition has an unknown component, token or pattern, an ambiguous name, a bad constraint, or a region it does not define, compiling reports every problem with its location and leaves that pattern out of the contract. Your other patterns are still added, and <code>compile</code> exits 1. Details are in <code>docs/specifications/pattern-definitions-v1.md</code>.</p>
+</section>
+
+<section class="doc" id="pattern-discovery">
+  <div class="kicker">Patterns</div>
+  <h2>Pattern discovery</h2>
+  <p>Discovery finds structures that already recur in your application code and proposes them as <b>candidates</b>. It never approves anything and never writes a rule. A person reviews each candidate, and an accepted one can be promoted into <code>invariant.patterns.json</code>, still unapproved.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant discover src/
+invariant candidates list
+invariant candidates show modal-button-ab12cd34
+invariant candidates accept ab12cd34 --as "Your Name" --note "our confirm dialog"
+invariant candidates promote ab12cd34 --id composition.confirm-dialog --as "Your Name"</pre></div>
+  <h3>Two methods</h3>
+  <div class="tbl"><table>
+    <tr><th>Kind</th><th>How it works</th></tr>
+    <tr><td><code>arrangement</code></td><td>Exact structure. Each design-system element with something inside it gets a canonical form such as <code>card(card.header,card.body(button))</code>, with marks for elements that may not render, may repeat, or take children from elsewhere. Identical forms are grouped. A group recurring in enough files and places is a candidate.</td></tr>
+    <tr><td><code>similar-files</code></td><td>Overlap of structure. Files are described by their top-level elements and nested pairs, and grouped when every pair overlaps by at least <code>--similarity</code>. The candidate reports what every file shares, what most share, what varies, and the lowest and mean overlap.</td></tr>
+  </table></div>
+  <h3>What a candidate does and does not say</h3>
+  <ul>
+    <li>Every candidate is <code>inferred</code> and starts <code>proposed</code>. Every one lists its evidence (file, line, column) and explains why it was found.</li>
+    <li><code>equivalence</code> is always <code>not-established</code>. Similar structure is measured and reported; it is never taken to mean the same purpose.</li>
+    <li>No language model is involved and no confidence score is invented. You get counts and measured overlap.</li>
+    <li>Output is deterministic: the same files and options give identical bytes, and a candidate keeps its id while its structure is unchanged.</li>
+  </ul>
+  <h3>Review and promotion</h3>
+  <p>Decisions are an append-only history in <code>invariant.candidate-reviews.json</code>, kept across new discovery runs. A decision about a structure that is gone is reported, not dropped. <code>promote</code> needs an accepted candidate and adds a definition with an <code>origin</code> block (candidate, method, counts, who accepted it and when). It adds no approval, no intent and no constraints: an observed arrangement is not a rule. After <code>compile</code> the pattern is <code>documented</code>, and you approve it with <code>invariant review</code> like any other.</p>
+  <div class="note"><b>Scope</b>Discovery reads React <code>.tsx</code> and <code>.jsx</code> files by syntax, never runs them, and needs a compiled contract. Vue, Angular and HTML files are skipped and counted. An element counts as inside another when it is under it in the same file, so markup between them is ignored.</div>
+</section>
+
+<section class="doc" id="validate">
+  <div class="kicker">Enforce</div>
+  <h2>Validate code</h2>
+  <p><code>invariant validate &lt;path...&gt;</code> checks application code against the compiled contract. Paths are files or directories inside the project. Directories are walked, skipping <code>node_modules</code>, build output, symbolic links, <code>.d.ts</code> files and <code>validation.ignore</code> globs. Recognized files: <code>.tsx .jsx .ts .js .mjs .cjs .vue .html</code>.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant validate src                                 # text report, exit 1 on any error
+invariant validate src --format json|github|sarif      # machine-readable output
+invariant validate src --fail-on warning|never         # change the failing threshold</pre></div>
+  <p>The framework comes from the file name, then <code>--framework</code>, then the contract's only framework, then React. Nothing is executed or imported. Only literal values are verified. Expressions and bindings are counted as unverified and never guessed.</p>
+  <h3>What a violation says</h3>
+  <div class="code"><span class="lang">text</span><pre>app/App.tsx:4:5 error prop-value-not-allowed
+  Button.variant is "danger", which is not one of "primary", "secondary", "ghost"
+  fix: Use one of "primary", "secondary", "ghost" (closest: "primary").
+  evidence src/Button.tsx:28 (discovered); subject component:button</pre></div>
+  <p>Every violation has file, line and column, a rule code, a subject, an explanation, a suggested fix, evidence (or the approved policy) and a <code>basis</code>: <code>discovered</code>, <code>documented</code>, <code>inferred</code>, <code>approved</code> or <code>heuristic</code>.</p>
+  <h3>The eleven rules</h3>
+  <div class="tbl"><table>
+    <tr><th>Rule</th><th>Codes</th><th>Severity</th></tr>
+    <tr><td>Unknown component</td><td><code>component-unknown</code>, <code>framework-not-implemented</code></td><td>error</td></tr>
+    <tr><td>Unknown property</td><td><code>unknown-prop</code>, <code>unverifiable-prop</code></td><td>warning, info</td></tr>
+    <tr><td>Invalid property value</td><td><code>prop-value-not-allowed</code>, <code>prop-type-mismatch</code></td><td>error, warning</td></tr>
+    <tr><td>Deprecated component</td><td><code>component-deprecated</code></td><td>warning</td></tr>
+    <tr><td>Deprecated property</td><td><code>prop-deprecated</code></td><td>warning</td></tr>
+    <tr><td>Unsupported composition</td><td><code>composition-parent-required</code>, <code>composition-not-allowed</code></td><td>error</td></tr>
+    <tr><td>Missing required property</td><td><code>required-prop-missing</code></td><td>error</td></tr>
+    <tr><td>Hardcoded color</td><td><code>color-not-in-tokens</code>, <code>color-matches-token</code></td><td>warning, info</td></tr>
+    <tr><td>Unapproved token</td><td><code>unknown-css-variable</code>, <code>token-deprecated</code>, <code>token-forbidden</code></td><td>warning, warning, error</td></tr>
+    <tr><td>Missing accessibility requirement</td><td><code>accessibility-requirement-missing</code></td><td>error</td></tr>
+    <tr><td>Invalid layout pattern</td><td><code>layout-pattern-invalid</code></td><td>error</td></tr>
+  </table></div>
+  <p>Run <code>invariant rules</code> for every code with its default severity and origin. Set a severity or <code>off</code> per code in <code>validation.rules</code>. Helper findings such as <code>component-ambiguous</code> and <code>native-element-has-equivalent</code> (a name match such as <code>&lt;button&gt;</code> and <code>Button</code>, always <code>heuristic</code> at confidence 0.5) are reported once per file.</p>
+  <h3>Literal values</h3>
+  <p>Invariant also compares literal values with tokens of the matching category. A check needs at least one token of that category with a literal value, otherwise it is skipped and the report says so. Anything containing <code>var(</code>, <code>calc(</code> or a binding is skipped, never guessed.</p>
+  <div class="tbl"><table>
+    <tr><th>Kind</th><th>Codes</th><th>Reads</th></tr>
+    <tr><td>Color</td><td><code>color-not-in-tokens</code>, <code>color-matches-token</code></td><td>Hex, <code>rgb()</code>/<code>rgba()</code>, <code>hsl()</code>/<code>hsla()</code> and CSS named colors. Hex and functional colors compare by value, so <code>rgb(0 87 255)</code> equals <code>#0057ff</code>. Names are read only as the value of a color property and match a token by name.</td></tr>
+    <tr><td>Spacing</td><td><code>spacing-not-in-tokens</code>, <code>spacing-matches-token</code></td><td>Lengths in <code>margin*</code>, <code>padding*</code> and <code>gap</code>, in CSS or style objects. <code>rem</code> and <code>em</code> use a 16px root. Zero, <code>auto</code> and percentages are skipped.</td></tr>
+    <tr><td>Typography</td><td><code>typography-not-in-tokens</code>, <code>typography-matches-token</code></td><td><code>font-size</code>, <code>font-weight</code>, <code>line-height</code>, <code>letter-spacing</code> and the first <code>font-family</code> name, including the parts of composite typography tokens.</td></tr>
+  </table></div>
+  <h3>Pattern rules</h3>
+  <p>When a pattern is approved and one of its constraints has <code>enforce</code>, <code>validate</code> checks React files against it. Only approved policies are enforced. The policy's <code>appliesTo.paths</code> says which files are instances of the pattern.</p>
+  <div class="tbl"><table>
+    <tr><th>Constraint</th><th>Code</th><th>Checks</th></tr>
+    <tr><td><code>required-child</code></td><td><code>pattern-required-child-missing</code></td><td>Each parent contains the child (at any depth, at least <code>min</code>).</td></tr>
+    <tr><td><code>forbidden-child</code></td><td><code>pattern-child-forbidden</code></td><td>No such child appears inside the parent.</td></tr>
+    <tr><td><code>requires-parent</code></td><td><code>pattern-parent-required</code></td><td>The child sits inside one of the allowed parents.</td></tr>
+    <tr><td><code>required-region</code></td><td><code>pattern-region-missing</code></td><td>A region of the pattern is present in the file. A region is recognized by the components of the composition parts that name it.</td></tr>
+    <tr><td><code>ordering</code></td><td><code>pattern-order-violated</code></td><td>One kind of element comes before another, in the file or inside each container.</td></tr>
+    <tr><td><code>cardinality</code></td><td><code>pattern-cardinality-violated</code></td><td>The number of elements is within <code>min</code> and <code>max</code>. <code>max: 0</code> forbids an element.</td></tr>
+    <tr><td><code>required-state</code></td><td><code>pattern-state-missing</code></td><td>An interaction in the file represents a state its workflow requires. See <a href="#validate">Interaction checks</a> below.</td></tr>
+  </table></div>
+  <p>Every check is reported with a status, in <code>evaluations</code> in the JSON output and as a tally in text:</p>
+  <div class="tbl"><table>
+    <tr><th>Status</th><th>Meaning</th></tr>
+    <tr><td><code>pass</code></td><td>Evaluated, and it holds.</td></tr>
+    <tr><td><code>fail</code></td><td>Evaluated, and it is violated. Produces a finding with the policy's severity.</td></tr>
+    <tr><td><code>warning</code></td><td>Holds only if conditionally rendered elements render, or a list or condition might break a limit.</td></tr>
+    <tr><td><code>not-verifiable</code></td><td>This analysis cannot establish it. No finding, never counted as a pass, and it does not fail the run.</td></tr>
+    <tr><td><code>skipped</code></td><td>It applies but cannot be evaluated, with the reason: for example a whole-file rule with no paths, nothing to order, or a Vue or Angular template.</td></tr>
+  </table></div>
+  <p>Invariant only says something is missing, out of order or over a limit when it can see everything in that scope. If the scope holds a component from outside the design system, or children that come from somewhere else (<code>{children}</code>, a spread, a function call), the answer is <code>not-verifiable</code>. Something that is present counts as proof even then. Elements inside a list or a condition never prove that something is present or that a limit holds.</p>
+  <div class="note warn"><b>What is not checked yet</b>Patterns used as references inside a constraint, <code>ordering</code> and <code>cardinality</code> <em>within a region</em>, and regions with no component part to recognize them are reported as not verifiable. Vue, Angular and HTML templates are skipped. Each file is read on its own, so a parent or child in another file cannot be seen. <code>requires-parent</code> can be a false positive if a wrapper lives in another file.</div>
+  <h3>Interaction checks</h3>
+  <p>A <code>required-state</code> constraint says that wherever a workflow occurs in a file, it must represent one of its states. Invariant looks for three workflows in the JSX and handlers of a React file:</p>
+  <div class="tbl"><table>
+    <tr><th>Workflow</th><th>Found as</th><th>States</th></tr>
+    <tr><td><code>form-submission</code></td><td>An element with <code>onSubmit</code>.</td><td><code>submitting</code>, <code>error</code>, <code>success</code>, <code>guarded</code> (not submittable twice while pending).</td></tr>
+    <tr><td><code>destructive-confirmation</code></td><td>A click handler that calls something named delete, remove or destroy, or a button that says so.</td><td><code>confirming</code> (a dialog or <code>confirm</code> comes first), <code>cancellable</code>.</td></tr>
+    <tr><td><code>search-results</code></td><td>A search input.</td><td><code>connected</code>, <code>loading</code>, <code>empty</code>, <code>error</code>, <code>clearable</code>.</td></tr>
+  </table></div>
+  <div class="code"><span class="lang">json</span><pre>{
+  "id": "shows-submitting",
+  "kind": "required-state",
+  "description": "A form shows that it is submitting.",
+  "details": { "workflow": "form-submission", "state": "submitting", "minimum": "static-inferred" },
+  "enforce": { "severity": "error", "enforcement": "block" }
+}</pre></div>
+  <p>Each result that found its state says how much that establishes:</p>
+  <div class="tbl"><table>
+    <tr><th>Level</th><th>Meaning</th></tr>
+    <tr><td><code>structural</code></td><td>The code has the piece and the interface shows it, for example a state called <code>isSubmitting</code> that the JSX reads. Part of this rests on names, and the evidence names the identifier.</td></tr>
+    <tr><td><code>static-inferred</code></td><td>A handler's code shows it happening: a flag set before an <code>await</code> and cleared after, a <code>catch</code> that sets the error, a delete reachable only from the dialog's confirm button.</td></tr>
+    <tr><td><code>runtime-verified</code></td><td>Reserved for results of running the code. Static analysis never produces it.</td></tr>
+  </table></div>
+  <p><code>minimum</code> sets the weakest level that satisfies the rule (default <code>structural</code>). A state found below the minimum is a <code>warning</code>. A state that is not found is a <code>fail</code> when nothing in the file could be hiding it, and <code>not-verifiable</code> when something could: a handler passed in as a prop, a custom hook, a spread on the form, a form <code>action</code>, or a component from another file.</p>
+  <div class="note warn"><b>Represented is not working</b>These checks show that a state exists in the code and is shown to the user. They do not run the code, so they cannot show that it works, and no result is ever called runtime verified. The text report ends its tally with how many results are at each level.</div>
+  <div class="note warn"><b>Care with false claims</b>Unknown-component detection for React depends on imports: a tag without an import from a package the contract publishes is never called unknown. Standard HTML attributes, <code>aria-*</code>, <code>data-*</code> and event or slot names are never flagged as unknown props.</div>
+</section>
+
+<section class="doc" id="policies">
+  <div class="kicker">Enforce</div>
+  <h2>Policies</h2>
+  <p>Organizational rules are written by people in <code>invariant.policies.json</code>, kept in version control.</p>
+  <div class="code"><span class="lang">json</span><pre>{ "version": 1, "policies": [ {
+  "id": "icon-buttons-need-labels",
+  "name": "Icon-only buttons need an accessible name",
+  "statement": "A button without text content must have aria-label or aria-labelledby.",
+  "severity": "error",
+  "enforcement": "block",
+  "approval": {
+    "approvedBy": "Jane Doe",
+    "approvedAt": "2026-01-05T00:00:00.000Z",
+    "role": "design-system lead",
+    "reference": "RFC-7"
+  },
+  "rule": {
+    "kind": "require-attribute",
+    "components": ["Button"],
+    "anyOf": ["aria-label", "aria-labelledby"],
+    "unlessChildren": true,
+    "category": "accessibility"
+  }
+} ] }</pre></div>
+  <p>Rule kinds: <code>require-attribute</code>, <code>forbid-prop</code>, <code>forbid-prop-value</code>, <code>forbid-component</code>, <code>forbid-token</code>, <code>allowed-children</code> and <code>required-parent</code>.</p>
+  <ul>
+    <li>A policy without <code>approval</code> is rejected. Nothing infers or auto-approves a policy.</li>
+    <li>Policies take their severity from the file, lowered by enforcement: <code>warn</code> caps at warning, <code>report-only</code> is info.</li>
+    <li><code>compile</code> adds each policy to the contract, so <code>validate</code> reads only the contract.</li>
+    <li>A policy that names a component or token the contract lacks is kept and reported as <code>governance.policy-unknown-component</code>. That part cannot fire.</li>
+    <li>Composition checks are conservative: <code>required-parent</code> only fires when the element sits inside other design-system components and none is an allowed parent.</li>
+  </ul>
+  <p>List approved policies with <code>invariant policy list</code>. There is no <code>policy add</code> yet; write the file by hand.</p>
+</section>
+
+<section class="doc" id="browser-verification">
+  <div class="kicker">Enforce</div>
+  <h2>Browser verification</h2>
+  <p>Static analysis cannot show focus behavior, keyboard order, responsive layout or what actually renders. <code>invariant browser run</code> checks a running app in a headless browser for the scenarios you write. It is opt-in and kept apart from compiling and from <code>validate</code>.</p>
+  <div class="code"><span class="lang">json</span><pre>{
+  "version": 1,
+  "baseUrl": "http://localhost:3000",
+  "scenarios": [
+    {
+      "id": "edit-form-saves",
+      "pattern": "pattern:page.edit-form",
+      "path": "/accounts/1/edit",
+      "viewports": [{ "width": 375, "height": 700 }, { "width": 1280, "height": 800 }],
+      "steps": [
+        { "action": "fill", "selector": "#name", "value": "Ada" },
+        { "action": "click", "selector": "button[type=submit]" }
+      ],
+      "expect": [
+        { "kind": "visible", "selector": "[role=status]" },
+        { "kind": "tab-order", "selectors": ["#name", "button[type=submit]"] }
+      ]
+    }
+  ]
+}</pre></div>
+  <div class="code"><span class="lang">bash</span><pre>npm install --save-dev playwright &amp;&amp; npx playwright install chromium
+invariant browser run</pre></div>
+  <h3>What you can check</h3>
+  <p>Steps: <code>click</code>, <code>fill</code>, <code>press</code>, <code>wait-for</code>. Expectations: <code>visible</code>, <code>hidden</code>, <code>text</code>, <code>focused</code>, <code>tab-order</code>, <code>contains</code> (rendered nesting) and <code>count</code>. Each scenario runs once per viewport. <code>pattern</code> and <code>constraint</code> record which approved pattern a scenario gives a runtime check for; you write the link, nothing infers it.</p>
+  <h3>Opt-in and controlled</h3>
+  <ul>
+    <li>Invariant does not install or depend on Playwright. It loads it from your project, and says how to install it if it is missing. No other command starts a browser.</li>
+    <li>A spec is data only: unknown keys are rejected and no step runs code.</li>
+    <li>Each scenario gets a fresh headless context with service workers blocked. Requests to origins other than the base URL's and <code>allowOrigins</code> are aborted. The base URL must be local unless its origin is listed.</li>
+  </ul>
+  <h3>Results stay distinguishable</h3>
+  <p>Results go to <code>&lt;output&gt;/invariant.browser-results.json</code> with <code>kind: "runtime"</code> and level <code>runtime-verified</code>, and each one records the browser, its version, the viewport and the URL. <code>pass</code> and <code>fail</code> are findings about the page. <code>error</code> means the check could not run (page did not load, a step failed) and is never counted as a pass. Failures say what was seen, such as <code>Tab 1 should reach #save, but focus is on &lt;input#name&gt;</code>. <code>validate</code> results are never upgraded by a browser result.</p>
+  <div class="note warn"><b>Early</b>The Playwright driver has not yet been exercised against a real browser in this repository's tests, which use a scripted stand-in. Run it against your app before relying on it. Accessibility audits are not included.</div>
+</section>
+
+<section class="doc" id="decisions">
+  <div class="kicker">Enforce</div>
+  <h2>Decisions</h2>
+  <p>Decisions are written to <code>invariant.decisions.json</code> and applied on every <code>compile</code>.</p>
+  <div class="tbl"><table>
+    <tr><th>Command</th><th>Effect at compile</th></tr>
+    <tr><td><code>review approve &lt;id&gt;</code></td><td>The fact becomes <code>approved</code>, layered over its prior status, with a fingerprint and your <code>--role</code>, <code>--reference</code> and <code>--note</code>.</td></tr>
+    <tr><td><code>review reject &lt;id&gt;</code></td><td>Removes an inferred containment link, guideline link or token category. Other inferred facts cannot be rejected; the reason says how to fix it at the source.</td></tr>
+    <tr><td><code>review resolve|accept|dismiss &lt;id&gt; [--source s]</code></td><td>Records the conflict's resolution: <code>resolved</code> (fixed at the source), <code>accepted</code> (a known difference) or <code>dismissed</code> (not a real conflict). The conflict disappears on recompile once the source is fixed.</td></tr>
+  </table></div>
+  <p>Every decision needs <code>--as &lt;name&gt;</code> (or the <code>INVARIANT_USER</code> environment variable) and records when it was made.</p>
+  <h3>Stale decisions</h3>
+  <p>A decision records the value or claims it was made about. If they change, the decision is <b>stale</b>: it is not applied, <code>compile</code> reports <code>governance.decision-stale</code>, and the item returns to the queue. A decision whose target is gone is reported as <code>governance.decision-target-missing</code>.</p>
+  <div class="note warn"><b>Authorization is not authentication</b>The recorded name is asserted, not proven. <code>governance.approvers</code> restricts which names the CLI will record and <code>compile</code> will apply. Real enforcement is your repository's review process over <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>, for example CODEOWNERS.</div>
+</section>
+
+<section class="doc" id="ci">
+  <div class="kicker">Enforce</div>
+  <h2>Verify in CI</h2>
+  <p>Exit codes plus output formats are the integration. <code>--format github</code> prints workflow annotations, <code>--format sarif</code> prints SARIF 2.1.0 for code scanning, and <code>--format json</code> is for scripts.</p>
+  <div class="code"><span class="lang">bash</span><pre>npx invariant-ui compile
+npx invariant-ui verify --fresh                # fails if stale or tampered with, and says what changed
+npx invariant-ui validate src --format github  # annotate pull requests</pre></div>
+  <p>Commit the <code>invariant/</code> folder, <code>invariant.config.json</code>, <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>. Compiling unchanged sources gives identical bytes, so diffs are meaningful.</p>
+  <h3>Let setup add it</h3>
+  <p>In a git project, <code>invariant setup</code> asks "Add a GitHub Action that checks every commit on pull requests?". Yes writes <code>.github/workflows/invariant.yml</code>:</p>
+  <ul>
+    <li><b>When it runs:</b> on every commit to an open pull request (<code>opened</code>, <code>synchronize</code>, <code>reopened</code>) and on pushes to <code>main</code>. A newer push cancels the run before it.</li>
+    <li><b>What it runs:</b> <code>verify --fresh</code>, which fails if the committed <code>invariant/</code> folder is stale or was edited by hand, then <code>validate</code> on your application folders with <code>--format github</code>, which annotates the lines that break the contract. Violations in <code>invariant.baseline.json</code> are hidden, and new ones fail the check.</li>
+    <li><b>Safe by default:</b> it pins the exact version it was written for, asks for <code>contents: read</code> only, and uses no secrets.</li>
+    <li><b>Options:</b> <code>--ci</code> adds it without asking (and in a folder that is not a git project), <code>--no-ci</code> skips the question. An existing <code>invariant.yml</code> is never overwritten. <code>--yes</code> answers yes.</li>
+  </ul>
+  <div class="note warn"><b>Commit the contract</b>The job verifies against the committed <code>invariant/</code> folder, so commit it along with the workflow and <code>invariant.baseline.json</code>. Without them the first run fails.</div>
+  <p>To write the job yourself, or to add it to a workflow you already have, it needs only Node, because <code>npx</code> fetches the package:</p>
+  <div class="code"><span class="lang">yaml</span><pre>- uses: actions/setup-node@v4
+  with: { node-version: 22 }
+- run: npx invariant-ui verify --fresh
+- run: npx invariant-ui validate src --format github</pre></div>
+  <p>Pin a version (<code>npx invariant-ui@0.1.0</code>) if you want builds that do not change underneath you.</p>
+  <div class="note"><b>No workflow file is generated</b>Invariant does not write files into <code>.github/</code>. Copy the job above into the workflow you already have.</div>
+</section>
+
 <section class="doc" id="cli">
   <div class="kicker">Use it</div>
   <h2>CLI</h2>
-  <p>The CLI works from a local checkout with no account, network access or cloud service.</p>
+  <p>The package is <code>invariant-ui</code> and the command is <code>invariant</code>. Run it with <code>npx invariant-ui &lt;command&gt;</code>, or install it with <code>npm install -g invariant-ui</code> and write <code>invariant &lt;command&gt;</code>, as below. It needs no account, network access or cloud service to run.</p>
   <div class="tbl"><table>
     <tr><th>Command</th><th>What it does</th></tr>
     <tr><td><code>init</code></td><td>Runs discovery and writes <code>invariant.config.json</code>. A repository with more than five packages of one framework gets one whole-project entry for it. Refuses to overwrite without <code>--force</code>.</td></tr>
@@ -486,11 +826,16 @@ invariant review accept &lt;id&gt; --as "Jane Doe" --note "known difference"</pr
     <tr><td><code>analyze</code></td><td>Discovers and extracts every source, prints what was found and the diagnostics, writes the IR to <code>&lt;output&gt;/analysis/</code>. Builds no contract.</td></tr>
     <tr><td><code>compile</code></td><td>Full pipeline: discover, extract, reconcile, enrich, verify. Writes the <a href="#artifacts">output files</a>. <code>--watch</code> compiles once, then again after changes settle, until Ctrl+C. It ignores the output directory, so writing files never triggers a cycle, and it keeps watching after a broken config.</td></tr>
     <tr><td><code>components list</code>, <code>components inspect &lt;name|id&gt;</code></td><td>Read the compiled contract. <code>inspect</code> shows implementations, props with status, events, slots, variants, composition and conflicts. <code>--evidence</code> adds source locations.</td></tr>
-    <tr><td><code>tokens list</code>, <code>patterns list</code>, <code>conflicts list</code></td><td>Read the contract. Inferred token categories are marked <code>*</code>. <code>conflicts list</code> filters by <code>--severity</code>, <code>--type</code>, <code>--subject</code>.</td></tr>
-    <tr><td><code>validate &lt;path...&gt;</code></td><td>Checks application code against the contract. See <a href="#validate">Validate code</a>.</td></tr>
+    <tr><td><code>tokens list</code>, <code>conflicts list</code></td><td>Read the contract. Inferred token categories are marked <code>*</code>. <code>conflicts list</code> filters by <code>--severity</code>, <code>--type</code>, <code>--subject</code>.</td></tr>
+    <tr><td><code>patterns list|inspect|resolve|search|relationships</code></td><td>Read the pattern definitions in the contract. <code>list</code> filters by <code>--category</code> and <code>--status</code>, and marks patterns that are not fully approved with <code>*</code>. <code>inspect &lt;name|id&gt;</code> shows parts, regions, states, constraints, relationships, which policies enforce it, and whether it is approved (<code>--evidence</code> adds the source of each fact). <code>resolve &lt;name&gt; [--variation v]</code> reads a pattern as a page blueprint, to any depth, with its variations, required interaction states and what is not approved. <code>search</code> ranks by name, intent, parts, regions and states. <code>relationships</code> walks edges (<code>--direction</code>, <code>--depth 1-5</code>).</td></tr>
+    <tr><td><code>setup</code></td><td>One command: compile, propose patterns from your app code, connect your AI tool, baseline existing violations. Options: <code>--yes</code>, <code>--confirm-contract</code>, <code>--as</code>, <code>--paths</code>, <code>--no-agent</code>, <code>--ci</code>, <code>--no-ci</code>. See <a href="#quick-start">Quick start</a> and <a href="#ci">Verify in CI</a>.</td></tr>
+    <tr><td><code>discover &lt;path...&gt;</code></td><td>Finds structures that recur in your React code and writes them to <code>&lt;output&gt;/invariant.candidates.json</code> as candidates to review. Options: <code>--min-files</code> (3), <code>--min-uses</code> (3), <code>--similarity</code> (0.7), <code>--depth</code> (3). See <a href="#pattern-discovery">Pattern discovery</a>.</td></tr>
+    <tr><td><code>candidates list|show|accept|reject|defer|promote</code></td><td>Review what <code>discover</code> found. <code>accept|reject|defer &lt;id&gt; --as &lt;name&gt;</code> records a decision. <code>promote &lt;id&gt; --id &lt;pattern id&gt; --as &lt;name&gt;</code> adds an accepted candidate to <code>invariant.patterns.json</code> without approving it.</td></tr>
+    <tr><td><code>browser run</code></td><td>Opt-in runtime checks of a running app in a headless browser, from <code>invariant.browser.json</code>. Needs Playwright in your project. See <a href="#browser-verification">Browser verification</a>.</td></tr>
+    <tr><td><code>validate &lt;path...&gt;</code></td><td>Checks application code against the compiled contract, including the structural rules of approved patterns. See <a href="#validate">Validate code</a>.</td></tr>
     <tr><td><code>verify</code></td><td>Checks the compiled output without the sources: structure, references, approval fingerprints, content hash, evidence ids and every file hash. <code>--fresh</code> also recompiles. If sources changed it reports <code>verify.stale</code> and then what changed: counts per collection, and each entity with the fields that differ. <code>--json</code> adds this as <code>changes</code>.</td></tr>
     <tr><td><code>rules</code>, <code>policy list</code></td><td>List validation rules and approved policies.</td></tr>
-    <tr><td><code>review list|show|approve|reject|resolve|accept|dismiss</code></td><td>Record human decisions. See <a href="#decisions">Decisions</a>.</td></tr>
+    <tr><td><code>review list|show|approve|reject|resolve|accept|dismiss</code></td><td>Record human decisions. See <a href="#decisions">Decisions</a>. The queue also lists the unapproved facts of patterns you wrote (<code>pattern-fact</code>), which <code>approve</code> accepts.</td></tr>
     <tr><td><code>mcp</code></td><td>Serve the contract to AI tools over stdio, read-only.</td></tr>
     <tr><td><code>agent init &lt;client|all&gt;</code>, <code>agent list</code></td><td>Write MCP config, skills and rules for Claude Code, Cursor, Codex and Windsurf.</td></tr>
     <tr><td><code>export --to &lt;dir&gt;</code></td><td>Verifies, then copies the artifacts plus <code>schema/</code> to a directory. Refuses an invalid output or a non-empty target unless <code>--force</code>.</td></tr>
@@ -534,6 +879,7 @@ invariant review accept &lt;id&gt; --as "Jane Doe" --note "known difference"</pr
     <tr><td><code>validation.failOn</code></td><td>Default failing threshold for <code>validate</code>.</td></tr>
     <tr><td><code>validation.ignore</code></td><td>Globs <code>validate</code> skips.</td></tr>
     <tr><td><code>governance.policiesFile</code></td><td>Path to the policies file. Default <code>invariant.policies.json</code>.</td></tr>
+    <tr><td><code>governance.patternsFile</code></td><td>Path to the pattern definitions file. Default <code>invariant.patterns.json</code>.</td></tr>
     <tr><td><code>governance.approvers</code></td><td>Optional list of names allowed to record and apply decisions.</td></tr>
   </table></div>
   <h3>Code configuration</h3>
@@ -547,22 +893,23 @@ invariant review accept &lt;id&gt; --as "Jane Doe" --note "known difference"</pr
   <div class="code"><span class="lang">bash</span><pre>invariant compile
 invariant mcp [--dir invariant]     # serves until stdin closes</pre></div>
   <h3>Tools</h3>
-  <p>All ten are read-only and deterministic. Results are JSON in <code>structuredContent</code> and in the text content, always with <code>contractHash</code>. Lists take <code>offset</code> and <code>limit</code> (default 50, at most 200). Results over 400,000 characters are refused with advice to narrow the request.</p>
+  <p>All eleven are read-only and deterministic. Results are JSON in <code>structuredContent</code> and in the text content, always with <code>contractHash</code>. Lists take <code>offset</code> and <code>limit</code> (default 50, at most 200). Results over 400,000 characters are refused with advice to narrow the request.</p>
   <div class="tbl"><table>
     <tr><th>Tool</th><th>Returns</th></tr>
     <tr><td><code>get_design_system_overview</code></td><td>Name, frameworks, sources and health, counts, open conflicts, inferred-fact count, and what is not covered.</td></tr>
-    <tr><td><code>search_design_system</code></td><td>Lexical hits over components, tokens and guidelines with score and what matched. Handles plurals, prefixes and one-letter typos. Fixed ranking; no model or embeddings.</td></tr>
+    <tr><td><code>search_design_system</code></td><td>Lexical hits over components, tokens, guidelines and patterns with score and what matched. Handles plurals, prefixes and one-letter typos. Fixed ranking; no model or embeddings.</td></tr>
     <tr><td><code>get_component</code></td><td>Implementations (with <code>apiComplete</code>), props with type, default, allowed values, status and source line, events, slots, variants, accessibility, conflicts, guidelines.</td></tr>
     <tr><td><code>get_component_usage</code></td><td>How to import, required props, variants and defaults, deprecated props, source examples, observed prop combinations (React only).</td></tr>
     <tr><td><code>get_component_composition</code></td><td>What it contains and what contains it, with discovered or inferred status; slots.</td></tr>
     <tr><td><code>get_design_tokens</code></td><td>Tokens filtered by category, text and theme, with alias chains and resolved values. Cycles and missing targets are reported, not guessed.</td></tr>
-    <tr><td><code>get_design_patterns</code></td><td>Patterns, or an explicit statement that none exist.</td></tr>
+    <tr><td><code>get_design_patterns</code></td><td>The pattern catalog, filterable by category, status and text. With a name or id, one pattern in full: parts, regions, states, constraints, relationships, enforcing policies, and every fact with its evidence. Each result says whether it is approved; anything else is a proposal. With <code>resolve</code> or <code>variation</code>, the pattern as a page blueprint: composed patterns expanded to any depth, variations, required interaction states, and notes such as an approved archetype built on patterns that are not approved.</td></tr>
+    <tr><td><code>get_pattern_relationships</code></td><td>The edges around a pattern, to a chosen depth and direction, each with the status and source of the fact behind it. Nothing is inferred from names.</td></tr>
     <tr><td><code>get_design_guidelines</code></td><td>Guideline titles, kinds and referenced documents. Page bodies are not included.</td></tr>
     <tr><td><code>validate_component_usage</code></td><td>Checks one intended use: unknown component or prop, disallowed value, type mismatch, deprecations, missing required props.</td></tr>
-    <tr><td><code>validate_design_system_compliance</code></td><td>Checks a snippet (React, Vue, Angular or HTML; at most 200,000 characters): props and values, literal colors and CSS variables against tokens.</td></tr>
+    <tr><td><code>validate_design_system_compliance</code></td><td>Checks a snippet (React, Vue, Angular or HTML; at most 200,000 characters): props and values, literal colors and CSS variables against tokens. Pass <code>filename</code> so path-scoped pattern rules apply; the result lists every pattern check with its status.</td></tr>
   </table></div>
   <h3>Resources</h3>
-  <p><code>invariant://manifest</code>, <code>invariant://metadata</code>, <code>invariant://components</code>, <code>invariant://tokens</code>, <code>invariant://patterns</code>, <code>invariant://guidelines</code>, and the template <code>invariant://component/{id}</code>. All are <code>application/json</code>.</p>
+  <p><code>invariant://manifest</code>, <code>invariant://metadata</code>, <code>invariant://components</code>, <code>invariant://tokens</code>, <code>invariant://patterns</code>, <code>invariant://guidelines</code>, and the templates <code>invariant://component/{id}</code> and <code>invariant://pattern/{id}</code>. All are <code>application/json</code>.</p>
   <h3>Protocol</h3>
   <p>Transport is newline-delimited JSON-RPC on stdio. Only protocol messages go to stdout; logs go to stderr. The server supports the modern stateless revision (2026-07-28) and legacy revisions 2025-11-25, 2025-06-18, 2025-03-26 and 2024-11-05. Methods: <code>initialize</code>, <code>ping</code>, <code>server/discover</code>, <code>tools/list</code>, <code>tools/call</code>, <code>resources/list</code>, <code>resources/templates/list</code>, <code>resources/read</code>. Prompts, logging, completions, subscriptions, tasks, sampling, elicitation, pagination and HTTP transports are not supported.</p>
   <h3>Loading and reload</h3>
@@ -576,114 +923,12 @@ invariant mcp [--dir invariant]     # serves until stdin closes</pre></div>
   <p>One command writes MCP configuration, skills and rules for your AI tool.</p>
   <div class="code"><span class="lang">bash</span><pre>invariant agent init claude-code     # also: cursor, codex, windsurf, all
 invariant agent list</pre></div>
-  <p>The entry it writes launches <code>invariant mcp --dir &lt;output dir&gt;</code>. The default command is <code>invariant</code>, so it must be on your <code>PATH</code> (see <a href="#install">Install</a>). Otherwise point at the built file:</p>
+  <p>The entry it writes launches <code>invariant mcp --dir &lt;output dir&gt;</code>. If <code>invariant</code> is on your <code>PATH</code> (after <code>npm install -g invariant-ui</code>), the entry runs it directly. If it is not, for example when you run Invariant with <code>npx</code>, the entry runs <code>npx -y invariant-ui mcp</code> instead, and the package installs on first use. To use something else, such as a local build, pass <code>--command</code>:</p>
   <div class="code"><span class="lang">bash</span><pre>invariant agent init claude-code \
   --command node --command-arg /abs/path/to/invariant/apps/cli/dist/main.js</pre></div>
   <p><code>--dry-run</code> shows what would be written. <code>--force</code> replaces differing entries.</p>
+  <p>The <code>invariant-build-ui</code> skill gives agents a scoped workflow instead of the whole contract: understand the task, find the page archetype (<code>get_design_patterns</code> with <code>resolve</code>), find interaction and layout patterns, check each pattern's status, get components and tokens, generate, validate, correct, and report. Agents follow approved patterns and treat documented, inferred or mixed ones as proposals to confirm. The report must list what is unresolved: unfixed violations, every check that was <code>not-verifiable</code> or <code>skipped</code>, and unapproved patterns that were followed. Generated files list the ids of fully approved page archetypes, never their names or descriptions.</p>
   <div class="note"><b>Safe by construction</b>Generated skills and rules only include identifiers matching <code>[A-Za-z][A-Za-z0-9._-]{0,63}</code> (at most 60 component names) and a short title. A hostile description in your source cannot be written into committed agent configuration.</div>
-</section>
-
-<section class="doc" id="validate">
-  <div class="kicker">Govern</div>
-  <h2>Validate code</h2>
-  <p><code>invariant validate &lt;path...&gt;</code> checks application code against the compiled contract. Paths are files or directories inside the project. Directories are walked, skipping <code>node_modules</code>, build output, symbolic links, <code>.d.ts</code> files and <code>validation.ignore</code> globs. Recognized files: <code>.tsx .jsx .ts .js .mjs .cjs .vue .html</code>.</p>
-  <div class="code"><span class="lang">bash</span><pre>invariant validate src                                 # text report, exit 1 on any error
-invariant validate src --format json|github|sarif      # machine-readable output
-invariant validate src --fail-on warning|never         # change the failing threshold</pre></div>
-  <p>The framework comes from the file name, then <code>--framework</code>, then the contract's only framework, then React. Nothing is executed or imported. Only literal values are verified. Expressions and bindings are counted as unverified and never guessed.</p>
-  <h3>What a violation says</h3>
-  <div class="code"><span class="lang">text</span><pre>app/App.tsx:4:5 error prop-value-not-allowed
-  Button.variant is "danger", which is not one of "primary", "secondary", "ghost"
-  fix: Use one of "primary", "secondary", "ghost" (closest: "primary").
-  evidence src/Button.tsx:28 (discovered); subject component:button</pre></div>
-  <p>Every violation has file, line and column, a rule code, a subject, an explanation, a suggested fix, evidence (or the approved policy) and a <code>basis</code>: <code>discovered</code>, <code>documented</code>, <code>inferred</code>, <code>approved</code> or <code>heuristic</code>.</p>
-  <h3>The eleven rules</h3>
-  <div class="tbl"><table>
-    <tr><th>Rule</th><th>Codes</th><th>Severity</th></tr>
-    <tr><td>Unknown component</td><td><code>component-unknown</code>, <code>framework-not-implemented</code></td><td>error</td></tr>
-    <tr><td>Unknown property</td><td><code>unknown-prop</code>, <code>unverifiable-prop</code></td><td>warning, info</td></tr>
-    <tr><td>Invalid property value</td><td><code>prop-value-not-allowed</code>, <code>prop-type-mismatch</code></td><td>error, warning</td></tr>
-    <tr><td>Deprecated component</td><td><code>component-deprecated</code></td><td>warning</td></tr>
-    <tr><td>Deprecated property</td><td><code>prop-deprecated</code></td><td>warning</td></tr>
-    <tr><td>Unsupported composition</td><td><code>composition-parent-required</code>, <code>composition-not-allowed</code></td><td>error</td></tr>
-    <tr><td>Missing required property</td><td><code>required-prop-missing</code></td><td>error</td></tr>
-    <tr><td>Hardcoded color</td><td><code>color-not-in-tokens</code>, <code>color-matches-token</code></td><td>warning, info</td></tr>
-    <tr><td>Unapproved token</td><td><code>unknown-css-variable</code>, <code>token-deprecated</code>, <code>token-forbidden</code></td><td>warning, warning, error</td></tr>
-    <tr><td>Missing accessibility requirement</td><td><code>accessibility-requirement-missing</code></td><td>error</td></tr>
-    <tr><td>Invalid layout pattern</td><td><code>layout-pattern-invalid</code></td><td>error</td></tr>
-  </table></div>
-  <p>Run <code>invariant rules</code> for every code with its default severity and origin. Set a severity or <code>off</code> per code in <code>validation.rules</code>. Helper findings such as <code>component-ambiguous</code> and <code>native-element-has-equivalent</code> (a name match such as <code>&lt;button&gt;</code> and <code>Button</code>, always <code>heuristic</code> at confidence 0.5) are reported once per file.</p>
-  <h3>Literal values</h3>
-  <p>Invariant also compares literal values with tokens of the matching category. A check needs at least one token of that category with a literal value, otherwise it is skipped and the report says so. Anything containing <code>var(</code>, <code>calc(</code> or a binding is skipped, never guessed.</p>
-  <div class="tbl"><table>
-    <tr><th>Kind</th><th>Codes</th><th>Reads</th></tr>
-    <tr><td>Color</td><td><code>color-not-in-tokens</code>, <code>color-matches-token</code></td><td>Hex, <code>rgb()</code>/<code>rgba()</code>, <code>hsl()</code>/<code>hsla()</code> and CSS named colors. Hex and functional colors compare by value, so <code>rgb(0 87 255)</code> equals <code>#0057ff</code>. Names are read only as the value of a color property and match a token by name.</td></tr>
-    <tr><td>Spacing</td><td><code>spacing-not-in-tokens</code>, <code>spacing-matches-token</code></td><td>Lengths in <code>margin*</code>, <code>padding*</code> and <code>gap</code>, in CSS or style objects. <code>rem</code> and <code>em</code> use a 16px root. Zero, <code>auto</code> and percentages are skipped.</td></tr>
-    <tr><td>Typography</td><td><code>typography-not-in-tokens</code>, <code>typography-matches-token</code></td><td><code>font-size</code>, <code>font-weight</code>, <code>line-height</code>, <code>letter-spacing</code> and the first <code>font-family</code> name, including the parts of composite typography tokens.</td></tr>
-  </table></div>
-  <div class="note warn"><b>Care with false claims</b>Unknown-component detection for React depends on imports: a tag without an import from a package the contract publishes is never called unknown. Standard HTML attributes, <code>aria-*</code>, <code>data-*</code> and event or slot names are never flagged as unknown props.</div>
-</section>
-
-<section class="doc" id="policies">
-  <div class="kicker">Govern</div>
-  <h2>Policies</h2>
-  <p>Organizational rules are written by people in <code>invariant.policies.json</code>, kept in version control.</p>
-  <div class="code"><span class="lang">json</span><pre>{ "version": 1, "policies": [ {
-  "id": "icon-buttons-need-labels",
-  "name": "Icon-only buttons need an accessible name",
-  "statement": "A button without text content must have aria-label or aria-labelledby.",
-  "severity": "error",
-  "enforcement": "block",
-  "approval": {
-    "approvedBy": "Jane Doe",
-    "approvedAt": "2026-01-05T00:00:00.000Z",
-    "role": "design-system lead",
-    "reference": "RFC-7"
-  },
-  "rule": {
-    "kind": "require-attribute",
-    "components": ["Button"],
-    "anyOf": ["aria-label", "aria-labelledby"],
-    "unlessChildren": true,
-    "category": "accessibility"
-  }
-} ] }</pre></div>
-  <p>Rule kinds: <code>require-attribute</code>, <code>forbid-prop</code>, <code>forbid-prop-value</code>, <code>forbid-component</code>, <code>forbid-token</code>, <code>allowed-children</code> and <code>required-parent</code>.</p>
-  <ul>
-    <li>A policy without <code>approval</code> is rejected. Nothing infers or auto-approves a policy.</li>
-    <li>Policies take their severity from the file, lowered by enforcement: <code>warn</code> caps at warning, <code>report-only</code> is info.</li>
-    <li><code>compile</code> adds each policy to the contract, so <code>validate</code> reads only the contract.</li>
-    <li>A policy that names a component or token the contract lacks is kept and reported as <code>governance.policy-unknown-component</code>. That part cannot fire.</li>
-    <li>Composition checks are conservative: <code>required-parent</code> only fires when the element sits inside other design-system components and none is an allowed parent.</li>
-  </ul>
-  <p>List approved policies with <code>invariant policy list</code>. There is no <code>policy add</code> yet; write the file by hand.</p>
-</section>
-
-<section class="doc" id="decisions">
-  <div class="kicker">Govern</div>
-  <h2>Decisions</h2>
-  <p>Decisions are written to <code>invariant.decisions.json</code> and applied on every <code>compile</code>.</p>
-  <div class="tbl"><table>
-    <tr><th>Command</th><th>Effect at compile</th></tr>
-    <tr><td><code>review approve &lt;id&gt;</code></td><td>The fact becomes <code>approved</code>, layered over its prior status, with a fingerprint and your <code>--role</code>, <code>--reference</code> and <code>--note</code>.</td></tr>
-    <tr><td><code>review reject &lt;id&gt;</code></td><td>Removes an inferred containment link, guideline link or token category. Other inferred facts cannot be rejected; the reason says how to fix it at the source.</td></tr>
-    <tr><td><code>review resolve|accept|dismiss &lt;id&gt; [--source s]</code></td><td>Records the conflict's resolution: <code>resolved</code> (fixed at the source), <code>accepted</code> (a known difference) or <code>dismissed</code> (not a real conflict). The conflict disappears on recompile once the source is fixed.</td></tr>
-  </table></div>
-  <p>Every decision needs <code>--as &lt;name&gt;</code> (or the <code>INVARIANT_USER</code> environment variable) and records when it was made.</p>
-  <h3>Stale decisions</h3>
-  <p>A decision records the value or claims it was made about. If they change, the decision is <b>stale</b>: it is not applied, <code>compile</code> reports <code>governance.decision-stale</code>, and the item returns to the queue. A decision whose target is gone is reported as <code>governance.decision-target-missing</code>.</p>
-  <div class="note warn"><b>Authorization is not authentication</b>The recorded name is asserted, not proven. <code>governance.approvers</code> restricts which names the CLI will record and <code>compile</code> will apply. Real enforcement is your repository's review process over <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>, for example CODEOWNERS.</div>
-</section>
-
-<section class="doc" id="ci">
-  <div class="kicker">Govern</div>
-  <h2>Verify in CI</h2>
-  <p>Exit codes plus output formats are the integration. <code>--format github</code> prints workflow annotations, <code>--format sarif</code> prints SARIF 2.1.0 for code scanning, and <code>--format json</code> is for scripts.</p>
-  <div class="code"><span class="lang">bash</span><pre>invariant compile
-invariant verify --fresh                       # fails if stale or tampered with, and says what changed
-invariant validate src --format github         # annotate pull requests</pre></div>
-  <p>Commit the <code>invariant/</code> folder, <code>invariant.config.json</code>, <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>. Compiling unchanged sources gives identical bytes, so diffs are meaningful.</p>
-  <div class="note"><b>No workflow file is generated</b>Invariant is not published, so an install step in a generated workflow would be invented. Write the install step to match how you build it.</div>
 </section>
 
 <section class="doc" id="artifacts">
@@ -699,6 +944,7 @@ invariant validate src --format github         # annotate pull requests</pre></d
     <tr><td><code>invariant.report.html</code></td><td>A static summary for people.</td></tr>
     <tr><td><code>invariant.manifest.json</code></td><td>Tool version, build time, compiled sources with input hashes, and the SHA-256 and size of every other file.</td></tr>
   </table></div>
+  <p>Other commands write their own files: <code>discover</code> writes <code>invariant.candidates.json</code> to the output directory, <code>browser run</code> writes <code>invariant.browser-results.json</code>, and decisions about candidates are kept in <code>invariant.candidate-reviews.json</code> at the project root, next to <code>invariant.patterns.json</code>, <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>.</p>
   <p><code>--keep-ir</code> adds <code>ir/</code> and <code>invariant.project.json</code>. Only the manifest holds the build time, so all other files are reproducible.</p>
   <p>The report is self-contained: no scripts, no external requests, a restrictive Content-Security-Policy, and every value from your source is HTML-escaped. Every table lists every row: the first 200 are visible and the rest are folded into a <code>&lt;details&gt;</code> block.</p>
   <p>The contract stays valid and useful alone. If the evidence file is missing, facts keep their status and you get a diagnostic, not an invalid contract.</p>
@@ -735,7 +981,9 @@ invariant validate src --format github         # annotate pull requests</pre></d
 
   <h3>Contract and inference</h3>
   <ul>
-    <li>Patterns are not produced. A pattern needs a description of intent, which static facts do not supply, so <code>patterns list</code> says none exist.</li>
+    <li>Patterns are not extracted from code or documents, because a pattern needs a description of intent that static facts do not supply. They exist only if you write them in <code>invariant.patterns.json</code>. Otherwise <code>patterns list</code> says none exist.</li>
+    <li>Page archetypes are not shipped: organizations define their own. Nested patterns are shown with their base composition, and a page does not inherit the constraints of the patterns it composes.</li>
+    <li>Pattern definitions are one JSON file, with facts per section rather than per field. Composition parts are not enforced on their own: write a constraint.</li>
     <li><code>requires-parent</code> relationships, accessibility requirements and layout patterns are not produced by any compiler. They work only through approved policies.</li>
     <li>Name-based identity is a heuristic, marked as such. It cannot link <code>Buttons</code> to <code>Button</code> or <code>Button / Primary</code> to <code>Button</code>.</li>
     <li>Compound inference is naming-based and proposes some wrong parents, for example <code>Button</code> and <code>ButtonGroup</code>. These get confidence 0.4 to 0.7 and sit in the review queue.</li>
@@ -748,7 +996,11 @@ invariant validate src --format github         # annotate pull requests</pre></d
 
   <h3>Validation and governance</h3>
   <ul>
+    <li>Interaction checks cover three workflows in React and read one component at a time. They show a state is represented, never that it works, and some of the evidence rests on names. State kept in a parent component or a store is not visible.</li>
+    <li>Pattern rules read one file's JSX, for React only. Anything that depends on another file, or on children a file does not show, is not verifiable. Patterns as references, regions as scopes, and templates are not evaluated yet.</li>
     <li><code>validate</code> sees one file at a time: no cross-file data flow, no resolution of wrapper components, and no knowledge of which package an unimported tag comes from. React unknown-component detection depends on imports. Vue and Angular detect components by name or selector only.</li>
+    <li>Discovery reads React JSX only and groups by design-system structure. It cannot tell intent, so every candidate stays unapproved until a person decides. MCP does not expose candidates.</li>
+    <li>Browser verification runs only the scenarios you write, does not start your app, and has no accessibility audit. Its Playwright driver has not been run against a real browser in this repository's tests.</li>
     <li>Name-based findings (<code>native-element-has-equivalent</code> and ambiguity) are heuristics.</li>
     <li>Colors are compared by value after converting to hex. <code>hsl()</code> conversion rounds, so a hex token and an hsl literal can differ by one step. Named colors match only a token with the same name. <code>oklch()</code>, <code>color()</code>, <code>lab()</code> and Tailwind class names are not read.</li>
     <li><code>rem</code> and <code>em</code> literals are compared against a 16px root font size.</li>
@@ -772,14 +1024,15 @@ invariant validate src --format github         # annotate pull requests</pre></d
 <section class="doc" id="contributing">
   <div class="kicker">Reference</div>
   <h2>Contributing</h2>
-  <p>The repo is a pnpm workspace with explicit package boundaries. <code>apps/cli</code> is the command, and <code>packages/*</code> hold the adapters, compiler, contract, validation, governance, MCP server and agent kit.</p>
+  <p>The repo is a pnpm workspace with explicit package boundaries. <code>apps/cli</code> is the command, and <code>packages/*</code> hold the adapters, compiler, contract, validation (which includes pattern discovery), governance, browser verification, MCP server and agent kit. Users get one package, <code>invariant-ui</code>: <code>pnpm build:npm</code> assembles the workspace into it, and <code>docs/releasing.md</code> in the repository covers publishing.</p>
   <div class="code"><span class="lang">bash</span><pre>pnpm build             # tsc -b
 pnpm test              # vitest
 pnpm lint              # biome
 pnpm typecheck
 pnpm check:boundaries  # enforce package boundaries
 pnpm verify            # lint + typecheck + boundaries + build + test
-pnpm update:golden     # regenerate golden fixtures</pre></div>
+pnpm update:golden     # regenerate golden fixtures
+pnpm build:npm         # assemble the single package that is published</pre></div>
   <h3>Engineering rules</h3>
   <ul>
     <li>TypeScript strict mode, small composable modules, deterministic compilation, structured diagnostics.</li>

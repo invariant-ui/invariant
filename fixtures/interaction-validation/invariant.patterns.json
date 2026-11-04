@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "interaction.form-workflow",
+      "name": "Form workflow",
+      "category": "interaction",
+      "description": "How a form behaves while it submits and after.",
+      "intent": "Never leave a person unsure whether their form went through.",
+      "behavior": {
+        "initial": "idle",
+        "states": [
+          {
+            "name": "idle"
+          },
+          {
+            "name": "submitting",
+            "feedback": "Show progress and prevent a second submit.",
+            "verifiableBy": "runtime"
+          },
+          {
+            "name": "success",
+            "terminal": true,
+            "feedback": "Confirm the result."
+          },
+          {
+            "name": "error",
+            "feedback": "Explain the failure and allow a retry."
+          }
+        ],
+        "transitions": [
+          {
+            "id": "submit",
+            "from": "idle",
+            "to": "submitting"
+          },
+          {
+            "id": "ok",
+            "from": "submitting",
+            "to": "success"
+          },
+          {
+            "id": "fail",
+            "from": "submitting",
+            "to": "error"
+          },
+          {
+            "id": "retry",
+            "from": "error",
+            "to": "submitting"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "shows-submitting",
+          "kind": "required-state",
+          "description": "A form shows that it is submitting.",
+          "details": {
+            "workflow": "form-submission",
+            "state": "submitting",
+            "minimum": "static-inferred"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "shows-error",
+          "kind": "required-state",
+          "description": "A form shows an error when submitting fails.",
+          "details": {
+            "workflow": "form-submission",
+            "state": "error"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "shows-success",
+          "kind": "required-state",
+          "description": "A form confirms success.",
+          "details": {
+            "workflow": "form-submission",
+            "state": "success"
+          },
+          "enforce": {
+            "severity": "warning",
+            "enforcement": "warn"
+          }
+        },
+        {
+          "id": "guards-duplicates",
+          "kind": "required-state",
+          "description": "A form cannot be submitted twice while pending.",
+          "details": {
+            "workflow": "form-submission",
+            "state": "guarded"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        }
+      ],
+      "appliesTo": {
+        "paths": [
+          "app/forms/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-230"
+      }
+    },
+    {
+      "id": "interaction.destructive-confirmation",
+      "name": "Destructive confirmation",
+      "category": "interaction",
+      "description": "Ask before deleting, and let the person back out.",
+      "intent": "Stop accidental data loss.",
+      "constraints": [
+        {
+          "id": "confirms",
+          "kind": "required-state",
+          "description": "A destructive action asks for confirmation first.",
+          "details": {
+            "workflow": "destructive-confirmation",
+            "state": "confirming",
+            "minimum": "static-inferred"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "cancellable",
+          "kind": "required-state",
+          "description": "The confirmation can be cancelled.",
+          "details": {
+            "workflow": "destructive-confirmation",
+            "state": "cancellable"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        }
+      ],
+      "appliesTo": {
+        "paths": [
+          "app/delete/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-230"
+      }
+    },
+    {
+      "id": "interaction.search-and-results",
+      "name": "Search and results",
+      "category": "interaction",
+      "description": "A search box and the results it produces.",
+      "intent": "Make it clear what a search is doing and found.",
+      "constraints": [
+        {
+          "id": "connected",
+          "kind": "required-state",
+          "description": "The search text drives the results.",
+          "details": {
+            "workflow": "search-results",
+            "state": "connected"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "loading",
+          "kind": "required-state",
+          "description": "Results show a loading state.",
+          "details": {
+            "workflow": "search-results",
+            "state": "loading"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "empty",
+          "kind": "required-state",
+          "description": "Results show an empty state.",
+          "details": {
+            "workflow": "search-results",
+            "state": "empty"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "error",
+          "kind": "required-state",
+          "description": "Results show an error state.",
+          "details": {
+            "workflow": "search-results",
+            "state": "error"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "clearable",
+          "kind": "required-state",
+          "description": "The search can be cleared.",
+          "details": {
+            "workflow": "search-results",
+            "state": "clearable"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        }
+      ],
+      "appliesTo": {
+        "paths": [
+          "app/search/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-230"
+      }
+    }
+  ]
+}

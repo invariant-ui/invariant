@@ -1,5 +1,5 @@
 import { relativePathSchema } from "@invariant/contract"
-import { diagnosticSchema } from "@invariant/diagnostics"
+import { diagnosticSchema } from "@invariant/shared"
 import { z } from "zod"
 
 export const DISCOVERY_VERSION = "1.0.0"

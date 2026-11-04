@@ -62,7 +62,9 @@ export const configSchema = z.strictObject({
       /** If present, only these names may record decisions. Names are asserted, not authenticated. */
       approvers: z.array(z.string().min(1).max(200)).max(200).optional(),
       policiesFile: relPath.optional(),
-      decisionsFile: relPath.optional()
+      patternsFile: relPath.optional(),
+      decisionsFile: relPath.optional(),
+      candidateReviewsFile: relPath.optional()
     })
     .optional()
 })

@@ -17,7 +17,9 @@
     "verify": "pnpm lint && pnpm typecheck && pnpm check:boundaries && pnpm build && pnpm test",
     "update:golden": "UPDATE_GOLDEN=1 vitest run",
     "dev:compile": "pnpm build && node scripts/compile-dev.ts",
-    "invariant": "node apps/cli/dist/main.js"
+    "invariant": "node apps/cli/dist/main.js",
+    "build:npm": "tsc -b && node scripts/build-npm.ts",
+    "pack:check": "pnpm build:npm && cd dist-npm && npm pack --dry-run"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.4",

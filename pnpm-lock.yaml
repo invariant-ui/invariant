@@ -190,6 +190,9 @@ importers:
       '@invariant/artifact-generator':
         specifier: workspace:*
         version: link:../../packages/artifact-generator
+      '@invariant/browser-verify':
+        specifier: workspace:*
+        version: link:../../packages/browser-verify
       '@invariant/compiler-angular':
         specifier: workspace:*
         version: link:../../packages/compiler-angular
@@ -217,9 +220,6 @@ importers:
       '@invariant/contract-query':
         specifier: workspace:*
         version: link:../../packages/contract-query
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../../packages/diagnostics
       '@invariant/governance':
         specifier: workspace:*
         version: link:../../packages/governance
@@ -260,6 +260,15 @@ importers:
         specifier: 4.6.7
         version: 4.6.7
 
+  packages/browser-verify:
+    dependencies:
+      '@invariant/shared':
+        specifier: workspace:*
+        version: link:../shared
+      zod:
+        specifier: 4.6.7
+        version: 4.6.7
+
   packages/compiler-angular:
     dependencies:
       '@invariant/compiler-core':
@@ -271,9 +280,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -289,9 +295,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -307,9 +310,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -328,9 +328,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -349,9 +346,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -370,9 +364,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -388,9 +379,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -403,9 +391,6 @@ importers:
 
   packages/contract:
     dependencies:
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -422,20 +407,11 @@ importers:
         specifier: workspace:*
         version: link:../shared
 
-  packages/diagnostics:
-    dependencies:
-      zod:
-        specifier: 4.6.7
-        version: 4.6.7
-
   packages/governance:
     dependencies:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -472,9 +448,6 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
@@ -487,14 +460,15 @@ importers:
       '@invariant/contract':
         specifier: workspace:*
         version: link:../contract
-      '@invariant/diagnostics':
-        specifier: workspace:*
-        version: link:../diagnostics
       '@invariant/shared':
         specifier: workspace:*
         version: link:../shared
 
-  packages/shared: {}
+  packages/shared:
+    dependencies:
+      zod:
+        specifier: 4.6.7
+        version: 4.6.7
 
   packages/validation:
     dependencies:

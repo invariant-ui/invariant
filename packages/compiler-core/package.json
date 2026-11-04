@@ -22,7 +22,6 @@
   "dependencies": {
     "@invariant/compiler-ir": "workspace:*",
     "@invariant/contract": "workspace:*",
-    "@invariant/diagnostics": "workspace:*",
     "@invariant/shared": "workspace:*",
     "typescript": "5.9.3",
     "zod": "4.6.7"

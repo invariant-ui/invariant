@@ -1,0 +1,40 @@
+import { CLI_VERSION, NPM_PACKAGE } from "./version.js"
+
+export const WORKFLOW_PATH = ".github/workflows/invariant.yml"
+
+/**
+ * The GitHub Actions job `setup` offers to add. It runs on every pull request commit, pins the exact version it was
+ * written for so a later release cannot change what CI does, and needs only Node: npx fetches the package. Paths are
+ * quoted, since they come from the project's folder names.
+ */
+export function workflowYaml(paths: readonly string[]): string {
+  const targets = (paths.length > 0 ? paths : ["src"]).map((p) => `'${p.replace(/'/g, "''")}'`).join(" ")
+  const run = `npx ${NPM_PACKAGE}@${CLI_VERSION}`
+  return `# Added by \`invariant setup\`. Checks every commit on a pull request against your design system contract.
+name: Invariant
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: invariant-\${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  invariant:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Fails if the committed contract (the invariant/ folder) is stale or was edited by hand.
+      - name: Verify the contract is current
+        run: ${run} verify --fresh
+      # Annotates the pull request. Violations listed in invariant.baseline.json are hidden; new ones fail the check.
+      - name: Validate code against the contract
+        run: ${run} validate ${targets} --format github
+`
+}

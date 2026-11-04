@@ -14,53 +14,37 @@ export interface WorkspacePackage {
  */
 export const ALLOWED: Record<string, readonly string[]> = {
   "@invariant/shared": [],
-  "@invariant/diagnostics": [],
-  "@invariant/contract": ["@invariant/shared", "@invariant/diagnostics"],
-  "@invariant/compiler-ir": ["@invariant/shared", "@invariant/diagnostics", "@invariant/contract"],
-  "@invariant/compiler-core": [
-    "@invariant/shared",
-    "@invariant/diagnostics",
-    "@invariant/contract",
-    "@invariant/compiler-ir"
-  ],
+  "@invariant/contract": ["@invariant/shared"],
+  "@invariant/compiler-ir": ["@invariant/shared", "@invariant/contract"],
+  "@invariant/compiler-core": ["@invariant/shared", "@invariant/contract", "@invariant/compiler-ir"],
   "@invariant/artifact-generator": ["@invariant/shared"],
   "@invariant/compiler-tokens": [
     "@invariant/shared",
-    "@invariant/diagnostics",
     "@invariant/contract",
     "@invariant/compiler-ir",
     "@invariant/compiler-core"
   ],
   "@invariant/compiler-storybook": [
     "@invariant/shared",
-    "@invariant/diagnostics",
     "@invariant/contract",
     "@invariant/compiler-ir",
     "@invariant/compiler-core"
   ],
   "@invariant/compiler-vue": [
     "@invariant/shared",
-    "@invariant/diagnostics",
     "@invariant/contract",
     "@invariant/compiler-ir",
     "@invariant/compiler-core"
   ],
   "@invariant/compiler-angular": [
     "@invariant/shared",
-    "@invariant/diagnostics",
     "@invariant/contract",
     "@invariant/compiler-ir",
     "@invariant/compiler-core"
   ],
-  "@invariant/reconciliation": [
-    "@invariant/shared",
-    "@invariant/diagnostics",
-    "@invariant/contract",
-    "@invariant/compiler-ir"
-  ],
+  "@invariant/reconciliation": ["@invariant/shared", "@invariant/contract", "@invariant/compiler-ir"],
   "@invariant/cli": [
     "@invariant/shared",
-    "@invariant/diagnostics",
     "@invariant/contract",
     "@invariant/compiler-ir",
     "@invariant/compiler-core",
@@ -76,16 +60,14 @@ export const ALLOWED: Record<string, readonly string[]> = {
     "@invariant/agent-kit",
     "@invariant/validation",
     "@invariant/governance",
-    "@invariant/contract-query"
+    "@invariant/contract-query",
+    "@invariant/validation",
+    "@invariant/browser-verify"
   ],
+  "@invariant/browser-verify": ["@invariant/shared"],
   "@invariant/contract-query": ["@invariant/shared", "@invariant/contract"],
   "@invariant/validation": ["@invariant/shared", "@invariant/contract", "@invariant/contract-query"],
-  "@invariant/governance": [
-    "@invariant/shared",
-    "@invariant/diagnostics",
-    "@invariant/contract",
-    "@invariant/validation"
-  ],
+  "@invariant/governance": ["@invariant/shared", "@invariant/contract", "@invariant/validation"],
   "@invariant/mcp": [
     "@invariant/shared",
     "@invariant/contract",
@@ -93,15 +75,9 @@ export const ALLOWED: Record<string, readonly string[]> = {
     "@invariant/validation"
   ],
   "@invariant/agent-kit": ["@invariant/shared", "@invariant/contract"],
-  "@invariant/semantic-engine": [
-    "@invariant/shared",
-    "@invariant/diagnostics",
-    "@invariant/contract",
-    "@invariant/compiler-ir"
-  ],
+  "@invariant/semantic-engine": ["@invariant/shared", "@invariant/contract", "@invariant/compiler-ir"],
   "@invariant/compiler-react": [
     "@invariant/shared",
-    "@invariant/diagnostics",
     "@invariant/contract",
     "@invariant/compiler-ir",
     "@invariant/compiler-core"

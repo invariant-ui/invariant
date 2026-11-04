@@ -8,8 +8,13 @@ import {
   resolveFactPath,
   type Token
 } from "@invariant/contract"
-import { type Diagnostic, DiagnosticCollector } from "@invariant/diagnostics"
-import { canonicalStringify, hashJson, type JsonValue } from "@invariant/shared"
+import {
+  canonicalStringify,
+  type Diagnostic,
+  DiagnosticCollector,
+  hashJson,
+  type JsonValue
+} from "@invariant/shared"
 import { z } from "zod"
 
 export const DECISIONS_FILE = "invariant.decisions.json"

@@ -1,0 +1,574 @@
+{
+  "patterns": [
+    {
+      "category": "composition",
+      "components": [
+        "component:button",
+        "component:card",
+        "component:card.body",
+        "component:card.header"
+      ],
+      "composition": {
+        "parts": [
+          {
+            "name": "card",
+            "ref": "component:card",
+            "role": "required"
+          },
+          {
+            "name": "header",
+            "ref": "component:card.header",
+            "role": "required"
+          },
+          {
+            "name": "body",
+            "ref": "component:card.body",
+            "role": "required"
+          },
+          {
+            "name": "actions",
+            "ref": "component:button",
+            "role": "optional"
+          }
+        ]
+      },
+      "constraints": [
+        "constraint:composition.card-with-actions.header-first"
+      ],
+      "description": "A card with a header, a body and optional actions.",
+      "facts": {
+        "composition": {
+          "evidenceIds": [
+            "ev_e43321139cf80d3d3a388d91"
+          ],
+          "status": "documented"
+        },
+        "description": {
+          "evidenceIds": [
+            "ev_e43321139cf80d3d3a388d91"
+          ],
+          "status": "documented"
+        },
+        "intent": {
+          "evidenceIds": [
+            "ev_e43321139cf80d3d3a388d91"
+          ],
+          "status": "documented"
+        }
+      },
+      "guidelines": [],
+      "id": "pattern:composition.card-with-actions",
+      "intent": "Group related content and the actions that apply to it.",
+      "name": "Card with actions"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          {
+            "id": "focus-moves",
+            "statement": "Focus moves into the dialog and returns on close.",
+            "verifiableBy": "runtime"
+          }
+        ]
+      },
+      "appliesTo": {
+        "frameworks": [
+          "react"
+        ],
+        "paths": [
+          "src/**"
+        ]
+      },
+      "behavior": {
+        "initial": "idle",
+        "states": [
+          {
+            "name": "idle"
+          },
+          {
+            "feedback": "Name what will be deleted and offer Cancel.",
+            "name": "confirming",
+            "verifiableBy": "static"
+          },
+          {
+            "feedback": "Show progress.",
+            "name": "deleting",
+            "verifiableBy": "runtime"
+          },
+          {
+            "feedback": "Confirm the result.",
+            "name": "done",
+            "terminal": true
+          },
+          {
+            "feedback": "Explain the failure and allow a retry.",
+            "name": "failed"
+          }
+        ],
+        "transitions": [
+          {
+            "from": "idle",
+            "id": "ask",
+            "to": "confirming",
+            "trigger": "user chooses Delete"
+          },
+          {
+            "from": "confirming",
+            "id": "cancel",
+            "to": "idle"
+          },
+          {
+            "from": "confirming",
+            "id": "confirm",
+            "to": "deleting"
+          },
+          {
+            "from": "deleting",
+            "id": "succeed",
+            "to": "done"
+          },
+          {
+            "from": "deleting",
+            "id": "fail",
+            "to": "failed"
+          },
+          {
+            "from": "failed",
+            "id": "retry",
+            "to": "deleting"
+          },
+          {
+            "from": "failed",
+            "id": "dismiss",
+            "to": "idle"
+          }
+        ]
+      },
+      "category": "interaction",
+      "components": [
+        "component:button",
+        "component:modal"
+      ],
+      "composition": {
+        "parts": [
+          {
+            "name": "dialog",
+            "ref": "component:modal",
+            "role": "required"
+          },
+          {
+            "name": "confirm",
+            "ref": "component:button",
+            "role": "required"
+          }
+        ]
+      },
+      "constraints": [
+        "constraint:interaction.destructive-confirmation.dialog-has-confirm"
+      ],
+      "description": "Ask before deleting, then report the result.",
+      "facts": {
+        "accessibility": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "4ef00daff1a2673f2e58c2830fab4d093dc0bd170fb963721f9e892c8aa4df86",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        },
+        "appliesTo": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "39a3d758331aac5d2e5fc96b0a86db9c108544709ab40625bc53d84afbe4ed73",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        },
+        "behavior": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "0b61313f64cfd21b6ead5faacb78d7e66716e82c38fcc88522aabffb3c4fe8b5",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        },
+        "composition": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "268850abb4e24aa6046e86792508f7552e7e9d3b7b7843058df5e16e6b3058d5",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        },
+        "description": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "9be5b6f8c7dd9b8dea7fc807807a58cb0ee1ae5116fe6b7ef311a2ff7c924b19",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        },
+        "intent": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "e4f6e6f12a4a71c106be86a67a3d9d1b8c9d90a89fa129a45cc0ff80691fea93",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        }
+      },
+      "guidelines": [],
+      "id": "pattern:interaction.destructive-confirmation",
+      "intent": "Stop accidental data loss.",
+      "name": "Destructive confirmation"
+    },
+    {
+      "category": "page",
+      "components": [
+        "component:text"
+      ],
+      "composition": {
+        "parts": [
+          {
+            "name": "title",
+            "ref": "component:text",
+            "region": "header",
+            "role": "required"
+          },
+          {
+            "name": "groups",
+            "ref": "pattern:composition.card-with-actions",
+            "region": "content",
+            "role": "required"
+          }
+        ]
+      },
+      "constraints": [
+        "constraint:page.settings.content-required"
+      ],
+      "description": "A page of grouped settings.",
+      "facts": {
+        "composition": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "fd60275c2c3962ba0066ef4b76e5601e743ae6bba15f401c93c9362cad168793",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        },
+        "description": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "e0c010e6b5c75bfc98a668d0af76916d072b7ccff633922d31ce23247b3f841f",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        },
+        "intent": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "ae5e8732f29ff6fcee959bce9c81e975e9550b918283b67872e3fc25a284eb58",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        },
+        "layout": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "f7b6bcf38b49d852f24045dc17c2b296f058636603419c3afeaf3cc3e12717be",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        },
+        "relationships.delete": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "d8eaaf8f9b932cfde9365e8dc4176789c16a7f83b0c8f1f0d557ea473b1e142d",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        },
+        "relationships.groups": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "1ba343a46cea6e54061d2cb213e827477a2b5906f879ffb954613518785d220a",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        }
+      },
+      "guidelines": [],
+      "id": "pattern:page.settings",
+      "intent": "Let a person review and change their settings in one place.",
+      "layout": {
+        "regions": [
+          {
+            "name": "header",
+            "required": true
+          },
+          {
+            "name": "content",
+            "parent": "header",
+            "required": true,
+            "width": {
+              "max": {
+                "unit": "px",
+                "value": 960
+              }
+            }
+          }
+        ]
+      },
+      "name": "Settings page",
+      "relationships": [
+        {
+          "id": "groups",
+          "target": "pattern:composition.card-with-actions",
+          "type": "composes"
+        },
+        {
+          "id": "delete",
+          "target": "pattern:interaction.destructive-confirmation",
+          "type": "uses"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "description": "The header comes before the body.",
+      "details": {
+        "after": "component:card.body",
+        "before": "component:card.header",
+        "within": "component:card"
+      },
+      "facts": {
+        "description": {
+          "evidenceIds": [
+            "ev_e43321139cf80d3d3a388d91"
+          ],
+          "status": "documented"
+        },
+        "details": {
+          "evidenceIds": [
+            "ev_e43321139cf80d3d3a388d91"
+          ],
+          "status": "documented"
+        }
+      },
+      "id": "constraint:composition.card-with-actions.header-first",
+      "kind": "ordering",
+      "name": "Card with actions: header-first",
+      "subjects": [
+        "pattern:composition.card-with-actions"
+      ]
+    },
+    {
+      "description": "A confirmation dialog contains a button to confirm.",
+      "details": {
+        "child": "component:button",
+        "parent": "component:modal"
+      },
+      "facts": {
+        "description": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "1c5d61abf380e5c4d481f2bd888adddd6ed2f19489566e744adac073fd5499e9",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        },
+        "details": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:00:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "05ecc0bf4ef01fbd4d945fa8ef54073b69eefd30dadba98302f8bb8295ed93f3",
+            "priorStatus": "documented",
+            "reference": "DS-210",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_9b4956df289822e36e4999a9"
+          ],
+          "status": "approved"
+        }
+      },
+      "id": "constraint:interaction.destructive-confirmation.dialog-has-confirm",
+      "kind": "required-child",
+      "name": "Destructive confirmation: dialog-has-confirm",
+      "subjects": [
+        "pattern:interaction.destructive-confirmation"
+      ]
+    },
+    {
+      "description": "A settings page has a content region.",
+      "details": {
+        "region": "region:content"
+      },
+      "facts": {
+        "description": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "569491ee684426a9fa08d031b2ecde81b1807b39609232d3694499ba09fbbfc6",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        },
+        "details": {
+          "approval": {
+            "approvedAt": "2026-11-03T10:30:00.000Z",
+            "approvedBy": "design-system-owners",
+            "fingerprint": "b31f8c1c0da3eddcdb3faf0e41f635b7028bc0e42f11faacc34120f5047a883f",
+            "priorStatus": "documented",
+            "reference": "DS-211",
+            "role": "owner"
+          },
+          "evidenceIds": [
+            "ev_3306508c77873eac8b52a015"
+          ],
+          "status": "approved"
+        }
+      },
+      "id": "constraint:page.settings.content-required",
+      "kind": "required-region",
+      "name": "Settings page: content-required",
+      "subjects": [
+        "pattern:page.settings"
+      ]
+    }
+  ],
+  "policies": [
+    {
+      "approval": {
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "approvedBy": "design-system-owners",
+        "reference": "DS-210",
+        "role": "owner"
+      },
+      "basedOn": [
+        "constraint:interaction.destructive-confirmation.dialog-has-confirm"
+      ],
+      "enforcement": "block",
+      "id": "policy:interaction.destructive-confirmation.dialog-has-confirm",
+      "name": "Destructive confirmation: dialog-has-confirm",
+      "scope": {
+        "entities": [
+          "pattern:interaction.destructive-confirmation"
+        ],
+        "frameworks": [
+          "react"
+        ],
+        "paths": [
+          "src/**"
+        ]
+      },
+      "severity": "error",
+      "statement": "A confirmation dialog contains a button to confirm."
+    },
+    {
+      "approval": {
+        "approvedAt": "2026-11-03T10:30:00.000Z",
+        "approvedBy": "design-system-owners",
+        "reference": "DS-211",
+        "role": "owner"
+      },
+      "basedOn": [
+        "constraint:page.settings.content-required"
+      ],
+      "enforcement": "warn",
+      "id": "policy:page.settings.content-required",
+      "name": "Settings page: content-required",
+      "scope": {
+        "entities": [
+          "pattern:page.settings"
+        ]
+      },
+      "severity": "warning",
+      "statement": "A settings page has a content region."
+    }
+  ]
+}

@@ -1,11 +1,18 @@
 {
-  "contractHash": "b85a072f6bbf99d73388fc03ea541ceaba41f931d9a1c7f7a94e593b33b6a2de",
+  "contractHash": "a8ca8d32bffef9798f00cdb2f97e67297a9ca57bb2e9980202bc5b299c659d0a",
   "summary": {
     "files": 2,
     "errors": 9,
     "warnings": 7,
     "info": 1,
-    "componentsChecked": 7
+    "componentsChecked": 7,
+    "patternRules": {
+      "pass": 0,
+      "fail": 0,
+      "warning": 0,
+      "notVerifiable": 0,
+      "skipped": 0
+    }
   },
   "violations": [
     {
@@ -216,5 +223,6 @@
       "suggestion": "Use a token from get_design_tokens.",
       "file": "app/Screen.tsx"
     }
-  ]
+  ],
+  "evaluations": []
 }

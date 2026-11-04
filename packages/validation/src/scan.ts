@@ -10,6 +10,23 @@ export interface ScannedUse {
   hasSpread: boolean
   /** Index in the scan result of the nearest enclosing element, if any. */
   parent: number | undefined
+  /**
+   * JSX only. How many `{...}` expressions enclose the element. An element with a greater depth than an
+   * ancestor is conditional or repeated relative to it (`cond && <A/>`, `.map(...)`), so whether it renders,
+   * and how often, is not known statically. JSX that is not returned or used as a render result counts as one.
+   */
+  exprDepth?: number
+  /**
+   * JSX only. How many callbacks inside `{...}` expressions enclose the element (a list `.map`, a render
+   * prop). An element with a greater loop depth than an ancestor may render any number of times relative to it.
+   */
+  loopDepth?: number
+  /**
+   * JSX only. True when something other than the elements seen here may supply this element's children:
+   * an expression child that contains no JSX (`{children}`, `{renderRows()}`), a spread, or a `children`
+   * prop. What is inside is unknown, so absence below it cannot be proven.
+   */
+  opaque?: boolean
 }
 
 export interface ImportBinding {
@@ -61,8 +78,59 @@ export function scanJsx(code: string, filename = "snippet.tsx"): JsxScan {
         imports.set(el.name.text, { module, imported: (el.propertyName ?? el.name).text })
   }
 
-  const visit = (node: ts.Node, parent: number | undefined): void => {
+  const unwrap = (node: ts.Node): ts.Node => {
+    let n = node
+    while (ts.isParenthesizedExpression(n) || ts.isAsExpression(n) || ts.isNonNullExpression(n))
+      n = n.expression
+    return n
+  }
+  const isJsx = (n: ts.Node): boolean =>
+    ts.isJsxElement(n) || ts.isJsxSelfClosingElement(n) || ts.isJsxFragment(n)
+  const containsJsx = (n: ts.Node): boolean => {
+    let found = false
+    const look = (c: ts.Node): void => {
+      if (found) return
+      if (isJsx(c)) found = true
+      else ts.forEachChild(c, look)
+    }
+    look(n)
+    return found
+  }
+  /** True when this element is what a component returns (directly or through a conditional), not a value stored elsewhere. */
+  const isRendered = (node: ts.Node): boolean => {
+    let child: ts.Node = node
+    for (let p = node.parent; p; child = p, p = p.parent) {
+      if (ts.isParenthesizedExpression(p) || ts.isAsExpression(p) || ts.isNonNullExpression(p)) continue
+      if (ts.isReturnStatement(p)) return true
+      if (ts.isArrowFunction(p)) return p.body === child
+      if (ts.isConditionalExpression(p)) {
+        if (p.condition === child) return false
+        continue
+      }
+      if (
+        ts.isBinaryExpression(p) &&
+        [
+          ts.SyntaxKind.AmpersandAmpersandToken,
+          ts.SyntaxKind.BarBarToken,
+          ts.SyntaxKind.QuestionQuestionToken
+        ].includes(p.operatorToken.kind)
+      )
+        continue
+      return false
+    }
+    return false
+  }
+  const isOpaqueChild = (child: ts.JsxChild): boolean => {
+    if (!ts.isJsxExpression(child) || !child.expression) return false
+    const e = unwrap(child.expression)
+    if (ts.isStringLiteralLike(e) || ts.isNumericLiteral(e)) return false
+    return !containsJsx(e)
+  }
+
+  const visit = (node: ts.Node, parent: number | undefined, depth: number, loop: number): void => {
     let next = parent
+    let nextDepth = depth
+    let nextLoop = loop
     if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
       const opening = ts.isJsxElement(node) ? node.openingElement : node
       const attrs: Record<string, PropValue> = {}
@@ -74,7 +142,14 @@ export function scanJsx(code: string, filename = "snippet.tsx"): JsxScan {
       const hasChildren = ts.isJsxElement(node)
         ? node.children.some((c) => !(ts.isJsxText(c) && c.containsOnlyTriviaWhiteSpaces))
         : false
+      const opaque =
+        spread ||
+        "children" in attrs ||
+        "dangerouslySetInnerHTML" in attrs ||
+        (ts.isJsxElement(node) && node.children.some(isOpaqueChild))
       const pos = sf.getLineAndCharacterOfPosition(node.getStart(sf))
+      // A root element that is not returned (a variable, an argument) is not placed in the tree here.
+      const level = parent === undefined && !isRendered(node) ? depth + 1 : depth
       uses.push({
         tag: opening.tagName.getText(sf),
         line: pos.line + 1,
@@ -82,13 +157,24 @@ export function scanJsx(code: string, filename = "snippet.tsx"): JsxScan {
         attrs,
         hasChildren,
         hasSpread: spread,
-        parent
+        parent,
+        exprDepth: level,
+        loopDepth: loop,
+        opaque
       })
       next = uses.length - 1
+      nextDepth = level
+    } else if (ts.isJsxExpression(node)) {
+      // `icon={<Icon />}` is an element handed to its parent as a prop, not a condition or a loop.
+      const direct =
+        ts.isJsxAttribute(node.parent) && node.expression !== undefined && isJsx(unwrap(node.expression))
+      if (!direct) nextDepth = depth + 1
+    } else if ((ts.isArrowFunction(node) || ts.isFunctionExpression(node)) && depth > 0) {
+      nextLoop = loop + 1
     }
-    ts.forEachChild(node, (child) => visit(child, next))
+    ts.forEachChild(node, (child) => visit(child, next, nextDepth, nextLoop))
   }
-  visit(sf, undefined)
+  visit(sf, undefined, 0, 0)
   return { uses, imports }
 }
 

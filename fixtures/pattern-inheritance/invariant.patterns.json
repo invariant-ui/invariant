@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "composition.confirm-dialog",
+      "name": "Confirm dialog",
+      "category": "composition",
+      "description": "A modal that asks for confirmation.",
+      "intent": "Make sure a person can act on a confirmation.",
+      "composition": {
+        "parts": [
+          {
+            "name": "dialog",
+            "ref": "Modal",
+            "role": "required"
+          },
+          {
+            "name": "confirm",
+            "ref": "Button",
+            "role": "required"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "modal-confirm",
+          "kind": "required-child",
+          "description": "A modal contains a button.",
+          "details": {
+            "parent": "Modal",
+            "child": "Button"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        },
+        {
+          "id": "one-modal",
+          "kind": "cardinality",
+          "description": "A file shows at most one modal.",
+          "details": {
+            "target": "Modal",
+            "max": 1
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        }
+      ],
+      "appliesTo": {
+        "paths": [
+          "app/dialogs/**",
+          "app/pages/ConfirmDialog.tsx"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T12:00:00.000Z",
+        "reference": "DS-401"
+      }
+    },
+    {
+      "id": "page.reports",
+      "name": "Reports",
+      "category": "page",
+      "description": "Reports page.",
+      "intent": "Show reports.",
+      "composition": {
+        "parts": [
+          {
+            "name": "confirm",
+            "ref": "pattern:composition.confirm-dialog",
+            "role": "optional"
+          }
+        ]
+      },
+      "appliesTo": {
+        "paths": [
+          "app/pages/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "inheritsConstraints": true,
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T12:00:00.000Z",
+        "reference": "DS-402"
+      }
+    },
+    {
+      "id": "page.drafts",
+      "name": "Drafts",
+      "category": "page",
+      "description": "Drafts page.",
+      "intent": "Show drafts.",
+      "composition": {
+        "parts": [
+          {
+            "name": "confirm",
+            "ref": "pattern:composition.confirm-dialog",
+            "role": "optional"
+          }
+        ]
+      },
+      "appliesTo": {
+        "paths": [
+          "app/drafts/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "inheritsConstraints": true
+    },
+    {
+      "id": "page.plain",
+      "name": "Plain",
+      "category": "page",
+      "description": "Plain page.",
+      "intent": "Show plain.",
+      "composition": {
+        "parts": [
+          {
+            "name": "confirm",
+            "ref": "pattern:composition.confirm-dialog",
+            "role": "optional"
+          }
+        ]
+      },
+      "appliesTo": {
+        "paths": [
+          "app/other/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T12:00:00.000Z",
+        "reference": "DS-402"
+      }
+    }
+  ]
+}

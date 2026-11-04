@@ -85,7 +85,9 @@ export const SOURCE_TYPES = [
   "tokens",
   "markdown",
   "git",
-  "npm"
+  "npm",
+  /** A human-authored pattern definition file. Adapters never emit it, so it is not an IR source type. */
+  "patterns"
 ] as const
 export const sourceTypeSchema = z.enum(SOURCE_TYPES)
 export type SourceType = z.infer<typeof sourceTypeSchema>

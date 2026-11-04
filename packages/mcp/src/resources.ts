@@ -5,6 +5,7 @@ import {
   guidelinesView,
   overview,
   patternsView,
+  patternView,
   tokensView
 } from "@invariant/contract-query"
 import type { JsonValue } from "@invariant/shared"
@@ -51,7 +52,8 @@ export const RESOURCES: ResourceDef[] = [
     uri: "invariant://patterns",
     name: "patterns",
     title: "Pattern catalog",
-    description: "Documented design patterns (often empty).",
+    description:
+      "Layouts, interactions, page archetypes and compositions, each with its derived approval status (often empty).",
     mimeType: "application/json"
   },
   {
@@ -69,6 +71,13 @@ export const RESOURCE_TEMPLATES = [
     name: "component",
     title: "Component",
     description: "One component's contract entry. The id is the part after `component:`.",
+    mimeType: "application/json"
+  },
+  {
+    uriTemplate: "invariant://pattern/{id}",
+    name: "pattern",
+    title: "Pattern",
+    description: "One pattern in full. The id is the part after `pattern:`, percent-encoded.",
     mimeType: "application/json"
   }
 ]
@@ -132,6 +141,17 @@ export function readResource(loaded: Loaded, uri: string): ReadResult {
     }
     const found = ds.findComponent(id)
     if (found.match) return json({ component: componentViewOf(ds, found.match.id) })
+  }
+  const pm = /^invariant:\/\/pattern\/(.+)$/.exec(uri)
+  if (pm) {
+    let id: string
+    try {
+      id = decodeURIComponent(pm[1] as string)
+    } catch {
+      return { ok: false, reason: "not-found", message: "malformed pattern uri" }
+    }
+    const found = ds.findPattern(id)
+    if (found.match) return json({ pattern: patternView(ds, found.match) })
   }
   return { ok: false, reason: "not-found", message: `No resource ${uri}` }
 }

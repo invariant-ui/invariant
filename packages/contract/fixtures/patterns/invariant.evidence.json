@@ -1,0 +1,189 @@
+{
+  "contractContentHash": "1eec1d812bd305c0026f7e7a117526f35b8472d6454f038b2093372da6fccc46",
+  "evidence": [
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "vue-props",
+        "version": "0.1.0"
+      },
+      "id": "ev_07161ae3f037b3a6d58d4ee5",
+      "location": {
+        "line": 8,
+        "path": "packages/ui-vue/src/Button.vue",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size: { type: String as PropType<\"sm\" | \"md\" | \"lg\">, default: \"md\" }",
+      "sourceId": "ui-vue",
+      "sourceRef": "packages/ui-vue/src/Button.vue",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-11-03T09:00:00.000Z",
+      "extractor": {
+        "name": "zeroheight-pages",
+        "version": "0.1.0"
+      },
+      "id": "ev_0c12e30f2d064b1446480ad0",
+      "location": {
+        "documentId": "data-management",
+        "title": "Data management pages",
+        "type": "document"
+      },
+      "method": "document-parse",
+      "original": "Every data management page has a header, a results region and a toolbar above the table.",
+      "sourceId": "zeroheight",
+      "sourceRef": "page/data-management",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "zeroheight-pages",
+        "version": "0.1.0"
+      },
+      "id": "ev_15e9cf41cefccab4fd5aee9c",
+      "location": {
+        "documentId": "buttons",
+        "section": "Usage",
+        "title": "Buttons",
+        "type": "document"
+      },
+      "method": "document-parse",
+      "original": "Use one primary button per view.",
+      "sourceId": "zeroheight",
+      "sourceRef": "page/buttons",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-11-03T09:00:00.000Z",
+      "extractor": {
+        "name": "jsx-usage",
+        "version": "0.1.0"
+      },
+      "id": "ev_28f5f586337664e2e78ab3d3",
+      "location": {
+        "line": 52,
+        "path": "packages/ui-react/src/CustomerList.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "<ConfirmDialog onConfirm={remove} />",
+      "sourceId": "ui-react",
+      "sourceRef": "packages/ui-react/src/CustomerList.tsx",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "jsx-usage",
+        "version": "0.1.0"
+      },
+      "id": "ev_4de10ec09dcaa53db7eb1134",
+      "location": {
+        "line": 31,
+        "path": "packages/ui-react/src/LoginForm.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "<Button><Icon name=\"lock\" />Sign in</Button>",
+      "sourceId": "ui-react",
+      "sourceRef": "packages/ui-react/src/LoginForm.tsx",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "css-variables",
+        "version": "0.1.0"
+      },
+      "id": "ev_5e8e0f7394c3dbed4794cd2a",
+      "location": {
+        "line": 3,
+        "path": "packages/ui-react/src/tokens.css",
+        "type": "file"
+      },
+      "method": "structured-parse",
+      "original": "--acme-color-brand: #0057ff;",
+      "sourceId": "ui-react",
+      "sourceRef": "packages/ui-react/src/tokens.css",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-11-03T09:00:00.000Z",
+      "extractor": {
+        "name": "jsx-usage",
+        "version": "0.1.0"
+      },
+      "id": "ev_7c9db74469fbda5ec2d147d7",
+      "location": {
+        "line": 18,
+        "path": "packages/ui-react/src/CustomerList.tsx",
+        "type": "file"
+      },
+      "method": "ast",
+      "original": "<TableToolbar><SearchField /></TableToolbar><DataTable />",
+      "sourceId": "ui-react",
+      "sourceRef": "packages/ui-react/src/CustomerList.tsx",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "angular-inputs",
+        "version": "0.1.0"
+      },
+      "id": "ev_97c93e9d01f841a56d3a86dc",
+      "location": {
+        "line": 20,
+        "path": "packages/ui-angular/src/button.component.ts",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size = input<\"sm\" | \"md\" | \"lg\">(\"md\")",
+      "sourceId": "ui-angular",
+      "sourceRef": "packages/ui-angular/src/button.component.ts#AcmeButton",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "react-props",
+        "version": "0.1.0"
+      },
+      "id": "ev_e7a8ae962ac83cdea3c9c1e4",
+      "location": {
+        "column": 3,
+        "line": 12,
+        "path": "packages/ui-react/src/Button.tsx",
+        "type": "file"
+      },
+      "method": "compiler-api",
+      "original": "size?: \"sm\" | \"md\" | \"lg\"",
+      "sourceId": "ui-react",
+      "sourceRef": "packages/ui-react/src/Button.tsx#Button",
+      "verificationStatus": "unverified"
+    },
+    {
+      "capturedAt": "2026-10-30T12:00:00.000Z",
+      "extractor": {
+        "name": "zeroheight-pages",
+        "version": "0.1.0"
+      },
+      "id": "ev_fab10a5ec234dda095db7c9a",
+      "location": {
+        "documentId": "buttons",
+        "section": "Sizes",
+        "title": "Buttons",
+        "type": "document"
+      },
+      "method": "document-parse",
+      "original": "The default button size is large.",
+      "sourceId": "zeroheight",
+      "sourceRef": "page/buttons",
+      "verificationStatus": "unverified"
+    }
+  ],
+  "evidenceVersion": "1.0.0"
+}

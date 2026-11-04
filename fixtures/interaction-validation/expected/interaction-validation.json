@@ -1,0 +1,591 @@
+{
+  "summary": {
+    "files": 10,
+    "errors": 10,
+    "warnings": 1,
+    "info": 9,
+    "componentsChecked": 0,
+    "patternRules": {
+      "pass": 13,
+      "fail": 11,
+      "warning": 0,
+      "notVerifiable": 9,
+      "skipped": 0
+    },
+    "interactionEvidence": {
+      "structural": 2,
+      "staticInferred": 11,
+      "runtimeVerified": 0
+    }
+  },
+  "violations": [
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "destructive action <button> at line 6: cancellable is not represented; there is no confirmation to cancel (pattern pattern:interaction.destructive-confirmation)",
+      "subject": "pattern:interaction.destructive-confirmation",
+      "line": 6,
+      "column": 10,
+      "basis": "approved",
+      "policy": "policy:interaction.destructive-confirmation.cancellable",
+      "source": "invariant.patterns.json",
+      "suggestion": "Give the confirmation a Cancel button that closes it without deleting.",
+      "file": "app/delete/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "destructive action <button> at line 6: confirming is not represented; the handler calls removeTeam (line 3) directly, with no confirmation step (pattern pattern:interaction.destructive-confirmation)",
+      "subject": "pattern:interaction.destructive-confirmation",
+      "line": 6,
+      "column": 10,
+      "basis": "approved",
+      "policy": "policy:interaction.destructive-confirmation.confirms",
+      "source": "invariant.patterns.json",
+      "suggestion": "Ask for confirmation, for example in a dialog, before deleting.",
+      "file": "app/delete/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "form <form> at line 7: guarded is not represented; nothing stops the form being submitted again while it is pending (pattern pattern:interaction.form-workflow)",
+      "subject": "pattern:interaction.form-workflow",
+      "line": 7,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:interaction.form-workflow.guards-duplicates",
+      "source": "invariant.patterns.json",
+      "suggestion": "Disable the submit button, or return early in the handler, while the form is pending.",
+      "file": "app/forms/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "form <form> at line 7: error is not represented; the submit handler has no catch and nothing shows an error (pattern pattern:interaction.form-workflow)",
+      "subject": "pattern:interaction.form-workflow",
+      "line": 7,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:interaction.form-workflow.shows-error",
+      "source": "invariant.patterns.json",
+      "suggestion": "Show an error message, and a way to try again, when the submission fails.",
+      "file": "app/forms/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "form <form> at line 7: submitting is not represented; nothing shows that the form is submitting (pattern pattern:interaction.form-workflow)",
+      "subject": "pattern:interaction.form-workflow",
+      "line": 7,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:interaction.form-workflow.shows-submitting",
+      "source": "invariant.patterns.json",
+      "suggestion": "Show that the form is submitting, for example disable the submit button and show progress.",
+      "file": "app/forms/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "warning",
+      "message": "form <form> at line 7: success is not represented; nothing shows that the submission succeeded (pattern pattern:interaction.form-workflow)",
+      "subject": "pattern:interaction.form-workflow",
+      "line": 7,
+      "column": 5,
+      "basis": "approved",
+      "policy": "policy:interaction.form-workflow.shows-success",
+      "source": "invariant.patterns.json",
+      "suggestion": "Confirm the result, for example with a message or by navigating on success.",
+      "file": "app/forms/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "search <input> at line 8: clearable is not represented; there is no way to clear the search (pattern pattern:interaction.search-and-results)",
+      "subject": "pattern:interaction.search-and-results",
+      "line": 8,
+      "column": 7,
+      "basis": "approved",
+      "policy": "policy:interaction.search-and-results.clearable",
+      "source": "invariant.patterns.json",
+      "suggestion": "Give the user a way to clear the search.",
+      "file": "app/search/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "search <input> at line 8: connected is not represented; q is set by the input but nothing else uses it (pattern pattern:interaction.search-and-results)",
+      "subject": "pattern:interaction.search-and-results",
+      "line": 8,
+      "column": 7,
+      "basis": "approved",
+      "policy": "policy:interaction.search-and-results.connected",
+      "source": "invariant.patterns.json",
+      "suggestion": "Use the search text to filter or fetch the results.",
+      "file": "app/search/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "search <input> at line 8: empty is not represented; nothing tells the user there are no results (pattern pattern:interaction.search-and-results)",
+      "subject": "pattern:interaction.search-and-results",
+      "line": 8,
+      "column": 7,
+      "basis": "approved",
+      "policy": "policy:interaction.search-and-results.empty",
+      "source": "invariant.patterns.json",
+      "suggestion": "Show an empty state when the search finds nothing.",
+      "file": "app/search/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "search <input> at line 8: error is not represented; nothing shows that a search failed (pattern pattern:interaction.search-and-results)",
+      "subject": "pattern:interaction.search-and-results",
+      "line": 8,
+      "column": 7,
+      "basis": "approved",
+      "policy": "policy:interaction.search-and-results.error",
+      "source": "invariant.patterns.json",
+      "suggestion": "Show an error state when the search fails.",
+      "file": "app/search/Bad.tsx"
+    },
+    {
+      "code": "pattern-state-missing",
+      "severity": "error",
+      "message": "search <input> at line 8: loading is not represented; nothing shows that results are loading (pattern pattern:interaction.search-and-results)",
+      "subject": "pattern:interaction.search-and-results",
+      "line": 8,
+      "column": 7,
+      "basis": "approved",
+      "policy": "policy:interaction.search-and-results.loading",
+      "source": "invariant.patterns.json",
+      "suggestion": "Show a loading state while the results load.",
+      "file": "app/search/Bad.tsx"
+    }
+  ],
+  "evaluations": [
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "destructive action <button> at line 6: cancellable is not represented; there is no confirmation to cancel",
+      "pattern": "pattern:interaction.destructive-confirmation",
+      "constraint": "constraint:interaction.destructive-confirmation.cancellable",
+      "policy": "policy:interaction.destructive-confirmation.cancellable",
+      "file": "app/delete/Bad.tsx",
+      "line": 6,
+      "column": 10
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "destructive action <button> at line 6: confirming is not represented; the handler calls removeTeam (line 3) directly, with no confirmation step",
+      "pattern": "pattern:interaction.destructive-confirmation",
+      "constraint": "constraint:interaction.destructive-confirmation.confirms",
+      "policy": "policy:interaction.destructive-confirmation.confirms",
+      "file": "app/delete/Bad.tsx",
+      "line": 6,
+      "column": 10
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "destructive action <button> at line 13: cancellable is represented (static-inferred)",
+      "pattern": "pattern:interaction.destructive-confirmation",
+      "constraint": "constraint:interaction.destructive-confirmation.cancellable",
+      "policy": "policy:interaction.destructive-confirmation.cancellable",
+      "file": "app/delete/Good.tsx",
+      "line": 13,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "<button> at line 18 reads \"Cancel\"",
+        "cancelling sets open back to false"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "destructive action <button> at line 13: confirming is represented (static-inferred)",
+      "pattern": "pattern:interaction.destructive-confirmation",
+      "constraint": "constraint:interaction.destructive-confirmation.confirms",
+      "policy": "policy:interaction.destructive-confirmation.confirms",
+      "file": "app/delete/Good.tsx",
+      "line": 13,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "<button> at line 13 opens <dialog> at line 15 through open",
+        "the delete call (line 7) is reached from the dialog's confirm action"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "destructive action <button> at line 2: cannot tell whether cancellable is represented; the delete handler cannot be read (the handler comes from outside this file (props.onDelete)), so any confirmation may live in the caller",
+      "pattern": "pattern:interaction.destructive-confirmation",
+      "constraint": "constraint:interaction.destructive-confirmation.cancellable",
+      "policy": "policy:interaction.destructive-confirmation.cancellable",
+      "file": "app/delete/Open.tsx",
+      "line": 2,
+      "column": 10
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "destructive action <button> at line 2: cannot tell whether confirming is represented; the delete handler cannot be read (the handler comes from outside this file (props.onDelete)), so any confirmation may live in the caller",
+      "pattern": "pattern:interaction.destructive-confirmation",
+      "constraint": "constraint:interaction.destructive-confirmation.confirms",
+      "policy": "policy:interaction.destructive-confirmation.confirms",
+      "file": "app/delete/Open.tsx",
+      "line": 2,
+      "column": 10
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "form <form> at line 7: guarded is not represented; nothing stops the form being submitted again while it is pending",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.guards-duplicates",
+      "policy": "policy:interaction.form-workflow.guards-duplicates",
+      "file": "app/forms/Bad.tsx",
+      "line": 7,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "form <form> at line 7: error is not represented; the submit handler has no catch and nothing shows an error",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-error",
+      "policy": "policy:interaction.form-workflow.shows-error",
+      "file": "app/forms/Bad.tsx",
+      "line": 7,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "form <form> at line 7: submitting is not represented; nothing shows that the form is submitting",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-submitting",
+      "policy": "policy:interaction.form-workflow.shows-submitting",
+      "file": "app/forms/Bad.tsx",
+      "line": 7,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "form <form> at line 7: success is not represented; nothing shows that the submission succeeded",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-success",
+      "policy": "policy:interaction.form-workflow.shows-success",
+      "file": "app/forms/Bad.tsx",
+      "line": 7,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "form <form> at line 22: guarded is represented (static-inferred)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.guards-duplicates",
+      "policy": "policy:interaction.form-workflow.guards-duplicates",
+      "file": "app/forms/Good.tsx",
+      "line": 22,
+      "column": 5,
+      "level": "static-inferred",
+      "evidence": [
+        "<button> at line 24 is disabled or loading while submitting is set",
+        "the submit handler returns early when submitting is set"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "form <form> at line 22: error is represented (static-inferred)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-error",
+      "policy": "policy:interaction.form-workflow.shows-error",
+      "file": "app/forms/Good.tsx",
+      "line": 22,
+      "column": 5,
+      "level": "static-inferred",
+      "evidence": [
+        "error is read in the interface and is named like an error",
+        "the submit handler sets error when it fails (catch, line 7)"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "form <form> at line 22: submitting is represented (static-inferred)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-submitting",
+      "policy": "policy:interaction.form-workflow.shows-submitting",
+      "file": "app/forms/Good.tsx",
+      "line": 22,
+      "column": 5,
+      "level": "static-inferred",
+      "evidence": [
+        "submitting (state) is read in the interface and is named like a pending flag",
+        "the submit handler (line 7) sets submitting to true before its await and back to false after, and the interface reads it"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "form <form> at line 22: success is represented (static-inferred)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-success",
+      "policy": "policy:interaction.form-workflow.shows-success",
+      "file": "app/forms/Good.tsx",
+      "line": 22,
+      "column": 5,
+      "level": "static-inferred",
+      "evidence": [
+        "the submit handler calls navigate after its await (line 13)"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "form <form> at line 3: cannot tell whether guarded is represented; the submit handler cannot be read: the handler comes from outside this file (props.onSubmit)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.guards-duplicates",
+      "policy": "policy:interaction.form-workflow.guards-duplicates",
+      "file": "app/forms/Open.tsx",
+      "line": 3,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "form <form> at line 3: cannot tell whether error is represented; the submit handler cannot be read: the handler comes from outside this file (props.onSubmit)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-error",
+      "policy": "policy:interaction.form-workflow.shows-error",
+      "file": "app/forms/Open.tsx",
+      "line": 3,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "form <form> at line 3: cannot tell whether submitting is represented; the submit handler cannot be read: the handler comes from outside this file (props.onSubmit)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-submitting",
+      "policy": "policy:interaction.form-workflow.shows-submitting",
+      "file": "app/forms/Open.tsx",
+      "line": 3,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "form <form> at line 3: cannot tell whether success is represented; the submit handler cannot be read: the handler comes from outside this file (props.onSubmit)",
+      "pattern": "pattern:interaction.form-workflow",
+      "constraint": "constraint:interaction.form-workflow.shows-success",
+      "policy": "policy:interaction.form-workflow.shows-success",
+      "file": "app/forms/Open.tsx",
+      "line": 3,
+      "column": 5
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "search <input> at line 8: clearable is not represented; there is no way to clear the search",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.clearable",
+      "policy": "policy:interaction.search-and-results.clearable",
+      "file": "app/search/Bad.tsx",
+      "line": 8,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "search <input> at line 8: connected is not represented; q is set by the input but nothing else uses it",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.connected",
+      "policy": "policy:interaction.search-and-results.connected",
+      "file": "app/search/Bad.tsx",
+      "line": 8,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "search <input> at line 8: empty is not represented; nothing tells the user there are no results",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.empty",
+      "policy": "policy:interaction.search-and-results.empty",
+      "file": "app/search/Bad.tsx",
+      "line": 8,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "search <input> at line 8: error is not represented; nothing shows that a search failed",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.error",
+      "policy": "policy:interaction.search-and-results.error",
+      "file": "app/search/Bad.tsx",
+      "line": 8,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "fail",
+      "reason": "search <input> at line 8: loading is not represented; nothing shows that results are loading",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.loading",
+      "policy": "policy:interaction.search-and-results.loading",
+      "file": "app/search/Bad.tsx",
+      "line": 8,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 25: clearable is represented (static-inferred)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.clearable",
+      "policy": "policy:interaction.search-and-results.clearable",
+      "file": "app/search/Good.tsx",
+      "line": 25,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "the input has type=\"search\", which browsers give a clear control",
+        "<button> at line 26 sets query to an empty string"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 25: connected is represented (static-inferred)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.connected",
+      "policy": "policy:interaction.search-and-results.connected",
+      "file": "app/search/Good.tsx",
+      "line": 25,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "query feeds a filter (line 7)"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 25: empty is represented (static-inferred)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.empty",
+      "policy": "policy:interaction.search-and-results.empty",
+      "file": "app/search/Good.tsx",
+      "line": 25,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "results.length is checked in the interface, and results is derived from query (line 29)"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 25: error is represented (static-inferred)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.error",
+      "policy": "policy:interaction.search-and-results.error",
+      "file": "app/search/Good.tsx",
+      "line": 25,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "error is read in the interface and is named like an error",
+        "error is set when the search fails (catch)"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 25: loading is represented (static-inferred)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.loading",
+      "policy": "policy:interaction.search-and-results.loading",
+      "file": "app/search/Good.tsx",
+      "line": 25,
+      "column": 7,
+      "level": "static-inferred",
+      "evidence": [
+        "loading is read in the interface and is named like a loading flag",
+        "loading is set to true before an await and back to false after, and the interface reads it"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 10: clearable is represented (structural)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.clearable",
+      "policy": "policy:interaction.search-and-results.clearable",
+      "file": "app/search/Open.tsx",
+      "line": 10,
+      "column": 7,
+      "level": "structural",
+      "evidence": [
+        "the input has type=\"search\", which browsers give a clear control"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "pass",
+      "reason": "search <input> at line 10: connected is represented (structural)",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.connected",
+      "policy": "policy:interaction.search-and-results.connected",
+      "file": "app/search/Open.tsx",
+      "line": 10,
+      "column": 7,
+      "level": "structural",
+      "evidence": [
+        "q is also used at line 6"
+      ]
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "search <input> at line 10: cannot tell whether empty is represented; useResults may supply it, and Invariant cannot see inside",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.empty",
+      "policy": "policy:interaction.search-and-results.empty",
+      "file": "app/search/Open.tsx",
+      "line": 10,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "search <input> at line 10: cannot tell whether error is represented; useResults may supply it, and Invariant cannot see inside",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.error",
+      "policy": "policy:interaction.search-and-results.error",
+      "file": "app/search/Open.tsx",
+      "line": 10,
+      "column": 7
+    },
+    {
+      "rule": "pattern-state-missing",
+      "status": "not-verifiable",
+      "reason": "search <input> at line 10: cannot tell whether loading is represented; useResults may supply it, and Invariant cannot see inside",
+      "pattern": "pattern:interaction.search-and-results",
+      "constraint": "constraint:interaction.search-and-results.loading",
+      "policy": "policy:interaction.search-and-results.loading",
+      "file": "app/search/Open.tsx",
+      "line": 10,
+      "column": 7
+    }
+  ]
+}

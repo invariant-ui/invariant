@@ -7,13 +7,14 @@ import {
   verifyIrDocument
 } from "@invariant/compiler-ir"
 import {
+  canonicalStringify,
   DIAGNOSTICS_FILE_VERSION,
   type Diagnostic,
   DiagnosticCollector,
   hasErrors,
+  type JsonValue,
   sortDiagnostics
-} from "@invariant/diagnostics"
-import { canonicalStringify, type JsonValue } from "@invariant/shared"
+} from "@invariant/shared"
 import type { DiscoveredSource, SourceAdapter } from "./adapter.js"
 import { INVENTORY_ADAPTERS } from "./adapters/inventory.js"
 import { type DiscoverOptions, discoverProject, type ProjectDiscovery } from "./discovery/index.js"

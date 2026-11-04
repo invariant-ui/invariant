@@ -11,8 +11,7 @@ import {
   type EvidenceLocation,
   type ExtractionMethod
 } from "@invariant/contract"
-import type { Diagnostic } from "@invariant/diagnostics"
-import type { JsonValue } from "@invariant/shared"
+import type { Diagnostic, JsonValue } from "@invariant/shared"
 
 const MAX_ORIGINAL = 2000
 

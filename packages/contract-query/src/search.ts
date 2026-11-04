@@ -1,7 +1,7 @@
 import type { JsonValue } from "@invariant/shared"
 import { cmp, type DesignSystem, normalize } from "./system.js"
 
-export type SearchKind = "component" | "token" | "guideline"
+export type SearchKind = "component" | "token" | "guideline" | "pattern"
 
 export interface SearchHit {
   kind: SearchKind
@@ -92,7 +92,7 @@ function score(
 export function search(
   ds: DesignSystem,
   query: string,
-  kinds: readonly SearchKind[] = ["component", "token", "guideline"],
+  kinds: readonly SearchKind[] = ["component", "token", "guideline", "pattern"],
   limit = 20
 ): { total: number; hits: SearchHit[] } {
   const hits: SearchHit[] = []
@@ -141,6 +141,26 @@ export function search(
         score(query, [
           { label: "title", text: g.name, weight: 8 },
           { label: "kind", text: g.kind, weight: 1 }
+        ])
+      )
+  if (kinds.includes("pattern"))
+    for (const p of ds.contract.patterns)
+      add(
+        "pattern",
+        p.id,
+        p.name,
+        score(query, [
+          { label: "name", text: p.name, weight: 10 },
+          { label: "intent", text: p.intent ?? "", weight: 3 },
+          { label: "category", text: p.category, weight: 2 },
+          {
+            label: "part",
+            text: (p.composition?.parts ?? []).map((x) => `${x.name} ${x.ref}`).join(" "),
+            weight: 3
+          },
+          { label: "region", text: (p.layout?.regions ?? []).map((r) => r.name).join(" "), weight: 2 },
+          { label: "state", text: (p.behavior?.states ?? []).map((x) => x.name).join(" "), weight: 2 },
+          { label: "description", text: p.description, weight: 1 }
         ])
       )
   hits.sort((a, b) => b.score - a.score || cmp(a.kind, b.kind) || cmp(a.id, b.id))

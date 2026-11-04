@@ -1,6 +1,13 @@
+export { type EffectivePart, effectiveParts } from "./archetype-checks.js"
 export { type Component, componentSchema } from "./components.js"
 export { type Conflict, conflictSchema } from "./conflicts.js"
-export { CONTRACT_VERSION, type Contract, type ContractDraft, contractSchema } from "./contract.js"
+export {
+  CONTRACT_VERSION,
+  type Contract,
+  type ContractDraft,
+  contractSchema,
+  SUPPORTED_CONTRACT_VERSIONS
+} from "./contract.js"
 export {
   computeEvidenceId,
   createEvidenceFile,
@@ -43,6 +50,35 @@ export {
   patternSchema,
   policySchema
 } from "./knowledge.js"
+export {
+  ACYCLIC_RELATIONSHIPS,
+  behaviorSchema,
+  type ConstraintDetails,
+  compositionPartSchema,
+  constraintDetailsSchemas,
+  EVIDENCE_LEVELS,
+  type EvidenceLevel,
+  elementRefSchema,
+  evidenceLevelSchema,
+  INTERACTION_STATES,
+  type InteractionWorkflow,
+  interactionWorkflowSchema,
+  isPatternConstraintKind,
+  layoutRegionSchema,
+  PATTERN_CATEGORIES,
+  PATTERN_CATEGORIES_1_1,
+  PATTERN_CONSTRAINT_KINDS,
+  PATTERN_ONLY_RELATIONSHIPS,
+  PATTERN_RELATIONSHIP_TYPES,
+  type PatternConstraintKind,
+  type PatternRelationshipType,
+  partNameSchema,
+  patternAccessibilitySchema,
+  patternRelationshipSchema,
+  patternVariationSchema,
+  regionRefSchema,
+  verifiableBySchema
+} from "./patterns.js"
 export {
   componentIdSchema,
   conflictIdSchema,

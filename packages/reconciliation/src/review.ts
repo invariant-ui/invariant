@@ -5,7 +5,7 @@ import { cmp } from "./util.js"
 export interface ReviewItem {
   /** Stable across runs for the same subject, path and kind. */
   id: string
-  kind: "conflict" | "inferred-fact"
+  kind: "conflict" | "inferred-fact" | "pattern-fact"
   subject: string
   path?: string
   priority: "high" | "medium" | "low"
@@ -17,7 +17,7 @@ export interface ReviewItem {
   evidenceIds: string[]
   /** Nothing inferred or conflicting becomes authoritative without a person's decision. */
   approvalRequired: true
-  /** Conflict resolution state; inferred facts are `pending` until approved. */
+  /** Conflict resolution state; inferred and authored pattern facts are `pending` until approved. */
   state: "open" | "pending"
 }
 
@@ -70,6 +70,28 @@ export function buildReviewQueue(contract: ContractDraft): ReviewItem[] {
       })
     }
   }
+  // A pattern written by a person is `documented`, not approved: someone must still say it is the standard.
+  // Its constraints are listed too, so each fact can be approved on its own.
+  const owned = new Set(contract.patterns.flatMap((p) => p.constraints ?? []))
+  const authored: Array<{ id: string; facts: Record<string, FactRecord> }> = [
+    ...contract.patterns,
+    ...contract.constraints.filter((c) => owned.has(c.id))
+  ]
+  for (const e of authored)
+    for (const [path, fact] of Object.entries(e.facts)) {
+      if (fact.status !== "documented") continue
+      items.push({
+        id: `rv_${hashJson({ kind: "pattern-fact", subject: e.id, path }).slice(0, 16)}`,
+        kind: "pattern-fact",
+        subject: e.id,
+        path,
+        priority: "low",
+        reason: "Authored pattern definition that has not been approved. Approve it to make it a standard.",
+        evidenceIds: [...fact.evidenceIds].sort(),
+        approvalRequired: true,
+        state: "pending"
+      })
+    }
   return items.sort(
     (a, b) =>
       PRIORITY[a.priority] - PRIORITY[b.priority] ||

@@ -1,3 +1,4 @@
+import type { Evaluation } from "./pattern-rules.js"
 import { RULES, ruleFor, type Severity } from "./rules.js"
 import type { Finding } from "./validate-usage.js"
 
@@ -11,15 +12,62 @@ export interface RunSummary {
   warnings: number
   info: number
   componentsChecked: number
+  /** How the structural pattern checks came out across all files. Not-verifiable and skipped checks are not failures, and not passes. */
+  patternRules: Record<"pass" | "fail" | "warning" | "notVerifiable" | "skipped", number>
+  /**
+   * Present when an interaction check found something: how much each result establishes. `runtimeVerified` is
+   * always 0 here, because static analysis does not run the code.
+   */
+  interactionEvidence?: { structural: number; staticInferred: number; runtimeVerified: number }
 }
 
 export function summarize(
   violations: readonly Violation[],
   files: number,
-  componentsChecked: number
+  componentsChecked: number,
+  evaluations: readonly Evaluation[] = []
 ): RunSummary {
   const n = (s: Severity): number => violations.filter((v) => v.severity === s).length
-  return { files, errors: n("error"), warnings: n("warning"), info: n("info"), componentsChecked }
+  const patternRules = { pass: 0, fail: 0, warning: 0, notVerifiable: 0, skipped: 0 }
+  for (const e of evaluations) patternRules[e.status === "not-verifiable" ? "notVerifiable" : e.status]++
+  const leveled = evaluations.filter((e) => e.level !== undefined)
+  const interactionEvidence =
+    leveled.length === 0
+      ? undefined
+      : {
+          structural: leveled.filter((e) => e.level === "structural").length,
+          staticInferred: leveled.filter((e) => e.level === "static-inferred").length,
+          runtimeVerified: leveled.filter((e) => e.level === "runtime-verified").length
+        }
+  return {
+    files,
+    errors: n("error"),
+    warnings: n("warning"),
+    info: n("info"),
+    componentsChecked,
+    patternRules,
+    ...(interactionEvidence ? { interactionEvidence } : {})
+  }
+}
+
+const evidenceLine = (s: RunSummary): string | undefined => {
+  const e = s.interactionEvidence
+  if (!e) return undefined
+  return `interaction evidence: ${e.structural + e.staticInferred + e.runtimeVerified} structural or better (${e.staticInferred} statically inferred, ${e.structural} structural only, ${e.runtimeVerified} runtime verified; static analysis does not run the code)`
+}
+
+const patternLine = (s: RunSummary["patternRules"]): string =>
+  `${s.pass} passed, ${s.fail} failed, ${s.warning} warnings, ${s.notVerifiable} not verifiable, ${s.skipped} skipped`
+const hasPatternRules = (s: RunSummary["patternRules"]): boolean => Object.values(s).some((n) => n > 0)
+
+export function sortEvaluations(evaluations: readonly Evaluation[]): Evaluation[] {
+  return [...evaluations].sort(
+    (a, b) =>
+      ((a.file ?? "") < (b.file ?? "") ? -1 : (a.file ?? "") > (b.file ?? "") ? 1 : 0) ||
+      (a.line ?? 0) - (b.line ?? 0) ||
+      (a.column ?? 0) - (b.column ?? 0) ||
+      (a.constraint < b.constraint ? -1 : a.constraint > b.constraint ? 1 : 0)
+  )
 }
 
 const RANK: Record<Severity, number> = { error: 0, warning: 1, info: 2 }
@@ -46,7 +94,11 @@ export function shouldFail(summary: RunSummary, failOn: FailOn): boolean {
       : summary.errors > 0
 }
 
-export function formatText(violations: readonly Violation[], summary: RunSummary): string {
+export function formatText(
+  violations: readonly Violation[],
+  summary: RunSummary,
+  evaluations: readonly Evaluation[] = []
+): string {
   const lines: string[] = []
   for (const v of sortViolations(violations)) {
     lines.push(`${v.file}:${v.line ?? 1}:${v.column ?? 1} ${v.severity} ${v.code}`)
@@ -60,6 +112,20 @@ export function formatText(violations: readonly Violation[], summary: RunSummary
     lines.push(`  ${refs.join("; ")}`)
     lines.push("")
   }
+  const unestablished = sortEvaluations(evaluations).filter(
+    (e) => e.status === "not-verifiable" || e.status === "skipped"
+  )
+  if (hasPatternRules(summary.patternRules)) {
+    lines.push(`pattern rules: ${patternLine(summary.patternRules)}`)
+    const evidence = evidenceLine(summary)
+    if (evidence) lines.push(evidence)
+    for (const e of unestablished.slice(0, 50))
+      lines.push(
+        `  ${e.status === "skipped" ? "skipped" : "not verifiable"} ${e.file ?? "(snippet)"}:${e.line ?? 1} ${e.rule}: ${e.reason}`
+      )
+    if (unestablished.length > 50) lines.push(`  ... ${unestablished.length - 50} more (see --format json)`)
+    lines.push("")
+  }
   lines.push(
     `${summary.errors} errors, ${summary.warnings} warnings, ${summary.info} info in ${summary.files} files (${summary.componentsChecked} components checked)`
   )
@@ -69,9 +135,22 @@ export function formatText(violations: readonly Violation[], summary: RunSummary
 export function toJson(
   violations: readonly Violation[],
   summary: RunSummary,
-  contractHash: string
+  contractHash: string,
+  evaluations: readonly Evaluation[] = []
 ): Record<string, unknown> {
-  return { contractHash, summary, violations: sortViolations(violations) }
+  return {
+    contractHash,
+    summary,
+    violations: sortViolations(violations),
+    evaluations: sortEvaluations(evaluations)
+  }
+}
+
+/** The pattern-rule tally for a one-line summary, or an empty string when no pattern rule applied. */
+export const patternSummaryText = (s: RunSummary): string => {
+  if (!hasPatternRules(s.patternRules)) return ""
+  const evidence = evidenceLine(s)
+  return `pattern rules: ${patternLine(s.patternRules)}${evidence ? `\n${evidence}` : ""}`
 }
 
 const escData = (s: string): string => s.replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A")
@@ -91,7 +170,8 @@ export function formatGithub(violations: readonly Violation[]): string {
 /** SARIF 2.1.0, accepted by GitHub code scanning and most CI viewers. */
 export function toSarif(
   violations: readonly Violation[],
-  tool: { name: string; version: string }
+  tool: { name: string; version: string },
+  summary?: RunSummary
 ): Record<string, unknown> {
   const level = (s: Severity): string => (s === "info" ? "note" : s)
   const used = new Set(violations.map((v) => v.code))
@@ -113,6 +193,9 @@ export function toSarif(
             }))
           }
         },
+        ...(summary && hasPatternRules(summary.patternRules)
+          ? { properties: { patternRules: summary.patternRules } }
+          : {}),
         results: sortViolations(violations).map((v) => ({
           ruleId: v.code,
           level: level(v.severity),

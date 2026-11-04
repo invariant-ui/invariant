@@ -10,6 +10,14 @@ import {
   tokenValueKeys,
   typographyLiterals
 } from "./literals.js"
+import {
+  type Evaluation,
+  evaluatePatternRules,
+  patternRuleCode,
+  patternRules,
+  type Tree,
+  type UseKind
+} from "./pattern-rules.js"
 import { type ActivePolicy, activePolicies, evaluateUse, relationshipRules } from "./policy.js"
 import type { RuleOverrides } from "./rules.js"
 import { type ImportBinding, type ScannedUse, scanJsx, scanMarkup } from "./scan.js"
@@ -18,6 +26,7 @@ import { type Finding, validateUsage } from "./validate-usage.js"
 
 export const MAX_CODE_CHARS = 200_000
 export const MAX_FINDINGS = 200
+export const MAX_EVALUATIONS = 500
 
 export type CodeFramework = "react" | "vue" | "angular" | "html"
 
@@ -42,8 +51,16 @@ export interface CodeResult {
     componentsChecked: string[]
     elementsNotInContract: string[]
     unverifiedValues: number
+    /** How the structural pattern rules that applied to this file came out. See `evaluations`. */
+    patternRules: Record<"pass" | "fail" | "warning" | "notVerifiable" | "skipped", number>
   }
   findings: Finding[]
+  /**
+   * One entry per structural pattern check that applied to this file, including the ones that passed and
+   * the ones that could not be established. A check that cannot be established is `not-verifiable` or
+   * `skipped`, never `pass`.
+   */
+  evaluations: Evaluation[]
   truncated: boolean
   limitations: string[]
 }
@@ -163,6 +180,34 @@ type Resolution =
   | { kind: "ambiguous"; matches: Component[] }
   | { kind: "none" }
 
+/** What an element is, for deciding whether a scope can be trusted to be complete. */
+function kindOf(r: Resolution, use: ScannedUse): UseKind {
+  if (r.kind === "component") return "component"
+  if (r.kind === "ambiguous") return "ambiguous"
+  if (r.kind === "unknown-ds") return "unknown"
+  if (r.kind === "foreign") return "foreign"
+  return /^[a-z][a-z0-9]*$/.test(use.tag) ? "native" : "unknown"
+}
+
+/**
+ * The elements of a React file with each one resolved to a design-system component where the contract says it is
+ * one. Reads syntax only and reports nothing; `validateCode` and pattern discovery both build on it.
+ */
+export function buildTree(ds: DesignSystem, code: string, filename: string): Tree {
+  const index = tagIndex(ds)
+  const modules = designSystemModules(ds)
+  const isDs = (m: string): boolean => modules.some((p) => m === p || m.startsWith(`${p}/`))
+  const { uses, imports } = scanJsx(code, filename)
+  const components: Array<Component | undefined> = []
+  const kinds: UseKind[] = []
+  for (const use of uses) {
+    const r = resolveUse(use, index, imports, isDs)
+    components.push(r.kind === "component" ? r.component : undefined)
+    kinds.push(kindOf(r, use))
+  }
+  return { uses, components, kinds }
+}
+
 function resolveUse(
   use: ScannedUse,
   index: Map<string, Component[]>,
@@ -212,6 +257,15 @@ function resolveUse(
  * with their literal props, approved policies are applied, and literal colors and CSS variables are compared
  * with the tokens. Dynamic values are counted, not guessed.
  */
+function tally(evaluations: readonly Evaluation[]): CodeResult["summary"]["patternRules"] {
+  const out = { pass: 0, fail: 0, warning: 0, notVerifiable: 0, skipped: 0 }
+  for (const e of evaluations) {
+    const key = e.status === "not-verifiable" ? "notVerifiable" : e.status
+    out[key]++
+  }
+  return out
+}
+
 export function validateCode(ds: DesignSystem, input: CodeInput, options: ValidateOptions = {}): CodeResult {
   const framework: CodeFramework = input.framework ?? defaultFramework(ds, input.filename)
   const findings: Finding[] = []
@@ -233,8 +287,10 @@ export function validateCode(ds: DesignSystem, input: CodeInput, options: Valida
         info: 0,
         componentsChecked: [],
         elementsNotInContract: [],
-        unverifiedValues: 0
+        unverifiedValues: 0,
+        patternRules: { pass: 0, fail: 0, warning: 0, notVerifiable: 0, skipped: 0 }
       },
+      evaluations: [],
       findings: [
         {
           code: "input-too-large",
@@ -256,10 +312,12 @@ export function validateCode(ds: DesignSystem, input: CodeInput, options: Valida
   const uses = jsx ? jsx.uses : scanMarkup(input.code)
   const imports = jsx?.imports ?? new Map<string, ImportBinding>()
   const resolved: Array<Component | undefined> = []
+  const kinds: UseKind[] = []
   const at = (u: ScannedUse): Pick<Finding, "line" | "column"> => ({ line: u.line, column: u.column })
 
   uses.forEach((use) => {
     const r = resolveUse(use, index, imports, isDs)
+    kinds.push(kindOf(r, use))
     if (r.kind === "component") {
       resolved.push(r.component)
       const result = validateUsage(ds, {
@@ -329,6 +387,25 @@ export function validateCode(ds: DesignSystem, input: CodeInput, options: Valida
   uses.forEach((use, i) => {
     for (const f of evaluateUse(rules, ctx, i)) findings.push({ ...f, ...at(use) })
   })
+
+  // Structural pattern rules, from approved policies whose constraints are of a pattern kind.
+  const off = options.rules ?? {}
+  const structural = patternRules(ds)
+  if (structural.problems.length > 0)
+    limitations.push(...structural.problems.map((p) => `Not enforced: ${p}.`))
+  const evaluation = evaluatePatternRules({
+    ds,
+    rules: structural.rules.filter((r) => off[patternRuleCode(r.kind)] !== "off"),
+    tree: { uses, components: resolved, kinds },
+    framework,
+    filename: input.filename,
+    code: input.code
+  })
+  findings.push(...evaluation.findings)
+  if (evaluation.evaluations.length > 0)
+    limitations.push(
+      "Pattern rules are static: they read the JSX of this file only. A check that depends on content from another file, or on children this file does not show, is reported as not verifiable, never as a pass."
+    )
 
   const colors = tokenColors(ds)
   const lines = input.code.split("\n")
@@ -511,8 +588,10 @@ export function validateCode(ds: DesignSystem, input: CodeInput, options: Valida
       info: count("info"),
       componentsChecked: [...checked].sort(),
       elementsNotInContract: [...unknown].sort().slice(0, 50),
-      unverifiedValues: unverified
+      unverifiedValues: unverified,
+      patternRules: tally(evaluation.evaluations)
     },
+    evaluations: evaluation.evaluations.slice(0, MAX_EVALUATIONS),
     findings: sorted.slice(0, MAX_FINDINGS),
     truncated: sorted.length > MAX_FINDINGS,
     limitations

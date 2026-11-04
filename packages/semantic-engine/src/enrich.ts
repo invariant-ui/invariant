@@ -1,6 +1,6 @@
 import type { IrDocument } from "@invariant/compiler-ir"
 import type { ContractDraft, Evidence } from "@invariant/contract"
-import { type Diagnostic, DiagnosticCollector } from "@invariant/diagnostics"
+import { type Diagnostic, DiagnosticCollector } from "@invariant/shared"
 import { assertAdditive } from "./additive.js"
 import { inferCompounds } from "./compounds.js"
 import { classifyDocuments } from "./documents.js"

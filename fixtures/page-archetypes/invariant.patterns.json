@@ -1,0 +1,431 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "layout.app-shell",
+      "name": "Application shell",
+      "category": "layout",
+      "description": "Navigation and content areas shared by every page.",
+      "intent": "Give every screen the same frame.",
+      "layout": {
+        "regions": [
+          {
+            "name": "nav",
+            "required": true
+          },
+          {
+            "name": "content",
+            "required": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "composition.page-header",
+      "name": "Page header",
+      "category": "composition",
+      "description": "A title with optional breadcrumbs and actions.",
+      "intent": "Say where a person is and what they can do.",
+      "composition": {
+        "parts": [
+          {
+            "name": "title",
+            "ref": "Text",
+            "role": "required"
+          },
+          {
+            "name": "breadcrumbs",
+            "ref": "Link",
+            "role": "optional"
+          },
+          {
+            "name": "actions",
+            "ref": "Stack",
+            "role": "optional"
+          }
+        ]
+      }
+    },
+    {
+      "id": "composition.table-toolbar",
+      "name": "Table toolbar",
+      "category": "composition",
+      "description": "Filters and actions above a list.",
+      "intent": "Keep filtering next to the data it filters.",
+      "composition": {
+        "parts": [
+          {
+            "name": "filter",
+            "ref": "Select",
+            "role": "required"
+          },
+          {
+            "name": "actions",
+            "ref": "Button",
+            "role": "optional"
+          }
+        ]
+      }
+    },
+    {
+      "id": "interaction.destructive-confirmation",
+      "name": "Destructive confirmation",
+      "category": "interaction",
+      "description": "Ask before deleting, and let the person back out.",
+      "intent": "Stop accidental data loss.",
+      "behavior": {
+        "initial": "idle",
+        "states": [
+          {
+            "name": "idle"
+          },
+          {
+            "name": "confirming",
+            "verifiableBy": "static"
+          },
+          {
+            "name": "done",
+            "terminal": true
+          }
+        ],
+        "transitions": [
+          {
+            "id": "ask",
+            "from": "idle",
+            "to": "confirming"
+          },
+          {
+            "id": "cancel",
+            "from": "confirming",
+            "to": "idle"
+          },
+          {
+            "id": "ok",
+            "from": "confirming",
+            "to": "done"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "confirms",
+          "kind": "required-state",
+          "description": "A destructive action asks for confirmation first.",
+          "details": {
+            "workflow": "destructive-confirmation",
+            "state": "confirming",
+            "minimum": "static-inferred"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        }
+      ],
+      "appliesTo": {
+        "paths": [
+          "app/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-400"
+      }
+    },
+    {
+      "id": "interaction.form-workflow",
+      "name": "Form workflow",
+      "category": "interaction",
+      "description": "How a form behaves while it submits and after.",
+      "intent": "Never leave a person unsure whether their form went through.",
+      "constraints": [
+        {
+          "id": "shows-error",
+          "kind": "required-state",
+          "description": "A form shows an error when submitting fails.",
+          "details": {
+            "workflow": "form-submission",
+            "state": "error"
+          }
+        },
+        {
+          "id": "shows-submitting",
+          "kind": "required-state",
+          "description": "A form shows that it is submitting.",
+          "details": {
+            "workflow": "form-submission",
+            "state": "submitting",
+            "minimum": "static-inferred"
+          }
+        }
+      ]
+    },
+    {
+      "id": "page.data-management",
+      "name": "Data management page",
+      "category": "page",
+      "description": "A page to find, review and act on a collection of records.",
+      "intent": "Let a person search a collection and act on what they find.",
+      "layout": {
+        "regions": [
+          {
+            "name": "header",
+            "required": true
+          },
+          {
+            "name": "toolbar",
+            "required": true
+          },
+          {
+            "name": "results",
+            "required": true
+          }
+        ]
+      },
+      "composition": {
+        "parts": [
+          {
+            "name": "header",
+            "ref": "composition.page-header",
+            "role": "required",
+            "region": "header"
+          },
+          {
+            "name": "toolbar",
+            "ref": "composition.table-toolbar",
+            "role": "required",
+            "region": "toolbar"
+          },
+          {
+            "name": "results",
+            "ref": "Card",
+            "role": "required",
+            "region": "results"
+          }
+        ]
+      },
+      "variations": [
+        {
+          "name": "bulk-actions",
+          "description": "People select several rows and act on them.",
+          "when": "The collection supports acting on many records.",
+          "parts": [
+            {
+              "name": "bulk",
+              "ref": "Button",
+              "role": "optional",
+              "region": "toolbar"
+            }
+          ]
+        },
+        {
+          "name": "minimal",
+          "description": "No toolbar.",
+          "when": "The collection is short.",
+          "roles": [
+            {
+              "part": "toolbar",
+              "role": "optional"
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "frame",
+          "type": "composes",
+          "target": "layout.app-shell"
+        },
+        {
+          "id": "delete",
+          "type": "uses",
+          "target": "interaction.destructive-confirmation"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "needs-results",
+          "kind": "required-region",
+          "description": "A data management page has a results region.",
+          "details": {
+            "region": "region:results"
+          },
+          "enforce": {
+            "severity": "error",
+            "enforcement": "block"
+          }
+        }
+      ],
+      "appliesTo": {
+        "paths": [
+          "app/pages/**"
+        ],
+        "frameworks": [
+          "react"
+        ]
+      },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-400"
+      }
+    },
+    {
+      "id": "page.detail",
+      "name": "Detail page",
+      "category": "page",
+      "description": "A page that shows one record and the actions that apply to it.",
+      "intent": "Let a person understand one record and act on it.",
+      "layout": {
+        "regions": [
+          {
+            "name": "header",
+            "required": true
+          },
+          {
+            "name": "summary",
+            "required": true
+          },
+          {
+            "name": "related",
+            "required": false
+          }
+        ]
+      },
+      "composition": {
+        "parts": [
+          {
+            "name": "header",
+            "ref": "composition.page-header",
+            "role": "required",
+            "region": "header"
+          },
+          {
+            "name": "summary",
+            "ref": "Card",
+            "role": "required",
+            "region": "summary"
+          },
+          {
+            "name": "related",
+            "ref": "Card",
+            "role": "optional",
+            "region": "related"
+          },
+          {
+            "name": "actions",
+            "ref": "Button",
+            "role": "optional",
+            "region": "header"
+          }
+        ]
+      },
+      "variations": [
+        {
+          "name": "read-only",
+          "description": "Read only",
+          "when": "The person cannot change this record.",
+          "roles": [
+            {
+              "part": "actions",
+              "role": "prohibited"
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "frame",
+          "type": "composes",
+          "target": "layout.app-shell"
+        },
+        {
+          "id": "delete",
+          "type": "uses",
+          "target": "interaction.destructive-confirmation"
+        }
+      ],
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-400"
+      }
+    },
+    {
+      "id": "page.edit-form",
+      "name": "Create or edit form",
+      "category": "page",
+      "description": "A page with one form that creates or changes a record.",
+      "intent": "Let a person create or change a record and know it was saved.",
+      "layout": {
+        "regions": [
+          {
+            "name": "header",
+            "required": true
+          },
+          {
+            "name": "form",
+            "required": true
+          }
+        ]
+      },
+      "composition": {
+        "parts": [
+          {
+            "name": "header",
+            "ref": "composition.page-header",
+            "role": "required",
+            "region": "header"
+          },
+          {
+            "name": "fields",
+            "ref": "Stack",
+            "role": "required",
+            "region": "form"
+          },
+          {
+            "name": "submit",
+            "ref": "Button",
+            "role": "required",
+            "region": "form"
+          },
+          {
+            "name": "remove",
+            "ref": "Button",
+            "role": "optional",
+            "region": "form"
+          }
+        ]
+      },
+      "variations": [
+        {
+          "name": "create",
+          "description": "Create",
+          "when": "There is no record yet.",
+          "roles": [
+            {
+              "part": "remove",
+              "role": "prohibited"
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "frame",
+          "type": "composes",
+          "target": "layout.app-shell"
+        },
+        {
+          "id": "workflow",
+          "type": "uses",
+          "target": "interaction.form-workflow"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import path from "node:path"
-import type { DiagnosticCollector } from "@invariant/diagnostics"
+import type { DiagnosticCollector } from "@invariant/shared"
 import { sha256Hex } from "@invariant/shared"
 import type { ReadonlyFs } from "../fs.js"
 

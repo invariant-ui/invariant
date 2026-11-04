@@ -4,6 +4,7 @@ import type {
   Evidence,
   EvidenceFile,
   FactRecord,
+  Pattern,
   Token,
   TokenValue
 } from "@invariant/contract"
@@ -29,6 +30,7 @@ export class DesignSystem {
   readonly contentHash: string
   private readonly evidence = new Map<string, Evidence>()
   private readonly byId = new Map<string, Component>()
+  private readonly patternsById = new Map<string, Pattern>()
   private readonly containers = new Map<string, Array<{ id: string; fact?: FactRecord }>>()
 
   constructor(contract: Contract, evidence?: EvidenceFile) {
@@ -36,6 +38,7 @@ export class DesignSystem {
     this.contentHash = contract.integrity.contentHash
     for (const e of evidence?.evidence ?? []) this.evidence.set(e.id, e)
     for (const c of contract.components) this.byId.set(c.id, c)
+    for (const p of contract.patterns) this.patternsById.set(p.id, p)
     for (const c of contract.components)
       c.composition.forEach((r, i) => {
         if (r.type !== "contains") return
@@ -65,6 +68,40 @@ export class DesignSystem {
       .filter((c) => n.length >= 2 && (normalize(c.name).includes(n) || n.includes(normalize(c.name))))
       .slice(0, 8)
     return { candidates: near }
+  }
+
+  pattern(id: string): Pattern | undefined {
+    return this.patternsById.get(id)
+  }
+
+  /**
+   * Resolves a pattern by id, by id without its prefix (`page.data-management`), by the part after the
+   * category (`data-management`), or by name, ignoring case and separators. Several matches yield candidates only.
+   */
+  findPattern(query: string): { match?: Pattern; candidates: Pattern[] } {
+    const q = query.trim()
+    const exact = this.patternsById.get(q) ?? this.patternsById.get(`pattern:${q.toLowerCase()}`)
+    if (exact) return { match: exact, candidates: [exact] }
+    const n = normalize(q)
+    const named = this.contract.patterns.filter((p) => {
+      const body = p.id.slice("pattern:".length)
+      const afterCategory = body.includes(".") ? body.slice(body.indexOf(".") + 1) : body
+      return normalize(p.name) === n || normalize(body) === n || normalize(afterCategory) === n
+    })
+    if (named.length === 1) return { match: named[0] as Pattern, candidates: named }
+    if (named.length > 1) return { candidates: named }
+    const near = this.contract.patterns
+      .filter((p) => n.length >= 2 && (normalize(p.name).includes(n) || n.includes(normalize(p.name))))
+      .slice(0, 8)
+    return { candidates: near }
+  }
+
+  /** The evidence entries for these ids, in the given order. Ids missing from the evidence file are skipped. */
+  evidenceEntries(ids: readonly string[]): Evidence[] {
+    return ids.flatMap((id) => {
+      const e = this.evidence.get(id)
+      return e ? [e] : []
+    })
   }
 
   containedBy(id: string): Array<{ id: string; fact?: FactRecord }> {

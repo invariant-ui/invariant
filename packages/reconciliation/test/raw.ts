@@ -13,7 +13,7 @@ export interface RawEntity {
 /** An IR document with one evidence entry per fact, for exact control over what a source claims. */
 export function rawDoc(
   sourceId: string,
-  type: SourceType,
+  type: Exclude<SourceType, "patterns">,
   entities: RawEntity[],
   options: { completeness?: IrDocument["completeness"] } = {}
 ): IrDocument {

@@ -1,4 +1,4 @@
-import type { Diagnostic } from "@invariant/diagnostics"
+import type { Diagnostic } from "@invariant/shared"
 import { hashJson, type JsonValue } from "@invariant/shared"
 import type { DiscoveredSource, SourceAdapter, SourceVersion } from "../adapter.js"
 import type { PackageInfo, ProjectDiscovery } from "../discovery/index.js"

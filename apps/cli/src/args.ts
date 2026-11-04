@@ -30,7 +30,28 @@ const OPTIONS = {
   reference: { type: "string" },
   note: { type: "string" },
   source: { type: "string" },
-  kind: { type: "string" }
+  kind: { type: "string" },
+  category: { type: "string" },
+  status: { type: "string" },
+  direction: { type: "string" },
+  depth: { type: "string" },
+  variation: { type: "string" },
+  "min-files": { type: "string" },
+  "min-uses": { type: "string" },
+  similarity: { type: "string" },
+  all: { type: "boolean" },
+  name: { type: "string" },
+  spec: { type: "string" },
+  browser: { type: "string" },
+  url: { type: "string" },
+  "update-baseline": { type: "boolean" },
+  "no-baseline": { type: "boolean" },
+  yes: { type: "boolean" },
+  "confirm-contract": { type: "boolean" },
+  "no-agent": { type: "boolean" },
+  paths: { type: "string" },
+  ci: { type: "boolean" },
+  "no-ci": { type: "boolean" }
 } as const
 
 export interface Parsed {
@@ -65,6 +86,27 @@ export interface Parsed {
     note?: string
     source?: string
     kind?: string
+    category?: string
+    status?: string
+    direction?: string
+    depth?: string
+    variation?: string
+    "min-files"?: string
+    "min-uses"?: string
+    similarity?: string
+    all?: boolean
+    name?: string
+    spec?: string
+    browser?: string
+    url?: string
+    "update-baseline"?: boolean
+    "no-baseline"?: boolean
+    yes?: boolean
+    "confirm-contract"?: boolean
+    "no-agent"?: boolean
+    paths?: string
+    ci?: boolean
+    "no-ci"?: boolean
   }
 }
 

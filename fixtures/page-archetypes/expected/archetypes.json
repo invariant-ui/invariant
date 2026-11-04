@@ -1,0 +1,822 @@
+{
+  "page.data-management": {
+    "id": "pattern:page.data-management",
+    "name": "Data management page",
+    "category": "page",
+    "intent": "Let a person search a collection and act on what they find.",
+    "status": {
+      "overall": "approved",
+      "counts": {
+        "approved": 9
+      },
+      "total": 9
+    },
+    "approved": true,
+    "regions": [
+      {
+        "name": "header",
+        "required": true,
+        "parts": [
+          "header"
+        ]
+      },
+      {
+        "name": "toolbar",
+        "required": true,
+        "parts": [
+          "toolbar"
+        ]
+      },
+      {
+        "name": "results",
+        "required": true,
+        "parts": [
+          "results"
+        ]
+      }
+    ],
+    "composition": {
+      "pattern": {
+        "id": "pattern:page.data-management",
+        "name": "Data management page",
+        "category": "page",
+        "status": "approved",
+        "approved": true
+      },
+      "parts": [
+        {
+          "name": "header",
+          "role": "required",
+          "region": "header",
+          "ref": {
+            "id": "pattern:composition.page-header",
+            "kind": "pattern",
+            "name": "Page header"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:composition.page-header",
+              "name": "Page header",
+              "category": "composition",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [
+              {
+                "name": "title",
+                "role": "required",
+                "ref": {
+                  "id": "component:text",
+                  "kind": "component",
+                  "name": "Text"
+                }
+              },
+              {
+                "name": "breadcrumbs",
+                "role": "optional",
+                "ref": {
+                  "id": "component:link",
+                  "kind": "component",
+                  "name": "Link"
+                }
+              },
+              {
+                "name": "actions",
+                "role": "optional",
+                "ref": {
+                  "id": "component:stack",
+                  "kind": "component",
+                  "name": "Stack"
+                }
+              }
+            ],
+            "related": []
+          }
+        },
+        {
+          "name": "toolbar",
+          "role": "required",
+          "region": "toolbar",
+          "ref": {
+            "id": "pattern:composition.table-toolbar",
+            "kind": "pattern",
+            "name": "Table toolbar"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:composition.table-toolbar",
+              "name": "Table toolbar",
+              "category": "composition",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [
+              {
+                "name": "filter",
+                "role": "required",
+                "ref": {
+                  "id": "component:select",
+                  "kind": "component",
+                  "name": "Select"
+                }
+              },
+              {
+                "name": "actions",
+                "role": "optional",
+                "ref": {
+                  "id": "component:button",
+                  "kind": "component",
+                  "name": "Button"
+                }
+              }
+            ],
+            "related": []
+          }
+        },
+        {
+          "name": "results",
+          "role": "required",
+          "region": "results",
+          "ref": {
+            "id": "component:card",
+            "kind": "component",
+            "name": "Card"
+          }
+        }
+      ],
+      "related": [
+        {
+          "id": "frame",
+          "type": "composes",
+          "target": {
+            "id": "pattern:layout.app-shell",
+            "kind": "pattern",
+            "name": "Application shell"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:layout.app-shell",
+              "name": "Application shell",
+              "category": "layout",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [],
+            "related": []
+          }
+        },
+        {
+          "id": "delete",
+          "type": "uses",
+          "target": {
+            "id": "pattern:interaction.destructive-confirmation",
+            "kind": "pattern",
+            "name": "Destructive confirmation"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:interaction.destructive-confirmation",
+              "name": "Destructive confirmation",
+              "category": "interaction",
+              "status": "approved",
+              "approved": true
+            },
+            "parts": [],
+            "related": []
+          }
+        }
+      ]
+    },
+    "patterns": [
+      {
+        "id": "pattern:page.data-management",
+        "name": "Data management page",
+        "category": "page",
+        "status": "approved",
+        "approved": true,
+        "depth": 0,
+        "via": "the archetype itself"
+      },
+      {
+        "id": "pattern:composition.page-header",
+        "name": "Page header",
+        "category": "composition",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.data-management part header"
+      },
+      {
+        "id": "pattern:composition.table-toolbar",
+        "name": "Table toolbar",
+        "category": "composition",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.data-management part toolbar"
+      },
+      {
+        "id": "pattern:interaction.destructive-confirmation",
+        "name": "Destructive confirmation",
+        "category": "interaction",
+        "status": "approved",
+        "approved": true,
+        "depth": 1,
+        "via": "pattern:page.data-management uses"
+      },
+      {
+        "id": "pattern:layout.app-shell",
+        "name": "Application shell",
+        "category": "layout",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.data-management composes"
+      }
+    ],
+    "unapproved": [
+      "pattern:composition.page-header",
+      "pattern:composition.table-toolbar",
+      "pattern:layout.app-shell"
+    ],
+    "variations": [
+      {
+        "name": "bulk-actions",
+        "description": "People select several rows and act on them.",
+        "when": "The collection supports acting on many records.",
+        "roles": [],
+        "addedParts": [
+          {
+            "name": "bulk",
+            "role": "optional",
+            "ref": {
+              "id": "component:button",
+              "kind": "component",
+              "name": "Button"
+            }
+          }
+        ],
+        "fact": {
+          "status": "approved",
+          "source": "invariant.patterns.json"
+        }
+      },
+      {
+        "name": "minimal",
+        "description": "No toolbar.",
+        "when": "The collection is short.",
+        "roles": [
+          {
+            "part": "toolbar",
+            "role": "optional"
+          }
+        ],
+        "addedParts": [],
+        "fact": {
+          "status": "approved",
+          "source": "invariant.patterns.json"
+        }
+      }
+    ],
+    "prohibited": {
+      "parts": [],
+      "patterns": []
+    },
+    "requiredStates": [
+      {
+        "pattern": "pattern:interaction.destructive-confirmation",
+        "constraint": "constraint:interaction.destructive-confirmation.confirms",
+        "workflow": "destructive-confirmation",
+        "state": "confirming",
+        "minimum": "static-inferred",
+        "enforced": true,
+        "enforcedBy": [
+          "policy:interaction.destructive-confirmation.confirms"
+        ]
+      }
+    ],
+    "constraints": [
+      {
+        "pattern": "pattern:page.data-management",
+        "constraint": "constraint:page.data-management.needs-results",
+        "kind": "required-region",
+        "enforced": true,
+        "enforcedBy": [
+          "policy:page.data-management.needs-results"
+        ]
+      }
+    ],
+    "responsive": [],
+    "notes": [
+      "This archetype is approved, but 3 pattern(s) it builds on are not: pattern:composition.page-header, pattern:composition.table-toolbar, pattern:layout.app-shell. Approval of the archetype does not approve them."
+    ]
+  },
+  "page.detail": {
+    "id": "pattern:page.detail",
+    "name": "Detail page",
+    "category": "page",
+    "intent": "Let a person understand one record and act on it.",
+    "status": {
+      "overall": "approved",
+      "counts": {
+        "approved": 7
+      },
+      "total": 7
+    },
+    "approved": true,
+    "regions": [
+      {
+        "name": "header",
+        "required": true,
+        "parts": [
+          "header",
+          "actions"
+        ]
+      },
+      {
+        "name": "summary",
+        "required": true,
+        "parts": [
+          "summary"
+        ]
+      },
+      {
+        "name": "related",
+        "required": false,
+        "parts": [
+          "related"
+        ]
+      }
+    ],
+    "composition": {
+      "pattern": {
+        "id": "pattern:page.detail",
+        "name": "Detail page",
+        "category": "page",
+        "status": "approved",
+        "approved": true
+      },
+      "parts": [
+        {
+          "name": "header",
+          "role": "required",
+          "region": "header",
+          "ref": {
+            "id": "pattern:composition.page-header",
+            "kind": "pattern",
+            "name": "Page header"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:composition.page-header",
+              "name": "Page header",
+              "category": "composition",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [
+              {
+                "name": "title",
+                "role": "required",
+                "ref": {
+                  "id": "component:text",
+                  "kind": "component",
+                  "name": "Text"
+                }
+              },
+              {
+                "name": "breadcrumbs",
+                "role": "optional",
+                "ref": {
+                  "id": "component:link",
+                  "kind": "component",
+                  "name": "Link"
+                }
+              },
+              {
+                "name": "actions",
+                "role": "optional",
+                "ref": {
+                  "id": "component:stack",
+                  "kind": "component",
+                  "name": "Stack"
+                }
+              }
+            ],
+            "related": []
+          }
+        },
+        {
+          "name": "summary",
+          "role": "required",
+          "region": "summary",
+          "ref": {
+            "id": "component:card",
+            "kind": "component",
+            "name": "Card"
+          }
+        },
+        {
+          "name": "related",
+          "role": "optional",
+          "region": "related",
+          "ref": {
+            "id": "component:card",
+            "kind": "component",
+            "name": "Card"
+          }
+        },
+        {
+          "name": "actions",
+          "role": "optional",
+          "region": "header",
+          "ref": {
+            "id": "component:button",
+            "kind": "component",
+            "name": "Button"
+          }
+        }
+      ],
+      "related": [
+        {
+          "id": "frame",
+          "type": "composes",
+          "target": {
+            "id": "pattern:layout.app-shell",
+            "kind": "pattern",
+            "name": "Application shell"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:layout.app-shell",
+              "name": "Application shell",
+              "category": "layout",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [],
+            "related": []
+          }
+        },
+        {
+          "id": "delete",
+          "type": "uses",
+          "target": {
+            "id": "pattern:interaction.destructive-confirmation",
+            "kind": "pattern",
+            "name": "Destructive confirmation"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:interaction.destructive-confirmation",
+              "name": "Destructive confirmation",
+              "category": "interaction",
+              "status": "approved",
+              "approved": true
+            },
+            "parts": [],
+            "related": []
+          }
+        }
+      ]
+    },
+    "patterns": [
+      {
+        "id": "pattern:page.detail",
+        "name": "Detail page",
+        "category": "page",
+        "status": "approved",
+        "approved": true,
+        "depth": 0,
+        "via": "the archetype itself"
+      },
+      {
+        "id": "pattern:composition.page-header",
+        "name": "Page header",
+        "category": "composition",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.detail part header"
+      },
+      {
+        "id": "pattern:interaction.destructive-confirmation",
+        "name": "Destructive confirmation",
+        "category": "interaction",
+        "status": "approved",
+        "approved": true,
+        "depth": 1,
+        "via": "pattern:page.detail uses"
+      },
+      {
+        "id": "pattern:layout.app-shell",
+        "name": "Application shell",
+        "category": "layout",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.detail composes"
+      }
+    ],
+    "unapproved": [
+      "pattern:composition.page-header",
+      "pattern:layout.app-shell"
+    ],
+    "variations": [
+      {
+        "name": "read-only",
+        "description": "Read only",
+        "when": "The person cannot change this record.",
+        "roles": [
+          {
+            "part": "actions",
+            "role": "prohibited"
+          }
+        ],
+        "addedParts": [],
+        "fact": {
+          "status": "approved",
+          "source": "invariant.patterns.json"
+        }
+      }
+    ],
+    "prohibited": {
+      "parts": [],
+      "patterns": []
+    },
+    "requiredStates": [
+      {
+        "pattern": "pattern:interaction.destructive-confirmation",
+        "constraint": "constraint:interaction.destructive-confirmation.confirms",
+        "workflow": "destructive-confirmation",
+        "state": "confirming",
+        "minimum": "static-inferred",
+        "enforced": true,
+        "enforcedBy": [
+          "policy:interaction.destructive-confirmation.confirms"
+        ]
+      }
+    ],
+    "constraints": [],
+    "responsive": [],
+    "notes": [
+      "This archetype is approved, but 2 pattern(s) it builds on are not: pattern:composition.page-header, pattern:layout.app-shell. Approval of the archetype does not approve them."
+    ]
+  },
+  "page.edit-form": {
+    "id": "pattern:page.edit-form",
+    "name": "Create or edit form",
+    "category": "page",
+    "intent": "Let a person create or change a record and know it was saved.",
+    "status": {
+      "overall": "documented",
+      "counts": {
+        "documented": 7
+      },
+      "total": 7
+    },
+    "approved": false,
+    "regions": [
+      {
+        "name": "header",
+        "required": true,
+        "parts": [
+          "header"
+        ]
+      },
+      {
+        "name": "form",
+        "required": true,
+        "parts": [
+          "fields",
+          "submit",
+          "remove"
+        ]
+      }
+    ],
+    "composition": {
+      "pattern": {
+        "id": "pattern:page.edit-form",
+        "name": "Create or edit form",
+        "category": "page",
+        "status": "documented",
+        "approved": false
+      },
+      "parts": [
+        {
+          "name": "header",
+          "role": "required",
+          "region": "header",
+          "ref": {
+            "id": "pattern:composition.page-header",
+            "kind": "pattern",
+            "name": "Page header"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:composition.page-header",
+              "name": "Page header",
+              "category": "composition",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [
+              {
+                "name": "title",
+                "role": "required",
+                "ref": {
+                  "id": "component:text",
+                  "kind": "component",
+                  "name": "Text"
+                }
+              },
+              {
+                "name": "breadcrumbs",
+                "role": "optional",
+                "ref": {
+                  "id": "component:link",
+                  "kind": "component",
+                  "name": "Link"
+                }
+              },
+              {
+                "name": "actions",
+                "role": "optional",
+                "ref": {
+                  "id": "component:stack",
+                  "kind": "component",
+                  "name": "Stack"
+                }
+              }
+            ],
+            "related": []
+          }
+        },
+        {
+          "name": "fields",
+          "role": "required",
+          "region": "form",
+          "ref": {
+            "id": "component:stack",
+            "kind": "component",
+            "name": "Stack"
+          }
+        },
+        {
+          "name": "submit",
+          "role": "required",
+          "region": "form",
+          "ref": {
+            "id": "component:button",
+            "kind": "component",
+            "name": "Button"
+          }
+        },
+        {
+          "name": "remove",
+          "role": "optional",
+          "region": "form",
+          "ref": {
+            "id": "component:button",
+            "kind": "component",
+            "name": "Button"
+          }
+        }
+      ],
+      "related": [
+        {
+          "id": "frame",
+          "type": "composes",
+          "target": {
+            "id": "pattern:layout.app-shell",
+            "kind": "pattern",
+            "name": "Application shell"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:layout.app-shell",
+              "name": "Application shell",
+              "category": "layout",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [],
+            "related": []
+          }
+        },
+        {
+          "id": "workflow",
+          "type": "uses",
+          "target": {
+            "id": "pattern:interaction.form-workflow",
+            "kind": "pattern",
+            "name": "Form workflow"
+          },
+          "expanded": {
+            "pattern": {
+              "id": "pattern:interaction.form-workflow",
+              "name": "Form workflow",
+              "category": "interaction",
+              "status": "documented",
+              "approved": false
+            },
+            "parts": [],
+            "related": []
+          }
+        }
+      ]
+    },
+    "patterns": [
+      {
+        "id": "pattern:page.edit-form",
+        "name": "Create or edit form",
+        "category": "page",
+        "status": "documented",
+        "approved": false,
+        "depth": 0,
+        "via": "the archetype itself"
+      },
+      {
+        "id": "pattern:composition.page-header",
+        "name": "Page header",
+        "category": "composition",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.edit-form part header"
+      },
+      {
+        "id": "pattern:interaction.form-workflow",
+        "name": "Form workflow",
+        "category": "interaction",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.edit-form uses"
+      },
+      {
+        "id": "pattern:layout.app-shell",
+        "name": "Application shell",
+        "category": "layout",
+        "status": "documented",
+        "approved": false,
+        "depth": 1,
+        "via": "pattern:page.edit-form composes"
+      }
+    ],
+    "unapproved": [
+      "pattern:page.edit-form",
+      "pattern:composition.page-header",
+      "pattern:interaction.form-workflow",
+      "pattern:layout.app-shell"
+    ],
+    "variations": [
+      {
+        "name": "create",
+        "description": "Create",
+        "when": "There is no record yet.",
+        "roles": [
+          {
+            "part": "remove",
+            "role": "prohibited"
+          }
+        ],
+        "addedParts": [],
+        "fact": {
+          "status": "documented",
+          "source": "invariant.patterns.json"
+        }
+      }
+    ],
+    "prohibited": {
+      "parts": [],
+      "patterns": []
+    },
+    "requiredStates": [
+      {
+        "pattern": "pattern:interaction.form-workflow",
+        "constraint": "constraint:interaction.form-workflow.shows-error",
+        "workflow": "form-submission",
+        "state": "error",
+        "minimum": "structural",
+        "enforced": false,
+        "enforcedBy": []
+      },
+      {
+        "pattern": "pattern:interaction.form-workflow",
+        "constraint": "constraint:interaction.form-workflow.shows-submitting",
+        "workflow": "form-submission",
+        "state": "submitting",
+        "minimum": "static-inferred",
+        "enforced": false,
+        "enforcedBy": []
+      }
+    ],
+    "constraints": [],
+    "responsive": [],
+    "notes": [
+      "This archetype is not fully approved (documented). Treat it as a proposal.",
+      "2 constraint(s) have no approved policy, so `validate` does not enforce them."
+    ]
+  }
+}

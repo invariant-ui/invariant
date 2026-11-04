@@ -5,9 +5,6 @@
       "path": "packages/shared"
     },
     {
-      "path": "packages/diagnostics"
-    },
-    {
       "path": "packages/contract"
     },
     {
@@ -54,6 +51,9 @@
     },
     {
       "path": "packages/validation"
+    },
+    {
+      "path": "packages/browser-verify"
     },
     {
       "path": "packages/governance"

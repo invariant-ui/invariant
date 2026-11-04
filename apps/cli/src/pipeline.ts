@@ -14,19 +14,16 @@ import { reactAdapter } from "@invariant/compiler-react"
 import { storybookAdapter } from "@invariant/compiler-storybook"
 import { designTokensAdapter } from "@invariant/compiler-tokens"
 import { vueAdapter } from "@invariant/compiler-vue"
-import type { ContractDraft } from "@invariant/contract"
-import {
-  DIAGNOSTICS_FILE_VERSION,
-  type Diagnostic,
-  DiagnosticCollector,
-  hasErrors
-} from "@invariant/diagnostics"
+import type { ContractDraft, Evidence } from "@invariant/contract"
 import {
   applyDecisions,
+  compilePatterns,
   compilePolicies,
   DECISIONS_FILE,
+  PATTERNS_FILE,
   POLICIES_FILE,
   parseDecisions,
+  parsePatterns,
   parsePolicies
 } from "@invariant/governance"
 import type { FinalizedContract } from "@invariant/reconciliation"
@@ -39,6 +36,7 @@ import {
 } from "@invariant/reconciliation"
 import { enrich } from "@invariant/semantic-engine"
 import type { JsonValue } from "@invariant/shared"
+import { DIAGNOSTICS_FILE_VERSION, type Diagnostic, DiagnosticCollector, hasErrors } from "@invariant/shared"
 import type { InvariantConfig } from "./config.js"
 import { renderReport } from "./report.js"
 import { CLI_NAME, CLI_VERSION } from "./version.js"
@@ -105,6 +103,10 @@ export interface PipelineResult {
 }
 
 export interface GovernanceSummary {
+  /** Patterns compiled from the definitions file, patterns left out because of a problem, and patterns still awaiting approval. */
+  patterns: number
+  patternsSkipped: number
+  patternsAwaitingApproval: number
   policies: number
   decisionsApplied: number
   decisionsStale: number
@@ -112,14 +114,32 @@ export interface GovernanceSummary {
 
 interface Governed {
   contract: ContractDraft
+  /** Evidence for the facts the governance files added. */
+  evidence: Evidence[]
   diagnostics: Diagnostic[]
   summary: GovernanceSummary
 }
 
-/** Adds approved policies, then applies people's decisions, from the two human-written files in the project. */
-function applyGovernance(cwd: string, config: InvariantConfig, draft: ContractDraft): Governed {
+/**
+ * Adds pattern definitions and approved policies, then applies people's decisions, from the human-written files in
+ * the project. Patterns come first so that a policy can name them.
+ */
+function applyGovernance(
+  cwd: string,
+  config: InvariantConfig,
+  draft: ContractDraft,
+  clock: () => string
+): Governed {
   const diagnostics: Diagnostic[] = []
-  const summary: GovernanceSummary = { policies: 0, decisionsApplied: 0, decisionsStale: 0 }
+  const summary: GovernanceSummary = {
+    patterns: 0,
+    patternsSkipped: 0,
+    patternsAwaitingApproval: 0,
+    policies: 0,
+    decisionsApplied: 0,
+    decisionsStale: 0
+  }
+  const evidence: Evidence[] = []
   const read = (rel: string): string | undefined => {
     const file = path.resolve(cwd, rel)
     return existsSync(file) ? readFileSync(file, "utf8") : undefined
@@ -128,6 +148,24 @@ function applyGovernance(cwd: string, config: InvariantConfig, draft: ContractDr
     diagnostics.push({ code: "governance.invalid-file", severity: "error", message })
   }
   let contract = draft
+  const patternsFile = config.governance?.patternsFile ?? PATTERNS_FILE
+  const patternsText = read(patternsFile)
+  if (patternsText !== undefined) {
+    const parsed = parsePatterns(patternsText, patternsFile)
+    if (parsed.ok) {
+      const compiled = compilePatterns(contract, parsed.value, {
+        file: patternsFile,
+        text: patternsText,
+        clock
+      })
+      contract = compiled.contract
+      evidence.push(...compiled.evidence)
+      diagnostics.push(...compiled.diagnostics)
+      summary.patterns = compiled.summary.added
+      summary.patternsSkipped = compiled.summary.skipped
+      summary.patternsAwaitingApproval = compiled.summary.awaitingApproval
+    } else bad(parsed.message)
+  }
   const policiesFile = config.governance?.policiesFile ?? POLICIES_FILE
   const policiesText = read(policiesFile)
   if (policiesText !== undefined) {
@@ -136,7 +174,6 @@ function applyGovernance(cwd: string, config: InvariantConfig, draft: ContractDr
       const compiled = compilePolicies(contract, parsed.value, policiesFile)
       contract = compiled.contract
       diagnostics.push(...compiled.diagnostics)
-      summary.policies = contract.policies.length - draft.policies.length
     } else bad(parsed.message)
   }
   const decisionsText = read(config.governance?.decisionsFile ?? DECISIONS_FILE)
@@ -150,7 +187,8 @@ function applyGovernance(cwd: string, config: InvariantConfig, draft: ContractDr
       summary.decisionsStale = result.stale.length
     } else bad(parsed.message)
   }
-  return { contract, diagnostics, summary }
+  summary.policies = contract.policies.length - draft.policies.length
+  return { contract, evidence, diagnostics, summary }
 }
 
 export interface PipelineInput {
@@ -188,8 +226,8 @@ export async function runPipeline(input: PipelineInput): Promise<PipelineResult>
     evidence: reconciled.evidence,
     docs: compiled.irDocuments
   })
-  const governed = applyGovernance(input.cwd, config, enriched.contract)
-  const final = finalizeAndVerify(governed.contract, enriched.evidence)
+  const governed = applyGovernance(input.cwd, config, enriched.contract, clock)
+  const final = finalizeAndVerify(governed.contract, [...enriched.evidence, ...governed.evidence])
   const review = buildReviewQueue(governed.contract)
   const mapping = mapSources(config, compiled)
 

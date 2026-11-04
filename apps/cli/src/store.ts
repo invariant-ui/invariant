@@ -8,8 +8,7 @@ import {
   parseContract,
   verifyContract
 } from "@invariant/contract"
-import { type Diagnostic, DiagnosticCollector } from "@invariant/diagnostics"
-import { sha256Hex } from "@invariant/shared"
+import { type Diagnostic, DiagnosticCollector, sha256Hex } from "@invariant/shared"
 import { CliError } from "./errors.js"
 
 export interface Compiled {

@@ -168,6 +168,7 @@ describe("tools", () => {
       "get_component_composition",
       "get_design_tokens",
       "get_design_patterns",
+      "get_pattern_relationships",
       "get_design_guidelines",
       "validate_component_usage",
       "validate_design_system_compliance"
@@ -184,7 +185,7 @@ describe("tools", () => {
       expect(/^[A-Za-z0-9_.-]{1,128}$/.test(t.name)).toBe(true)
     }
     expect(JSON.stringify((await call(server(), "tools/list")).result)).toBe(JSON.stringify(r.result))
-    expect(TOOLS).toHaveLength(10)
+    expect(TOOLS).toHaveLength(11)
   })
 
   it("returns structured data that matches its serialized text, marked untrusted, with the contract hash", async () => {
@@ -295,9 +296,11 @@ describe("resources", () => {
       "patterns",
       "guidelines"
     ])
-    expect((await call(s, "resources/templates/list")).result.resourceTemplates[0].uriTemplate).toBe(
-      "invariant://component/{id}"
-    )
+    expect(
+      (await call(s, "resources/templates/list")).result.resourceTemplates.map(
+        (t: { uriTemplate: string }) => t.uriTemplate
+      )
+    ).toEqual(["invariant://component/{id}", "invariant://pattern/{id}"])
   })
 
   it("reads each resource as JSON, with the contract hash", async () => {
@@ -360,7 +363,7 @@ describe("contract loading", () => {
     expect((await call(s, "resources/read", { uri: "invariant://components" })).error?.message).toMatch(
       /invariant compile/
     )
-    expect((await call(s, "tools/list")).result.tools).toHaveLength(10)
+    expect((await call(s, "tools/list")).result.tools).toHaveLength(11)
   })
 
   it("refuses a tampered contract and recovers when it is restored, without a restart", async () => {
@@ -529,5 +532,204 @@ describe("read-only guarantee", () => {
     expect(snapshot()).toBe(before)
     expect(existsSync(path.join(dir, "invariant.manifest.json"))).toBe(false)
     mkdirSync(path.join(dir, "x"), { recursive: true })
+  })
+})
+
+describe("pattern tools and resources", () => {
+  const patternFixture = fileURLToPath(new URL("../../contract/fixtures/patterns", import.meta.url))
+  const patternServer = (): McpServer => {
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-mcp-patterns-"))
+    made.push(dir)
+    cpSync(patternFixture, dir, { recursive: true })
+    return server(dir)
+  }
+  const data = (r: R) => r.result.structuredContent
+
+  it("lists patterns with their derived status and warns that none is fully approved", async () => {
+    const r = await tool(patternServer(), "get_design_patterns")
+    expect(r.result.isError).toBe(false)
+    expect(data(r).total).toBe(5)
+    expect(data(r).patterns.every((p: { approved: boolean }) => p.approved === false)).toBe(true)
+    expect(data(r).notes.join(" ")).toMatch(/not fully approved/)
+    expect(r.result._meta["com.invariant/provenance"].untrustedContent).toBe(true)
+  })
+
+  it("filters by category, status and text instead of needing one tool per category", async () => {
+    const s = patternServer()
+    const ids = (r: R): string[] => data(r).patterns.map((p: { id: string }) => p.id)
+    expect(ids(await tool(s, "get_design_patterns", { category: "interaction" }))).toEqual([
+      "pattern:interaction.destructive-confirmation"
+    ])
+    expect(ids(await tool(s, "get_design_patterns", { category: "page" }))).toEqual([
+      "pattern:page.data-management"
+    ])
+    expect(ids(await tool(s, "get_design_patterns", { category: "layout" }))).toEqual([
+      "pattern:layout.application-shell"
+    ])
+    expect(ids(await tool(s, "get_design_patterns", { status: "mixed" }))).toEqual([
+      "pattern:page.data-management"
+    ])
+    expect(ids(await tool(s, "get_design_patterns", { query: "toolbar", limit: 1 }))).toEqual([
+      "pattern:composition.table-toolbar"
+    ])
+  })
+
+  it("returns one pattern in full by name or id, with evidence and constraints", async () => {
+    const s = patternServer()
+    for (const name of ["Data management page", "page.data-management", "pattern:page.data-management"]) {
+      const r = await tool(s, "get_design_patterns", { name })
+      expect(data(r).id, name).toBe("pattern:page.data-management")
+    }
+    const d = data(await tool(s, "get_design_patterns", { name: "data-management" }))
+    expect(d.approved).toBe(false)
+    expect(d.constraints).toHaveLength(3)
+    expect(
+      d.facts.find((f: { path: string }) => f.path === "relationships.delete").evidence[0]
+    ).toMatchObject({
+      method: "ast",
+      location: "packages/ui-react/src/CustomerList.tsx:52"
+    })
+  })
+
+  it("reports an unknown pattern or a bad argument as an error the model can act on", async () => {
+    const s = patternServer()
+    const unknown = await tool(s, "get_design_patterns", { name: "nope" })
+    expect(unknown.result.isError).toBe(true)
+    expect(data(unknown).error).toMatch(/No pattern matches/)
+    expect((await tool(s, "get_design_patterns", { category: "bogus" })).result.isError).toBe(true)
+    expect((await tool(s, "get_design_patterns", { extra: 1 })).result.isError).toBe(true)
+    expect((await tool(s, "get_pattern_relationships", {})).result.isError).toBe(true)
+    expect(
+      (await tool(s, "get_pattern_relationships", { name: "page.data-management", depth: 9 })).result.isError
+    ).toBe(true)
+  })
+
+  it("returns relationships with the status of the fact behind each edge", async () => {
+    const s = patternServer()
+    const r = await tool(s, "get_pattern_relationships", {
+      name: "data-management",
+      direction: "out",
+      types: ["uses", "composes"]
+    })
+    expect(r.result.isError).toBe(false)
+    const edges = data(r).edges as Array<{ id: string; type: string; status: string | null }>
+    expect(edges.map((e) => e.id).sort()).toEqual(["actions", "delete", "frame", "tools"])
+    expect(edges.find((e) => e.id === "delete")?.status).toBe("inferred")
+    const incoming = await tool(s, "get_pattern_relationships", { name: "table-toolbar", direction: "in" })
+    expect(
+      data(incoming).edges.every((e: { to: string }) => e.to === "pattern:composition.table-toolbar")
+    ).toBe(true)
+    expect((await tool(s, "get_pattern_relationships", { name: "nope" })).result.isError).toBe(true)
+  })
+
+  it("makes patterns searchable through the existing search tool", async () => {
+    const s = patternServer()
+    const r = await tool(s, "search_design_system", { query: "toolbar", kinds: ["pattern"] })
+    expect(data(r).hits[0]).toMatchObject({ kind: "pattern", id: "pattern:composition.table-toolbar" })
+    expect(
+      (await tool(s, "search_design_system", { query: "toolbar", kinds: ["bogus"] })).result.isError
+    ).toBe(true)
+  })
+
+  it("reads one pattern as a resource, by plain or percent-encoded id", async () => {
+    const s = patternServer()
+    for (const id of ["page.data-management", encodeURIComponent("pattern:page.data-management")]) {
+      const r = await call(s, "resources/read", { uri: `invariant://pattern/${id}` })
+      expect(JSON.parse(r.result.contents[0].text).pattern.id, id).toBe("pattern:page.data-management")
+    }
+    const missing = await call(s, "resources/read", { uri: "invariant://pattern/nope" })
+    expect(missing.error?.code).toBe(-32602)
+    expect(
+      JSON.parse((await call(s, "resources/read", { uri: "invariant://patterns" })).result.contents[0].text)
+        .total
+    ).toBe(5)
+  })
+
+  it("stays read-only", async () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-mcp-patterns-"))
+    made.push(dir)
+    cpSync(patternFixture, dir, { recursive: true })
+    const files = ["invariant.contract.json", "invariant.evidence.json"]
+    const before = files.map((f) => readFileSync(path.join(dir, f), "utf8")).join("")
+    const s = server(dir)
+    await tool(s, "get_design_patterns", { name: "data-management" })
+    await tool(s, "get_pattern_relationships", { name: "data-management", depth: 3 })
+    expect(files.map((f) => readFileSync(path.join(dir, f), "utf8")).join("")).toBe(before)
+  })
+})
+
+describe("page archetypes through get_design_patterns", () => {
+  const archetypeFixture = fileURLToPath(new URL("../../contract/fixtures/archetypes", import.meta.url))
+  const archetypeServer = (): McpServer => {
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-mcp-archetypes-"))
+    made.push(dir)
+    cpSync(archetypeFixture, dir, { recursive: true })
+    return server(dir)
+  }
+  const data = (r: R) => r.result.structuredContent
+
+  it("returns the resolved blueprint for a name with resolve true", async () => {
+    const r = await tool(archetypeServer(), "get_design_patterns", { name: "detail", resolve: true })
+    expect(r.result.isError).toBe(false)
+    const d = data(r)
+    expect(d.id).toBe("pattern:page.detail")
+    expect(d.patterns.map((p: { id: string }) => p.id)).toEqual([
+      "pattern:page.detail",
+      "pattern:interaction.destructive-confirmation",
+      "pattern:layout.application-shell"
+    ])
+    expect(d.regions.map((x: { name: string }) => x.name)).toEqual(["header", "summary", "related"])
+    expect(d.notes.join(" ")).toMatch(/approved, but 2 pattern\(s\) it builds on are not/)
+    expect(r.result._meta["com.invariant/provenance"].untrustedContent).toBe(true)
+  })
+
+  it("applies a variation, and a variation alone implies resolving", async () => {
+    const s = archetypeServer()
+    const d = data(await tool(s, "get_design_patterns", { name: "page.detail", variation: "read-only" }))
+    expect(d.variation).toBe("read-only")
+    expect(d.prohibited.parts.map((p: { name: string }) => p.name)).toEqual(["actions"])
+    expect(d.regions[0].parts).toEqual(["header"])
+  })
+
+  it("still returns the ordinary pattern view without resolve", async () => {
+    const d = data(await tool(archetypeServer(), "get_design_patterns", { name: "detail" }))
+    expect(d.id).toBe("pattern:page.detail")
+    expect(d.composition.parts).toHaveLength(4)
+    expect(d.patterns).toBeUndefined()
+  })
+
+  it("reports an unknown variation with the ones that exist, and a misuse without a name", async () => {
+    const s = archetypeServer()
+    const bad = await tool(s, "get_design_patterns", { name: "detail", variation: "nope" })
+    expect(bad.result.isError).toBe(true)
+    expect(data(bad)).toMatchObject({
+      error: expect.stringMatching(/has no variation "nope"/),
+      variations: ["read-only", "with-history"]
+    })
+    const noName = await tool(s, "get_design_patterns", { resolve: true })
+    expect(noName.result.isError).toBe(true)
+    expect(data(noName).error).toMatch(/need a pattern name/)
+    expect((await tool(s, "get_design_patterns", { name: "detail", resolve: "yes" })).result.isError).toBe(
+      true
+    )
+  })
+
+  it("lists page archetypes through the category filter", async () => {
+    const r = await tool(archetypeServer(), "get_design_patterns", { category: "page" })
+    expect(data(r).patterns.map((p: { id: string }) => p.id)).toEqual([
+      "pattern:page.data-management",
+      "pattern:page.detail",
+      "pattern:page.edit-form"
+    ])
+  })
+
+  it("stays read-only", async () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-mcp-archetypes-"))
+    made.push(dir)
+    cpSync(archetypeFixture, dir, { recursive: true })
+    const files = ["invariant.contract.json", "invariant.evidence.json"]
+    const before = files.map((f) => readFileSync(path.join(dir, f), "utf8")).join("")
+    await tool(server(dir), "get_design_patterns", { name: "edit-form", resolve: true })
+    expect(files.map((f) => readFileSync(path.join(dir, f), "utf8")).join("")).toBe(before)
   })
 })

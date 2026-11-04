@@ -1,7 +1,11 @@
 import path from "node:path"
 import { parse } from "./args.js"
 import * as commands from "./commands.js"
+import * as browserCommands from "./commands-browser.js"
+import * as discoverCommands from "./commands-discover.js"
 import * as governance from "./commands-governance.js"
+import * as patterns from "./commands-patterns.js"
+import * as setupCommands from "./commands-setup.js"
 import * as validation from "./commands-validate.js"
 import { CliError } from "./errors.js"
 import type { Io } from "./io.js"
@@ -19,7 +23,11 @@ usage: ${CLI_NAME} <command> [options]
   compile                       build the contract, evidence, diagnostics, review and report [--watch recompiles when sources change]
   components list | inspect <name>
   tokens list
-  patterns list
+  setup                         one command: compile, propose patterns from your code, connect your AI tool   [--yes] [--confirm-contract] [--as name] [--paths a,b] [--no-agent] [--ci|--no-ci]
+  browser run                   check a running app in a real browser (opt-in; needs Playwright)   [--spec file] [--browser chromium|firefox|webkit] [--url base]
+  discover <path...>            find structures that recur in your code and write them as candidates   [--min-files n] [--min-uses n] [--similarity 0-1] [--depth n]
+  candidates list | show <id> | accept|reject|defer <id> | promote <id>   review candidates   [--status s] [--kind k] [--all] [--as name] [--note why] [--id pattern-id]
+  patterns list | inspect <name> | resolve <name> | search <query> | relationships <name>   [--category c] [--status s] [--direction out|in|both] [--depth n] [--variation v] [--evidence]
   conflicts list                [--severity s] [--type t] [--subject id]
   validate <path...>            check application code against the contract [--format text|json|github|sarif] [--fail-on error|warning|never]
   verify                        check the compiled output itself [--fresh recompiles and compares]
@@ -65,7 +73,15 @@ export async function run(argv: string[], io: Io): Promise<number> {
       case "tokens":
         return await commands.tokens(context)
       case "patterns":
-        return await commands.patterns(context)
+        return await patterns.patterns(context)
+      case "discover":
+        return await discoverCommands.discoverCommand(context)
+      case "setup":
+        return await setupCommands.setup(context)
+      case "browser":
+        return await browserCommands.browser(context)
+      case "candidates":
+        return await discoverCommands.candidatesCommand(context)
       case "conflicts":
         return await commands.conflicts(context)
       case "validate":

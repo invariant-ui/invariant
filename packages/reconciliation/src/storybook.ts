@@ -1,6 +1,6 @@
 import type { IrDocument } from "@invariant/compiler-ir"
-import { type Diagnostic, sortDiagnostics } from "@invariant/diagnostics"
 import type { JsonValue } from "@invariant/shared"
+import { type Diagnostic, sortDiagnostics } from "@invariant/shared"
 import { type CodeComponent, codeComponents } from "./code.js"
 import { FactIndex } from "./facts.js"
 

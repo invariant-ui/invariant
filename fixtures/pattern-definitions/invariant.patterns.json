@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "composition.card-with-actions",
+      "name": "Card with actions",
+      "category": "composition",
+      "description": "A card with a header, a body and optional actions.",
+      "intent": "Group related content and the actions that apply to it.",
+      "composition": {
+        "parts": [
+          { "name": "card", "ref": "Card", "role": "required" },
+          { "name": "header", "ref": "component:card.header", "role": "required" },
+          { "name": "body", "ref": "component:card.body", "role": "required" },
+          { "name": "actions", "ref": "Button", "role": "optional" }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "header-first",
+          "kind": "ordering",
+          "description": "The header comes before the body.",
+          "details": { "before": "component:card.header", "after": "component:card.body", "within": "Card" }
+        }
+      ]
+    },
+    {
+      "id": "interaction.destructive-confirmation",
+      "name": "Destructive confirmation",
+      "category": "interaction",
+      "description": "Ask before deleting, then report the result.",
+      "intent": "Stop accidental data loss.",
+      "composition": {
+        "parts": [
+          { "name": "dialog", "ref": "Modal", "role": "required" },
+          { "name": "confirm", "ref": "Button", "role": "required" }
+        ]
+      },
+      "behavior": {
+        "initial": "idle",
+        "states": [
+          { "name": "idle" },
+          { "name": "confirming", "feedback": "Name what will be deleted and offer Cancel.", "verifiableBy": "static" },
+          { "name": "deleting", "feedback": "Show progress.", "verifiableBy": "runtime" },
+          { "name": "done", "terminal": true, "feedback": "Confirm the result." },
+          { "name": "failed", "feedback": "Explain the failure and allow a retry." }
+        ],
+        "transitions": [
+          { "id": "ask", "from": "idle", "to": "confirming", "trigger": "user chooses Delete" },
+          { "id": "cancel", "from": "confirming", "to": "idle" },
+          { "id": "confirm", "from": "confirming", "to": "deleting" },
+          { "id": "succeed", "from": "deleting", "to": "done" },
+          { "id": "fail", "from": "deleting", "to": "failed" },
+          { "id": "retry", "from": "failed", "to": "deleting" },
+          { "id": "dismiss", "from": "failed", "to": "idle" }
+        ]
+      },
+      "accessibility": {
+        "requirements": [
+          { "id": "focus-moves", "statement": "Focus moves into the dialog and returns on close.", "verifiableBy": "runtime" }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "dialog-has-confirm",
+          "kind": "required-child",
+          "description": "A confirmation dialog contains a button to confirm.",
+          "details": { "parent": "Modal", "child": "Button" },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        }
+      ],
+      "appliesTo": { "paths": ["src/**"], "frameworks": ["react"] },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "role": "owner",
+        "reference": "DS-210"
+      }
+    },
+    {
+      "id": "page.settings",
+      "name": "Settings page",
+      "category": "page",
+      "description": "A page of grouped settings.",
+      "intent": "Let a person review and change their settings in one place.",
+      "layout": {
+        "regions": [
+          { "name": "header", "required": true },
+          { "name": "content", "required": true, "parent": "header", "width": { "max": { "value": 960, "unit": "px" } } }
+        ]
+      },
+      "composition": {
+        "parts": [
+          { "name": "title", "ref": "Text", "role": "required", "region": "header" },
+          { "name": "groups", "ref": "composition.card-with-actions", "role": "required", "region": "content" }
+        ]
+      },
+      "relationships": [
+        { "id": "groups", "type": "composes", "target": "card-with-actions" },
+        { "id": "delete", "type": "uses", "target": "interaction.destructive-confirmation" }
+      ],
+      "constraints": [
+        {
+          "id": "content-required",
+          "kind": "required-region",
+          "description": "A settings page has a content region.",
+          "details": { "region": "region:content" },
+          "enforce": { "severity": "warning", "enforcement": "warn" }
+        }
+      ],
+      "guidelines": [],
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:30:00.000Z",
+        "role": "owner",
+        "reference": "DS-211"
+      }
+    }
+  ]
+}

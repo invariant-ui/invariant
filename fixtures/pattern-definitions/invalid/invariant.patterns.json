@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "page.broken",
+      "name": "Broken page",
+      "category": "page",
+      "description": "Uses things that do not exist.",
+      "layout": { "regions": [{ "name": "content", "required": true, "spacing": "spacing.huge" }] },
+      "composition": {
+        "parts": [
+          { "name": "title", "ref": "Txet", "role": "required" },
+          { "name": "table", "ref": "DataTable", "role": "required" }
+        ]
+      },
+      "relationships": [{ "id": "frame", "type": "composes", "target": "layout.nowhere" }],
+      "constraints": [
+        {
+          "id": "needs-footer",
+          "kind": "required-region",
+          "description": "Needs a footer.",
+          "details": { "region": "region:footer" }
+        },
+        {
+          "id": "bad-count",
+          "kind": "cardinality",
+          "description": "No bounds.",
+          "details": { "target": "Button" }
+        }
+      ]
+    },
+    {
+      "id": "composition.fine",
+      "name": "Fine pattern",
+      "category": "composition",
+      "description": "This one is valid and must still be added.",
+      "composition": { "parts": [{ "name": "card", "ref": "Card", "role": "required" }] },
+      "constraints": [
+        {
+          "id": "one-card",
+          "kind": "cardinality",
+          "description": "Exactly one card.",
+          "details": { "target": "Card", "min": 1, "max": 1 },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        }
+      ]
+    },
+    {
+      "id": "composition.fine",
+      "name": "Fine pattern again",
+      "category": "composition",
+      "description": "A duplicate id."
+    }
+  ]
+}

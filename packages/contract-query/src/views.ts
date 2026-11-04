@@ -25,7 +25,7 @@ export function page<T>(all: readonly T[], offset = 0, limit?: number): Page<T> 
 
 export function overview(ds: DesignSystem): Json {
   const c = ds.contract
-  const inferred = [...c.components, ...c.tokens, ...c.guidelines].reduce(
+  const inferred = [...c.components, ...c.tokens, ...c.guidelines, ...c.patterns].reduce(
     (n, e) => n + Object.values(e.facts).filter((f) => f.status === "inferred").length,
     0
   )
@@ -332,25 +332,6 @@ export function guidelinesView(
       "Guideline text is the page title: Invariant does not read page bodies, so open the referenced document for the actual guidance.",
       ...(f.component && !target ? [`No component matches "${f.component}".`] : [])
     ]
-  }
-}
-
-export function patternsView(ds: DesignSystem): Json {
-  return {
-    total: ds.contract.patterns.length,
-    patterns: ds.contract.patterns.map((p) => ({
-      id: p.id,
-      name: p.name,
-      category: p.category,
-      description: p.description,
-      components: p.components
-    })),
-    notes:
-      ds.contract.patterns.length === 0
-        ? [
-            "No patterns are defined. Invariant does not infer patterns from code, and no source documents one yet."
-          ]
-        : []
   }
 }
 

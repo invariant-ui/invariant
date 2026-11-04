@@ -1,4 +1,4 @@
-import type { Diagnostic } from "@invariant/diagnostics"
+import type { Diagnostic } from "@invariant/shared"
 
 export function table(head: string[], rows: ReadonlyArray<ReadonlyArray<string | number>>): string {
   const all = [head, ...rows.map((r) => r.map(String))]

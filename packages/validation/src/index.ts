@@ -1,3 +1,14 @@
+export * from "./discovery/index.js"
+export {
+  type Evaluation,
+  type EvaluationStatus,
+  evaluatePatternRules,
+  PATTERN_RULE_CODES,
+  type PatternRule,
+  patternRules,
+  type Tree,
+  type UseKind
+} from "./pattern-rules.js"
 export {
   type ActivePolicy,
   activePolicies,
@@ -10,8 +21,10 @@ export {
   type FailOn,
   formatGithub,
   formatText,
+  patternSummaryText,
   type RunSummary,
   shouldFail,
+  sortEvaluations,
   sortViolations,
   summarize,
   toJson,
@@ -22,6 +35,7 @@ export { PLAN_RULES, RULES, type RuleInfo, type RuleOverrides, ruleFor, type Sev
 export { type ImportBinding, type JsxScan, type ScannedUse, scanJsx, scanMarkup } from "./scan.js"
 export { distance, nearest } from "./text.js"
 export {
+  buildTree,
   type CodeFramework,
   type CodeInput,
   type CodeResult,

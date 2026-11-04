@@ -363,7 +363,7 @@ describe("review decisions", () => {
       /applies to conflicts/
     )
     expect((await cli(dir, ["review", "approve", conflict], { INVARIANT_USER: "Jane" })).err).toMatch(
-      /applies to inferred facts/
+      /applies to facts/
     )
     expect((await c(dir, "review", "show", "rv_nothing")).code).toBe(1)
     expect((await c(dir, "review", "bogus", fact)).code).toBe(2)

@@ -4,9 +4,10 @@ import { applyPlan, CLIENTS, type Client, planIntegration, validateLaunch } from
 import { renderArtifacts, writeArtifacts } from "@invariant/artifact-generator"
 import { compile, nodeFs, toArtifactEntries } from "@invariant/compiler-core"
 import { type Component, type Conflict, contractJsonSchemas, type Evidence } from "@invariant/contract"
-import { hasErrors } from "@invariant/diagnostics"
+import { patternsFileJsonSchema } from "@invariant/governance"
 import { ContractSource, McpServer, serveStdio } from "@invariant/mcp"
 import type { JsonValue } from "@invariant/shared"
+import { hasErrors } from "@invariant/shared"
 import type { Parsed } from "./args.js"
 import {
   CONFIG_FILE,
@@ -27,7 +28,7 @@ import { countBySeverity, formatDiagnostic, shortValue, table } from "./format.j
 import type { Io } from "./io.js"
 import { adaptersFor, runPipeline } from "./pipeline.js"
 import { checkOutput, loadCompiled } from "./store.js"
-import { CLI_NAME, CLI_VERSION } from "./version.js"
+import { CLI_NAME, CLI_VERSION, NPM_PACKAGE } from "./version.js"
 import { watchProject } from "./watch.js"
 
 export interface Context {
@@ -197,7 +198,7 @@ async function compileOnce(c: Context): Promise<number> {
   print(c, `conflicts ${contract.conflicts.length}, needs review ${result.review.length}`)
   print(
     c,
-    `policies ${result.governance.policies}, decisions applied ${result.governance.decisionsApplied}${result.governance.decisionsStale > 0 ? ` (${result.governance.decisionsStale} stale)` : ""}`
+    `patterns ${result.governance.patterns}${result.governance.patternsSkipped > 0 ? ` (${result.governance.patternsSkipped} skipped)` : ""}${result.governance.patternsAwaitingApproval > 0 ? `, ${result.governance.patternsAwaitingApproval} awaiting approval` : ""}, policies ${result.governance.policies}, decisions applied ${result.governance.decisionsApplied}${result.governance.decisionsStale > 0 ? ` (${result.governance.decisionsStale} stale)` : ""}`
   )
   print(c, `diagnostics: ${countBySeverity(result.diagnostics)}`)
   for (const d of result.diagnostics.filter((x) => x.severity === "error").slice(0, 10))
@@ -410,23 +411,6 @@ export async function tokens(c: Context): Promise<number> {
   return 0
 }
 
-export async function patterns(c: Context): Promise<number> {
-  if (c.args.positionals[1] !== "list") throw new CliError("usage: invariant patterns list")
-  const { contract } = loadCompiled(await outputDir(c))
-  if (c.args.values.json) json(c, contract.patterns)
-  else
-    print(
-      c,
-      contract.patterns.length === 0
-        ? "no patterns. Invariant does not infer patterns from code yet, and no source documents one."
-        : table(
-            ["id", "name", "category", "components"],
-            contract.patterns.map((p) => [p.id, p.name, p.category, p.components.length])
-          )
-    )
-  return 0
-}
-
 export async function conflicts(c: Context): Promise<number> {
   if (c.args.positionals[1] !== "list")
     throw new CliError("usage: invariant conflicts list [--severity s] [--type t] [--subject id]")
@@ -517,9 +501,15 @@ export async function exportCommand(c: Context): Promise<number> {
   ]
   for (const f of files) if (existsSync(path.join(dir, f))) cpSync(path.join(dir, f), path.join(target, f))
   mkdirSync(path.join(target, "schema"), { recursive: true })
-  for (const [name, schema] of Object.entries(contractJsonSchemas()))
+  for (const [name, schema] of Object.entries({
+    ...contractJsonSchemas(),
+    "patterns-file-v1.schema.json": patternsFileJsonSchema()
+  }))
     writeFileSync(path.join(target, "schema", name), `${JSON.stringify(schema as JsonValue, null, 2)}\n`)
-  print(c, `exported to ${to}/ (contract, evidence, diagnostics, review, report, manifest, schema/)`)
+  print(
+    c,
+    `exported to ${to}/ (contract, evidence, diagnostics, review, report, manifest, schema/ with the contract and pattern-definition schemas)`
+  )
   return 0
 }
 
@@ -560,10 +550,28 @@ export async function agent(c: Context): Promise<number> {
     throw new CliError(
       "the output directory must be inside the project so a committed config can refer to it"
     )
+  // With no --command, use `invariant` if it is installed. Someone running through npx has no such command, so the
+  // agent's config starts it through npx instead (it installs on first use). A missing PATH means we cannot tell.
+  const searchPath = c.io.env?.PATH
+  const installed =
+    searchPath === undefined ||
+    searchPath.split(path.delimiter).some((d) => d !== "" && existsSync(path.join(d, "invariant")))
+  const viaNpx = c.args.values.command === undefined && !installed
   const launch = {
-    command: c.args.values.command ?? "invariant",
-    args: [...(c.args.values["command-arg"] ?? []), "mcp", "--dir", rel]
+    command: c.args.values.command ?? (viaNpx ? "npx" : "invariant"),
+    args: [
+      ...(viaNpx ? ["-y", NPM_PACKAGE] : []),
+      ...(c.args.values["command-arg"] ?? []),
+      "mcp",
+      "--dir",
+      rel
+    ]
   }
+  if (viaNpx)
+    print(
+      c,
+      `${CLI_NAME} is not on your PATH, so the agent will start it with npx ${NPM_PACKAGE} (it installs on first use).`
+    )
   const problem = validateLaunch(launch)
   if (problem) throw new CliError(problem)
   let skipped = 0

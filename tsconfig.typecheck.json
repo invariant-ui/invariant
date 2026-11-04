@@ -12,9 +12,6 @@
       "@invariant/shared": [
         "./packages/shared/src/index.ts"
       ],
-      "@invariant/diagnostics": [
-        "./packages/diagnostics/src/index.ts"
-      ],
       "@invariant/contract": [
         "./packages/contract/src/index.ts"
       ],

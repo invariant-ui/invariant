@@ -11,7 +11,7 @@ import {
   tsconfigPaths,
   unwrap
 } from "@invariant/compiler-core"
-import type { Diagnostic } from "@invariant/diagnostics"
+import type { Diagnostic } from "@invariant/shared"
 import ts from "typescript"
 import {
   type AccessibilityInfo,

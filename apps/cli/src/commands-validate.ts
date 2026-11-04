@@ -4,9 +4,11 @@ import { DEFAULT_IGNORED_DIRS, globToRegExp, matchesAny } from "@invariant/compi
 import { DesignSystem } from "@invariant/contract-query"
 import {
   type CodeFramework,
+  type Evaluation,
   type FailOn,
   formatGithub,
   formatText,
+  patternSummaryText,
   RULES,
   type RuleOverrides,
   shouldFail,
@@ -16,6 +18,7 @@ import {
   type Violation,
   validateCode
 } from "@invariant/validation"
+import { applyBaseline, BASELINE_FILE, makeBaseline, readBaseline, writeBaseline } from "./baseline.js"
 import { type Context, json, outputDir, print } from "./commands.js"
 import { loadConfig } from "./config.js"
 import { CliError } from "./errors.js"
@@ -36,7 +39,7 @@ function frameworkFor(file: string): CodeFramework | undefined {
   return undefined
 }
 
-function collect(cwd: string, target: string, ignore: readonly RegExp[], out: string[]): void {
+export function collect(cwd: string, target: string, ignore: readonly RegExp[], out: string[]): void {
   const abs = path.resolve(cwd, target)
   const rel = path.relative(cwd, abs).split(path.sep).join("/")
   if (rel.startsWith("..") || path.isAbsolute(rel)) throw new CliError(`${target} is outside the project`)
@@ -100,6 +103,7 @@ export async function validate(c: Context): Promise<number> {
   const rules = (loaded?.config.validation?.rules ?? {}) as RuleOverrides
 
   const violations: Violation[] = []
+  const evaluations: Evaluation[] = []
   const checked = new Set<string>()
   for (const file of unique) {
     const code = readFileSync(path.resolve(c.cwd, file), "utf8")
@@ -110,19 +114,50 @@ export async function validate(c: Context): Promise<number> {
     )
     for (const id of result.summary.componentsChecked) checked.add(id)
     for (const f of result.findings) violations.push({ ...f, file })
+    for (const e of result.evaluations) evaluations.push({ ...e, file })
   }
-  const summary = summarize(violations, unique.length, checked.size)
+  const baselineFile = path.resolve(c.cwd, BASELINE_FILE)
+  if (c.args.values["update-baseline"]) {
+    const baseline = makeBaseline(violations)
+    writeBaseline(baselineFile, baseline)
+    const total = baseline.violations.reduce((n, v) => n + v.count, 0)
+    print(
+      c,
+      `wrote ${BASELINE_FILE}: ${total} existing violation(s) in ${unique.length} file(s) are now hidden. New violations still fail. Commit the file, and fix the old ones when you can.`
+    )
+    return 0
+  }
+  let shown: Violation[] = violations
+  if (!c.args.values["no-baseline"]) {
+    let baseline: ReturnType<typeof readBaseline>
+    try {
+      baseline = readBaseline(baselineFile)
+    } catch (error) {
+      throw new CliError((error as Error).message, 2)
+    }
+    if (baseline) {
+      const applied = applyBaseline(violations, baseline)
+      shown = applied.fresh
+      if (applied.hidden > 0)
+        c.io.stderr(
+          `${applied.hidden} existing violation(s) hidden by ${BASELINE_FILE}. Show them with --no-baseline.\n`
+        )
+    }
+  }
+  const summary = summarize(shown, unique.length, checked.size, evaluations)
 
-  if (format === "json") json(c, toJson(violations, summary, contract.integrity.contentHash))
-  else if (format === "sarif") json(c, toSarif(violations, { name: CLI_NAME, version: CLI_VERSION }))
+  if (format === "json") json(c, toJson(shown, summary, contract.integrity.contentHash, evaluations))
+  else if (format === "sarif") json(c, toSarif(shown, { name: CLI_NAME, version: CLI_VERSION }, summary))
   else if (format === "github") {
-    const lines = formatGithub(violations)
+    const lines = formatGithub(shown)
     if (lines !== "") print(c, lines)
+    const patterns = patternSummaryText(summary)
+    if (patterns !== "") print(c, patterns)
     print(
       c,
       `${summary.errors} errors, ${summary.warnings} warnings, ${summary.info} info in ${summary.files} files`
     )
-  } else print(c, formatText(violations, summary))
+  } else print(c, formatText(shown, summary, evaluations))
   return shouldFail(summary, failOn as FailOn) ? 1 : 0
 }
 

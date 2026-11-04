@@ -3,7 +3,7 @@ export type Severity = "error" | "warning" | "info"
 export interface RuleInfo {
   code: string
   title: string
-  /** Which of the plan's eleven initial rules this implements, `Hardcoded value` for the spacing and typography checks added after them, or `support` for helpers. */
+  /** Which of the plan's eleven initial rules this implements, `Hardcoded value` for the spacing and typography checks and `Pattern composition` for the structural pattern checks added after them, or `support` for helpers. */
   plan: string
   severity: Severity
   /** `policy` rules take their severity and reference from an approved policy. */
@@ -122,6 +122,55 @@ export const RULES: readonly RuleInfo[] = [
     plan: "Hardcoded value",
     severity: "info",
     origin: "contract"
+  },
+  {
+    code: "pattern-required-child-missing",
+    title: "Pattern requires a child that is missing",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
+  },
+  {
+    code: "pattern-child-forbidden",
+    title: "Pattern forbids a child that is present",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
+  },
+  {
+    code: "pattern-parent-required",
+    title: "Component is used outside the parent its pattern requires",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
+  },
+  {
+    code: "pattern-region-missing",
+    title: "Pattern region is missing",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
+  },
+  {
+    code: "pattern-order-violated",
+    title: "Elements are in the wrong order for the pattern",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
+  },
+  {
+    code: "pattern-cardinality-violated",
+    title: "Number of elements breaks the pattern",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
+  },
+  {
+    code: "pattern-state-missing",
+    title: "Interaction state the pattern requires is not represented",
+    plan: "Pattern composition",
+    severity: "error",
+    origin: "policy"
   },
   {
     code: "unknown-css-variable",

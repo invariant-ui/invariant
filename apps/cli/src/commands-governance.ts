@@ -124,7 +124,7 @@ export async function review(c: Context): Promise<number> {
   if (conflictActions.includes(sub)) {
     if (item.kind !== "conflict" || !item.conflictId)
       throw new CliError(
-        `${sub} applies to conflicts; ${item.id} is an inferred fact (use approve or reject)`
+        `${sub} applies to conflicts; ${item.id} is a fact (use approve${item.kind === "inferred-fact" ? " or reject" : ""})`
       )
     const conflict = contract.conflicts.find((x) => x.id === item.conflictId)
     if (!conflict) throw new CliError("the conflict is no longer in the contract", 1)
@@ -142,9 +142,11 @@ export async function review(c: Context): Promise<number> {
       ...(note ? { note } : {})
     }
   } else {
-    if (item.kind !== "inferred-fact" || !item.path)
+    if (item.kind === "conflict" || !item.path)
+      throw new CliError(`${sub} applies to facts; ${item.id} is a conflict (use resolve, accept or dismiss)`)
+    if (item.kind === "pattern-fact" && sub === "reject")
       throw new CliError(
-        `${sub} applies to inferred facts; ${item.id} is a conflict (use resolve, accept or dismiss)`
+        `${item.id} is part of a pattern you wrote; reject does not apply. Approve it, or edit or remove the definition.`
       )
     const entity = [
       ...contract.components,

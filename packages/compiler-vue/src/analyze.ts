@@ -15,7 +15,7 @@ import {
   type VariantSpec,
   variantsFromProps
 } from "@invariant/compiler-core"
-import type { Diagnostic } from "@invariant/diagnostics"
+import type { Diagnostic } from "@invariant/shared"
 import ts from "typescript"
 import { analyzeOptionsDeclaration, analyzeScript, type ScriptInfo, type VueSlot } from "./script.js"
 import { type ParsedSfc, parseSfc, sfcLocalName } from "./sfc.js"

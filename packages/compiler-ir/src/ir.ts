@@ -7,7 +7,7 @@ import {
   sourceTypeSchema,
   sourceVersionSchema
 } from "@invariant/contract"
-import { diagnosticSchema } from "@invariant/diagnostics"
+import { diagnosticSchema } from "@invariant/shared"
 import { z } from "zod"
 
 export const IR_VERSION = "1.3.0"
@@ -60,7 +60,7 @@ export type IrFact = z.infer<typeof irFactSchema>
 
 export const irSourceSchema = z.strictObject({
   id: sourceIdSchema,
-  type: sourceTypeSchema,
+  type: sourceTypeSchema.exclude(["patterns"]),
   location: z.string().min(1),
   version: sourceVersionSchema.optional(),
   /** Hash of the source inputs read, so an unchanged source can be skipped on recompile. */

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "page.settings",
+      "name": "Settings page",
+      "category": "page",
+      "description": "A page of grouped settings with an optional confirmation.",
+      "intent": "Let a person review and change their settings in one place.",
+      "layout": {
+        "regions": [
+          { "name": "header", "required": true },
+          { "name": "content", "required": true }
+        ]
+      },
+      "composition": {
+        "parts": [
+          { "name": "title", "ref": "component:card.header", "role": "required", "region": "header" },
+          { "name": "groups", "ref": "component:card.body", "role": "required", "region": "content" }
+        ]
+      },
+      "constraints": [
+        {
+          "id": "needs-content",
+          "kind": "required-region",
+          "description": "A settings page has a content region.",
+          "details": { "region": "region:content" },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        },
+        {
+          "id": "one-modal",
+          "kind": "cardinality",
+          "description": "A settings page has at most one modal.",
+          "details": { "target": "Modal", "max": 1 },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        },
+        {
+          "id": "header-first",
+          "kind": "ordering",
+          "description": "A card's header comes before its body.",
+          "details": { "before": "component:card.header", "after": "component:card.body", "within": "Card" },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        },
+        {
+          "id": "modal-confirm",
+          "kind": "required-child",
+          "description": "A modal contains a button.",
+          "details": { "parent": "Modal", "child": "Button" },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        },
+        {
+          "id": "no-nested-card",
+          "kind": "forbidden-child",
+          "description": "Cards are not nested.",
+          "details": { "parent": "Card", "child": "Card" },
+          "enforce": { "severity": "error", "enforcement": "warn" }
+        },
+        {
+          "id": "iconbutton-in-stack",
+          "kind": "requires-parent",
+          "description": "An icon button sits inside a stack.",
+          "details": { "child": "IconButton", "parents": ["Stack"] },
+          "enforce": { "severity": "error", "enforcement": "block" }
+        }
+      ],
+      "appliesTo": { "paths": ["app/pages/**"], "frameworks": ["react"] },
+      "approval": {
+        "approvedBy": "design-system-owners",
+        "approvedAt": "2026-11-03T10:00:00.000Z",
+        "reference": "DS-220"
+      }
+    }
+  ]
+}

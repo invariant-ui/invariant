@@ -110,7 +110,7 @@ describe.skipIf(!existsSync(main))(
       const discover = await server.next()
       expect(discover.result).toMatchObject({ resultType: "complete", supportedVersions: ["2026-07-28"] })
       server.send({ jsonrpc: "2.0", id: 2, method: "tools/list", params: { _meta: meta } })
-      expect((await server.next()).result.tools).toHaveLength(10)
+      expect((await server.next()).result.tools).toHaveLength(11)
       server.send({
         jsonrpc: "2.0",
         id: 3,
