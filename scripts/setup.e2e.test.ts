@@ -1,3 +1,4 @@
+import { execSync } from "node:child_process"
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
@@ -49,59 +50,128 @@ const patterns = (dir: string) =>
     patterns: Array<{ id: string; approval?: { approvedBy: string; reference?: string } }>
   }
 
+/** Gives the package a name and some fields, keeping what it already declares (React, peer dependencies). */
+const writeMeta = (dir: string, extra: Record<string, unknown>) => {
+  const file = path.join(dir, "package.json")
+  const existing = existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : {}
+  writeFileSync(file, JSON.stringify({ ...existing, name: "@acme/ui", version: "1.0.0", ...extra }, null, 2))
+}
+
 describe("invariant setup", () => {
   it("without a confirmed contract, adds proposals and approves nothing", async () => {
     const dir = project()
     const r = await cli(dir, ["setup", "--yes", "--as", "ana"])
     expect(r.code).toBe(0)
     expect(r.out).toMatch(/compiled: \d+ components/)
-    expect(r.out).toMatch(/contract not confirmed, so nothing will be approved/)
-    expect(r.out).toMatch(/added as proposals \(not approved\)/)
+    expect(r.out).toMatch(/contract not confirmed, so nothing is approved and no rule is turned on/)
+    expect(r.out).toMatch(/patterns {3}3 added as proposals \(not approved\)/)
     const list = patterns(dir).patterns
     expect(list.length).toBeGreaterThan(0)
     expect(list.every((p) => p.approval === undefined)).toBe(true)
+    expect(JSON.stringify(list)).not.toContain('"constraints"')
+    expect(r.out).not.toMatch(/rules /)
     expect(existsSync(path.join(dir, "invariant.candidate-reviews.json"))).toBe(true)
-    expect(r.out).toMatch(/Add this to CI/)
   })
 
-  it("approves discovered patterns only after the contract is confirmed, and records who and why", async () => {
+  it("approves patterns and turns on starter rules only after the contract is confirmed", async () => {
     const dir = project()
-    const r = await cli(dir, ["setup", "--yes", "--confirm-contract", "--as", "ana"])
+    const r = await cli(dir, ["setup", "--confirm-contract", "--as", "ana"])
     expect(r.code).toBe(0)
     expect(r.out).toMatch(/contract confirmed by ana/)
-    expect(r.out).toMatch(/pattern\(s\) approved by ana/)
+    expect(r.out).toMatch(/patterns {3}3 approved by ana/)
+    expect(r.out).toMatch(/rules {6}\d+ starter rule\(s\), as warnings/)
+    expect(r.out).toMatch(/See it work/)
     for (const p of patterns(dir).patterns) {
       expect(p.approval?.approvedBy).toBe("ana")
       expect(p.approval?.reference).toMatch(/contract confirmed by ana/)
     }
-    const list = await cli(dir, ["patterns", "list", "--json"])
-    expect(list.code).toBe(0)
-    const inspected = await cli(dir, ["patterns", "inspect", patterns(dir).patterns[0]?.id as string])
+    const defs = patterns(dir).patterns as Array<{
+      id: string
+      constraints?: Array<{ enforce: object; kind: string }>
+      appliesTo?: { paths: string[] }
+    }>
+    const withRules = defs.filter((d) => d.constraints)
+    expect(withRules.length).toBeGreaterThan(0)
+    for (const d of withRules) {
+      expect(d.appliesTo?.paths).toEqual(["app/**"])
+      for (const k of d.constraints ?? [])
+        expect(k.enforce).toEqual({ severity: "warning", enforcement: "warn" })
+    }
+    const inspected = await cli(dir, ["patterns", "inspect", defs[0]?.id as string])
     expect(inspected.out).not.toMatch(/NOT APPROVED/)
   })
 
-  it("asks first: a 'no' on the contract keeps everything unapproved, and numbers skip candidates", async () => {
+  it("a starter rule flags new code and, as a warning, does not fail the build", async () => {
     const dir = project()
-    const r = await cli(dir, ["setup", "--as", "ana"], ["n", "1", "y"])
+    await cli(dir, ["setup", "--confirm-contract", "--as", "ana", "--no-ci", "--no-agent"])
+    writeFileSync(
+      path.join(dir, "app/pages/NewModal.tsx"),
+      'import { Modal } from "@acme/ui"\nexport const N = () => <Modal open title="x" />\n'
+    )
+    const r = await cli(dir, ["validate", "app", "--format", "json"])
+    const out = JSON.parse(r.out) as { violations: Array<{ code: string; file: string; severity: string }> }
+    const hit = out.violations.filter((v) => v.file === "app/pages/NewModal.tsx")
+    expect(hit.map((v) => v.code)).toContain("pattern-required-child-missing")
+    expect(hit.every((v) => v.severity === "warning")).toBe(true)
     expect(r.code).toBe(0)
-    expect(r.asked[0]).toMatch(/Does this look like your design system/)
-    expect(r.out).toMatch(/contract not confirmed/)
-    expect(patterns(dir).patterns.every((p) => p.approval === undefined)).toBe(true)
-    expect(r.asked.some((q) => /Approve \d+ pattern/.test(q))).toBe(false)
+    // The same rule on the code that was already there is hidden by the baseline.
+    expect(out.violations.filter((v) => v.file !== "app/pages/NewModal.tsx")).toEqual([])
   })
 
-  it("approves when a person says yes to both questions", async () => {
+  it("--no-rules approves patterns without turning on any rule", async () => {
     const dir = project()
-    const r = await cli(dir, ["setup", "--as", "ana"], ["y", "", "y", "y"])
-    expect(r.asked.some((q) => /Approve \d+ pattern/.test(q))).toBe(true)
+    const r = await cli(dir, ["setup", "--confirm-contract", "--as", "ana", "--no-rules"])
+    expect(r.out).toMatch(/patterns {3}3 approved by ana/)
+    expect(r.out).not.toMatch(/starter rule/)
+    expect(JSON.stringify(patterns(dir).patterns)).not.toContain('"constraints"')
+  })
+
+  it("asks once. Yes confirms the contract and does the whole plan", async () => {
+    const dir = project()
+    const r = await cli(dir, ["setup", "--as", "ana"], ["y"])
+    expect(r.asked).toHaveLength(1)
+    expect(r.asked[0]).toMatch(/Looks right\?/)
+    expect(r.out).toMatch(/Plan\. Yes confirms the contract above is right/)
+    expect(r.out).toMatch(/approved by ana/)
+    expect(r.out).toMatch(/starter rule\(s\) as warnings/)
     expect(patterns(dir).patterns.every((p) => p.approval?.approvedBy === "ana")).toBe(true)
+  })
+
+  it("asking and answering just Enter means yes", async () => {
+    const dir = project()
+    const r = await cli(dir, ["setup", "--as", "ana"], [""])
+    expect(patterns(dir).patterns.every((p) => p.approval?.approvedBy === "ana")).toBe(true)
+    expect(r.asked).toHaveLength(1)
+  })
+
+  it("no stops: nothing is approved, added or written", async () => {
+    const dir = project()
+    const r = await cli(dir, ["setup", "--as", "ana"], ["n"])
+    expect(r.code).toBe(0)
+    expect(r.out).toMatch(/Stopped\. Nothing was approved or added/)
+    expect(existsSync(path.join(dir, "invariant.patterns.json"))).toBe(false)
+    expect(existsSync(path.join(dir, "invariant.baseline.json"))).toBe(false)
+    expect(existsSync(path.join(dir, "invariant"))).toBe(true)
+  })
+
+  it("c asks about each step, and a no on the contract keeps patterns unapproved", async () => {
+    const dir = project()
+    // contract? no. which patterns? skip 1. baseline: yes (the rest default to yes).
+    const r = await cli(dir, ["setup", "--as", "ana"], ["c", "n", "1", "y"])
+    expect(r.asked[0]).toMatch(/Looks right\?/)
+    expect(r.asked.some((q) => /Does this look like your design system/.test(q))).toBe(true)
+    expect(r.asked.some((q) => /Approve \d+ pattern/.test(q))).toBe(false)
+    expect(r.out).toMatch(/contract not confirmed/)
+    const list = patterns(dir).patterns
+    expect(list).toHaveLength(2)
+    expect(list.every((p) => p.approval === undefined)).toBe(true)
   })
 
   it("does not ask or add anything when there is no terminal and no --yes", async () => {
     const dir = project()
     const r = await cli(dir, ["setup", "--as", "ana"])
     expect(r.code).toBe(0)
-    expect(r.out).toMatch(/not asking \(no terminal\)/)
+    expect(r.out).toMatch(/not asking \(no terminal\)\. Nothing was added/)
     expect(existsSync(path.join(dir, "invariant.patterns.json"))).toBe(false)
   })
 
@@ -113,9 +183,7 @@ describe("invariant setup", () => {
     expect(existsSync(path.join(dir, ".cursor/mcp.json"))).toBe(true)
     const dir2 = project()
     mkdirSync(path.join(dir2, ".cursor"))
-    expect((await cli(dir2, ["setup", "--yes", "--as", "ana", "--no-agent"])).out).toMatch(
-      /skipped agent setup/
-    )
+    await cli(dir2, ["setup", "--yes", "--as", "ana", "--no-agent"])
     expect(existsSync(path.join(dir2, ".cursor/mcp.json"))).toBe(false)
   })
 
@@ -130,6 +198,116 @@ describe("invariant setup", () => {
   })
 })
 
+describe("setup in a design system repository: publishing the contract", () => {
+  it("adds a prepack script, and says what apps do next", async () => {
+    const dir = project()
+    writeMeta(dir, { files: ["src"] })
+    const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    expect(r.out).toMatch(/publish {4}@acme\/ui: added "invariant" to files and added a prepack script/)
+    const pkg = JSON.parse(readFileSync(path.join(dir, "package.json"), "utf8"))
+    expect(pkg.files).toEqual(["src", "invariant"])
+    expect(pkg.scripts.prepack).toBe("npx invariant-ui@0.1.0 compile")
+    expect(readFileSync(path.join(dir, "package.json"), "utf8").endsWith("\n")).toBe(false)
+  })
+
+  it("is idempotent, and leaves an existing prepack alone", async () => {
+    const dir = project()
+    writeMeta(dir, { files: ["invariant"], scripts: { prepack: "tsc" } })
+    const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    expect(r.out).not.toMatch(/publish {4}/)
+    expect(JSON.parse(readFileSync(path.join(dir, "package.json"), "utf8")).scripts.prepack).toBe("tsc")
+  })
+
+  it("skips a private package, and --no-publish", async () => {
+    const dir = project()
+    writeMeta(dir, { private: true })
+    const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    expect(r.out).toMatch(/not wiring publishing: @acme\/ui is private/)
+    expect(JSON.parse(readFileSync(path.join(dir, "package.json"), "utf8")).scripts).toBeUndefined()
+    const other = project()
+    writeMeta(other, {})
+    await cli(other, ["setup", "--yes", "--as", "ana", "--no-ci", "--no-publish"])
+    expect(JSON.parse(readFileSync(path.join(other, "package.json"), "utf8")).scripts).toBeUndefined()
+  })
+
+  it("warns when the folder is ignored, since it would not be published", async () => {
+    const dir = project()
+    writeMeta(dir, {})
+    writeFileSync(path.join(dir, ".npmignore"), "invariant/\n")
+    const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    expect(r.out).toMatch(/Warning: \.npmignore ignores invariant\//)
+  })
+
+  it("in a monorepo, compiles from the root and exports into the package", async () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-setup-"))
+    made.push(dir)
+    mkdirSync(path.join(dir, "packages"), { recursive: true })
+    cpSync(path.join(root, "fixtures/storybook/acme-ui"), path.join(dir, "packages/ui"), {
+      recursive: true,
+      filter: (s) => !s.includes("storybook-static")
+    })
+    writeFileSync(
+      path.join(dir, "package.json"),
+      JSON.stringify({ name: "mono", private: true, workspaces: ["packages/*"] })
+    )
+    writeMeta(path.join(dir, "packages/ui"), { files: ["src"] })
+    const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    expect(r.code).toBe(0)
+    const pkg = JSON.parse(readFileSync(path.join(dir, "packages/ui/package.json"), "utf8"))
+    expect(pkg.scripts.prepack).toBe(
+      "npx invariant-ui@0.1.0 compile --cwd ../.. && npx invariant-ui@0.1.0 export --to packages/ui/invariant --force --cwd ../.."
+    )
+    expect(pkg.files).toContain("invariant")
+  })
+})
+
+describe("the publishing wiring actually works", () => {
+  const main = path.join(root, "apps/cli/dist/main.js")
+  const runPrepack = (dir: string, cmd: string) =>
+    execSync(cmd.replaceAll("npx invariant-ui@0.1.0", `node ${main}`), { cwd: dir, stdio: "pipe" })
+  const tarball = (dir: string): string[] =>
+    (
+      JSON.parse(
+        execSync("npm pack --dry-run --json --ignore-scripts", { cwd: dir, stdio: "pipe" }).toString()
+      ) as Array<{
+        files: Array<{ path: string }>
+      }>
+    )[0]?.files.map((f) => f.path) ?? []
+
+  it("a single package: the compiled contract is in the tarball after prepack", async () => {
+    const dir = project()
+    writeMeta(dir, { files: ["src"] })
+    await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    rmSync(path.join(dir, "invariant"), { recursive: true })
+    const prepack = JSON.parse(readFileSync(path.join(dir, "package.json"), "utf8")).scripts.prepack as string
+    runPrepack(dir, prepack)
+    const files = tarball(dir)
+    expect(files).toContain("invariant/invariant.contract.json")
+    expect(files).toContain("invariant/invariant.evidence.json")
+  })
+
+  it("a monorepo package: prepack compiles at the root and exports into the package folder", async () => {
+    const dir = mkdtempSync(path.join(tmpdir(), "invariant-setup-"))
+    made.push(dir)
+    cpSync(path.join(root, "fixtures/storybook/acme-ui"), path.join(dir, "packages/ui"), {
+      recursive: true,
+      filter: (s) => !s.includes("storybook-static")
+    })
+    writeFileSync(
+      path.join(dir, "package.json"),
+      JSON.stringify({ name: "mono", private: true, workspaces: ["packages/*"] })
+    )
+    writeMeta(path.join(dir, "packages/ui"), { files: ["src"] })
+    await cli(dir, ["setup", "--yes", "--as", "ana", "--no-ci"])
+    const pkgDir = path.join(dir, "packages/ui")
+    const prepack = JSON.parse(readFileSync(path.join(pkgDir, "package.json"), "utf8")).scripts
+      .prepack as string
+    runPrepack(pkgDir, prepack)
+    expect(existsSync(path.join(pkgDir, "invariant/invariant.contract.json"))).toBe(true)
+    expect(tarball(pkgDir)).toContain("invariant/invariant.contract.json")
+  })
+})
+
 describe("setup: GitHub Action", () => {
   const wf = ".github/workflows/invariant.yml"
 
@@ -137,8 +315,7 @@ describe("setup: GitHub Action", () => {
     const dir = project()
     const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--ci"])
     expect(r.code).toBe(0)
-    expect(r.out).toMatch(/wrote \.github\/workflows\/invariant\.yml/)
-    expect(r.out).toMatch(/CI: \.github\/workflows\/invariant\.yml checks every pull request commit/)
+    expect(r.out).toMatch(/CI {9}wrote \.github\/workflows\/invariant\.yml/)
     expect(r.out).not.toMatch(/Add this to CI/)
     const yaml = readFileSync(path.join(dir, wf), "utf8")
     expect(yaml).toMatch(/pull_request:\n\s+types: \[opened, synchronize, reopened\]/)
@@ -149,21 +326,26 @@ describe("setup: GitHub Action", () => {
     expect(yaml).not.toContain("\t")
   })
 
-  it("asks first in a git project, and writes nothing on a no", async () => {
-    const yes = project()
-    mkdirSync(path.join(yes, ".git"))
-    const a = await cli(yes, ["setup", "--as", "ana"], ["n", "", "y", "y"])
-    expect(a.asked.some((q) => /GitHub Action/.test(q))).toBe(true)
-    expect(existsSync(path.join(yes, wf))).toBe(true)
-    const no = project()
-    mkdirSync(path.join(no, ".git"))
-    const b = await cli(no, ["setup", "--as", "ana"], ["n", "", "y", "n"])
-    expect(b.asked.some((q) => /GitHub Action/.test(q))).toBe(true)
-    expect(existsSync(path.join(no, wf))).toBe(false)
-    expect(b.out).toMatch(/no workflow added/)
+  it("is part of the one plan in a git project", async () => {
+    const dir = project()
+    mkdirSync(path.join(dir, ".git"))
+    const r = await cli(dir, ["setup", "--as", "ana"], ["y"])
+    expect(r.asked).toHaveLength(1)
+    expect(r.out).toContain(`add ${wf}, which checks every pull request commit`)
+    expect(existsSync(path.join(dir, wf))).toBe(true)
   })
 
-  it("does not ask outside a git project, or with --no-ci", async () => {
+  it("can be declined in the step-by-step mode", async () => {
+    const dir = project()
+    mkdirSync(path.join(dir, ".git"))
+    // c, contract yes, patterns all, approve yes, rules yes, baseline yes, CI no.
+    const r = await cli(dir, ["setup", "--as", "ana"], ["c", "y", "", "y", "y", "y", "n"])
+    expect(r.asked.some((q) => /GitHub Action/.test(q))).toBe(true)
+    expect(existsSync(path.join(dir, wf))).toBe(false)
+    expect(r.out).toMatch(/Add this to CI/)
+  })
+
+  it("is not offered outside a git project, or with --no-ci", async () => {
     const plain = project()
     const a = await cli(plain, ["setup", "--yes", "--as", "ana"])
     expect(existsSync(path.join(plain, ".github"))).toBe(false)
@@ -172,7 +354,7 @@ describe("setup: GitHub Action", () => {
     mkdirSync(path.join(git, ".git"))
     const b = await cli(git, ["setup", "--yes", "--as", "ana", "--no-ci"])
     expect(existsSync(path.join(git, wf))).toBe(false)
-    expect(b.out).not.toMatch(/GitHub Action|7\./)
+    expect(b.out).not.toMatch(/GitHub Action/)
   })
 
   it("leaves an existing workflow alone", async () => {
@@ -180,7 +362,7 @@ describe("setup: GitHub Action", () => {
     mkdirSync(path.join(dir, ".github/workflows"), { recursive: true })
     writeFileSync(path.join(dir, wf), "name: mine\n")
     const r = await cli(dir, ["setup", "--yes", "--as", "ana", "--ci"])
-    expect(r.out).toMatch(/already exists, so it was left alone/)
+    expect(r.out).toMatch(/already exists, so it will be left alone/)
     expect(readFileSync(path.join(dir, wf), "utf8")).toBe("name: mine\n")
   })
 

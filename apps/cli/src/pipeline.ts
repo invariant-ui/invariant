@@ -39,6 +39,7 @@ import type { JsonValue } from "@invariant/shared"
 import { DIAGNOSTICS_FILE_VERSION, type Diagnostic, DiagnosticCollector, hasErrors } from "@invariant/shared"
 import type { InvariantConfig } from "./config.js"
 import { renderReport } from "./report.js"
+import { loadCompiled } from "./store.js"
 import { CLI_NAME, CLI_VERSION } from "./version.js"
 
 const ADAPTERS: Record<InvariantConfig["sources"][number]["type"], SourceAdapter> = {
@@ -191,6 +192,12 @@ function applyGovernance(
   return { contract, evidence, diagnostics, summary }
 }
 
+/** What every compile produces, whether it read sources or started from a shipped contract. */
+export type PipelineOutput = Pick<
+  PipelineResult,
+  "final" | "review" | "diagnostics" | "mapping" | "governance" | "ok" | "artifacts"
+>
+
 export interface PipelineInput {
   cwd: string
   config: InvariantConfig
@@ -276,6 +283,68 @@ export async function runPipeline(input: PipelineInput): Promise<PipelineResult>
     review,
     diagnostics,
     mapping,
+    governance: governed.summary,
+    ok: !hasErrors(diagnostics),
+    artifacts
+  }
+}
+
+/**
+ * Compiles a project that uses a design system it does not contain. The contract the library ships is the base:
+ * its components, tokens and patterns are taken as they are, with their evidence and approvals. This project's own
+ * pattern definitions, policies and decisions are applied on top, the result is verified and written locally. Nothing is
+ * read from sources, so a new version of the library shows up as a stale contract (`verify --fresh`).
+ */
+export function runLayeredPipeline(input: PipelineInput): PipelineOutput {
+  const { config, clock } = input
+  const from = config.extends?.contract
+  if (!from) throw new Error("runLayeredPipeline needs extends.contract")
+  const base = loadCompiled(path.resolve(input.cwd, from))
+  const { integrity: _integrity, ...draft } = base.contract
+  const governed = applyGovernance(input.cwd, config, draft, clock)
+  const final = finalizeAndVerify(governed.contract, [...base.evidence.evidence, ...governed.evidence])
+  const review = buildReviewQueue(governed.contract)
+
+  const collector = new DiagnosticCollector()
+  collector.addAll(governed.diagnostics)
+  collector.addAll(final.diagnostics)
+  const diagnostics = collector.toArray()
+  const baseHash = base.contract.integrity.contentHash
+  const entries: ArtifactEntry[] = [
+    { path: "invariant.contract.json", value: final.contract as unknown as JsonValue },
+    { path: "invariant.evidence.json", value: final.evidenceFile as unknown as JsonValue },
+    {
+      path: "invariant.diagnostics.json",
+      value: { diagnosticsVersion: DIAGNOSTICS_FILE_VERSION, diagnostics } as unknown as JsonValue
+    },
+    {
+      path: "invariant.review.json",
+      value: { reviewVersion: REVIEW_VERSION, items: review } as unknown as JsonValue
+    },
+    { path: "invariant.report.html", text: renderReport({ contract: final.contract, review, diagnostics }) }
+  ]
+  const artifacts = renderArtifacts(entries, {
+    tool: { name: CLI_NAME, version: CLI_VERSION },
+    generatedAt: clock(),
+    sources: [
+      {
+        id: "extends",
+        type: "contract",
+        adapterId: "extends",
+        adapterVersion: "1",
+        inputHash: baseHash,
+        irContentHash: baseHash,
+        completeness: "complete"
+      }
+    ]
+  })
+  return {
+    final,
+    review,
+    diagnostics,
+    mapping: [
+      { configId: "extends", type: "contract", path: from, sources: [`contract ${baseHash.slice(0, 12)}`] }
+    ],
     governance: governed.summary,
     ok: !hasErrors(diagnostics),
     artifacts

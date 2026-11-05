@@ -1,4 +1,4 @@
-import type { Candidate, Occurrence } from "./model.js"
+import type { Candidate, Occurrence, ShapeTree } from "./model.js"
 import { type FileShape, type ShapeNode, walk } from "./shapes.js"
 import { candidateId, capEvidence, listNames, slug, uniqueName } from "./util.js"
 
@@ -22,6 +22,16 @@ export function keyOf(node: ShapeNode, depth: number, maxDepth: number): string 
   if (node.children.length === 0) return head
   if (depth >= maxDepth) return `${head}(…)`
   return `${head}(${node.children.map((c) => keyOf(c, depth + 1, maxDepth)).join(",")})`
+}
+
+function treeOf(node: ShapeNode, depth: number, maxDepth: number): ShapeTree {
+  return {
+    id: node.id,
+    name: node.name,
+    optional: node.conditional || node.repeated,
+    opaque: node.opaque || (depth >= maxDepth && node.children.length > 0),
+    children: depth >= maxDepth ? [] : node.children.map((c) => treeOf(c, depth + 1, maxDepth))
+  }
 }
 
 interface Group {
@@ -116,7 +126,14 @@ export function findArrangements(files: readonly FileShape[], options: Arrangeme
           : [])
       ],
       support: { files: fileCount, occurrences: g.nodes.length },
-      structure: { key: g.key, common: [], frequent: [], variable: [], variableTruncated: false },
+      structure: {
+        key: g.key,
+        common: [],
+        frequent: [],
+        variable: [],
+        variableTruncated: false,
+        tree: treeOf(root, 0, options.maxDepth)
+      },
       evidence: capped.evidence,
       evidenceTruncated: capped.truncated,
       definition: {

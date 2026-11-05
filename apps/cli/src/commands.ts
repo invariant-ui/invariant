@@ -26,7 +26,7 @@ import { type CollectionDiff, diffContracts, formatDiff } from "./diff.js"
 import { CliError } from "./errors.js"
 import { countBySeverity, formatDiagnostic, shortValue, table } from "./format.js"
 import type { Io } from "./io.js"
-import { adaptersFor, runPipeline } from "./pipeline.js"
+import { adaptersFor, type PipelineOutput, runLayeredPipeline, runPipeline } from "./pipeline.js"
 import { checkOutput, loadCompiled } from "./store.js"
 import { CLI_NAME, CLI_VERSION, NPM_PACKAGE } from "./version.js"
 import { watchProject } from "./watch.js"
@@ -48,6 +48,22 @@ export async function requireConfig(c: Context): Promise<LoadedConfig> {
   })
   if (!loaded) throw new CliError(`no ${CONFIG_FILE} found. Run \`${CLI_NAME} init\` first.`)
   return loaded
+}
+
+/**
+ * Where a command may write its own files (candidates, browser results). That is the output directory, except that a
+ * contract read from inside node_modules (`--dir node_modules/@acme/ui/invariant`) is never written to: files go to the
+ * project's own output directory instead.
+ */
+export async function writableDir(c: Context): Promise<string> {
+  const dir = await outputDir(c)
+  if (!path.relative(c.cwd, dir).split(path.sep).includes("node_modules")) return dir
+  const loaded = await loadConfig({
+    cwd: c.cwd,
+    file: c.args.values.config,
+    trustConfig: c.args.values["trust-config"] === true
+  })
+  return path.resolve(c.cwd, outputDirectory(loaded?.config))
 }
 
 export async function outputDir(c: Context): Promise<string> {
@@ -173,14 +189,25 @@ export async function analyze(c: Context): Promise<number> {
   return hasErrors(result.diagnostics) ? 1 : 0
 }
 
+/** Compiles from sources, or from the contract a library ships when the config says `extends`. */
+async function compileProject(c: Context, config: InvariantConfig): Promise<PipelineOutput> {
+  if (config.extends) {
+    if (!existsSync(path.resolve(c.cwd, config.extends.contract, "invariant.contract.json")))
+      throw new CliError(
+        `extends.contract points at ${config.extends.contract}, which has no invariant.contract.json. Install the design system package, or fix the path.`
+      )
+    return runLayeredPipeline({ cwd: c.cwd, config, clock: c.io.clock })
+  }
+  if (config.sources.length === 0)
+    throw new CliError(
+      `${CONFIG_FILE} has no sources, so there is nothing to compile. Add one with \`${CLI_NAME} source add <type> [path]\`, or, if this project uses a design system from a package, set extends.contract (see \`${CLI_NAME} setup\`).`
+    )
+  return runPipeline({ cwd: c.cwd, config, clock: c.io.clock, keepIr: c.args.values["keep-ir"] === true })
+}
+
 async function compileOnce(c: Context): Promise<number> {
   const { config } = await requireConfig(c)
-  const result = await runPipeline({
-    cwd: c.cwd,
-    config,
-    clock: c.io.clock,
-    keepIr: c.args.values["keep-ir"] === true
-  })
+  const result = await compileProject(c, config)
   const out = await outputDir(c)
   await writeArtifacts(out, result.artifacts)
   const contract = result.final.contract
@@ -451,7 +478,7 @@ export async function verify(c: Context): Promise<number> {
   let changes: CollectionDiff[] | undefined
   if (c.args.values.fresh) {
     const { config } = await requireConfig(c)
-    const fresh = await runPipeline({ cwd: c.cwd, config, clock: c.io.clock })
+    const fresh = await compileProject(c, config)
     if (fresh.final.contract.integrity.contentHash !== compiled.contract.integrity.contentHash) {
       changes = diffContracts(compiled.contract, fresh.final.contract)
       all.push({

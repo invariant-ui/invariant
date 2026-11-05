@@ -357,7 +357,7 @@ footer a:hover{color:var(--text)}
     <div class="grid g3" style="margin-top:16px">
       <div class="card"><h3>Page archetypes</h3><p>A data page, a detail page, an edit form. Each composes shared patterns, names its regions and lists the variations it allows.</p></div>
       <div class="card"><h3>Layout and interaction rules</h3><p>Required children, ordering, counts and regions, plus required states like loading, error and confirm for forms, deletes and search.</p></div>
-      <div class="card"><h3>Enforced, not just documented</h3><p>Approved rules become policies that <code>validate</code> checks in CI. A page can opt in to inherit the rules of everything it composes.</p></div>
+      <div class="card"><h3>Enforced, not just documented</h3><p>Approved rules become policies that <code>validate</code> checks in CI. Setup can turn on starter rules from the structures it found, as warnings, so you see them work without breaking a build.</p></div>
     </div>
   </div>
 </section>
@@ -412,7 +412,7 @@ chromium 1.2.3: 4 passed, 1 failed, 0 could not run
       - <span class="k">run</span>: npx invariant-ui@0.1.0 validate 'src' --format github</pre></div>
     </div>
     <div class="grid g3" style="margin-top:16px">
-      <div class="card"><h3>New problems only</h3><p>Existing violations are baselined, so the check fails on what a pull request adds, not on history.</p></div>
+      <div class="card"><h3>New problems only</h3><p>Existing violations are baselined, so a pull request is checked on what it adds, not on history.</p></div>
       <div class="card"><h3>Stale contract caught</h3><p><code>verify --fresh</code> fails when the committed contract no longer matches your sources, or was edited by hand.</p></div>
       <div class="card"><h3>Pinned and read-only</h3><p>The job pins the exact version and asks for read access only. A later release can't change what your CI does.</p></div>
     </div>
@@ -471,12 +471,16 @@ chromium 1.2.3: 4 passed, 1 failed, 0 could not run
       <div class="step"><div>
         <h3>Run setup</h3>
         <div class="code"><pre>npx invariant-ui setup</pre></div>
-        <p class="c" style="margin:10px 0 0">Compiles your design system, shows what it found and asks you to confirm it, proposes patterns from your app code, connects your AI tool, and baselines existing violations. Nothing is approved until you say so.</p>
+        <p class="c" style="margin:10px 0 0">Compiles your design system, finds the patterns your apps already repeat, and shows one plan. Answer yes once and it approves them, turns on starter rules, connects your AI tool, baselines old violations and adds the CI check. Nothing is approved until you say so.</p>
       </div></div>
       <div class="step"><div>
         <h3>Enforce it</h3>
         <div class="code"><pre>npx invariant-ui validate src/
 npx invariant-ui verify --fresh   # put both in CI</pre></div>
+      </div></div>
+      <div class="step"><div>
+        <h3>Design system in a package?</h3>
+        <p class="c" style="margin:0">Run the same command in your app. It finds the contract the package ships, adds your own patterns on top, and flags a stale contract when you upgrade the library.</p>
       </div></div>
       <div class="step"><div>
         <h3>Keep the command</h3>

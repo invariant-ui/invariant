@@ -18,7 +18,8 @@ export {
   type Review,
   type ReviewsFile,
   reviewSchema,
-  reviewsFileSchema
+  reviewsFileSchema,
+  type ShapeTree
 } from "./model.js"
 export { type PromoteInput, toDefinition } from "./promote.js"
 export {

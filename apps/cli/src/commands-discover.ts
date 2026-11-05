@@ -23,7 +23,7 @@ import {
   serializeReviews,
   toDefinition
 } from "@invariant/validation"
-import { type Context, json, outputDir, print } from "./commands.js"
+import { type Context, json, outputDir, print, writableDir } from "./commands.js"
 import { collect } from "./commands-validate.js"
 import { loadConfig } from "./config.js"
 import { CliError } from "./errors.js"
@@ -97,8 +97,9 @@ export async function discoverCommand(c: Context): Promise<number> {
     file: c.args.values.config,
     trustConfig: c.args.values["trust-config"] === true
   })
-  const dir = await outputDir(c)
-  const { contract, evidence } = loadCompiled(dir)
+  const contractFolder = await outputDir(c)
+  const dir = await writableDir(c)
+  const { contract, evidence } = loadCompiled(contractFolder)
   const ds = new DesignSystem(contract, evidence)
   const ignore = (loaded?.config.validation?.ignore ?? []).map((g) => globToRegExp(g))
   const found: string[] = []
@@ -146,7 +147,7 @@ const listTable = (candidates: readonly Candidate[]): string =>
 async function loadCandidates(
   c: Context
 ): Promise<{ file: CandidatesFile; candidates: Candidate[]; stale: boolean; dir: string }> {
-  const dir = await outputDir(c)
+  const dir = await writableDir(c)
   const text = read(path.join(dir, CANDIDATES_FILE))
   if (text === undefined)
     throw new CliError(`no ${CANDIDATES_FILE} in ${dir}. Run \`${CLI_NAME} discover <path...>\` first.`)
@@ -169,7 +170,8 @@ async function loadCandidates(
   )
   let stale = false
   try {
-    stale = loadCompiled(dir).contract.integrity.contentHash !== parsed.data.contract.contentHash
+    stale =
+      loadCompiled(await outputDir(c)).contract.integrity.contentHash !== parsed.data.contract.contentHash
   } catch {
     stale = false
   }

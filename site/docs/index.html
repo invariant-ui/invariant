@@ -164,6 +164,7 @@ td code{white-space:nowrap}
   <a href="#introduction">Introduction</a>
   <a href="#install">Install</a>
   <a href="#quick-start">Quick start</a>
+  <a href="#integrate">Add it to your project</a>
   <h4>Concepts</h4>
   <a href="#how-it-works">How it works</a>
   <a href="#contract">The contract</a>
@@ -216,6 +217,7 @@ td code{white-space:nowrap}
   <div class="cards">
     <a class="card" href="#install"><b>Install</b><span>One npx command.</span></a>
     <a class="card" href="#quick-start"><b>Quick start</b><span>Compile a contract, then enforce it.</span></a>
+    <a class="card" href="#integrate"><b>Add it to your project</b><span>Design system in your repo, or in a package.</span></a>
     <a class="card" href="#pattern-definitions"><b>Define patterns</b><span>Describe your pages and interactions.</span></a>
     <a class="card" href="#agents"><b>Connect an agent</b><span>One command, read-only.</span></a>
   </div>
@@ -248,8 +250,21 @@ pnpm invariant --help   # same as: node apps/cli/dist/main.js</pre></div>
   <p>Run these inside the project that holds your design system.</p>
   <h3>Fastest path: one command</h3>
   <div class="code"><span class="lang">bash</span><pre>invariant setup</pre></div>
-  <p>It detects your sources, compiles the contract and shows what it found. It asks whether that looks like your design system, then finds structures that recur in your app code and offers the top ones as patterns. It connects any AI tool it finds (<code>.claude</code>, <code>.cursor</code>, <code>.codex</code>, <code>.windsurf</code>), offers to hide existing violations so only new ones fail, and offers to add a GitHub Action that checks every commit on pull requests.</p>
-  <div class="note"><b>Nothing is approved until you say so</b>Patterns are approved only after you confirm the contract and agree a second time. Without that they are added as proposals. <code>--yes</code> answers the other questions with their defaults and never confirms the contract; <code>--confirm-contract --as "Your Name"</code> does it for scripts. Approved patterns guide agents. No rule is enforced until you write one.</div>
+  <p>It detects your sources, compiles the contract and looks at your app code. Then it shows one plan and asks one question:</p>
+  <div class="code"><span class="lang">text</span><pre>Plan. Yes confirms the contract above is right, and does all of this:
+  - add 3 recurring pattern(s) from app, approved by Ana
+  - turn on 7 starter rule(s) as warnings: they flag new code, and existing code is hidden by the baseline
+  - hide 5 existing violation(s) so only new ones are flagged
+  - connect cursor
+  - add .github/workflows/invariant.yml, which checks every pull request commit
+  - publish the contract with @acme/ui (adds "invariant" to files and a prepack script)
+Looks right? [Y/n, or c to choose each step]</pre></div>
+  <p>Enter or <code>y</code> does it all. <code>n</code> stops with nothing added. <code>c</code> asks about each step. The plan only lists what applies: the publish line appears in a design system repository, the CI line in a git project.</p>
+  <ul>
+    <li><b>Starter rules</b> restate what a recurring arrangement did every time: a <code>Modal</code> always contained a <code>Button</code>, a <code>Card.Header</code> always came before the <code>Card.Body</code>. They are checked across your app folders as warnings, so they annotate new code and do not fail a build until you raise them. Skip them with <code>--no-rules</code>.</li>
+    <li><b>Publishing</b> (design system repository): adds <code>invariant</code> to the package's <code>files</code> and a <code>prepack</code> script that compiles the contract, so the published package carries it. Skipped for a private package; <code>--no-publish</code> skips it.</li>
+  </ul>
+  <div class="note"><b>Nothing is approved until you say so</b>Yes is the confirmation: patterns are approved and starter rules turned on only after you confirm the contract. <code>--yes</code> takes the other defaults but never confirms, so patterns are added as proposals and no rule is turned on. <code>--confirm-contract --as "Your Name"</code> is the same yes for scripts.</div>
   <p>The steps below do the same thing one at a time.</p>
   <h3>1. Compile the contract</h3>
   <div class="code"><span class="lang">bash</span><pre>invariant init                          # detect sources, write invariant.config.json
@@ -271,6 +286,34 @@ invariant verify --fresh                # is the contract stale or tampered with
 invariant agent init claude-code        # give your AI tool the contract</pre></div>
   <p>Put <code>validate</code> and <code>verify --fresh</code> in CI. To start clean on an existing codebase, run <code>invariant validate src/ --update-baseline</code>: existing violations are hidden (with a note), and new ones still fail. <code>--no-baseline</code> shows everything. To check behavior in a browser, see <a href="#browser-verification">Browser verification</a>.</p>
   <div class="note"><b>Compile exit code</b><code>compile</code> exits 1 if any diagnostic is an error. The files are still written so you can inspect the problem. <code>compile --watch</code> recompiles after changes settle, so a connected agent always sees a current contract.</div>
+</section>
+
+<section class="doc" id="integrate">
+  <div class="kicker">Start</div>
+  <h2>Add it to your project</h2>
+  <p>What you do depends on where the design system's source code lives, because <code>compile</code> reads that source.</p>
+  <h3>The design system is in this repo</h3>
+  <p>A single repo or a monorepo, with the design system as a package. Run <code>npx invariant-ui setup</code> at the root. Commit <code>invariant/</code>, <code>invariant.patterns.json</code>, <code>invariant.baseline.json</code> and <code>.github/workflows/invariant.yml</code>. CI then runs <code>verify --fresh</code> and <code>validate</code> on every pull request. An app that imports the library through a workspace dependency (<code>@acme/ui</code> as <code>workspace:*</code>) works as is, because components are matched by package name.</p>
+  <p>If application pages share a folder with the design system's components (<code>src/pages</code> next to <code>src/components</code>), setup skips that folder as design-system source. Pass <code>--paths src/pages</code>.</p>
+  <h3>The app uses a design system from npm</h3>
+  <p>The source is not in your repo, so the contract travels with the library.</p>
+  <ol>
+    <li><b>Design system repo:</b> run <code>invariant setup</code> there. It adds <code>invariant</code> to the package's <code>files</code> and a <code>prepack</code> script that compiles the contract (in a monorepo it compiles at the root and exports into the package), so each release ships a contract that matches it. It skips a private package.</li>
+    <li><b>App repo:</b> install the package, then run <code>npx invariant-ui setup</code>. It sees there is no design system source here, finds the contract the package ships (<code>node_modules/&lt;package&gt;/invariant/</code>), and writes a config that extends it. With several installed it asks which; <code>--contract &lt;folder&gt;</code> chooses.</li>
+  </ol>
+  <div class="code"><span class="lang">json</span><pre>{
+  "name": "Acme UI",
+  "sources": [],
+  "extends": { "contract": "node_modules/@acme/ui/invariant" }
+}</pre></div>
+  <p>From then on <code>compile</code> starts from the shipped contract, keeps its components, tokens and patterns with their evidence and approvals, and adds <b>your own</b> <code>invariant.patterns.json</code>, <code>invariant.policies.json</code> and <code>invariant.decisions.json</code> on top. The result is written to <code>invariant/</code> in your repo, so <code>validate</code>, <code>discover</code>, the MCP server and <code>agent init</code> all work with no <code>--dir</code>.</p>
+  <ul>
+    <li><b>Upgrading the library:</b> when the package ships a new contract, <code>verify --fresh</code> fails with <code>verify.stale</code> and says what changed. Run <code>compile</code> and commit the result.</li>
+    <li><b>CI:</b> the generated workflow installs your dependencies first (with the package manager your lockfile names), so the shipped contract is present.</li>
+    <li><b>Your patterns:</b> set them up in the app repo with <code>discover</code>, or write them by hand. Patterns that every app should follow belong in the design system repo.</li>
+  </ul>
+  <div class="note"><b>Where files are written</b>Commands that write their own files, such as <code>discover</code> and <code>browser run</code>, never write into <code>node_modules</code>. If you point <code>--dir</code> at a shipped contract, they write to your project's own output folder.</div>
+  <div class="note warn"><b>Without a contract, setup stops</b>If there is no design system source and no installed package ships a contract, <code>setup</code> says so and creates nothing. <code>compile</code> likewise refuses a config with no sources and no <code>extends</code>, instead of writing an empty contract.</div>
 </section>
 
 <section class="doc" id="how-it-works">
@@ -799,7 +842,7 @@ npx invariant-ui validate src --format github  # annotate pull requests</pre></d
   <p>In a git project, <code>invariant setup</code> asks "Add a GitHub Action that checks every commit on pull requests?". Yes writes <code>.github/workflows/invariant.yml</code>:</p>
   <ul>
     <li><b>When it runs:</b> on every commit to an open pull request (<code>opened</code>, <code>synchronize</code>, <code>reopened</code>) and on pushes to <code>main</code>. A newer push cancels the run before it.</li>
-    <li><b>What it runs:</b> <code>verify --fresh</code>, which fails if the committed <code>invariant/</code> folder is stale or was edited by hand, then <code>validate</code> on your application folders with <code>--format github</code>, which annotates the lines that break the contract. Violations in <code>invariant.baseline.json</code> are hidden, and new ones fail the check.</li>
+    <li><b>What it runs:</b> <code>verify --fresh</code>, which fails if the committed <code>invariant/</code> folder is stale or was edited by hand, then <code>validate</code> on your application folders with <code>--format github</code>, which annotates the lines that break the contract. Violations in <code>invariant.baseline.json</code> are hidden. New ones are annotated, and any at error severity fail the check; starter rules are warnings, so they annotate without failing.</li>
     <li><b>Safe by default:</b> it pins the exact version it was written for, asks for <code>contents: read</code> only, and uses no secrets.</li>
     <li><b>Options:</b> <code>--ci</code> adds it without asking (and in a folder that is not a git project), <code>--no-ci</code> skips the question. An existing <code>invariant.yml</code> is never overwritten. <code>--yes</code> answers yes.</li>
   </ul>
@@ -828,7 +871,7 @@ npx invariant-ui validate src --format github  # annotate pull requests</pre></d
     <tr><td><code>components list</code>, <code>components inspect &lt;name|id&gt;</code></td><td>Read the compiled contract. <code>inspect</code> shows implementations, props with status, events, slots, variants, composition and conflicts. <code>--evidence</code> adds source locations.</td></tr>
     <tr><td><code>tokens list</code>, <code>conflicts list</code></td><td>Read the contract. Inferred token categories are marked <code>*</code>. <code>conflicts list</code> filters by <code>--severity</code>, <code>--type</code>, <code>--subject</code>.</td></tr>
     <tr><td><code>patterns list|inspect|resolve|search|relationships</code></td><td>Read the pattern definitions in the contract. <code>list</code> filters by <code>--category</code> and <code>--status</code>, and marks patterns that are not fully approved with <code>*</code>. <code>inspect &lt;name|id&gt;</code> shows parts, regions, states, constraints, relationships, which policies enforce it, and whether it is approved (<code>--evidence</code> adds the source of each fact). <code>resolve &lt;name&gt; [--variation v]</code> reads a pattern as a page blueprint, to any depth, with its variations, required interaction states and what is not approved. <code>search</code> ranks by name, intent, parts, regions and states. <code>relationships</code> walks edges (<code>--direction</code>, <code>--depth 1-5</code>).</td></tr>
-    <tr><td><code>setup</code></td><td>One command: compile, propose patterns from your app code, connect your AI tool, baseline existing violations. Options: <code>--yes</code>, <code>--confirm-contract</code>, <code>--as</code>, <code>--paths</code>, <code>--no-agent</code>, <code>--ci</code>, <code>--no-ci</code>. See <a href="#quick-start">Quick start</a> and <a href="#ci">Verify in CI</a>.</td></tr>
+    <tr><td><code>setup</code></td><td>One command: compile, propose patterns from your app code, connect your AI tool, baseline existing violations. Options: <code>--yes</code>, <code>--confirm-contract</code>, <code>--as</code>, <code>--paths</code>, <code>--contract</code>, <code>--no-agent</code>, <code>--ci</code>, <code>--no-ci</code>. With no design system source in the project it uses the contract an installed package ships; see <a href="#integrate">Add it to your project</a>. See <a href="#quick-start">Quick start</a> and <a href="#ci">Verify in CI</a>.</td></tr>
     <tr><td><code>discover &lt;path...&gt;</code></td><td>Finds structures that recur in your React code and writes them to <code>&lt;output&gt;/invariant.candidates.json</code> as candidates to review. Options: <code>--min-files</code> (3), <code>--min-uses</code> (3), <code>--similarity</code> (0.7), <code>--depth</code> (3). See <a href="#pattern-discovery">Pattern discovery</a>.</td></tr>
     <tr><td><code>candidates list|show|accept|reject|defer|promote</code></td><td>Review what <code>discover</code> found. <code>accept|reject|defer &lt;id&gt; --as &lt;name&gt;</code> records a decision. <code>promote &lt;id&gt; --id &lt;pattern id&gt; --as &lt;name&gt;</code> adds an accepted candidate to <code>invariant.patterns.json</code> without approving it.</td></tr>
     <tr><td><code>browser run</code></td><td>Opt-in runtime checks of a running app in a headless browser, from <code>invariant.browser.json</code>. Needs Playwright in your project. See <a href="#browser-verification">Browser verification</a>.</td></tr>
@@ -875,6 +918,7 @@ npx invariant-ui validate src --format github  # annotate pull requests</pre></d
   <h3>Other settings</h3>
   <div class="tbl"><table>
     <tr><th>Key</th><th>Purpose</th></tr>
+    <tr><td><code>extends.contract</code></td><td>For an app that uses a design system from a package: the folder holding the contract the package ships. <code>compile</code> starts from it and adds your own patterns, policies and decisions. See <a href="#integrate">Add it to your project</a>.</td></tr>
     <tr><td><code>validation.rules</code></td><td>Severity or <code>off</code> per rule code. Unknown codes are rejected with a suggestion.</td></tr>
     <tr><td><code>validation.failOn</code></td><td>Default failing threshold for <code>validate</code>.</td></tr>
     <tr><td><code>validation.ignore</code></td><td>Globs <code>validate</code> skips.</td></tr>

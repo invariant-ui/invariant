@@ -56,7 +56,7 @@ Fastest path, with nothing to install first. In your project:
 npx invariant-ui setup
 ```
 
-It compiles your design system, proposes patterns from your code, connects your AI tool and records a baseline, asking a few questions. Nothing is approved until you confirm the contract. To keep the command, run `npm install -g invariant-ui`, then `invariant setup`.
+It compiles your design system, finds the patterns your code already repeats, and shows one plan. Answer yes once and it approves the patterns, turns on starter rules (as warnings), connects your AI tool, baselines existing violations and adds a GitHub Action. In a design system repository it also makes the published package carry the contract. Nothing is approved until you confirm the contract. To keep the command, run `npm install -g invariant-ui`, then `invariant setup`.
 
 From a source checkout, or one step at a time:
 
@@ -91,6 +91,11 @@ Compiling writes these files to the `invariant/` folder:
 | `invariant.manifest.json` | Tool version and a hash of every file |
 
 Compiling unchanged sources gives identical output, so the files are safe to commit and diff.
+
+## Use it in your project
+
+- **The design system is in your repo** (a package in a monorepo, or the repo itself): run `npx invariant-ui setup` at the root.
+- **Your app uses a design system from npm:** the design system's repo compiles a contract and publishes its `invariant/` folder with the package. In your app, install the package and run `npx invariant-ui setup`. It finds the shipped contract, adds your own patterns on top, and writes a config with `"extends": { "contract": "node_modules/<package>/invariant" }`. `verify --fresh` flags the contract as stale when you upgrade the library.
 
 ## Configuration
 

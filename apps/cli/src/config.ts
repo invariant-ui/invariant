@@ -48,6 +48,12 @@ export const configSchema = z.strictObject({
     })
   ),
   output: z.strictObject({ directory: relPath }).optional(),
+  /**
+   * For an application that uses a design system it does not contain: the folder holding the contract the library
+   * ships (for example `node_modules/@acme/ui/invariant`). `compile` then starts from that contract instead of reading
+   * sources, and adds this project's own patterns, policies and decisions on top.
+   */
+  extends: z.strictObject({ contract: relPath }).optional(),
   validation: z
     .strictObject({
       /** Severity per rule code, or `off`. See `invariant rules`. */

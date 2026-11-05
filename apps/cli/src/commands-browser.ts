@@ -14,7 +14,7 @@ import {
   runBrowserChecks,
   summarizeBrowser
 } from "@invariant/browser-verify"
-import { type Context, json, outputDir, print } from "./commands.js"
+import { type Context, json, outputDir, print, writableDir } from "./commands.js"
 import { CliError } from "./errors.js"
 import { table } from "./format.js"
 import { loadCompiled } from "./store.js"
@@ -86,7 +86,7 @@ export async function browser(c: Context): Promise<number> {
     notes,
     results
   }
-  const dir = await outputDir(c)
+  const dir = await writableDir(c)
   mkdirSync(dir, { recursive: true })
   writeFileSync(path.join(dir, BROWSER_RESULTS_FILE), `${JSON.stringify(report, null, 2)}\n`)
 

@@ -42,6 +42,25 @@ const definitionDraft = z.strictObject({
 })
 export type DefinitionDraft = z.infer<typeof definitionDraft>
 
+/** The shape of an arrangement as data, to the depth it was compared at. `optional` is conditional or repeated. */
+export interface ShapeTree {
+  id: string
+  name: string
+  optional: boolean
+  /** Something other than the elements seen may supply its children, so what is inside it is incomplete. */
+  opaque: boolean
+  children: ShapeTree[]
+}
+const shapeTree: z.ZodType<ShapeTree> = z.lazy(() =>
+  z.strictObject({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    optional: z.boolean(),
+    opaque: z.boolean(),
+    children: z.array(shapeTree)
+  })
+)
+
 const featureCount = z.strictObject({ feature: z.string().min(1), files: z.number().int().positive() })
 
 export const reviewSchema = z.strictObject({
@@ -87,7 +106,9 @@ export const candidateSchema = z.strictObject({
     common: z.array(z.string()),
     frequent: z.array(featureCount),
     variable: z.array(featureCount),
-    variableTruncated: z.boolean()
+    variableTruncated: z.boolean(),
+    /** `arrangement` only: the same shape as `key`, as data. */
+    tree: shapeTree.optional()
   }),
   evidence: z.array(occurrence).min(1),
   evidenceTruncated: z.boolean(),

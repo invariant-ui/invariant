@@ -123,7 +123,7 @@ export async function validate(c: Context): Promise<number> {
     const total = baseline.violations.reduce((n, v) => n + v.count, 0)
     print(
       c,
-      `wrote ${BASELINE_FILE}: ${total} existing violation(s) in ${unique.length} file(s) are now hidden. New violations still fail. Commit the file, and fix the old ones when you can.`
+      `wrote ${BASELINE_FILE}: ${total} existing violation(s) in ${unique.length} file(s) are now hidden. New violations are still reported. Commit the file, and fix the old ones when you can.`
     )
     return 0
   }
