@@ -522,3 +522,17 @@ describe("golden output", () => {
     for (const f of readdirSync(golden)) expect(read(out, f), f).toBe(read(golden, f))
   })
 })
+
+describe("declarations sources", () => {
+  it("accepts declarations with a path and rejects it without one", async () => {
+    const { validateConfig } = await import("./config.js")
+    const ok = validateConfig({
+      name: "x",
+      sources: [{ id: "ui", type: "react", path: "node_modules/@acme/ui", declarations: true }]
+    })
+    expect(ok.sources[0]?.declarations).toBe(true)
+    expect(() =>
+      validateConfig({ name: "x", sources: [{ id: "ui", type: "react", declarations: true }] })
+    ).toThrow(/declarations but has no path/)
+  })
+})

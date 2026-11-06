@@ -47,6 +47,21 @@ const FC_TYPES = new Set([
   "VFC",
   "React.VFC"
 ])
+/** Types a declaration file gives a component constant, and whether the first type argument is its props. */
+const DECLARED_COMPONENT_TYPES: Record<string, { kind: "function" | "forwardRef" }> = {
+  ForwardRefExoticComponent: { kind: "forwardRef" },
+  ExoticComponent: { kind: "function" },
+  NamedExoticComponent: { kind: "function" },
+  ComponentType: { kind: "function" },
+  ComponentClass: { kind: "function" },
+  FC: { kind: "function" },
+  FunctionComponent: { kind: "function" },
+  VFC: { kind: "function" }
+}
+const REACT_PREFIX = String.raw`(?:React\.|import\(["']react["']\)\.)?`
+const JSX_RETURN = new RegExp(
+  `^(?:${REACT_PREFIX}JSX\\.Element|${REACT_PREFIX}ReactElement(?:<[\\s\\S]*>)?|${REACT_PREFIX}ReactNode)$`
+)
 const STYLED_MODULES: Record<string, "styled-components" | "emotion"> = {
   "styled-components": "styled-components",
   "@emotion/styled": "emotion"
@@ -68,6 +83,12 @@ export function classifyDeclaration(
   if (ts.isFunctionDeclaration(decl)) {
     const name = decl.name?.text ?? displayHint
     if (isComponentFunction(decl, name))
+      return finish(
+        { decl, name, kind: "function", wrappers: [], impl: decl, propsUnknown: false, subcomponents: [] },
+        decl
+      )
+    // `export declare function Card(props: P): JSX.Element`: a declaration file has no body to read JSX from.
+    if (isDeclaredComponentFunction(decl, name))
       return finish(
         { decl, name, kind: "function", wrappers: [], impl: decl, propsUnknown: false, subcomponents: [] },
         decl
@@ -104,7 +125,22 @@ export function classifyDeclaration(
       if (fcProps && !fromInit.propsTypeNode) fromInit.propsTypeNode = fcProps
       return finish(fromInit, decl)
     }
-    return undefined
+    // `export declare const Button: ForwardRefExoticComponent<P & RefAttributes<T>>`
+    const declared =
+      !decl.initializer && decl.type ? declaredComponent(checker, decl.type, name, decl) : undefined
+    return declared ? finish(declared, decl) : undefined
+  }
+  // A member of a declared compound object: `Item: (props: P) => JSX.Element`.
+  if (ts.isPropertySignature(decl) && decl.type) {
+    if (ts.isTypeQueryNode(decl.type)) {
+      const query = decl.type.exprName
+      const symbol = checker.getSymbolAtLocation(ts.isQualifiedName(query) ? query.right : query)
+      const target = declarationOf(resolveSymbol(checker, symbol))
+      return target && target !== decl
+        ? classifyDeclaration(checker, target, displayHint, depth + 1)
+        : undefined
+    }
+    return declaredComponent(checker, decl.type, displayHint, decl)
   }
   if (ts.isClassDeclaration(decl)) {
     const base = componentBase(decl)
@@ -228,6 +264,175 @@ function classifyExpression(
     }
   }
   return undefined
+}
+
+/**
+ * A declaration file's compound object, `declare const Dialog: { Root: typeof DialogRoot; Title: typeof DialogTitle }`.
+ * It is a namespace, not a component, so only its members are returned (named `Dialog.Root` by the caller).
+ */
+export function classifyCompound(
+  checker: ts.TypeChecker,
+  decl: ts.Node,
+  name: string
+): Array<{ key: string; candidate: Candidate }> | undefined {
+  if (!ts.isVariableDeclaration(decl) || decl.initializer || !decl.type || !ts.isTypeLiteralNode(decl.type))
+    return undefined
+  if (!PASCAL.test(name)) return undefined
+  const out: Array<{ key: string; candidate: Candidate }> = []
+  for (const member of decl.type.members) {
+    if (!ts.isPropertySignature(member) || !member.type) continue
+    if (!member.name || !(ts.isIdentifier(member.name) || ts.isStringLiteralLike(member.name))) continue
+    const key = member.name.text
+    if (!PASCAL.test(key)) continue
+    let candidate: Candidate | HocFinding | undefined
+    if (ts.isTypeQueryNode(member.type)) {
+      const query = member.type.exprName
+      const symbol = checker.getSymbolAtLocation(ts.isQualifiedName(query) ? query.right : query)
+      const target = declarationOf(resolveSymbol(checker, symbol))
+      candidate = target ? classifyDeclaration(checker, target, key) : undefined
+    } else candidate = declaredComponent(checker, member.type, key, member)
+    if (candidate && !("hoc" in candidate)) out.push({ key, candidate })
+  }
+  return out.length > 0 ? out : undefined
+}
+
+function unparen(type: ts.TypeNode): ts.TypeNode {
+  return ts.isParenthesizedTypeNode(type) ? unparen(type.type) : type
+}
+
+/** The name and type arguments of `Foo<P>`, `React.Foo<P>` and `import('react').Foo<P>`. */
+function refInfo(type: ts.TypeNode): { name: string; typeArguments?: ts.NodeArray<ts.TypeNode> } | undefined {
+  if (ts.isTypeReferenceNode(type)) {
+    const n = type.typeName
+    return {
+      name: ts.isQualifiedName(n) ? n.right.text : n.text,
+      ...(type.typeArguments ? { typeArguments: type.typeArguments } : {})
+    }
+  }
+  if (ts.isImportTypeNode(type) && type.qualifier) {
+    const q = type.qualifier
+    return {
+      name: ts.isQualifiedName(q) ? q.right.text : q.text,
+      ...(type.typeArguments ? { typeArguments: type.typeArguments } : {})
+    }
+  }
+  return undefined
+}
+
+function returnsJsxType(type: ts.TypeNode | undefined): boolean {
+  if (!type) return false
+  return JSX_RETURN.test(type.getText().replace(/\s*\|\s*(?:null|undefined)/g, ""))
+}
+
+function isDeclaredComponentFunction(fn: ts.FunctionDeclaration, name: string): boolean {
+  return PASCAL.test(name) && !fn.body && fn.parameters.length <= 1 && returnsJsxType(fn.type)
+}
+
+/**
+ * A component declared by its type in a declaration file, where there is no body to read JSX from:
+ * `React.ForwardRefExoticComponent<P & RefAttributes<T>>`, `React.FC<P>`, an arrow type `(props: P) => JSX.Element`,
+ * a callable object `{ (props: P): JSX.Element; Item: … }` (its Pascal-case members are subcomponents), or an alias of those.
+ */
+export function declaredComponent(
+  checker: ts.TypeChecker,
+  type: ts.TypeNode,
+  name: string,
+  decl: ts.Node,
+  depth = 0
+): Candidate | undefined {
+  if (depth > 4 || !PASCAL.test(name)) return undefined
+  const t = unparen(type)
+  const make = (extra: Partial<Candidate>): Candidate => ({
+    decl,
+    name,
+    kind: "function",
+    wrappers: [],
+    propsUnknown: false,
+    subcomponents: [],
+    ...extra
+  })
+  if (ts.isFunctionTypeNode(t)) {
+    if (t.parameters.length > 1 || !returnsJsxType(t.type)) return undefined
+    const props = t.parameters[0]?.type
+    return make(props ? { propsTypeNode: props } : {})
+  }
+  if (ts.isTypeLiteralNode(t)) {
+    const call = t.members.find(ts.isCallSignatureDeclaration)
+    if (!call || call.parameters.length > 1 || !returnsJsxType(call.type)) return undefined
+    const props = call.parameters[0]?.type
+    const subcomponents: Candidate["subcomponents"] = []
+    for (const member of t.members) {
+      if (!ts.isPropertySignature(member) || !member.type || !member.name) continue
+      if (!(ts.isIdentifier(member.name) || ts.isStringLiteralLike(member.name))) continue
+      const key = member.name.text
+      if (PASCAL.test(key) && declaredComponent(checker, member.type, key, member, depth + 1))
+        subcomponents.push({ key, target: member })
+    }
+    return make({ ...(props ? { propsTypeNode: props } : {}), subcomponents })
+  }
+  const ref = refInfo(t)
+  if (!ref) return undefined
+  const known = DECLARED_COMPONENT_TYPES[ref.name]
+  const fromKnown = known ? knownComponent(known, ref.typeArguments, make) : undefined
+  if (fromKnown) return fromKnown
+  if (!known && ts.isTypeReferenceNode(t)) {
+    const target = declarationOf(resolveSymbol(checker, checker.getSymbolAtLocation(t.typeName)))
+    // `type TableSelectComponent = { (props: P): JSX.Element; Option: … }`
+    if (target && ts.isTypeAliasDeclaration(target))
+      return declaredComponent(checker, target.type, name, decl, depth + 1)
+    // `interface X extends React.ForwardRefExoticComponent<P> { Item: typeof Item }`
+    if (target && ts.isInterfaceDeclaration(target)) {
+      for (const heritage of target.heritageClauses ?? []) {
+        if (heritage.token !== ts.SyntaxKind.ExtendsKeyword) continue
+        for (const base of heritage.types) {
+          const baseKnown = DECLARED_COMPONENT_TYPES[base.expression.getText().split(".").pop() ?? ""]
+          const candidate = baseKnown ? knownComponent(baseKnown, base.typeArguments, make) : undefined
+          if (!candidate) continue
+          for (const member of target.members) {
+            if (!ts.isPropertySignature(member) || !member.type || !member.name) continue
+            if (!(ts.isIdentifier(member.name) || ts.isStringLiteralLike(member.name))) continue
+            const key = member.name.text
+            if (!PASCAL.test(key)) continue
+            if (
+              ts.isTypeQueryNode(member.type) ||
+              declaredComponent(checker, member.type, key, member, depth + 1)
+            )
+              candidate.subcomponents.push({ key, target: member })
+          }
+          return candidate
+        }
+      }
+    }
+  }
+  return undefined
+}
+
+/** A component typed as one of the React component types, with its props from the first type argument. */
+function knownComponent(
+  known: { kind: "function" | "forwardRef" },
+  typeArguments: ts.NodeArray<ts.TypeNode> | undefined,
+  make: (extra: Partial<Candidate>) => Candidate
+): Candidate | undefined {
+  const props = typeArguments?.[0]
+  if (!props) return undefined
+  // `P & RefAttributes<T>` is how forwardRef components declare their ref: it is not part of the props.
+  let propsTypeNode: ts.TypeNode = props
+  let refTypeText: string | undefined
+  if (ts.isIntersectionTypeNode(props)) {
+    const isRef = (n: ts.TypeNode): boolean => refInfo(n)?.name === "RefAttributes"
+    const refs = props.types.filter(isRef)
+    const rest = props.types.filter((n) => !isRef(n))
+    if (refs.length === 1 && rest.length === 1) {
+      propsTypeNode = rest[0] as ts.TypeNode
+      refTypeText = refInfo(refs[0] as ts.TypeNode)?.typeArguments?.[0]?.getText()
+    }
+  }
+  return make({
+    kind: known.kind,
+    wrappers: known.kind === "forwardRef" ? ["forwardRef"] : [],
+    propsTypeNode,
+    ...(refTypeText ? { refTypeText } : {})
+  })
 }
 
 /** Adds `Root.displayName = "…"` and `Root.Item = Item` information found next to the declaration. */

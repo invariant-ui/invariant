@@ -227,3 +227,25 @@ describe("the spec", () => {
     ])
   })
 })
+
+describe("loading Playwright", () => {
+  it("finds the browsers on a CommonJS module whose exports Node cannot see", async () => {
+    const { mkdtempSync, mkdirSync, writeFileSync } = await import("node:fs")
+    const { tmpdir } = await import("node:os")
+    const { join } = await import("node:path")
+    const { playwrightDriver } = await import("./playwright.js")
+    const root = mkdtempSync(join(tmpdir(), "invariant-pw-"))
+    mkdirSync(join(root, "node_modules", "playwright"), { recursive: true })
+    writeFileSync(
+      join(root, "node_modules", "playwright", "package.json"),
+      '{"name":"playwright","main":"index.js"}'
+    )
+    // Assembled at run time, like Playwright's own index: no static named exports for Node to find.
+    writeFileSync(
+      join(root, "node_modules", "playwright", "index.js"),
+      'module.exports = Object.assign({}, { chromium: { launch: async () => { throw new Error("fake launch") } } })\n'
+    )
+    await expect(playwrightDriver("chromium", root)).rejects.toThrow(/could not start chromium: fake launch/)
+    await expect(playwrightDriver("firefox", root)).rejects.toThrow(/has no firefox/)
+  })
+})

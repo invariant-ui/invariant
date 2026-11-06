@@ -536,3 +536,88 @@ describe("adapter behavior", () => {
     expect(result.irDocuments[0]?.evidence.some((e) => e.method === "llm-assisted")).toBe(false)
   })
 })
+
+describe("declaration files", () => {
+  const dts = `import * as React from "react";
+export interface ButtonProps {
+  variant: "primary" | "secondary";
+  size?: "sm" | "md";
+}
+export declare const Button: React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+export declare function Card(props: { title: string; children?: React.ReactNode }): React.JSX.Element;
+export declare const Badge: React.FC<{ tone: "neutral" | "brand" }>;
+export declare class LegacyPanel extends React.Component<{ open: boolean }> {
+  render(): React.ReactNode;
+}
+declare function DialogRoot(props: { open?: boolean }): React.JSX.Element;
+declare function DialogTitle(props: { children?: React.ReactNode }): React.JSX.Element;
+export declare const Dialog: { Root: typeof DialogRoot; Title: typeof DialogTitle };
+export declare function useToast(): { show(msg: string): void };
+export declare function helper(input: string): string;
+export declare const VERSION: string;
+export type Tone = "neutral" | "brand";
+export {};
+`
+
+  it("detects components by their declared types, not by a body", async () => {
+    const { names, facts, codes } = await run({ "index.d.ts": dts }, { exports: "./index.d.ts" })
+    expect(names).toEqual(
+      expect.arrayContaining(["Button", "Card", "Badge", "LegacyPanel", "Dialog.Root", "Dialog.Title"])
+    )
+    // Hooks, plain functions, constants and types are not components, and the compound object is not one itself.
+    for (const not of ["useToast", "helper", "VERSION", "Tone", "ButtonProps", "Dialog"])
+      expect(names).not.toContain(not)
+    expect(codes).not.toContain("react.entry-not-analyzed")
+    const button = facts("Button")
+    expect(button["props.variant.allowedValues"]).toEqual(["primary", "secondary"])
+    expect(button["implementations.react.extensions.react.refType"]).toBe("HTMLButtonElement")
+    // The ref comes from RefAttributes, so it is not one of the component's props.
+    expect(Object.keys(button).some((p) => p.startsWith("props.ref"))).toBe(false)
+  })
+})
+
+describe("declaration files: more declared forms", () => {
+  const dts = `import { default as React } from "react";
+export interface AlertProps { kind?: "info" | "error"; }
+declare const Alert: ({ kind }: AlertProps) => React.JSX.Element;
+export interface TableProps { density?: "compact" | "loose"; }
+declare const Table: {
+  ({ density }: TableProps): React.JSX.Element;
+  Header: ({ children }: { children: React.ReactNode }) => React.JSX.Element;
+  Row: { ({ id }: { id: string }): import("react").JSX.Element; displayName: string; Cell: React.FC<{ span?: number }> };
+};
+declare function ItemImpl(props: { value: string }): React.JSX.Element;
+interface SelectComponent extends React.ForwardRefExoticComponent<{ label: string } & React.RefAttributes<HTMLInputElement>> {
+  Item: typeof ItemImpl;
+}
+declare const Select: SelectComponent;
+declare const Field: {
+  Text: React.ForwardRefExoticComponent<{ label: string } & React.RefAttributes<HTMLInputElement>>;
+  Date: { ({ label }: { label: string }): React.JSX.Element; displayName: string };
+};
+declare const notAComponent: () => string;
+declare const Config: { (input: string): string; Extra: number };
+export { Alert, Table, Select, Field, notAComponent, Config };
+`
+
+  it("detects arrow-typed components, callable objects with nested members, interface-extended components, and namespaces", async () => {
+    const { names, facts } = await run({ "index.d.ts": dts }, { exports: "./index.d.ts" })
+    expect(names).toEqual(
+      expect.arrayContaining([
+        "Alert",
+        "Table",
+        "Table.Header",
+        "Table.Row",
+        "Table.Row.Cell",
+        "Select",
+        "Select.Item",
+        "Field.Text",
+        "Field.Date"
+      ])
+    )
+    for (const not of ["Field", "notAComponent", "Config"]) expect(names).not.toContain(not)
+    expect(facts("Alert")["props.kind.allowedValues"]).toEqual(["info", "error"])
+    expect(facts("Table")["props.density.allowedValues"]).toEqual(["compact", "loose"])
+    expect(Object.keys(facts("Select.Item")).some((p) => p.startsWith("props.value"))).toBe(true)
+  })
+})

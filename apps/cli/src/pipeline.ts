@@ -220,7 +220,13 @@ function mapSources(config: InvariantConfig, compiled: CompileResult): SourceMap
 /** discover, extract, reconcile, enrich, verify and render. Reads the project; writes nothing. */
 export async function runPipeline(input: PipelineInput): Promise<PipelineResult> {
   const { config, clock } = input
-  const compiled = await compile({ fs: nodeFs(input.cwd), adapters: adaptersFor(config), clock })
+  const declarationRoots = config.sources.flatMap((s) => (s.declarations && s.path ? [s.path] : []))
+  const compiled = await compile({
+    fs: nodeFs(input.cwd),
+    adapters: adaptersFor(config),
+    clock,
+    ...(declarationRoots.length > 0 ? { discovery: { declarationRoots } } : {})
+  })
   const reconciled = reconcile(compiled.irDocuments, {
     name: config.name,
     ...(config.contractId ? { contractId: config.contractId } : {}),

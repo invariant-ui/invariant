@@ -27,6 +27,7 @@ export async function discoverPackages(
   const selected = manifestPaths.filter((manifest) => {
     const dir = posix.dirname(manifest)
     if (dir === ".") return true
+    if (env.declarationRoots?.has(dir)) return true
     // An ng-packagr library root (a package.json next to an ng-package.json) is a package even when the
     // repository declares no workspaces: its source lives in a subfolder such as `src/`.
     if (env.fileSet.has(posix.join(dir, "ng-package.json"))) return true
