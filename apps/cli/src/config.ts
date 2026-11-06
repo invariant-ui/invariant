@@ -44,7 +44,12 @@ export const configSchema = z.strictObject({
       id: z.string().regex(slugRe).max(64),
       type: z.enum(SOURCE_TYPES),
       /** Limits the entry to sources found at or below this directory. Omitted means the whole project. */
-      path: relPath.optional()
+      path: relPath.optional(),
+      /**
+       * Read the installed package at `path` (for example `node_modules/@acme/ui`) as a source, although it
+       * sits under node_modules. Needs `path`.
+       */
+      declarations: z.boolean().optional()
     })
   ),
   output: z.strictObject({ directory: relPath }).optional(),
@@ -108,6 +113,8 @@ export function validateConfig(raw: unknown): InvariantConfig {
   }
   const ids = new Set<string>()
   for (const s of parsed.data.sources) {
+    if (s.declarations && s.path === undefined)
+      throw new CliError(`invalid configuration: source "${s.id}" sets declarations but has no path`)
     if (ids.has(s.id)) throw new CliError(`invalid configuration: duplicate source id "${s.id}"`)
     ids.add(s.id)
   }

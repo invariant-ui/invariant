@@ -21,7 +21,7 @@ import {
   type SlotInfo,
   slotsOf
 } from "./behavior.js"
-import { type Candidate, classifyDeclaration } from "./detect.js"
+import { type Candidate, classifyCompound, classifyDeclaration } from "./detect.js"
 import { extractProps, type PropsResult } from "./props.js"
 import { type StylingInfo, stylingOf } from "./styling.js"
 import { analyzeUsage, type UsageStats } from "./usage.js"
@@ -106,6 +106,22 @@ export function analyzePackage(input: PackageInput): PackageAnalysis {
         exported.name === "default" ? baseName(decl) : exported.name
       )
       if (!result) {
+        // A declaration file's `{ Root: typeof X }` object: its members are the components.
+        const compound = classifyCompound(
+          checker,
+          decl,
+          exported.name === "default" ? baseName(decl) : exported.name
+        )
+        if (compound) {
+          for (const { key, candidate } of compound) {
+            const displayName = `${exported.name}.${key}`
+            const existingChild = candidates.get(candidate.decl)
+            const exportEntry = { subpath: entry.subpath, name: displayName }
+            if (existingChild) existingChild.exports.push(exportEntry)
+            else candidates.set(candidate.decl, { ...candidate, displayName, exports: [exportEntry] })
+          }
+          continue
+        }
         if (looksLikeFactoryComponent(decl, exported.name)) {
           note(
             "info",
@@ -135,15 +151,19 @@ export function analyzePackage(input: PackageInput): PackageAnalysis {
   // 2. Compound children become components of their own, named `Parent.Child`.
   const parents = new Map<Candidate, Candidate>()
   const children: Array<Candidate & { exports: Array<{ subpath: string; name: string }> }> = []
-  for (const parent of [...candidates.values()]) {
+  const queue: Candidate[] = [...candidates.values()]
+  for (let i = 0; i < queue.length; i++) {
+    const parent = queue[i] as Candidate
     for (const sub of parent.subcomponents) {
-      const decl = subTarget(checker, sub.target)
+      // A declaration file's `Item: (props: P) => JSX.Element` member is its own declaration.
+      const decl = ts.isPropertySignature(sub.target) ? sub.target : subTarget(checker, sub.target)
       if (!decl) continue
       const child = classifyDeclaration(checker, decl, sub.key)
       if (!child || "hoc" in child || candidates.has(child.decl)) continue
       const named = { ...child, displayName: `${parent.displayName ?? parent.name}.${sub.key}`, exports: [] }
       parents.set(named, parent)
       children.push(named)
+      queue.push(named)
     }
   }
   for (const child of children) candidates.set(child.decl, child)

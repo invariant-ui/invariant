@@ -627,3 +627,43 @@ describe("limits and determinism", () => {
     expect(await discover(reversed)).toEqual(await discover(files))
   })
 })
+
+describe("declaration roots", () => {
+  const files = {
+    "package.json": pkg({ name: "app", dependencies: { "@acme/ui": "1.0.0" } }),
+    "node_modules/@acme/ui/package.json": pkg({
+      name: "@acme/ui",
+      version: "1.0.0",
+      types: "dist/index.d.ts",
+      peerDependencies: { react: "*" }
+    }),
+    "node_modules/@acme/ui/dist/index.d.ts": "export declare const x: number;",
+    "node_modules/@acme/ui/node_modules/dep/package.json": pkg({ name: "dep" }),
+    "node_modules/other/package.json": pkg({ name: "other" })
+  }
+
+  it("ignores installed packages by default", async () => {
+    const d = await discover(files)
+    expect(d.packages.map((p) => p.name)).toEqual(["app"])
+  })
+
+  it("reads only the opted-in package, including its build output, and not its own dependencies", async () => {
+    const d = await discover(files, { declarationRoots: ["node_modules/@acme/ui"] })
+    expect(d.packages.map((p) => p.name)).toEqual(["app", "@acme/ui"])
+    const ui = d.packages.find((p) => p.name === "@acme/ui")
+    expect(ui?.dir).toBe("node_modules/@acme/ui")
+    expect(ui?.entryPoints[0]).toMatchObject({
+      resolution: expect.not.stringMatching(/unresolved/),
+      file: "node_modules/@acme/ui/dist/index.d.ts"
+    })
+    expect(d.packages.some((p) => p.name === "dep" || p.name === "other")).toBe(false)
+  })
+
+  it("warns when the root is missing", async () => {
+    const d = await discover(
+      { "package.json": pkg({ name: "app" }) },
+      { declarationRoots: ["node_modules/nope"] }
+    )
+    expect(codes(d)).toContain("discovery.declaration-root-missing")
+  })
+})

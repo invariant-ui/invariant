@@ -68,7 +68,10 @@ async function loadPlaywright(projectRoot: string): Promise<PwModule> {
   } catch {
     throw new PlaywrightMissing(INSTALL_HINT)
   }
-  return (await import(pathToFileURL(file).href)) as PwModule
+  const mod = (await import(pathToFileURL(file).href)) as PwModule & { default?: PwModule }
+  // Playwright is CommonJS and assembles its exports at run time, so Node finds no named exports in it:
+  // the browsers are on `default`.
+  return mod.chromium || mod.firefox || mod.webkit ? mod : (mod.default ?? mod)
 }
 
 function handle(page: PwPage, context: PwContext, timeoutMs: number): PageHandle {

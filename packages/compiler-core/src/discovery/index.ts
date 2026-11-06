@@ -16,7 +16,17 @@ export interface DiscoverOptions {
   /** Extra directory names to skip, added to the defaults (node_modules, dist, .git, ...). */
   ignoreDirs?: readonly string[]
   limits?: Partial<DiscoveryLimits>
+  /**
+   * Project-relative directories of installed packages to read as packages although they sit under an
+   * ignored directory such as `node_modules` (for example `node_modules/@acme/ui`). Opt-in per package,
+   * because reading dependencies is never the default. Inside these, build output (`dist`, `build`, `out`)
+   * is read too, since that is where a published package keeps its declaration files.
+   */
+  declarationRoots?: readonly string[]
 }
+
+/** Build output folders: ignored in a project, but the content of a published package. */
+const BUILD_OUTPUT_DIRS = ["dist", "build", "out"]
 
 /**
  * Framework-neutral project discovery: packages, workspaces, package manager, frameworks and
@@ -34,10 +44,39 @@ export async function discoverProject(options: DiscoverOptions): Promise<Project
       `Stopped after ${limits.maxFiles} files; discovery is incomplete`
     )
   }
+  const roots = new Set(
+    (options.declarationRoots ?? []).map((r) => r.replace(/^\.\//, "").replace(/\/+$/, ""))
+  )
+  const files = new Set(walked.files)
+  const packageIgnore = new Set([...ignore].filter((d) => !BUILD_OUTPUT_DIRS.includes(d)))
+  for (const root of [...roots].sort()) {
+    try {
+      await options.fs.readDir(root)
+    } catch {
+      diagnostics.warning(
+        "discovery.declaration-root-missing",
+        `${root} was not found; is the package installed?`
+      )
+      continue
+    }
+    const inside = await walk(options.fs, {
+      ignoreDirs: packageIgnore,
+      maxFiles: limits.maxFiles,
+      start: root
+    })
+    if (inside.truncated)
+      diagnostics.warning(
+        "discovery.walk-truncated",
+        `Stopped reading ${root} after ${limits.maxFiles} files`
+      )
+    for (const file of inside.files) files.add(file)
+  }
+  const allFiles = [...files].sort()
   const env = {
     fs: options.fs,
-    files: walked.files,
-    fileSet: new Set(walked.files),
+    files: allFiles,
+    fileSet: files as ReadonlySet<string>,
+    declarationRoots: roots,
     ignoreDirs: ignore,
     diagnostics,
     limits
@@ -65,7 +104,7 @@ export async function discoverProject(options: DiscoverOptions): Promise<Project
     tokenFiles,
     docFiles,
     graph: buildGraph({ packages, storybooks, tokenFiles, docFiles }),
-    stats: { filesScanned: walked.files.length, truncated: walked.truncated },
+    stats: { filesScanned: allFiles.length, truncated: walked.truncated },
     diagnostics: diagnostics.toArray()
   }
   return projectDiscoverySchema.parse(result)

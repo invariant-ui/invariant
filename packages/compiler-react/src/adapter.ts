@@ -118,8 +118,14 @@ async function readPackageFiles(
   pkg: PackageInfo,
   nested: readonly PackageInfo[]
 ): Promise<{ files: Map<string, string>; hashes: Array<[string, string]> }> {
+  // An installed package (opted in through a declaration root) keeps its declaration files in build output.
+  const installed = pkg.dir.split("/").includes("node_modules")
   const walked = await walk(fs, {
-    ignoreDirs: new Set(DEFAULT_IGNORED_DIRS),
+    ignoreDirs: new Set(
+      installed
+        ? DEFAULT_IGNORED_DIRS.filter((d) => !["dist", "build", "out"].includes(d))
+        : DEFAULT_IGNORED_DIRS
+    ),
     maxFiles: 20_000,
     start: pkg.dir
   })

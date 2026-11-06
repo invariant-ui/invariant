@@ -9,6 +9,8 @@ export interface DiscoveryEnv {
   files: readonly string[]
   fileSet: ReadonlySet<string>
   ignoreDirs: ReadonlySet<string>
+  /** Directories read although they sit under an ignored directory, and always treated as packages. See `DiscoverOptions`. */
+  declarationRoots?: ReadonlySet<string>
   diagnostics: DiagnosticCollector
   limits: DiscoveryLimits
 }
