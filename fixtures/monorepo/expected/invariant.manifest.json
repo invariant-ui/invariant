@@ -1,14 +1,14 @@
 {
   "artifacts": [
     {
-      "bytes": 692,
+      "bytes": 710,
       "path": "invariant.diagnostics.json",
-      "sha256": "868ca88db1a24dfbe90d43ad019192a1ca2c043ef8f6c30f5234c74351e9a761"
+      "sha256": "48774e066a544d80be3f5418144b51e95b0f0c1bf23bf1bb3dcf3ce74ca412f8"
     },
     {
-      "bytes": 29933,
+      "bytes": 29951,
       "path": "invariant.project.json",
-      "sha256": "ee7c0f0fd46d0bef06b5a82bb0d847a9ea2f0d0b7abdee994bbe6f9b86b81765"
+      "sha256": "2aa36d19b2a9d0408191b1671134471437f32fe3ffa1bd373629085da41a604b"
     },
     {
       "bytes": 1895,
@@ -51,9 +51,9 @@
       "sha256": "ca8bc98ec2d057893003aa76ae90dacb5f6252e513936f670b1a3d38ce101777"
     },
     {
-      "bytes": 20842,
+      "bytes": 20860,
       "path": "ir/npm-acme-ui-react.ir.json",
-      "sha256": "03034b557c380b8e8f2106622a2a8abefadf7f758c9f2fa114e1e6b486a4d565"
+      "sha256": "11a2ad3cf36689305e5171bcaca6802208b3737161716679acc99be7a3b6b636"
     },
     {
       "bytes": 9374,
@@ -157,7 +157,7 @@
       "completeness": "complete",
       "id": "npm-acme-ui-react",
       "inputHash": "93e513ff8e58254bf9cc567d8780037c2a3f3ded37050da68a446d9d07ce9e32",
-      "irContentHash": "c25ae4a4db7cd8c2e04403a3594ede0eb66da9beced0c46f68dbb6e2453f2af6",
+      "irContentHash": "d384c52fdb7d592b02bc49b4527f4de4c3b3273fc23bcb7c0cf34c685f1336a7",
       "type": "npm"
     },
     {

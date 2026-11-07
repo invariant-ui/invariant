@@ -487,3 +487,52 @@ type __VLS_WithTemplateSlots<T, S> = T & { new (): { $slots: S } };
     expect(Object.keys(tag).some((p) => p.startsWith("events.close"))).toBe(true)
   })
 })
+
+describe("declaration files: library wrapper types", () => {
+  // No `vue` peer dependency, like PrimeVue: the configured source type says it is a Vue package.
+  const files: Record<string, string> = {
+    "package.json": JSON.stringify({ name: "@acme/wrapped", version: "1.0.0", types: "./index.d.ts" }),
+    "index.d.ts": `import type { DefineComponent, CreateComponentPublicInstanceWithMixins } from "vue";
+type SFCWithInstall<T> = T & { install(app: unknown): void };
+declare const _default: DefineComponent<{ tone?: "info" | "warn" }, {}, {}, {}, {}, any, any, {}, string>;
+export declare const ElAlert: SFCWithInstall<typeof _default>;
+export declare const VChip: {
+  new (...args: any[]): CreateComponentPublicInstanceWithMixins<{ size: "sm" | "md" } & { label?: string }, {}, {}, {}, {}, any, any, {}, string>;
+};
+export declare const VERSION: string;
+export {};
+`
+  }
+
+  async function runWrapped(declaredFrameworks?: Record<string, "vue">) {
+    const root = "node_modules/@acme/wrapped"
+    const result = await compile({
+      fs: memoryFs({
+        "package.json": JSON.stringify({ name: "app", dependencies: { "@acme/wrapped": "1.0.0" } }),
+        ...Object.fromEntries(Object.entries(files).map(([path, text]) => [`${root}/${path}`, text]))
+      }),
+      adapters: [adapter],
+      clock: FIXED_CLOCK,
+      discovery: { declarationRoots: [root], ...(declaredFrameworks ? { declaredFrameworks } : {}) }
+    })
+    const ir = result.irDocuments[0]
+    const facts = (name: string): Record<string, unknown> => {
+      const entity = ir?.entities.find((e) => e.name === name)
+      return Object.fromEntries(
+        (ir?.facts ?? []).filter((f) => f.subject === entity?.ref).map((f) => [f.path, f.value])
+      )
+    }
+    return { ir, facts }
+  }
+
+  it("finds nothing in a package that names no framework unless the source type is configured", async () => {
+    expect((await runWrapped()).ir).toBeUndefined()
+  })
+
+  it("reads a component behind SFCWithInstall<typeof X> and a construct-signature component", async () => {
+    const { ir, facts } = await runWrapped({ "node_modules/@acme/wrapped": "vue" })
+    expect(ir?.entities.map((e) => e.name).sort()).toEqual(["ElAlert", "VChip"])
+    expect(facts("ElAlert")["props.tone.allowedValues"]).toEqual(["info", "warn"])
+    expect(facts("VChip")["props.size.allowedValues"]).toEqual(["sm", "md"])
+  })
+})

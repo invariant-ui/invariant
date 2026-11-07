@@ -15,9 +15,15 @@ const PARSEABLE = /\.(?:[cm]?[jt]sx?)$/
  * Enumerates the names a module exports, syntactically (no type checking, no execution). Follows
  * relative `export *` and `export {…} from` chains. Whether an export is a component is NOT decided here.
  */
-export async function listExports(env: DiscoveryEnv, entryFile: string): Promise<ExportListing> {
-  const state = {
+export async function listExports(
+  env: DiscoveryEnv,
+  entryFile: string,
+  /** The package's own entry points by import specifier (`primevue/accordion`) to file: followed like relative imports. */
+  self: ReadonlyMap<string, string> = new Map()
+): Promise<ExportListing> {
+  const state: State = {
     env,
+    self,
     byName: new Map<string, ExportInfo>(),
     parsed: new Map<string, string>(),
     complete: true,
@@ -35,6 +41,7 @@ export async function listExports(env: DiscoveryEnv, entryFile: string): Promise
 
 interface State {
   env: DiscoveryEnv
+  self: ReadonlyMap<string, string>
   byName: Map<string, ExportInfo>
   parsed: Map<string, string>
   complete: boolean
@@ -93,7 +100,7 @@ async function visitModule(state: State, file: string): Promise<void> {
         statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)
           ? statement.moduleSpecifier.text
           : undefined
-      const external = spec !== undefined && !spec.startsWith(".")
+      const external = spec !== undefined && !spec.startsWith(".") && !state.self.has(spec)
       const clause = statement.exportClause
       if (!clause) {
         if (spec) stars.push(spec)
@@ -145,7 +152,7 @@ async function visitModule(state: State, file: string): Promise<void> {
   }
 
   for (const spec of stars) {
-    if (!spec.startsWith(".")) {
+    if (!spec.startsWith(".") && !state.self.has(spec)) {
       state.complete = false
       state.env.diagnostics.info(
         "discovery.external-reexport",
@@ -154,7 +161,7 @@ async function visitModule(state: State, file: string): Promise<void> {
       )
       continue
     }
-    const target = await resolveModule(state.env, file, spec)
+    const target = await resolveSpecifier(state, file, spec)
     if (!target) {
       state.complete = false
       state.env.diagnostics.warning(
@@ -166,6 +173,11 @@ async function visitModule(state: State, file: string): Promise<void> {
     }
     await visitModule(state, target)
   }
+}
+
+/** A relative path, or one of the package's own entry points imported by its name. */
+async function resolveSpecifier(state: State, from: string, spec: string): Promise<string | undefined> {
+  return spec.startsWith(".") ? resolveModule(state.env, from, spec) : state.self.get(spec)
 }
 
 async function resolveModule(env: DiscoveryEnv, from: string, spec: string): Promise<string | undefined> {
@@ -186,7 +198,7 @@ async function resolveModule(env: DiscoveryEnv, from: string, spec: string): Pro
 
 /** Looks one level into a relative module to learn whether a re-exported name is a value, type or namespace. */
 async function reexportedKind(state: State, from: string, spec: string, name: string): Promise<Kind> {
-  const target = await resolveModule(state.env, from, spec)
+  const target = await resolveSpecifier(state, from, spec)
   if (!target || !PARSEABLE.test(target)) return "unknown"
   const text = await readBounded(state.env, target)
   if (text === undefined) return "unknown"

@@ -115,7 +115,7 @@ describe("Acme monorepo fixture (React + Vue + Angular + tokens + Storybook + do
   it("reports exactly the expected diagnostics (warnings before infos)", () => {
     expect(project.diagnostics.map((d) => d.code)).toEqual([
       "discovery.storybook-dynamic-config",
-      "discovery.entry-pattern-unsupported"
+      "discovery.entry-pattern-unmatched"
     ])
   })
 

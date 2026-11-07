@@ -23,9 +23,15 @@ export interface DiscoverOptions {
    * is read too, since that is where a published package keeps its declaration files.
    */
   declarationRoots?: readonly string[]
+  /**
+   * Framework of a declaration root by its directory, for packages whose manifest names no framework (PrimeVue declares
+   * neither `vue` nor a peer): the configured source type stands in for the dependency.
+   */
+  declaredFrameworks?: Readonly<Record<string, "react" | "vue" | "angular">>
 }
 
 /** Build output folders: ignored in a project, but the content of a published package. */
+const FRAMEWORK_PACKAGE_NAME = { react: "react", vue: "vue", angular: "@angular/core" } as const
 const BUILD_OUTPUT_DIRS = ["dist", "build", "out"]
 
 /**
@@ -87,6 +93,17 @@ export async function discoverProject(options: DiscoverOptions): Promise<Project
   const packageManager = await detectPackageManager(env, root)
   for (const raw of raws) {
     raw.info.frameworks = await detectFrameworks(env, raw)
+    const configured = options.declaredFrameworks?.[raw.info.dir]
+    // shortcut: a configured framework is recorded as a `*` peer dependency; upgrade if discovery needs to tell them apart.
+    if (configured && raw.info.frameworks.length === 0)
+      raw.info.frameworks = [
+        {
+          name: configured,
+          package: FRAMEWORK_PACKAGE_NAME[configured],
+          dependencyKind: "peerDependencies",
+          declaredRange: "*"
+        }
+      ]
     raw.info.buildTools = detectBuildTools(env, raw)
     raw.info.entryPoints = await discoverEntryPoints(env, raw)
   }

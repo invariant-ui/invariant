@@ -24,15 +24,29 @@ interface Declared {
 /** Package entry points from `exports` (or main/module/types), resolved to a readable file and enumerated. */
 export async function discoverEntryPoints(env: DiscoveryEnv, raw: RawPackage): Promise<EntryPoint[]> {
   const dir = raw.info.dir
-  const declared = declaredEntries(env, raw)
+  const tsconfig = await readOutRoot(env, dir)
+  const declared = declaredEntries(env, raw, tsconfig)
   // ng-packagr libraries declare their entry in `ng-package.json` (or default to a `public-api` file),
   // not in package.json: the source manifest has no entry fields at all.
   if (declared.length === 0) declared.push(...(await angularLibraryEntry(env, dir)))
   declared.push(...(await angularSecondaryEntries(env, dir)))
-  const tsconfig = await readOutRoot(env, dir)
+  // Resolve every entry first: an entry may re-export another one through the package's own name.
+  const resolvedEntries: Array<{ declared: Declared; resolved: Awaited<ReturnType<typeof resolveTarget>> }> =
+    []
+  for (const d of declared)
+    resolvedEntries.push({
+      declared: d,
+      resolved: await resolveTarget(env, { dir, subpath: d.subpath, target: d.target, tsconfig })
+    })
+  const self = new Map<string, string>()
+  const name = raw.info.name
+  if (name)
+    for (const { declared: d, resolved } of resolvedEntries)
+      if (resolved && !self.has(selfSpecifier(name, d.subpath)))
+        self.set(selfSpecifier(name, d.subpath), resolved.file)
   const entries: EntryPoint[] = []
-  for (const { subpath, condition, target } of declared) {
-    const resolved = await resolveTarget(env, { dir, subpath, target, tsconfig })
+  for (const { declared: d, resolved } of resolvedEntries) {
+    const { subpath, condition, target } = d
     if (!resolved) {
       env.diagnostics.warning(
         "discovery.entry-unresolved",
@@ -52,7 +66,7 @@ export async function discoverEntryPoints(env: DiscoveryEnv, raw: RawPackage): P
       })
       continue
     }
-    const listing = await listExports(env, resolved.file)
+    const listing = await listExports(env, resolved.file, self)
     entries.push({
       subpath,
       condition,
@@ -67,16 +81,38 @@ export async function discoverEntryPoints(env: DiscoveryEnv, raw: RawPackage): P
   return entries.sort((a, b) => cmp(a.subpath, b.subpath))
 }
 
-function declaredEntries(env: DiscoveryEnv, raw: RawPackage): Declared[] {
+/** `primevue` for the root entry, `primevue/accordion` for `./accordion`: how the package imports itself. */
+function selfSpecifier(name: string, subpath: string): string {
+  return subpath === "." ? name : `${name}/${subpath.replace(/^\.\//, "")}`
+}
+
+function declaredEntries(
+  env: DiscoveryEnv,
+  raw: RawPackage,
+  tsconfig: { outDir?: string; rootDir?: string }
+): Declared[] {
   const out: Declared[] = []
   const manifest = raw.manifest
   const add = (subpath: string, condition: string, target: string): void => {
     if (subpath.includes("*") || target.includes("*")) {
-      env.diagnostics.info(
-        "discovery.entry-pattern-unsupported",
-        `Entry pattern ${subpath} in ${raw.info.id} is not expanded`,
-        { location: { path: raw.info.manifest.path } }
-      )
+      const stars = (t: string): number => t.split("*").length - 1
+      if (stars(subpath) !== 1 || stars(target) !== 1) {
+        env.diagnostics.info(
+          "discovery.entry-pattern-unsupported",
+          `Entry pattern ${subpath} in ${raw.info.id} is not expanded`,
+          { location: { path: raw.info.manifest.path } }
+        )
+        return
+      }
+      const matches = expandPattern(env, { dir: raw.info.dir, target, tsconfig })
+      if (matches.length === 0)
+        env.diagnostics.info(
+          "discovery.entry-pattern-unmatched",
+          `Entry pattern ${subpath} (${target}) in ${raw.info.id} matches no file`,
+          { location: { path: raw.info.manifest.path } }
+        )
+      for (const match of matches)
+        out.push({ subpath: subpath.replace("*", match), condition, target: target.replace("*", match) })
       return
     }
     out.push({ subpath, condition, target })
@@ -112,6 +148,43 @@ function declaredEntries(env: DiscoveryEnv, raw: RawPackage): Declared[] {
     seen.add(e.subpath)
     return true
   })
+}
+
+/**
+ * What `*` stands for in a target pattern such as `./dist/*\/index.d.ts`, for every file that fits it. A target in
+ * build output is also matched against the sources it was built from (`src/*.ts`), as `resolveTarget` does.
+ */
+function expandPattern(
+  env: DiscoveryEnv,
+  input: { dir: string; target: string; tsconfig: { outDir?: string; rootDir?: string } }
+): string[] {
+  const { dir, target, tsconfig } = input
+  const declaredPath = posix.normalize(posix.join(dir, target))
+  const regexes = [globRegExp(declaredPath, "")]
+  if (tsconfig.outDir !== undefined) {
+    const out = posix.normalize(posix.join(dir, tsconfig.outDir))
+    if (declaredPath.startsWith(`${out}/`)) {
+      const rootDir = posix.normalize(posix.join(dir, tsconfig.rootDir ?? "src"))
+      const rel = declaredPath.slice(out.length + 1).replace(/\.d\.ts$|\.(?:[cm]?js|jsx)$/, "")
+      regexes.push(globRegExp(posix.join(rootDir, rel), String.raw`\.(?:[cm]?tsx?)`))
+    }
+  }
+  const found = new Set<string>()
+  for (const file of env.files)
+    for (const [i, re] of regexes.entries()) {
+      // Declaration files are not the sources a build output was made from.
+      if (i > 0 && file.endsWith(".d.ts")) continue
+      const captured = re.exec(file)?.[1]
+      // `*` never stands for an empty string or for a dependency's files.
+      if (captured && !captured.split("/").includes("node_modules")) found.add(captured)
+    }
+  return [...found].sort(cmp)
+}
+
+function globRegExp(pattern: string, suffix: string): RegExp {
+  const [head = "", tail = ""] = pattern.split("*")
+  const quote = (t: string): string => t.replace(/[.+?^${}()|[\]\\]/g, "\\$&")
+  return new RegExp(`^${quote(head)}(.+)${quote(tail)}${suffix}$`)
 }
 
 function rank(condition: string): number {

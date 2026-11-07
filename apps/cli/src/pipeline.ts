@@ -221,11 +221,18 @@ function mapSources(config: InvariantConfig, compiled: CompileResult): SourceMap
 export async function runPipeline(input: PipelineInput): Promise<PipelineResult> {
   const { config, clock } = input
   const declarationRoots = config.sources.flatMap((s) => (s.declarations && s.path ? [s.path] : []))
+  const declaredFrameworks = Object.fromEntries(
+    config.sources.flatMap((s) =>
+      s.declarations && s.path && (s.type === "react" || s.type === "vue" || s.type === "angular")
+        ? [[s.path, s.type]]
+        : []
+    )
+  )
   const compiled = await compile({
     fs: nodeFs(input.cwd),
     adapters: adaptersFor(config),
     clock,
-    ...(declarationRoots.length > 0 ? { discovery: { declarationRoots } } : {})
+    ...(declarationRoots.length > 0 ? { discovery: { declarationRoots, declaredFrameworks } } : {})
   })
   const reconciled = reconcile(compiled.irDocuments, {
     name: config.name,
