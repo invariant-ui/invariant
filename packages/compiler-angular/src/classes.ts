@@ -82,6 +82,8 @@ export interface ClassMetadata {
   hostBindings: string[]
   queries: Array<{ kind: string; property: string; selector?: string }>
   inheritsFrom: string[]
+  /** Content projection slots read from a declaration file, which has no template to scan for `<ng-content>`. */
+  projection?: Array<{ name: string; select?: string }>
   notes: string[]
 }
 
@@ -536,7 +538,7 @@ function propertyOf(object: ts.ObjectLiteralExpression, key: string): ts.Propert
   return property(object, key)
 }
 
-function typeInfoOf(
+export function typeInfoOf(
   analysis: Analysis,
   node: ts.TypeNode
 ): { text: string; kind: MemberKind; allowedValues: Array<string | number | boolean> | undefined } {

@@ -400,3 +400,90 @@ describe("adapter behavior", () => {
     )
   })
 })
+
+describe("declaration files", () => {
+  const dts: Record<string, string> = {
+    "package.json": JSON.stringify({
+      name: "@acme/ui",
+      version: "1.0.0",
+      types: "./dist/index.d.ts",
+      peerDependencies: { vue: "^3.5.0" }
+    }),
+    "dist/index.d.ts": `export { default as Button } from "./Button.vue";
+export { default as Card } from "./Card.vue";
+import type { DefineComponent, PropType, ExtractPropTypes } from "vue";
+declare const Tag: DefineComponent<ExtractPropTypes<{
+  tone: { type: PropType<"info" | "warn">; required: true };
+  label: StringConstructor;
+  count: { type: NumberConstructor; default: number };
+}>, {}, {}, {}, {}, any, any, { close: (id: number) => void }, string>;
+export { Tag };
+export declare function useThing(): string;
+export declare const VERSION: string;
+`,
+    "dist/Button.vue.d.ts": `import type { DefineComponent, PublicProps } from "vue";
+interface Props {
+  /** Visual style. */
+  variant: "primary" | "ghost";
+  size?: "sm" | "md";
+}
+declare const _default: import("vue").DefineComponent<Props, {}, {}, {}, {}, any, any, { click: [e: MouseEvent]; open: () => void }, string, PublicProps, Readonly<Props>, {}, {}>;
+export default _default;
+`,
+    "dist/Card.vue.d.ts": `import type { DefineComponent } from "vue";
+declare const __VLS_component: DefineComponent<{ title?: string }, {}, {}, {}, {}, any, any, {}, string>;
+declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, { default?(_: {}): any; footer?(_: { close: () => void }): any }>;
+export default _default;
+type __VLS_WithTemplateSlots<T, S> = T & { new (): { $slots: S } };
+`
+  }
+
+  async function runDts() {
+    const root = "node_modules/@acme/ui"
+    const result = await compile({
+      fs: memoryFs({
+        "package.json": JSON.stringify({ name: "app", dependencies: { "@acme/ui": "1.0.0" } }),
+        ...Object.fromEntries(Object.entries(dts).map(([path, text]) => [`${root}/${path}`, text]))
+      }),
+      adapters: [adapter],
+      clock: FIXED_CLOCK,
+      discovery: { declarationRoots: [root] }
+    })
+    const ir = result.irDocuments[0]
+    const facts = (name: string): Record<string, unknown> => {
+      const entity = ir?.entities.find((e) => e.name === name)
+      return Object.fromEntries(
+        (ir?.facts ?? []).filter((f) => f.subject === entity?.ref).map((f) => [f.path, f.value])
+      )
+    }
+    return { ir, facts, codes: result.diagnostics.map((d) => d.code) }
+  }
+
+  it("reads props, events and slots from DefineComponent types, and not functions or constants", async () => {
+    const { ir, facts, codes } = await runDts()
+    expect(ir?.entities.map((e) => e.name).sort()).toEqual(["Button", "Card", "Tag"])
+    const button = facts("Button")
+    expect(button["props.variant.allowedValues"]).toEqual(["primary", "ghost"])
+    expect(button["props.variant.required"]).toBe(true)
+    expect(button["props.variant.description"]).toBe("Visual style.")
+    expect(button["props.size.required"]).toBe(false)
+    expect(Object.keys(button).some((p) => p.startsWith("events.click"))).toBe(true)
+    expect(Object.keys(button).some((p) => p.startsWith("events.open"))).toBe(true)
+    const card = facts("Card")
+    expect(Object.keys(card).some((p) => p.startsWith("slots.default"))).toBe(true)
+    expect(Object.keys(card).some((p) => p.startsWith("slots.footer"))).toBe(true)
+    // A declaration file has types, not default values, and says so once.
+    expect(codes).toContain("vue.declaration-defaults-unavailable")
+  })
+
+  it("reads runtime-style props: constructors, PropType, required, and a default makes no claim of its value", async () => {
+    const { facts } = await runDts()
+    const tag = facts("Tag")
+    expect(tag["props.tone.allowedValues"]).toEqual(["info", "warn"])
+    expect(tag["props.tone.required"]).toBe(true)
+    expect(tag["props.label.type.kind"]).toBe("string")
+    expect(tag["props.count.type.kind"]).toBe("number")
+    expect(Object.keys(tag).some((p) => p.startsWith("props.count.default"))).toBe(false)
+    expect(Object.keys(tag).some((p) => p.startsWith("events.close"))).toBe(true)
+  })
+})

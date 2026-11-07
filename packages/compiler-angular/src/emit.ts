@@ -149,6 +149,15 @@ export function emitComponent(builder: IrBuilder, c: AngularComponent, pkg: Pack
       )
     }
   }
+  for (const s of meta.projection ?? []) {
+    facts.slot(
+      {
+        name: s.name,
+        extensions: { source: "ng-content", ...(s.select !== undefined ? { select: s.select } : {}) }
+      },
+      decl
+    )
+  }
   for (const v of variantsFromProps(specs)) {
     const input = c.inputs.find((p) => p.name === v.name)
     facts.variant({ ...v, extensions: { source: "prop-union" } }, input ? atNode(input.node) : decl)

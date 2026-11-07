@@ -70,6 +70,7 @@ export {
   resolveSymbol,
   subTarget,
   topLevelAssignments,
+  typeReferenceInfo,
   unwrap,
   walkSameFunction
 } from "./ts/ast.js"

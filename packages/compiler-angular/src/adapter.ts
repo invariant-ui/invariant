@@ -25,7 +25,7 @@ const MAX_FILE_BYTES = 1_000_000
  * with the TypeScript API (what the Angular compiler reads from decorators, evaluated statically):
  * components and directives, decorator and signal inputs and outputs, `model()`, selectors, standalone
  * metadata and imports, content projection, host bindings, templates and styles, and NgModules.
- * Nothing is executed and `node_modules` is not read.
+ * Nothing is executed. `node_modules` is read only for a package opted in as a declaration root, from its `.d.ts` files.
  */
 export const angularAdapter: SourceAdapter<Config> = {
   id: ADAPTER_ID,
@@ -109,8 +109,14 @@ async function readPackageFiles(
   pkg: PackageInfo,
   nested: readonly PackageInfo[]
 ): Promise<{ files: Map<string, string>; hashes: Array<[string, string]> }> {
+  // An installed package (opted in through a declaration root) keeps its declaration files in build output.
+  const installed = pkg.dir.split("/").includes("node_modules")
   const walked = await walk(fs, {
-    ignoreDirs: new Set(DEFAULT_IGNORED_DIRS),
+    ignoreDirs: new Set(
+      installed
+        ? DEFAULT_IGNORED_DIRS.filter((d) => !["dist", "build", "out"].includes(d))
+        : DEFAULT_IGNORED_DIRS
+    ),
     maxFiles: 20_000,
     start: pkg.dir
   })
