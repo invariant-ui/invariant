@@ -576,6 +576,35 @@ export {};
   })
 })
 
+describe("declaration files: library wrapper types", () => {
+  // MUI's `OverridableComponent` and Mantine's `MantineComponent` are not React's own types, and `react` is not installed.
+  const dts = `import * as React from "react";
+export interface ButtonProps { variant?: "solid" | "outline"; }
+interface ButtonTypeMap { props: ButtonProps }
+export interface OverridableComponent<M extends { props: object }> {
+  <C extends React.ElementType>(props: { component: C } & M["props"]): React.JSX.Element;
+  (props: M["props"]): React.JSX.Element;
+}
+export declare const Button: OverridableComponent<ButtonTypeMap>;
+export interface AlertProps { tone?: "info" | "error"; }
+type FactoryPayload = { props: object; ref?: unknown };
+export type MantineComponent<Payload extends FactoryPayload> = React.NamedExoticComponent<Payload["props"] & React.RefAttributes<Payload["ref"]>> & { classes: string };
+export declare const Alert: MantineComponent<{ props: AlertProps; ref: HTMLDivElement }>;
+export declare const Plain: ((props: { n: number }) => React.JSX.Element) & { displayName: string };
+export declare const NotOne: ((input: string) => string) & { extra: number };
+export {};
+`
+
+  it("detects components declared through wrapper types by their call signatures", async () => {
+    const { names, facts } = await run({ "index.d.ts": dts }, { exports: "./index.d.ts" })
+    expect(names).toEqual(expect.arrayContaining(["Button", "Alert", "Plain"]))
+    expect(names).not.toContain("NotOne")
+    // shortcut: props of a generic wrapper like OverridableComponent<M> are `M["props"]`, which does not resolve without
+    // reading M at the use site; upgrade when MUI-style props matter.
+    expect(facts("Alert")["props.tone.allowedValues"]).toEqual(["info", "error"])
+  })
+})
+
 describe("declaration files: more declared forms", () => {
   const dts = `import { default as React } from "react";
 export interface AlertProps { kind?: "info" | "error"; }

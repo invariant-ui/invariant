@@ -259,12 +259,52 @@ describe("entry points", () => {
     ).toEqual([])
   })
 
-  it("does not expand wildcard subpaths but says so", async () => {
+  it("says so when a wildcard subpath matches no file", async () => {
     const d = await discover({ "package.json": base({ exports: { "./icons/*": "./dist/icons/*.js" } }) })
     expect(d.packages[0]?.entryPoints).toEqual([])
-    expect(codes(d)).toContain("discovery.entry-pattern-unsupported")
+    expect(codes(d)).toContain("discovery.entry-pattern-unmatched")
   })
 
+  it("expands a wildcard subpath over the files its target matches, including `./*`", async () => {
+    const d = await discover({
+      "package.json": base({
+        name: "lib",
+        exports: {
+          "./*": { types: "./types/*/index.d.ts" },
+          "./icons/*": "./src/icons/*.ts"
+        }
+      }),
+      "types/accordion/index.d.ts": "export declare const Accordion: number;",
+      "types/button/index.d.ts": "export declare const Button: number;",
+      "src/icons/home.ts": "export const Home = 1",
+      "src/icons/nested/deep.ts": "export const Deep = 1"
+    })
+    const entries = d.packages[0]?.entryPoints ?? []
+    expect(entries.map((e) => e.subpath)).toEqual([
+      "./accordion",
+      "./button",
+      "./icons/home",
+      "./icons/nested/deep"
+    ])
+    expect(entries.find((e) => e.subpath === "./button")).toMatchObject({
+      file: "types/button/index.d.ts",
+      exports: [expect.objectContaining({ name: "Button" })]
+    })
+  })
+
+  it("matches a wildcard target in build output against the sources it was built from", async () => {
+    const d = await discover({
+      "package.json": base({ exports: { "./*": "./dist/*.js" } }),
+      "tsconfig.json": JSON.stringify({ compilerOptions: { outDir: "dist", rootDir: "src" } }),
+      "src/a.ts": "export const A = 1",
+      "src/b.tsx": "export const B = 1",
+      "src/types.d.ts": "export type T = 1"
+    })
+    expect(d.packages[0]?.entryPoints.map((e) => [e.subpath, e.file])).toEqual([
+      ["./a", "src/a.ts"],
+      ["./b", "src/b.tsx"]
+    ])
+  })
   it("does not confuse differently-cased files on case-insensitive filesystems", async () => {
     const d = await discover({
       "package.json": base({ exports: "./src/index.ts" }),
@@ -665,5 +705,61 @@ describe("declaration roots", () => {
       { declarationRoots: ["node_modules/nope"] }
     )
     expect(codes(d)).toContain("discovery.declaration-root-missing")
+  })
+})
+
+describe("re-exports through the package's own name", () => {
+  const files = {
+    "package.json": pkg({
+      name: "primevue",
+      exports: {
+        ".": "./src/index.ts",
+        "./accordion": "./src/accordion/index.ts",
+        "./*": "./src/*/index.ts"
+      }
+    }),
+    "src/index.ts":
+      'export * from "primevue/accordion"\nexport { Tabs } from "primevue/tabs"\nexport * from "other-lib"',
+    "src/accordion/index.ts": "export const Accordion = 1",
+    "src/tabs/index.ts": "export const Tabs = 1"
+  }
+
+  it("follows them like relative re-exports and leaves other packages external", async () => {
+    const d = await discover(files)
+    const root = d.packages[0]?.entryPoints.find((e) => e.subpath === ".")
+    expect(root?.exports.map((e) => [e.name, e.kind])).toEqual([
+      ["Accordion", "value"],
+      ["Tabs", "value"]
+    ])
+    expect(root?.exports.find((e) => e.name === "Tabs")?.reexportOf).toEqual({
+      module: "primevue/tabs",
+      external: false
+    })
+    expect(root?.exportsComplete).toBe(false)
+    expect(codes(d)).toContain("discovery.external-reexport")
+  })
+
+  it("does not loop when entries re-export each other", async () => {
+    const d = await discover({
+      ...files,
+      "src/accordion/index.ts": 'export const Accordion = 1\nexport * from "primevue"'
+    })
+    const accordion = d.packages[0]?.entryPoints.find((e) => e.subpath === "./accordion")
+    expect(accordion?.exports.map((e) => e.name)).toEqual(expect.arrayContaining(["Accordion", "Tabs"]))
+  })
+})
+
+describe("export follow limit", () => {
+  it("follows a package of several hundred modules by default", async () => {
+    const files: Record<string, string> = { "package.json": pkg({ name: "big", exports: "./src/index.ts" }) }
+    let index = ""
+    for (let i = 0; i < 450; i++) {
+      files[`src/m${i}.ts`] = `export const c${i} = ${i}`
+      index += `export * from "./m${i}"\n`
+    }
+    files["src/index.ts"] = index
+    const d = await discover(files)
+    expect(d.packages[0]?.entryPoints[0]?.exports).toHaveLength(450)
+    expect(d.packages[0]?.entryPoints[0]?.exportsComplete).toBe(true)
   })
 })

@@ -37,6 +37,8 @@ export interface HocFinding {
   node: ts.Node
 }
 
+/** Component types of other packages that declare components by wrapping a type map: see `declaredComponent`. */
+const POLYMORPHIC_WRAPPERS = new Set(["OverridableComponent", "ExtendButtonBase"])
 const PASCAL = /^[A-Z]/
 const COMPONENT_BASES = new Set(["Component", "React.Component", "PureComponent", "React.PureComponent"])
 const FC_TYPES = new Set([
@@ -370,16 +372,36 @@ export function declaredComponent(
     }
     return make({ ...(props ? { propsTypeNode: props } : {}), subcomponents })
   }
+  // `NamedExoticComponent<P> & ThemeExtend<…>`: the component type is one member, the rest are static properties.
+  if (ts.isIntersectionTypeNode(t)) {
+    for (const member of t.types) {
+      const found = declaredComponent(checker, member, name, decl, depth + 1)
+      if (found) return found
+    }
+  }
   const ref = refInfo(t)
-  if (!ref) return undefined
+  if (!ref) return callableComponent(checker, t, make)
   const known = DECLARED_COMPONENT_TYPES[ref.name]
   const fromKnown = known ? knownComponent(known, ref.typeArguments, make) : undefined
   if (fromKnown) return fromKnown
-  if (!known && ts.isTypeReferenceNode(t)) {
-    const target = declarationOf(resolveSymbol(checker, checker.getSymbolAtLocation(t.typeName)))
+  if (!known && (ts.isTypeReferenceNode(t) || (ts.isImportTypeNode(t) && t.qualifier))) {
+    const reference = ts.isTypeReferenceNode(t) ? t.typeName : (t.qualifier as ts.EntityName)
+    const target = declarationOf(resolveSymbol(checker, checker.getSymbolAtLocation(reference)))
     // `type TableSelectComponent = { (props: P): JSX.Element; Option: … }`
-    if (target && ts.isTypeAliasDeclaration(target))
-      return declaredComponent(checker, target.type, name, decl, depth + 1)
+    if (target && ts.isTypeAliasDeclaration(target)) {
+      const aliased = declaredComponent(checker, target.type, name, decl, depth + 1)
+      // Mantine's `MantineComponent<{ props: AlertProps; … }>`: the alias's own props are `Payload['props']`, so read the
+      // concrete type from the payload object at the use site.
+      const payload = t.typeArguments?.[0]
+      const payloadProps =
+        payload && ts.isTypeLiteralNode(payload)
+          ? payload.members.find(
+              (m): m is ts.PropertySignature => ts.isPropertySignature(m) && m.name.getText() === "props"
+            )?.type
+          : undefined
+      if (aliased && payloadProps) aliased.propsTypeNode = payloadProps
+      if (aliased) return aliased
+    }
     // `interface X extends React.ForwardRefExoticComponent<P> { Item: typeof Item }`
     if (target && ts.isInterfaceDeclaration(target)) {
       for (const heritage of target.heritageClauses ?? []) {
@@ -404,7 +426,37 @@ export function declaredComponent(
       }
     }
   }
-  return undefined
+  const callable = callableComponent(checker, t, make)
+  if (callable) return callable
+  // MUI's `OverridableComponent` can come from `@mui/types`, which is not part of the analyzed package, so the checker
+  // cannot see its call signatures. The name alone says it is a component; its props stay unresolved.
+  return POLYMORPHIC_WRAPPERS.has(ref.name) ? make({ propsUnknown: true }) : undefined
+}
+
+/**
+ * A component whose declared type is not one of the known React component types but is still callable with props and
+ * returns JSX: MUI's `OverridableComponent<M>` and `ExtendButtonBase<M>`, Mantine's `((props: P) => JSX.Element) & ThemeExtend<…>`.
+ * The type checker finds the call signatures, so library-specific wrapper names need no list.
+ */
+function callableComponent(
+  checker: ts.TypeChecker,
+  node: ts.TypeNode,
+  make: (extra: Partial<Candidate>) => Candidate
+): Candidate | undefined {
+  const signatures = checker.getSignaturesOfType(checker.getTypeFromTypeNode(node), ts.SignatureKind.Call)
+  const jsx = signatures.filter((s) => s.parameters.length <= 1 && signatureReturnsJsx(checker, s))
+  // An overload without type parameters has concrete props; generic ones are `component`-polymorphic variants.
+  const sig = jsx.find((s) => !s.typeParameters?.length) ?? jsx[0]
+  if (!sig) return undefined
+  const param = sig.parameters[0]?.valueDeclaration
+  const props = param && ts.isParameter(param) ? param.type : undefined
+  return make(props ? { propsTypeNode: props } : {})
+}
+
+function signatureReturnsJsx(checker: ts.TypeChecker, sig: ts.Signature): boolean {
+  const declared = sig.declaration?.type
+  if (declared && ts.isTypeNode(declared)) return returnsJsxType(declared)
+  return JSX_RETURN.test(checker.typeToString(sig.getReturnType()).replace(/\s*\|\s*(?:null|undefined)/g, ""))
 }
 
 /** A component typed as one of the React component types, with its props from the first type argument. */

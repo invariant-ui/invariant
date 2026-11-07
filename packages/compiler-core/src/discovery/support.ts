@@ -27,7 +27,7 @@ export interface DiscoveryLimits {
 export const DEFAULT_LIMITS: DiscoveryLimits = {
   maxFiles: 50_000,
   maxFileBytes: 1_000_000,
-  maxParsedFilesPerEntry: 200,
+  maxParsedFilesPerEntry: 5000,
   maxCssVariablesPerFile: 5000,
   maxStoryFiles: 1000,
   maxHeadings: 100

@@ -9,11 +9,11 @@
       "severity": "warning"
     },
     {
-      "code": "discovery.entry-pattern-unsupported",
+      "code": "discovery.entry-pattern-unmatched",
       "location": {
         "path": "packages/ui-react/package.json"
       },
-      "message": "Entry pattern ./icons/* in package:@acme/ui-react is not expanded",
+      "message": "Entry pattern ./icons/* (./dist/icons/*.js) in package:@acme/ui-react matches no file",
       "severity": "info"
     }
   ],

@@ -12,6 +12,7 @@ import ts from "typescript"
 import type { ScriptInfo } from "./script.js"
 
 const RENDERABLE = /^(?:VNode|VNodeChild|VNodeArrayChildren|Component|DefineComponent)(?:<.*>)?$/
+const INSTANCE_TYPES = /^(?:CreateComponentPublicInstance(?:WithMixins)?|ComponentPublicInstance)$/
 const CONSTRUCTORS: Record<string, { text: string; kind: MemberKind }> = {
   StringConstructor: { text: "string", kind: "string" },
   NumberConstructor: { text: "number", kind: "number" },
@@ -93,6 +94,16 @@ function findDefineComponent(analysis: Analysis, type: ts.TypeNode, depth: numbe
       ? findDefineComponent(analysis, target.type, depth + 1)
       : undefined
   }
+  // `{ new (...args: any[]): CreateComponentPublicInstanceWithMixins<Props, …, Emits, …> }`: what Vuetify and other
+  // `defineComponent` libraries write, with the same type-argument positions as `DefineComponent`.
+  if (ts.isTypeLiteralNode(t)) {
+    for (const member of t.members) {
+      if (!ts.isConstructSignatureDeclaration(member) || !member.type) continue
+      const instance = typeReferenceInfo(member.type)
+      if (instance && INSTANCE_TYPES.test(instance.name)) return { args: instance.typeArguments }
+    }
+    return undefined
+  }
   const ref = typeReferenceInfo(t)
   if (!ref) return undefined
   if (ref.name === "DefineComponent") return { args: ref.typeArguments }
@@ -105,6 +116,17 @@ function findDefineComponent(analysis: Analysis, type: ts.TypeNode, depth: numbe
     const target = targetOf(analysis, t.typeName)
     if (target && ts.isTypeAliasDeclaration(target) && !target.typeParameters)
       return findDefineComponent(analysis, target.type, depth + 1)
+    // `type SFCWithInstall<T> = T & Plugin` (Element Plus): the component is the argument passed for `T`.
+    if (target && ts.isTypeAliasDeclaration(target) && target.typeParameters && t.typeArguments) {
+      const body = unparen(target.type)
+      const members = ts.isIntersectionTypeNode(body) ? body.types : [body]
+      for (const member of members) {
+        const param = ts.isTypeReferenceNode(member) ? target.typeParameters.findIndex((p) => p.name.text === member.typeName.getText()) : -1
+        const arg = param >= 0 ? t.typeArguments[param] : undefined
+        const found = arg ? findDefineComponent(analysis, arg, depth + 1) : undefined
+        if (found) return found
+      }
+    }
   }
   return undefined
 }

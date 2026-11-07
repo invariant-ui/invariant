@@ -37,7 +37,7 @@ describe("Phase 2 exit criterion: a project is discovered, analyzed and represen
     // Findings reported by discovery and forwarded by an adapter appear once, attributed to the source.
     expect(result.diagnostics.map((d) => [d.code, d.sourceId])).toEqual([
       ["discovery.storybook-dynamic-config", "storybook-packages-ui-react"],
-      ["discovery.entry-pattern-unsupported", "npm-acme-ui-react"]
+      ["discovery.entry-pattern-unmatched", "npm-acme-ui-react"]
     ])
     expect(result.project.packages.flatMap((p) => p.frameworks.map((f) => f.name)).sort()).toEqual([
       "angular",
