@@ -43,12 +43,19 @@ export function cmp(a: string, b: string): number {
   return a < b ? -1 : a > b ? 1 : 0
 }
 
+const SOURCE_FILE = /\.(?:[cm]?[jt]sx?|vue|svelte|s?css|less)$/
+
 /** Reads a file; returns undefined (with a diagnostic) when unreadable or over the size limit. */
 export async function readBounded(env: DiscoveryEnv, file: string): Promise<string | undefined> {
   try {
     const text = await env.fs.readFile(file)
     if (text.length > env.limits.maxFileBytes) {
-      env.diagnostics.warning(
+      // Data files (web-types.json, source maps) are not read for components, so skipping them is not a finding.
+      if (!SOURCE_FILE.test(file)) return undefined
+      // An installed package ships prebuilt bundles (`dist/vuetify.js`, aggregate `.d.ts`) far over the limit; the same
+      // components are in its smaller per-component files, so skipping them is information, not a warning.
+      const installed = [...(env.declarationRoots ?? [])].some((root) => file.startsWith(`${root}/`))
+      env.diagnostics[installed ? "info" : "warning"](
         "discovery.file-too-large",
         `Skipped ${file}: larger than ${env.limits.maxFileBytes} bytes`,
         {

@@ -27,9 +27,15 @@ export function createAnalysis(
      * the virtual TypeScript file standing in for it (`src/Button.vue.ts`).
      */
     moduleAliases?: Record<string, string>
+    /**
+     * Files the type checker may read (for example `@types/react`) that are not part of the analyzed project: they
+     * resolve imports, but nothing declared in them counts as a project node.
+     */
+    externalFiles?: ReadonlyMap<string, string>
   } = {}
 ): Analysis {
   const virtual = new Map([...files].map(([rel, text]) => [`/${rel}`, text]))
+  const external = new Map([...(extra.externalFiles ?? [])].map(([rel, text]) => [`/${rel}`, text]))
   const options: ts.CompilerOptions = {
     target: ts.ScriptTarget.ES2022,
     module: ts.ModuleKind.ESNext,
@@ -57,7 +63,7 @@ export function createAnalysis(
   const libDir = ts.getDefaultLibFilePath(options).replace(/[^/\\]+$/, "")
   const isLib = (file: string): boolean => file.startsWith(libDir)
   const read = (file: string): string | undefined => {
-    const text = virtual.get(file)
+    const text = virtual.get(file) ?? external.get(file)
     if (text !== undefined) return text
     return isLib(file) && existsSync(file) ? readFileSync(file, "utf8") : undefined
   }

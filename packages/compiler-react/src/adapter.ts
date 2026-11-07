@@ -76,6 +76,7 @@ export const reactAdapter: SourceAdapter<Config> = {
       packageDir: pkg.dir,
       entryPoints: pkg.entryPoints,
       files,
+      ...(pkg.dir.split("/").includes("node_modules") ? { typeFiles: await readTypeFiles(fs) } : {}),
       tailwind: config.tailwind
     })
     const builder = new IrBuilder({
@@ -111,6 +112,26 @@ export const reactAdapter: SourceAdapter<Config> = {
         ]
       : []
   }
+}
+
+/**
+ * Declaration files of everything installed next to an installed package (`@types/react`, `csstype`, the primitives a
+ * library builds on). Without them a props type that mentions any of them resolves to nothing, and so does the whole
+ * intersection it is part of. They are read for type resolution only: nothing declared in them is a project node.
+ */
+async function readTypeFiles(fs: ReadonlyFs): Promise<Map<string, string>> {
+  const files = new Map<string, string>()
+  if (!(await fs.exists("node_modules"))) return files
+  const walked = await walk(fs, { ignoreDirs: new Set([".invariant", ".bin", ".cache"]), maxFiles: 60_000, start: "node_modules" })
+  let bytes = 0
+  for (const path of walked.files) {
+    if (!/\.d\.[cm]?ts$|(?:^|\/)package\.json$/.test(path)) continue
+    const text = await fs.readFile(path)
+    if (text.length > 5_000_000 || bytes + text.length > 60_000_000) continue
+    bytes += text.length
+    files.set(path, text)
+  }
+  return files
 }
 
 async function readPackageFiles(

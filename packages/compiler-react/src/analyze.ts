@@ -63,13 +63,18 @@ export interface PackageInput {
   entryPoints: ReadonlyArray<{ subpath: string; file?: string | undefined; resolution: string }>
   /** Project-relative path -> text, for every source and CSS file of the package. */
   files: ReadonlyMap<string, string>
+  /** Type packages the checker reads but whose declarations are not the package's own (`@types/react`, `csstype`). */
+  typeFiles?: ReadonlyMap<string, string>
   tailwind: boolean
 }
 
 /** Finds the package's public React components (exports of its entry points) and analyzes each. */
 export function analyzePackage(input: PackageInput): PackageAnalysis {
   const diagnostics: Diagnostic[] = []
-  const analysis = createAnalysis(input.files, { paths: tsconfigPaths(input.files, input.packageDir) })
+  const analysis = createAnalysis(input.files, {
+    paths: tsconfigPaths(input.files, input.packageDir),
+    ...(input.typeFiles ? { externalFiles: input.typeFiles } : {})
+  })
   const { checker } = analysis
   const note = (severity: Diagnostic["severity"], code: string, message: string, node?: ts.Node): void => {
     const file = node ? relativeFileOf(analysis, node) : undefined
@@ -86,7 +91,8 @@ export function analyzePackage(input: PackageInput): PackageAnalysis {
   for (const entry of input.entryPoints) {
     const sf = entry.file ? analysis.sourceFile(entry.file) : undefined
     if (!entry.file || entry.resolution === "unresolved" || !sf) {
-      if (entry.file)
+      // Stylesheets, JSON and the like are entries a component library lists but not modules to analyze.
+      if (entry.file && /\.[cm]?[jt]sx?$/.test(entry.file))
         note(
           "warning",
           "react.entry-not-analyzed",
