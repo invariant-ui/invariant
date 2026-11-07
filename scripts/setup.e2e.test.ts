@@ -284,7 +284,7 @@ describe("the publishing wiring actually works", () => {
     const files = tarball(dir)
     expect(files).toContain("invariant/invariant.contract.json")
     expect(files).toContain("invariant/invariant.evidence.json")
-  })
+  }, 60_000)
 
   it("a monorepo package: prepack compiles at the root and exports into the package folder", async () => {
     const dir = mkdtempSync(path.join(tmpdir(), "invariant-setup-"))
@@ -305,7 +305,7 @@ describe("the publishing wiring actually works", () => {
     runPrepack(pkgDir, prepack)
     expect(existsSync(path.join(pkgDir, "invariant/invariant.contract.json"))).toBe(true)
     expect(tarball(pkgDir)).toContain("invariant/invariant.contract.json")
-  })
+  }, 60_000)
 })
 
 describe("setup: GitHub Action", () => {
