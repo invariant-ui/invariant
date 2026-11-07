@@ -223,7 +223,9 @@ export async function runPipeline(input: PipelineInput): Promise<PipelineResult>
   const declarationRoots = config.sources.flatMap((s) => (s.declarations && s.path ? [s.path] : []))
   const declaredFrameworks = Object.fromEntries(
     config.sources.flatMap((s) =>
-      s.declarations && s.path && (s.type === "react" || s.type === "vue" || s.type === "angular") ? [[s.path, s.type]] : []
+      s.declarations && s.path && (s.type === "react" || s.type === "vue" || s.type === "angular")
+        ? [[s.path, s.type]]
+        : []
     )
   )
   const compiled = await compile({

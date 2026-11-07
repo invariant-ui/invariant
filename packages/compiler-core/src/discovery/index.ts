@@ -97,7 +97,12 @@ export async function discoverProject(options: DiscoverOptions): Promise<Project
     // shortcut: a configured framework is recorded as a `*` peer dependency; upgrade if discovery needs to tell them apart.
     if (configured && raw.info.frameworks.length === 0)
       raw.info.frameworks = [
-        { name: configured, package: FRAMEWORK_PACKAGE_NAME[configured], dependencyKind: "peerDependencies", declaredRange: "*" }
+        {
+          name: configured,
+          package: FRAMEWORK_PACKAGE_NAME[configured],
+          dependencyKind: "peerDependencies",
+          declaredRange: "*"
+        }
       ]
     raw.info.buildTools = detectBuildTools(env, raw)
     raw.info.entryPoints = await discoverEntryPoints(env, raw)

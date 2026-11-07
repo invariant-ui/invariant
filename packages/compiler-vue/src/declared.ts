@@ -121,7 +121,9 @@ function findDefineComponent(analysis: Analysis, type: ts.TypeNode, depth: numbe
       const body = unparen(target.type)
       const members = ts.isIntersectionTypeNode(body) ? body.types : [body]
       for (const member of members) {
-        const param = ts.isTypeReferenceNode(member) ? target.typeParameters.findIndex((p) => p.name.text === member.typeName.getText()) : -1
+        const param = ts.isTypeReferenceNode(member)
+          ? target.typeParameters.findIndex((p) => p.name.text === member.typeName.getText())
+          : -1
         const arg = param >= 0 ? t.typeArguments[param] : undefined
         const found = arg ? findDefineComponent(analysis, arg, depth + 1) : undefined
         if (found) return found
