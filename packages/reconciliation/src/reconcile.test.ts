@@ -118,6 +118,19 @@ describe("contract assembly", () => {
   })
 })
 
+describe("variants with an empty-string value", () => {
+  it("drops the empty value so the contract stays valid, and keeps the others", () => {
+    const input = component({
+      name: "Input",
+      extra: [["variants.size.values", ["", "small", "large"]]]
+    })
+    const r = run([rawDoc("react-ui", "react", [input])])
+    const variants = r.contract.components.find((c) => c.id === "component:input")?.variants
+    expect(variants).toEqual([{ name: "size", values: ["small", "large"] }])
+    expect(() => parseContract(serializeContract(r.contract))).not.toThrow()
+  })
+})
+
 describe("entity resolution", () => {
   it("merges same-named components across frameworks as an inferred, explained link", () => {
     const r = run([react([{ name: "Button" }]), vue([{ name: "Button" }])])
