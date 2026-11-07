@@ -71,14 +71,23 @@ export function extractProps(analysis: Analysis, candidate: Candidate): PropsRes
   const props: PropInfo[] = []
   const skipped: string[] = []
 
-  for (const symbol of checker.getPropertiesOfType(type)) {
-    const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0]
-    if (!declaration || !isProjectNode(analysis, declaration)) continue
-    if (!PROP_NAME.test(symbol.name)) {
-      skipped.push(symbol.name)
-      continue
+  // One member that does not resolve (a type from a package that is not installed) turns the whole intersection into
+  // `any`; reading the members one by one keeps the props of the rest.
+  const parts = ts.isIntersectionTypeNode(typeNode) && (type.flags & ts.TypeFlags.Any) !== 0 ? typeNode.types.map((n) => checker.getTypeFromTypeNode(n)) : [type]
+  const seen = new Set<string>()
+  for (const part of parts) {
+    if ((part.flags & ts.TypeFlags.Any) !== 0) continue
+    for (const symbol of checker.getPropertiesOfType(part)) {
+      if (seen.has(symbol.name)) continue
+      seen.add(symbol.name)
+      const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0]
+      if (!declaration || !isProjectNode(analysis, declaration)) continue
+      if (!PROP_NAME.test(symbol.name)) {
+        skipped.push(symbol.name)
+        continue
+      }
+      props.push(describeProp({ analysis, symbol, declaration, rootName, defaults, candidate }))
     }
-    props.push(describeProp({ analysis, symbol, declaration, rootName, defaults, candidate }))
   }
   props.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
 

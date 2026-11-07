@@ -589,6 +589,9 @@ export declare const Button: OverridableComponent<ButtonTypeMap>;
 export interface AlertProps { tone?: "info" | "error"; }
 type FactoryPayload = { props: object; ref?: unknown };
 export type MantineComponent<Payload extends FactoryPayload> = React.NamedExoticComponent<Payload["props"] & React.RefAttributes<Payload["ref"]>> & { classes: string };
+type ExtendTypeMap<M extends { props: object }> = M & { extra: true };
+export type CardTypeMap<A = {}> = ExtendTypeMap<{ props: A & { title: string }; defaultComponent: "div" }>;
+export declare const Card: OverridableComponent<CardTypeMap>;
 export declare const Alert: MantineComponent<{ props: AlertProps; ref: HTMLDivElement }>;
 export declare const Plain: ((props: { n: number }) => React.JSX.Element) & { displayName: string };
 export declare const NotOne: ((input: string) => string) & { extra: number };
@@ -597,10 +600,11 @@ export {};
 
   it("detects components declared through wrapper types by their call signatures", async () => {
     const { names, facts } = await run({ "index.d.ts": dts }, { exports: "./index.d.ts" })
-    expect(names).toEqual(expect.arrayContaining(["Button", "Alert", "Plain"]))
+    expect(names).toEqual(expect.arrayContaining(["Button", "Card", "Alert", "Plain"]))
     expect(names).not.toContain("NotOne")
-    // shortcut: props of a generic wrapper like OverridableComponent<M> are `M["props"]`, which does not resolve without
-    // reading M at the use site; upgrade when MUI-style props matter.
+    // The props of `OverridableComponent<M>` are `M["props"]`, read from the type map at the use site.
+    expect(facts("Button")["props.variant.allowedValues"]).toEqual(["solid", "outline"])
+    expect(facts("Card")["props.title.required"]).toBe(true)
     expect(facts("Alert")["props.tone.allowedValues"]).toEqual(["info", "error"])
   })
 })

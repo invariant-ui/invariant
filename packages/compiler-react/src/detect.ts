@@ -426,11 +426,41 @@ export function declaredComponent(
       }
     }
   }
+  const polymorphic = POLYMORPHIC_WRAPPERS.has(ref.name)
+  // `OverridableComponent<ButtonTypeMap>`: the component's own props are the type map's `props`. The call signature's
+  // parameter is `DefaultComponentProps<M>`, which names the generic `M` and does not resolve on its own.
+  const typeMapProps = polymorphic ? propsOfTypeMap(checker, ref.typeArguments?.[0]) : undefined
   const callable = callableComponent(checker, t, make)
-  if (callable) return callable
+  if (callable) {
+    if (typeMapProps) callable.propsTypeNode = typeMapProps
+    return callable
+  }
   // MUI's `OverridableComponent` can come from `@mui/types`, which is not part of the analyzed package, so the checker
-  // cannot see its call signatures. The name alone says it is a component; its props stay unresolved.
-  return POLYMORPHIC_WRAPPERS.has(ref.name) ? make({ propsUnknown: true }) : undefined
+  // cannot see its call signatures. The name alone says it is a component.
+  if (!polymorphic) return undefined
+  return make(typeMapProps ? { propsTypeNode: typeMapProps } : { propsUnknown: true })
+}
+
+/** The `props` member of a type map declared in the analyzed package (`interface ButtonTypeMap { props: P; … }`). */
+function propsOfTypeMap(checker: ts.TypeChecker, arg: ts.TypeNode | undefined): ts.TypeNode | undefined {
+  if (!arg || !ts.isTypeReferenceNode(arg)) return undefined
+  const target = declarationOf(resolveSymbol(checker, checker.getSymbolAtLocation(arg.typeName)))
+  // `type AccordionTypeMap<…> = ExtendPaperTypeMap<{ props: …; defaultComponent: … }>`: the map is the wrapper's argument.
+  const literal = (t: ts.TypeNode | undefined): ts.TypeLiteralNode | undefined => {
+    if (!t) return undefined
+    if (ts.isTypeLiteralNode(t)) return t
+    const first = ts.isTypeReferenceNode(t) ? t.typeArguments?.[0] : undefined
+    return first && ts.isTypeLiteralNode(first) ? first : undefined
+  }
+  const members = target
+    ? ts.isInterfaceDeclaration(target)
+      ? target.members
+      : ts.isTypeAliasDeclaration(target)
+        ? literal(target.type)?.members
+        : undefined
+    : undefined
+  const prop = members?.find((m): m is ts.PropertySignature => ts.isPropertySignature(m) && m.name.getText() === "props")
+  return prop?.type
 }
 
 /**
