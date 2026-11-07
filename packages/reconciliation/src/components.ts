@@ -387,8 +387,8 @@ function assemble(
     slots: sorted([...items.slots].map(([name, d]) => ({ name, ...withExt(d) }))),
     variants: sorted(
       [...items.variants]
-        .filter(([, d]) => Array.isArray(d.value.values) && d.value.values.length > 0)
-        .map(([name, d]) => ({ name, ...d.value }))
+        .map(([name, d]) => ({ name, ...d.value, ...withoutEmptyValues(d.value) }))
+        .filter((v) => Array.isArray(v.values) && v.values.length > 0)
     ),
     states: [],
     ...(Object.keys(a11y).length > 0 ? { accessibility: a11y } : {}),
@@ -401,6 +401,19 @@ function assemble(
     ...(Object.keys(extensions).length > 0 ? { extensions } : {})
   }
   return component as unknown as Component
+}
+
+/**
+ * The contract has no way to say "empty string" (a variant value and a default are at least one character), but a
+ * union such as `size?: "" | "small" | "large"` is common (Element Plus, Angular Material). Dropping the value keeps the
+ * contract valid; the rest of the domain is still enforced.
+ */
+function withoutEmptyValues(value: { values?: unknown; default?: unknown }): { values?: unknown[]; default?: unknown } {
+  const values = Array.isArray(value.values) ? value.values.filter((v) => v !== "") : value.values
+  return {
+    ...(values !== undefined ? { values: values as unknown[] } : {}),
+    ...(value.default === "" ? { default: undefined } : {})
+  }
 }
 
 function sortedRecord<T>(record: Record<string, T>): Record<string, T> {
