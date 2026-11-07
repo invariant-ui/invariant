@@ -6,6 +6,7 @@
     "declarationMap": false,
     "sourceMap": false,
     "noEmit": true,
+    "lib": ["ES2023", "ESNext.Iterator"],
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "paths": {
@@ -62,6 +63,9 @@
       ],
       "@invariant/validation": [
         "./packages/validation/src/index.ts"
+      ],
+      "@invariant/browser-verify": [
+        "./packages/browser-verify/src/index.ts"
       ],
       "@invariant/governance": [
         "./packages/governance/src/index.ts"

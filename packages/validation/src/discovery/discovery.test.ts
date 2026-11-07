@@ -30,8 +30,11 @@ const HEAD = 'import { Badge, Button, Card, Link, Modal, Stack, Text } from "@ac
 const file = (name: string, body: string) => ({ file: name, code: `${HEAD}export const X = () => (${body})` })
 const CARD =
   "<Card><Card.Header><Text>t</Text></Card.Header><Card.Body><Button>go</Button></Card.Body></Card>"
-const run = (files: ReturnType<typeof file>[], options = {}, reviews = undefined as never) =>
-  discover({ ds: ds(), files, options, reviews })
+const run = (
+  files: ReturnType<typeof file>[],
+  options = {},
+  reviews?: Parameters<typeof discover>[0]["reviews"]
+) => discover({ ds: ds(), files, options, reviews })
 const arrangements = (r: CandidatesFile): Candidate[] => r.candidates.filter((c) => c.kind === "arrangement")
 
 describe("recurring arrangements", () => {
