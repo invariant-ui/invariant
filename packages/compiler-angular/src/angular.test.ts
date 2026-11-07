@@ -448,3 +448,90 @@ describe("adapter behavior", () => {
     )
   })
 })
+
+describe("declaration files", () => {
+  const root = "node_modules/@acme/ng"
+  const dts: Record<string, string> = {
+    "package.json": JSON.stringify({
+      name: "@acme/ng",
+      version: "1.0.0",
+      types: "./index.d.ts",
+      peerDependencies: { "@angular/core": "^19.0.0" }
+    }),
+    "index.d.ts": `import * as i0 from "@angular/core";
+export declare class ButtonComponent {
+  /** Visual style. */
+  variant: "primary" | "ghost";
+  size: i0.InputSignal<"sm" | "md">;
+  label: i0.InputSignalWithTransform<boolean, string | boolean>;
+  checked: i0.ModelSignal<boolean>;
+  set disabled(value: boolean);
+  clicked: i0.OutputEmitterRef<MouseEvent>;
+  closed: EventEmitter<void>;
+  static ɵfac: i0.ɵɵFactoryDeclaration<ButtonComponent, never>;
+  static ɵcmp: i0.ɵɵComponentDeclaration<ButtonComponent, "ui-button, button[uiButton]", ["uiButton"], { "variant": { "alias": "variant"; "required": true; }; "size": { "alias": "size"; "required": false; "isSignal": true; }; "label": { "alias": "text"; "required": false; "isSignal": true; }; "checked": { "alias": "checked"; "required": false; "isSignal": true; }; "disabled": { "alias": "disabled"; "required": false; }; }, { "clicked": "clicked"; "closed": "closed"; "checkedChange": "checkedChange"; }, never, ["*", "[icon]"], true, never>;
+}
+export declare class TooltipDirective {
+  tip: string;
+  static ɵdir: i0.ɵɵDirectiveDeclaration<TooltipDirective, "[uiTooltip]", never, { "tip": { "alias": "uiTooltip"; "required": false; }; }, {}, never, never, true, never>;
+}
+export declare class UiModule {
+  static ɵmod: i0.ɵɵNgModuleDeclaration<UiModule, never, [typeof ButtonComponent, typeof TooltipDirective], [typeof ButtonComponent]>;
+}
+export declare function helper(): string;
+import { EventEmitter } from "@angular/core";
+`
+  }
+
+  async function runDts() {
+    const result = await compile({
+      fs: memoryFs({
+        "package.json": JSON.stringify({ name: "app", dependencies: { "@acme/ng": "1.0.0" } }),
+        ...Object.fromEntries(Object.entries(dts).map(([path, text]) => [`${root}/${path}`, text]))
+      }),
+      adapters: [adapter],
+      clock: FIXED_CLOCK,
+      discovery: { declarationRoots: [root] }
+    })
+    const ir = result.irDocuments[0]
+    const facts = (name: string): Record<string, unknown> => {
+      const entity = ir?.entities.find((e) => e.name === name)
+      return Object.fromEntries(
+        (ir?.facts ?? []).filter((f) => f.subject === entity?.ref).map((f) => [f.path, f.value])
+      )
+    }
+    return { ir, facts }
+  }
+
+  it("reads the compiled metadata of components, directives and modules, and ignores plain functions", async () => {
+    const { ir, facts } = await runDts()
+    expect(ir?.entities.map((e) => `${e.kind}:${e.name}`).sort()).toEqual([
+      "component:ButtonComponent",
+      "component:TooltipDirective",
+      "module:UiModule"
+    ])
+    const button = facts("ButtonComponent")
+    expect(button["implementations.angular.extensions.angular.selector"]).toBe("ui-button, button[uiButton]")
+    expect(button["implementations.angular.extensions.angular.standalone"]).toBe(true)
+    expect(button["implementations.angular.extensions.angular.exportAs"]).toBe("uiButton")
+    expect(button["props.variant.allowedValues"]).toEqual(["primary", "ghost"])
+    expect(button["props.variant.required"]).toBe(true)
+    expect(button["props.variant.description"]).toBe("Visual style.")
+    // Signal inputs: the value type is the type argument, and the public name is the alias.
+    expect(button["props.size.allowedValues"]).toEqual(["sm", "md"])
+    expect(button["props.text.type.kind"]).toBe("boolean")
+    expect(button["props.text.extensions.angular.writeType"]).toBe("string | boolean")
+    expect(button["props.text.extensions.angular.property"]).toBe("label")
+    expect(button["props.checked.extensions.angular.kind"]).toBe("model")
+    expect(button["props.disabled.type.kind"]).toBe("boolean")
+    expect(button["events.clicked.extensions.angular.kind"]).toBe("signal-output")
+    expect(button["events.clicked.payload.text"]).toBe("MouseEvent")
+    expect(button["events.checkedChange.extensions.angular.kind"]).toBe("model")
+    expect(Object.keys(button).some((p) => p.startsWith("slots.default"))).toBe(true)
+    expect(Object.keys(button).some((p) => p.startsWith("slots.icon"))).toBe(true)
+    expect(facts("TooltipDirective")["props.uiTooltip.extensions.angular.property"]).toBe("tip")
+    expect(facts("UiModule")["module.exports"]).toEqual([
+      { name: "ButtonComponent", file: `${root}/index.d.ts`, localName: "ButtonComponent" }
+    ])
+  })
+})

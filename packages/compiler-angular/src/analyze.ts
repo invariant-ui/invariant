@@ -11,6 +11,7 @@ import {
 import type { Diagnostic } from "@invariant/shared"
 import ts from "typescript"
 import { type AngularInput, type AngularOutput, type ClassMetadata, readClass } from "./classes.js"
+import { readDeclaredClass } from "./declared.js"
 import {
   matchesSelector,
   parseSelector,
@@ -108,7 +109,7 @@ export function analyzePackage(input: {
     if (!analysis.relativePath(sf.fileName)) continue
     for (const statement of sf.statements) {
       if (!ts.isClassDeclaration(statement)) continue
-      const meta = readClass(analysis, statement)
+      const meta = readClass(analysis, statement) ?? readDeclaredClass(analysis, statement)
       if (!meta) continue
       metas.set(statement, meta)
       if (meta.kind === "module")

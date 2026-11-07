@@ -17,6 +17,7 @@ import {
 } from "@invariant/compiler-core"
 import type { Diagnostic } from "@invariant/shared"
 import ts from "typescript"
+import { analyzeDeclaredComponent } from "./declared.js"
 import { analyzeOptionsDeclaration, analyzeScript, type ScriptInfo, type VueSlot } from "./script.js"
 import { type ParsedSfc, parseSfc, sfcLocalName } from "./sfc.js"
 import { analyzeTemplate, type TemplateInfo } from "./template.js"
@@ -43,7 +44,7 @@ export interface VueComponent {
   localName: string
   file: string
   line: number
-  kind: "sfc" | "defineComponent"
+  kind: "sfc" | "defineComponent" | "declaration"
   exports: Array<{ subpath: string; name: string }>
   sfc?: ParsedSfc
   script: ScriptInfo
@@ -158,6 +159,30 @@ export function analyzePackage(input: {
       )
         continue
       const init = decl.initializer ? unwrap(decl.initializer) : undefined
+      if (!init) {
+        // A declaration file's `declare const X: DefineComponent<…>`.
+        const file = relativeFileOf(analysis, decl) as string
+        const localName = declaredLocalName(decl.name.text, exported.name, file)
+        const ref = `vue:${file}#${localName}`
+        const existing = components.find((c) => c.ref === ref)
+        if (existing) existing.exports.push({ subpath: entry.subpath, name: exported.name })
+        else {
+          const script = analyzeDeclaredComponent(analysis, decl)
+          if (script)
+            components.push(
+              buildTsComponent({
+                analysis,
+                decl,
+                script,
+                ref,
+                localName,
+                kind: "declaration",
+                exported: { subpath: entry.subpath, name: exported.name }
+              })
+            )
+        }
+        continue
+      }
       if (
         !init ||
         !ts.isCallExpression(init) ||
@@ -185,6 +210,12 @@ export function analyzePackage(input: {
     }
   }
 
+  if (components.some((c) => c.kind === "declaration"))
+    note(
+      "info",
+      "vue.declaration-defaults-unavailable",
+      "Components were read from declaration files, which carry types but no default values: prop defaults are not reported"
+    )
   for (const c of components) {
     if (!c.propsComplete)
       note(
@@ -213,6 +244,13 @@ export function analyzePackage(input: {
       a.subpath < b.subpath ? -1 : a.subpath > b.subpath ? 1 : a.name < b.name ? -1 : 1
     )
   return { components, diagnostics }
+}
+
+/** `declare const _default` (vue-tsc output for one `.vue` file) is named after its file; other names are kept. */
+function declaredLocalName(declName: string, exportName: string, file: string): string {
+  if (!declName.startsWith("_")) return declName
+  if (exportName !== "default") return exportName
+  return sfcLocalName(file.replace(/(?:\.vue)?\.d\.[cm]?ts$/, ".vue"))
 }
 
 function sfcTargetOf(
@@ -326,21 +364,23 @@ function buildTsComponent(input: {
   decl: ts.VariableDeclaration
   script: ScriptInfo
   ref: string
+  localName?: string
+  kind?: VueComponent["kind"]
   exported: { subpath: string; name: string }
 }): VueComponent {
   const { analysis, decl, script } = input
   const file = relativeFileOf(analysis, decl) as string
   return {
     ref: input.ref,
-    localName: (decl.name as ts.Identifier).text,
+    localName: input.localName ?? (decl.name as ts.Identifier).text,
     file,
     line: lineOf(decl),
-    kind: "defineComponent",
+    kind: input.kind ?? "defineComponent",
     exports: [input.exported],
     script,
     styling: { variables: [], scoped: false, module: false, preprocessors: [], blocks: 0 },
     variants: variantsFromProps(script.props.map(toSpec)),
-    slots: [],
+    slots: mergeSlots(script.slots, { slots: [] }),
     renders: [],
     propsComplete: script.complete,
     locate: (node) => ({ file: relativeFileOf(analysis, node) ?? file, line: lineOf(node) })
@@ -365,7 +405,7 @@ function toSpec(p: ScriptInfo["props"][number]): PropSpec {
   }
 }
 
-function mergeSlots(declared: readonly VueSlot[], template: TemplateInfo): MergedSlot[] {
+function mergeSlots(declared: readonly VueSlot[], template: Pick<TemplateInfo, "slots">): MergedSlot[] {
   const byName = new Map<string, MergedSlot>()
   for (const s of declared)
     byName.set(s.name, {

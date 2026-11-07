@@ -172,3 +172,15 @@ export function componentNameFromFile(path: string): string {
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join("")
 }
+
+/** The name and type arguments of `Foo<P>`, `ns.Foo<P>` and `import("pkg").Foo<P>`: the written form, nothing resolved. */
+export function typeReferenceInfo(
+  type: ts.TypeNode
+): { name: string; typeArguments: readonly ts.TypeNode[] } | undefined {
+  const lastName = (n: ts.EntityName): string => (ts.isQualifiedName(n) ? n.right.text : n.text)
+  if (ts.isTypeReferenceNode(type))
+    return { name: lastName(type.typeName), typeArguments: type.typeArguments ?? [] }
+  if (ts.isImportTypeNode(type) && type.qualifier)
+    return { name: lastName(type.qualifier), typeArguments: type.typeArguments ?? [] }
+  return undefined
+}
