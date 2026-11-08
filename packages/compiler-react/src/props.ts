@@ -99,6 +99,7 @@ export function extractProps(analysis: Analysis, candidate: Candidate): PropsRes
     inheritsFrom,
     generics,
     complete:
+      !candidate.openProps &&
       inheritsFrom.length === 0 &&
       skipped.length === 0 &&
       !resolvedAny &&

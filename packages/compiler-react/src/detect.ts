@@ -23,6 +23,11 @@ export interface Candidate {
   styled?: { library: "styled-components" | "emotion" }
   /** Props cannot be determined from syntax (lazy, untyped, unknown wrapper). */
   propsUnknown: boolean
+  /**
+   * The component accepts more than its declared props (a polymorphic `component` prop, system props like `sx`, the root
+   * element's attributes), so a prop it does not declare is not an error.
+   */
+  openProps?: boolean
   /** `Object.assign(Root, { Item })` and `Root.Item = Item` children. */
   subcomponents: Array<{ key: string; target: ts.Node }>
   /** Catalog name override, set for compound children (`Card.Header`). */
@@ -381,6 +386,16 @@ export function declaredComponent(
   }
   const ref = refInfo(t)
   if (!ref) return callableComponent(checker, t, make)
+  // Checked first: the wrapper's own declaration is an alias whose first call signature (`href` required) is a trap.
+  const polymorphic = POLYMORPHIC_WRAPPERS.has(ref.name)
+  if (polymorphic) {
+    // `OverridableComponent<ButtonTypeMap>`: the component's own props are the type map's `props`. Its call signatures
+    // are no help: `ExtendButtonBase` lists an `href`-required overload first, and the `OverridableComponent` parameter
+    // names the generic `M`. The wrapper also adds a `component` prop and system props, so the list is never closed.
+    // Without a readable type map (it comes from a package that is not installed) there are no props to report.
+    const typeMapProps = propsOfTypeMap(checker, ref.typeArguments?.[0])
+    return make({ openProps: true, ...(typeMapProps ? { propsTypeNode: typeMapProps } : { propsUnknown: true }) })
+  }
   const known = DECLARED_COMPONENT_TYPES[ref.name]
   const fromKnown = known ? knownComponent(known, ref.typeArguments, make) : undefined
   if (fromKnown) return fromKnown
@@ -426,19 +441,7 @@ export function declaredComponent(
       }
     }
   }
-  const polymorphic = POLYMORPHIC_WRAPPERS.has(ref.name)
-  // `OverridableComponent<ButtonTypeMap>`: the component's own props are the type map's `props`. The call signature's
-  // parameter is `DefaultComponentProps<M>`, which names the generic `M` and does not resolve on its own.
-  const typeMapProps = polymorphic ? propsOfTypeMap(checker, ref.typeArguments?.[0]) : undefined
-  const callable = callableComponent(checker, t, make)
-  if (callable) {
-    if (typeMapProps) callable.propsTypeNode = typeMapProps
-    return callable
-  }
-  // MUI's `OverridableComponent` can come from `@mui/types`, which is not part of the analyzed package, so the checker
-  // cannot see its call signatures. The name alone says it is a component.
-  if (!polymorphic) return undefined
-  return make(typeMapProps ? { propsTypeNode: typeMapProps } : { propsUnknown: true })
+  return callableComponent(checker, t, make)
 }
 
 /** The `props` member of a type map declared in the analyzed package (`interface ButtonTypeMap { props: P; … }`). */
