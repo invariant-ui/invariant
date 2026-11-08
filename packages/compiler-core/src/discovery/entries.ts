@@ -94,6 +94,16 @@ function declaredEntries(
   const out: Declared[] = []
   const manifest = raw.manifest
   const add = (subpath: string, condition: string, target: string): void => {
+    // `"./*": "./*"` maps every file of the package to itself: it is not a list of what the package offers, and expanding
+    // it makes each component appear once per build folder (dist/esm, dist/cjs, src) as separate, "ambiguous" copies.
+    if (subpath.includes("*") && posix.normalize(subpath) === posix.normalize(target)) {
+      env.diagnostics.info(
+        "discovery.entry-pattern-identity",
+        `Entry pattern ${subpath} in ${raw.info.id} maps files to themselves and is not expanded`,
+        { location: { path: raw.info.manifest.path } }
+      )
+      return
+    }
     if (subpath.includes("*") || target.includes("*")) {
       const stars = (t: string): number => t.split("*").length - 1
       if (stars(subpath) !== 1 || stars(target) !== 1) {
