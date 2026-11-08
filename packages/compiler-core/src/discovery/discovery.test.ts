@@ -292,6 +292,17 @@ describe("entry points", () => {
     })
   })
 
+  it("does not expand `./*` mapped to itself: it names every file, not what the package offers", async () => {
+    const d = await discover({
+      "package.json": base({ name: "lib", exports: { ".": "./dist/index.d.ts", "./*": "./*" } }),
+      "dist/index.d.ts": "export declare const A: number;",
+      "dist/other.d.ts": "export declare const B: number;",
+      "src/other.ts": "export const B = 1"
+    })
+    expect((d.packages[0]?.entryPoints ?? []).map((e) => e.subpath)).toEqual(["."])
+    expect(codes(d)).toContain("discovery.entry-pattern-identity")
+  })
+
   it("matches a wildcard target in build output against the sources it was built from", async () => {
     const d = await discover({
       "package.json": base({ exports: { "./*": "./dist/*.js" } }),
