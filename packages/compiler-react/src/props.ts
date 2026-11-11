@@ -73,7 +73,10 @@ export function extractProps(analysis: Analysis, candidate: Candidate): PropsRes
 
   // One member that does not resolve (a type from a package that is not installed) turns the whole intersection into
   // `any`; reading the members one by one keeps the props of the rest.
-  const parts = ts.isIntersectionTypeNode(typeNode) && (type.flags & ts.TypeFlags.Any) !== 0 ? typeNode.types.map((n) => checker.getTypeFromTypeNode(n)) : [type]
+  const parts =
+    ts.isIntersectionTypeNode(typeNode) && (type.flags & ts.TypeFlags.Any) !== 0
+      ? typeNode.types.map((n) => checker.getTypeFromTypeNode(n))
+      : [type]
   const seen = new Set<string>()
   for (const part of parts) {
     if ((part.flags & ts.TypeFlags.Any) !== 0) continue

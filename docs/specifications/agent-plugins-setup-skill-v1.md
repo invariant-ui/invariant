@@ -45,7 +45,7 @@ Rules: report only what the CLI printed; never edit contract, pattern, policy or
 
 ## 1. Check where things stand
 Look for `invariant.config.json` and an `invariant/` folder in the project root. If they exist, ask whether to re-check the setup, recompile, or look at the enforcement record (`invariant enforcement report`), and do only that. Otherwise continue.
-Run `invariant --version`. If it says the CLI is being installed, wait a moment and retry; if it cannot be installed, tell the person to run `npm install -g invariant-ui` and stop.
+Run `invariant --version`. If it says the CLI is being installed, wait a moment and retry; if it cannot be installed, tell the person to run `npm install -g @invariant-ui/cli` and stop.
 
 ## 2. Find the design system
 Without changing anything, look for: an installed package that ships a contract (`node_modules/*/invariant/invariant.contract.json`), design system source in this repository (React, Vue or Angular components, Storybook, token files), or neither.

@@ -408,7 +408,10 @@ function assemble(
  * union such as `size?: "" | "small" | "large"` is common (Element Plus, Angular Material). Dropping the value keeps the
  * contract valid; the rest of the domain is still enforced.
  */
-function withoutEmptyValues(value: { values?: unknown; default?: unknown }): { values?: unknown[]; default?: unknown } {
+function withoutEmptyValues(value: { values?: unknown; default?: unknown }): {
+  values?: unknown[]
+  default?: unknown
+} {
   const values = Array.isArray(value.values) ? value.values.filter((v) => v !== "") : value.values
   return {
     ...(values !== undefined ? { values: values as unknown[] } : {}),

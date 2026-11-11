@@ -160,10 +160,10 @@ Compatibility: generated skill and rules text changed; regenerate with `invarian
 
 ## Packaging and consolidation (2026-11-03)
 
-- **One published package, `invariant-ui`** (bin `invariant`), so `npx invariant-ui setup` works with nothing installed first. `invariant` is an unrelated package on npm, hence the name; it is set in `NPM_PACKAGE`.
+- **One published package, `@invariant-ui/cli`** (bin `invariant`), so `npx @invariant-ui/cli setup` works with nothing installed first. `invariant` is an unrelated package on npm, hence the name; it is set in `NPM_PACKAGE`.
 - **No bundler.** `scripts/build-npm.ts` copies each workspace package's compiled JavaScript under `dist/<name>/` and rewrites `@invariant/<name>` imports to relative paths. The published code is the compiled code, file for file. Runtime dependencies are `typescript`, `zod` and `@vue/compiler-sfc`. A test builds it, checks no workspace import remains and every relative import resolves, and runs it as a process. It also ran on Node 20 and 24, so `engines` is `>=20`.
 - **Consolidated two packages.** `diagnostics` into `shared` (121 lines, no reason to be separate) and `discovery` into `validation` (it is built on the validation scan and element resolution). Eighteen workspace packages remain. The rest were kept because each is a boundary the checker enforces or has different dependencies: the contract and IR must not know frameworks, each adapter has its own compiler dependency and must not import another, `mcp` must not run the compiler, and `browser-verify` must stay free of heavy dependencies. Merging them would trade enforced boundaries for fewer files.
-- **Agent config under npx.** `agent init` writes `npx -y invariant-ui mcp` when `invariant` is not on PATH, and the plain command when it is (or `--command` is given).
+- **Agent config under npx.** `agent init` writes `npx -y @invariant-ui/cli mcp` when `invariant` is not on PATH, and the plain command when it is (or `--command` is given).
 - **Version.** The CLI version moved from `0.0.0` to `0.1.0` so `--version` matches the package. Golden files changed only in versions and hashes.
 - **Not done:** the package is not published. That needs an npm login, and a name only you can claim. See `docs/releasing.md`; `.github/workflows/publish.yml` publishes on a version tag once an `NPM_TOKEN` secret exists.
 

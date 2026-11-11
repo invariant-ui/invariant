@@ -394,7 +394,10 @@ export function declaredComponent(
     // names the generic `M`. The wrapper also adds a `component` prop and system props, so the list is never closed.
     // Without a readable type map (it comes from a package that is not installed) there are no props to report.
     const typeMapProps = propsOfTypeMap(checker, ref.typeArguments?.[0])
-    return make({ openProps: true, ...(typeMapProps ? { propsTypeNode: typeMapProps } : { propsUnknown: true }) })
+    return make({
+      openProps: true,
+      ...(typeMapProps ? { propsTypeNode: typeMapProps } : { propsUnknown: true })
+    })
   }
   const known = DECLARED_COMPONENT_TYPES[ref.name]
   const fromKnown = known ? knownComponent(known, ref.typeArguments, make) : undefined
@@ -462,7 +465,9 @@ function propsOfTypeMap(checker: ts.TypeChecker, arg: ts.TypeNode | undefined): 
         ? literal(target.type)?.members
         : undefined
     : undefined
-  const prop = members?.find((m): m is ts.PropertySignature => ts.isPropertySignature(m) && m.name.getText() === "props")
+  const prop = members?.find(
+    (m): m is ts.PropertySignature => ts.isPropertySignature(m) && m.name.getText() === "props"
+  )
   return prop?.type
 }
 

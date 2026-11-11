@@ -5,13 +5,13 @@ Related: `docs/specifications/agent-plugins-v1.md`, `docs/decisions/0003-agent-e
 
 ## Context
 
-Today a team adopts Invariant by running the CLI (`npx invariant-ui setup`, then `invariant agent init <client>`). That is fine for an engineer. The people who decide that an internal design system must govern AI-generated UI are often product, design or engineering leaders, and for them "install a plugin from a marketplace, or upload a downloaded file, then follow a guided setup" is a much lower bar. The goal is the least human effort between "I want my AI tools to follow our design system" and a contract the agents are bound to.
+Today a team adopts Invariant by running the CLI (`npx @invariant-ui/cli setup`, then `invariant agent init <client>`). That is fine for an engineer. The people who decide that an internal design system must govern AI-generated UI are often product, design or engineering leaders, and for them "install a plugin from a marketplace, or upload a downloaded file, then follow a guided setup" is a much lower bar. The goal is the least human effort between "I want my AI tools to follow our design system" and a contract the agents are bound to.
 
-Claude Code and Cursor both have installable plugin systems that can bundle skills, hooks and MCP servers (verified against their docs on 2026-11-11; see the spec). Neither plugin can contain the CLI's logic by itself: the hook runs `invariant hook` and the MCP server runs `invariant mcp`. And `invariant-ui` has not been published to npm (the registry returns 404), so nothing can fetch it yet.
+Claude Code and Cursor both have installable plugin systems that can bundle skills, hooks and MCP servers (verified against their docs on 2026-11-11; see the spec). Neither plugin can contain the CLI's logic by itself: the hook runs `invariant hook` and the MCP server runs `invariant mcp`. And `@invariant-ui/cli` has not been published to npm (the registry returns 404), so nothing can fetch it yet.
 
 ## Decisions
 
-**D1. The plugins auto-install a pinned `invariant-ui` into a user cache, through one launcher.** A small dependency-free Node launcher script, shipped in each plugin, resolves the CLI in this order: an `invariant` on PATH, then a pinned version in `~/.invariant/cli/<version>/`, installing it there with `npm install --ignore-scripts` on first use. Both clients use the same launcher. This was chosen over bundling the CLI's dependencies in the plugin (large downloads, heavy build) and over requiring a global install (the extra step this work exists to remove). It needs Node 20 or newer, network on first run, and a published package. Running `npx -y` on every hook fire was rejected: it cannot meet the 500 ms hook budget.
+**D1. The plugins auto-install a pinned `@invariant-ui/cli` into a user cache, through one launcher.** A small dependency-free Node launcher script, shipped in each plugin, resolves the CLI in this order: an `invariant` on PATH, then a pinned version in `~/.invariant/cli/<version>/`, installing it there with `npm install --ignore-scripts` on first use. Both clients use the same launcher. This was chosen over bundling the CLI's dependencies in the plugin (large downloads, heavy build) and over requiring a global install (the extra step this work exists to remove). It needs Node 20 or newer, network on first run, and a published package. Running `npx -y` on every hook fire was rejected: it cannot meet the 500 ms hook budget.
 
 **D2. Cursor ships feedback-only enforcement first.** Cursor's `afterFileEdit` hook runs after the write and has no deny field; `preToolUse` may be able to block a Write, but its payload is not documented. The Cursor plugin ships rules, skills, MCP and an `afterFileEdit` hook that reports findings to the agent, and says in the support matrix that it does not block. Blocking is tried against a real Cursor install as a follow-up, and adopted only if it works. Claude Code keeps write-time blocking.
 
@@ -32,11 +32,15 @@ Claude Code and Cursor both have installable plugin systems that can bundle skil
 
 ## Consequences
 
-- `invariant-ui` must be published before the plugins can work. Publishing cannot be undone (a version number is never reusable), so it is an owner action, not something the build does.
+- `@invariant-ui/cli` must be published before the plugins can work. Publishing cannot be undone (a version number is never reusable), so it is an owner action, not something the build does.
 - The launcher is code that runs `npm install` on a user's machine, outside the clients' sandboxes. It pins an exact version, passes `--ignore-scripts`, writes only under `~/.invariant/`, takes a lock so concurrent hooks do not race, and fails open. The spec lists its failure modes.
 - Plugins add their skill and agent descriptions to the model's context on every turn in Claude Code. The plugin keeps its skill count small.
 - `agent init` and `setup` keep working unchanged for people who use the CLI directly.
 - The support matrix gains a "via plugin" column and must stay honest: Cursor does not block writes until D2's follow-up proves it.
+
+## Package name (2026-11-11)
+
+The package is published as `@invariant-ui/cli` under the owner's new npm organization `invariant-ui`, not as the unscoped `invariant-ui`. The earlier npm account was locked, and an org-owned package cannot be stranded by one account. The installed command is still `invariant`. `NPM_PACKAGE` in `apps/cli/src/version.ts` is the source of truth for the build; the launcher's `PACKAGE` constant mirrors it and a test should keep the two equal.
 
 ## Alternatives considered
 
@@ -46,6 +50,6 @@ Claude Code and Cursor both have installable plugin systems that can bundle skil
 
 ## Open items for the owner
 
-1. Publish `invariant-ui` (name, account, first version). The owner is locked out of the npm account (2026-11-11) and is waiting on npm support. Until then the launcher can install from a tarball URL (a GitHub release asset) instead; the plugin should not depend on npm being available.
+1. Publish `@invariant-ui/cli` (name, account, first version). The owner is locked out of the npm account (2026-11-11) and is waiting on npm support. Until then the launcher can install from a tarball URL (a GitHub release asset) instead; the plugin should not depend on npm being available.
 2. Confirm the GitHub repository that serves the Claude marketplace (the existing site links to `mcarlucci/invariant`).
-3. Plugin name: `invariant`, confirmed by the owner 2026-11-11 (the npm package name `invariant-ui` is separate; plugin names are per marketplace). The marketplace repository is `mcarlucci/invariant`, confirmed.
+3. Plugin name: `invariant`, confirmed by the owner 2026-11-11 (the npm package name `@invariant-ui/cli` is separate; plugin names are per marketplace). The marketplace repository is `mcarlucci/invariant`, confirmed.

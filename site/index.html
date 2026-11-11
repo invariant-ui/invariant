@@ -396,7 +396,7 @@ chromium 1.2.3: 4 passed, 1 failed, 0 could not run
     <h2>Setup adds the check to your repo. Every commit gets verified.</h2>
     <p class="sub">Say yes when <code>setup</code> asks and it writes a GitHub Action for you. From then on, each commit on an open pull request is checked against your contract, with annotations on the lines that break it.</p>
     <div class="grid g2">
-      <div class="code"><pre><span class="p">$</span> npx invariant-ui setup
+      <div class="code"><pre><span class="p">$</span> npx @invariant-ui/cli setup
 <span class="c">...</span>
 7. Add a GitHub Action that checks every
    commit on pull requests? [Y/n] y
@@ -408,8 +408,8 @@ chromium 1.2.3: 4 passed, 1 failed, 0 could not run
 <span class="k">jobs</span>:
   <span class="k">invariant</span>:
     <span class="k">steps</span>:
-      - <span class="k">run</span>: npx invariant-ui@0.1.0 verify --fresh
-      - <span class="k">run</span>: npx invariant-ui@0.1.0 validate 'src' --format github</pre></div>
+      - <span class="k">run</span>: npx @invariant-ui/cli@0.1.0 verify --fresh
+      - <span class="k">run</span>: npx @invariant-ui/cli@0.1.0 validate 'src' --format github</pre></div>
     </div>
     <div class="grid g3" style="margin-top:16px">
       <div class="card"><h3>New problems only</h3><p>Existing violations are baselined, so a pull request is checked on what it adds, not on history.</p></div>
@@ -470,13 +470,13 @@ chromium 1.2.3: 4 passed, 1 failed, 0 could not run
     <div class="steps">
       <div class="step"><div>
         <h3>Run setup</h3>
-        <div class="code"><pre>npx invariant-ui setup</pre></div>
+        <div class="code"><pre>npx @invariant-ui/cli setup</pre></div>
         <p class="c" style="margin:10px 0 0">Compiles your design system, finds the patterns your apps already repeat, and shows one plan. Answer yes once and it approves them, turns on starter rules, connects your AI tool, baselines old violations and adds the CI check. Nothing is approved until you say so.</p>
       </div></div>
       <div class="step"><div>
         <h3>Enforce it</h3>
-        <div class="code"><pre>npx invariant-ui validate src/
-npx invariant-ui verify --fresh   # put both in CI</pre></div>
+        <div class="code"><pre>npx @invariant-ui/cli validate src/
+npx @invariant-ui/cli verify --fresh   # put both in CI</pre></div>
       </div></div>
       <div class="step"><div>
         <h3>Design system in a package?</h3>
@@ -484,7 +484,7 @@ npx invariant-ui verify --fresh   # put both in CI</pre></div>
       </div></div>
       <div class="step"><div>
         <h3>Keep the command</h3>
-        <div class="code"><pre>npm install -g invariant-ui
+        <div class="code"><pre>npm install -g @invariant-ui/cli
 invariant --help</pre></div>
       </div></div>
     </div>

@@ -23,7 +23,7 @@ beforeAll(() => {
   const pkg = tmp("fakepkg")
   writeFileSync(
     path.join(pkg, "package.json"),
-    JSON.stringify({ name: "invariant-ui", version: "9.9.9", bin: { invariant: "bin.js" } })
+    JSON.stringify({ name: "@invariant-ui/cli", version: "9.9.9", bin: { invariant: "bin.js" } })
   )
   writeFileSync(
     path.join(pkg, "bin.js"),
@@ -78,7 +78,7 @@ const sandbox = (): { home: string; project: string; env: Record<string, string>
 const configure = (project: string): void => writeFileSync(path.join(project, "invariant.config.json"), "{}")
 const installed = (home: string): boolean =>
   existsSync(path.join(home, "cli")) &&
-  spawnSync("find", [path.join(home, "cli"), "-path", "*node_modules/invariant-ui/package.json"], {
+  spawnSync("find", [path.join(home, "cli"), "-path", "*node_modules/@invariant-ui/cli/package.json"], {
     encoding: "utf8"
   }).stdout.trim() !== ""
 

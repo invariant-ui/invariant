@@ -229,11 +229,11 @@ td code{white-space:nowrap}
   <div class="kicker">Start</div>
   <h2>Install</h2>
   <p>You need Node 20 or newer. There is nothing to install first: run it with <code>npx</code>.</p>
-  <div class="code"><span class="lang">bash</span><pre>npx invariant-ui setup</pre></div>
+  <div class="code"><span class="lang">bash</span><pre>npx @invariant-ui/cli setup</pre></div>
   <p>To keep the command, install it globally. It is then called <code>invariant</code>, which is what the rest of these docs use.</p>
-  <div class="code"><span class="lang">bash</span><pre>npm install -g invariant-ui
+  <div class="code"><span class="lang">bash</span><pre>npm install -g @invariant-ui/cli
 invariant --help</pre></div>
-  <p>Without a global install, write <code>npx invariant-ui</code> where the docs say <code>invariant</code>. <code>invariant agent init</code> notices when <code>invariant</code> is not on your <code>PATH</code> and writes an MCP entry that starts the server with <code>npx -y invariant-ui mcp</code> instead.</p>
+  <p>Without a global install, write <code>npx @invariant-ui/cli</code> where the docs say <code>invariant</code>. <code>invariant agent init</code> notices when <code>invariant</code> is not on your <code>PATH</code> and writes an MCP entry that starts the server with <code>npx -y @invariant-ui/cli mcp</code> instead.</p>
   <h3>From source</h3>
   <p>To work on Invariant itself you need Node 24 and <a href="https://pnpm.io">pnpm</a>.</p>
   <div class="code"><span class="lang">bash</span><pre>git clone https://github.com/mcarlucci/invariant.git
@@ -294,13 +294,13 @@ invariant agent init claude-code        # give your AI tool the contract</pre></
   <h2>Add it to your project</h2>
   <p>What you do depends on where the design system's source code lives, because <code>compile</code> reads that source.</p>
   <h3>The design system is in this repo</h3>
-  <p>A single repo or a monorepo, with the design system as a package. Run <code>npx invariant-ui setup</code> at the root. Commit <code>invariant/</code>, <code>invariant.patterns.json</code>, <code>invariant.baseline.json</code> and <code>.github/workflows/invariant.yml</code>. CI then runs <code>verify --fresh</code> and <code>validate</code> on every pull request. An app that imports the library through a workspace dependency (<code>@acme/ui</code> as <code>workspace:*</code>) works as is, because components are matched by package name.</p>
+  <p>A single repo or a monorepo, with the design system as a package. Run <code>npx @invariant-ui/cli setup</code> at the root. Commit <code>invariant/</code>, <code>invariant.patterns.json</code>, <code>invariant.baseline.json</code> and <code>.github/workflows/invariant.yml</code>. CI then runs <code>verify --fresh</code> and <code>validate</code> on every pull request. An app that imports the library through a workspace dependency (<code>@acme/ui</code> as <code>workspace:*</code>) works as is, because components are matched by package name.</p>
   <p>If application pages share a folder with the design system's components (<code>src/pages</code> next to <code>src/components</code>), setup skips that folder as design-system source. Pass <code>--paths src/pages</code>.</p>
   <h3>The app uses a design system from npm</h3>
   <p>The source is not in your repo, so the contract travels with the library.</p>
   <ol>
     <li><b>Design system repo:</b> run <code>invariant setup</code> there. It adds <code>invariant</code> to the package's <code>files</code> and a <code>prepack</code> script that compiles the contract (in a monorepo it compiles at the root and exports into the package), so each release ships a contract that matches it. It skips a private package.</li>
-    <li><b>App repo:</b> install the package, then run <code>npx invariant-ui setup</code>. It sees there is no design system source here, finds the contract the package ships (<code>node_modules/&lt;package&gt;/invariant/</code>), and writes a config that extends it. With several installed it asks which; <code>--contract &lt;folder&gt;</code> chooses.</li>
+    <li><b>App repo:</b> install the package, then run <code>npx @invariant-ui/cli setup</code>. It sees there is no design system source here, finds the contract the package ships (<code>node_modules/&lt;package&gt;/invariant/</code>), and writes a config that extends it. With several installed it asks which; <code>--contract &lt;folder&gt;</code> chooses.</li>
   </ol>
   <div class="code"><span class="lang">json</span><pre>{
   "name": "Acme UI",
@@ -835,9 +835,9 @@ invariant browser run</pre></div>
   <div class="kicker">Enforce</div>
   <h2>Verify in CI</h2>
   <p>Exit codes plus output formats are the integration. <code>--format github</code> prints workflow annotations, <code>--format sarif</code> prints SARIF 2.1.0 for code scanning, and <code>--format json</code> is for scripts.</p>
-  <div class="code"><span class="lang">bash</span><pre>npx invariant-ui compile
-npx invariant-ui verify --fresh                # fails if stale or tampered with, and says what changed
-npx invariant-ui validate src --format github  # annotate pull requests</pre></div>
+  <div class="code"><span class="lang">bash</span><pre>npx @invariant-ui/cli compile
+npx @invariant-ui/cli verify --fresh                # fails if stale or tampered with, and says what changed
+npx @invariant-ui/cli validate src --format github  # annotate pull requests</pre></div>
   <p>Commit the <code>invariant/</code> folder, <code>invariant.config.json</code>, <code>invariant.policies.json</code> and <code>invariant.decisions.json</code>. Compiling unchanged sources gives identical bytes, so diffs are meaningful.</p>
   <h3>Let setup add it</h3>
   <p>In a git project, <code>invariant setup</code> asks "Add a GitHub Action that checks every commit on pull requests?". Yes writes <code>.github/workflows/invariant.yml</code>:</p>
@@ -851,16 +851,16 @@ npx invariant-ui validate src --format github  # annotate pull requests</pre></d
   <p>To write the job yourself, or to add it to a workflow you already have, it needs only Node, because <code>npx</code> fetches the package:</p>
   <div class="code"><span class="lang">yaml</span><pre>- uses: actions/setup-node@v4
   with: { node-version: 22 }
-- run: npx invariant-ui verify --fresh
-- run: npx invariant-ui validate src --format github</pre></div>
-  <p>Pin a version (<code>npx invariant-ui@0.1.0</code>) if you want builds that do not change underneath you.</p>
+- run: npx @invariant-ui/cli verify --fresh
+- run: npx @invariant-ui/cli validate src --format github</pre></div>
+  <p>Pin a version (<code>npx @invariant-ui/cli@0.1.0</code>) if you want builds that do not change underneath you.</p>
   <div class="note"><b>No workflow file is generated</b>Invariant does not write files into <code>.github/</code>. Copy the job above into the workflow you already have.</div>
 </section>
 
 <section class="doc" id="cli">
   <div class="kicker">Use it</div>
   <h2>CLI</h2>
-  <p>The package is <code>invariant-ui</code> and the command is <code>invariant</code>. Run it with <code>npx invariant-ui &lt;command&gt;</code>, or install it with <code>npm install -g invariant-ui</code> and write <code>invariant &lt;command&gt;</code>, as below. It needs no account, network access or cloud service to run.</p>
+  <p>The package is <code>@invariant-ui/cli</code> and the command is <code>invariant</code>. Run it with <code>npx @invariant-ui/cli &lt;command&gt;</code>, or install it with <code>npm install -g @invariant-ui/cli</code> and write <code>invariant &lt;command&gt;</code>, as below. It needs no account, network access or cloud service to run.</p>
   <div class="tbl"><table>
     <tr><th>Command</th><th>What it does</th></tr>
     <tr><td><code>init</code></td><td>Runs discovery and writes <code>invariant.config.json</code>. A repository with more than five packages of one framework gets one whole-project entry for it. Refuses to overwrite without <code>--force</code>.</td></tr>
@@ -968,7 +968,7 @@ invariant mcp [--dir invariant]     # serves until stdin closes</pre></div>
   <p>One command writes MCP configuration, skills and rules for your AI tool.</p>
   <div class="code"><span class="lang">bash</span><pre>invariant agent init claude-code     # also: cursor, codex, windsurf, all
 invariant agent list</pre></div>
-  <p>The entry it writes launches <code>invariant mcp --dir &lt;output dir&gt;</code>. If <code>invariant</code> is on your <code>PATH</code> (after <code>npm install -g invariant-ui</code>), the entry runs it directly. If it is not, for example when you run Invariant with <code>npx</code>, the entry runs <code>npx -y invariant-ui mcp</code> instead, and the package installs on first use. To use something else, such as a local build, pass <code>--command</code>:</p>
+  <p>The entry it writes launches <code>invariant mcp --dir &lt;output dir&gt;</code>. If <code>invariant</code> is on your <code>PATH</code> (after <code>npm install -g @invariant-ui/cli</code>), the entry runs it directly. If it is not, for example when you run Invariant with <code>npx</code>, the entry runs <code>npx -y @invariant-ui/cli mcp</code> instead, and the package installs on first use. To use something else, such as a local build, pass <code>--command</code>:</p>
   <div class="code"><span class="lang">bash</span><pre>invariant agent init claude-code \
   --command node --command-arg /abs/path/to/invariant/apps/cli/dist/main.js</pre></div>
   <p><code>--dry-run</code> shows what would be written. <code>--force</code> replaces differing entries.</p>
@@ -1107,7 +1107,7 @@ invariant enforcement report --format html --to report.html   # one self-contain
 <section class="doc" id="contributing">
   <div class="kicker">Reference</div>
   <h2>Contributing</h2>
-  <p>The repo is a pnpm workspace with explicit package boundaries. <code>apps/cli</code> is the command, and <code>packages/*</code> hold the adapters, compiler, contract, validation (which includes pattern discovery), governance, browser verification, MCP server and agent kit. Users get one package, <code>invariant-ui</code>: <code>pnpm build:npm</code> assembles the workspace into it, and <code>docs/releasing.md</code> in the repository covers publishing.</p>
+  <p>The repo is a pnpm workspace with explicit package boundaries. <code>apps/cli</code> is the command, and <code>packages/*</code> hold the adapters, compiler, contract, validation (which includes pattern discovery), governance, browser verification, MCP server and agent kit. Users get one package, <code>@invariant-ui/cli</code>: <code>pnpm build:npm</code> assembles the workspace into it, and <code>docs/releasing.md</code> in the repository covers publishing.</p>
   <div class="code"><span class="lang">bash</span><pre>pnpm build             # tsc -b
 pnpm test              # vitest
 pnpm lint              # biome

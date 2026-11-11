@@ -49,7 +49,7 @@ One dependency-free file, run as `node <launcher> <subcommand...>`:
 
 1. **Fast exit for unrelated projects.** Look for `invariant.config.json` from `CLAUDE_PROJECT_DIR` (or the payload's directory) upward to the filesystem root. If there is none, and the subcommand is `hook`, exit 0 with no output. For `mcp`, still start (the server reports there is no contract and tells the agent to run setup).
 2. **Resolve the CLI:** an `invariant` on PATH wins; otherwise `~/.invariant/cli/<pinned version>/node_modules/.bin/invariant` (the version is written into the plugin at build time).
-3. **First-use install** when neither exists: `npm install --ignore-scripts --prefix ~/.invariant/cli/<version> invariant-ui@<version>`, under an exclusive lock file so concurrent hooks wait instead of racing. A hook that cannot install fails open with one stderr line; the first write is simply unchecked.
+3. **First-use install** when neither exists: `npm install --ignore-scripts --prefix ~/.invariant/cli/<version> @invariant-ui/cli@<version>`, under an exclusive lock file so concurrent hooks wait instead of racing. A hook that cannot install fails open with one stderr line; the first write is simply unchecked.
 4. **Exec** the CLI with the same arguments, passing stdin and stdout through.
 
 Safety: exact version pin, `--ignore-scripts`, writes only under `~/.invariant/`, no use of project content in any command, and no network access except that one install. Cost: one Node start for the launcher plus the CLI's own start, which has to be re-measured against the 500 ms budget.
@@ -95,7 +95,7 @@ Inputs are `packages/agent-kit` (skills, rules, the hook definition), the pinned
 
 ## Phases
 
-**P0. Publish (owner action).** Publish `invariant-ui` to npm and confirm the name, owner and first version. The registry returns 404 today. Blocks P2's end-to-end test and everything user-facing.
+**P0. Publish (owner action).** Publish `@invariant-ui/cli` to npm and confirm the name, owner and first version. The registry returns 404 today. Blocks P2's end-to-end test and everything user-facing.
 
 **P1. Hook for plugin use (done 2026-11-11).** `--quiet`, `--client cursor` adapter, tests with recorded Cursor-shaped payloads. Acceptance: Claude behavior unchanged; Cursor payloads produce findings; quiet mode prints nothing on stderr when unconfigured. Built: `--quiet` and `--client claude-code|cursor` on `invariant hook`, with three new tests in `apps/cli/src/hook.test.ts`. The Cursor answer (`agent_message` for findings, `user_message` for the clean pass) follows the documented field names but is still unverified against a live Cursor.
 
@@ -111,7 +111,7 @@ Inputs are `packages/agent-kit` (skills, rules, the hook definition), the pinned
 
 ## Risks
 
-- **Auto-install is code execution on the user's machine.** Mitigations are in the launcher section. A compromised `invariant-ui` release would reach every user of the plugin, so the release process (provenance, 2FA on the npm account) matters more once plugins exist.
+- **Auto-install is code execution on the user's machine.** Mitigations are in the launcher section. A compromised `@invariant-ui/cli` release would reach every user of the plugin, so the release process (provenance, 2FA on the npm account) matters more once plugins exist.
 - **Plugin hooks fire in every project.** The fast exit keeps the cost small, but a bug in the launcher would affect every repo a user opens. Fail open, always.
 - **Cursor's hook semantics are unverified.** The Cursor plugin may ship with weaker enforcement than the docs imply; the matrix says so.
 - **Version skew.** The plugin pins a CLI version; the contract format is versioned (`SUPPORTED_CONTRACT_VERSIONS`). A plugin that pins an older CLI than the one that compiled a project's contract must say so clearly rather than mis-validate.

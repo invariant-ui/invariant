@@ -11,7 +11,7 @@
 //
 // Which CLI runs, in order: $INVARIANT_CLI (an explicit path), `invariant` on PATH, then a pinned copy in
 // $INVARIANT_HOME (default ~/.invariant). The pinned copy is installed with `npm install --ignore-scripts`
-// from $INVARIANT_INSTALL_SPEC (default invariant-ui@<pinned version>; a tarball path or URL also works).
+// from $INVARIANT_INSTALL_SPEC (default @invariant-ui/cli@<pinned version>; a tarball path or URL also works).
 // Only `--ensure` and `mcp` wait for an install. A hook never does: it starts the install in the background
 // and lets the write through, because a hook that waits would blow its time budget.
 import { spawn, spawnSync } from "node:child_process"
@@ -23,7 +23,7 @@ import { fileURLToPath } from "node:url"
 
 /** Replaced with the CLI version this plugin was built for. */
 const PINNED_VERSION = "__INVARIANT_VERSION__"
-const PACKAGE = "invariant-ui"
+const PACKAGE = "@invariant-ui/cli"
 const STALE_LOCK_MS = 5 * 60_000
 const WAIT_MS = 180_000
 const env = process.env

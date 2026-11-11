@@ -22,6 +22,14 @@ describe("generated plugins", () => {
     }
   })
 
+  it("install the package the build publishes", () => {
+    const published = /NPM_PACKAGE = "([^"]+)"/.exec(
+      readFileSync(path.join(root, "apps/cli/src/version.ts"), "utf8")
+    )?.[1]
+    expect(published).toBe("@invariant-ui/cli")
+    expect(text(`${CLAUDE}/bin/invariant-launch.mjs`)).toContain(`const PACKAGE = "${published}"`)
+  })
+
   it("carry the CLI version everywhere and no unfilled placeholder", () => {
     expect(parsed(`${CLAUDE}/.claude-plugin/plugin.json`).version).toBe(CLI_VERSION)
     expect(parsed(`${CURSOR}/.cursor-plugin/plugin.json`).version).toBe(CLI_VERSION)

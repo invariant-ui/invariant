@@ -1,4 +1,4 @@
-# Publishes the invariant-ui package to npm when a version tag is pushed (for example v0.1.0).
+# Publishes the @invariant-ui/cli package to npm when a version tag is pushed (for example v0.1.0).
 # It does nothing until the repository has an NPM_TOKEN secret (an npm automation token) and a tag is pushed.
 name: Publish to npm
 on:

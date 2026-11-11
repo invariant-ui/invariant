@@ -246,7 +246,7 @@ describe("setup in a design system repository: publishing the contract", () => {
     expect(r.out).toMatch(/publish {4}@acme\/ui: added "invariant" to files and added a prepack script/)
     const pkg = JSON.parse(readFileSync(path.join(dir, "package.json"), "utf8"))
     expect(pkg.files).toEqual(["src", "invariant"])
-    expect(pkg.scripts.prepack).toBe("npx invariant-ui@0.1.0 compile")
+    expect(pkg.scripts.prepack).toBe("npx @invariant-ui/cli@0.1.0 compile")
     expect(readFileSync(path.join(dir, "package.json"), "utf8").endsWith("\n")).toBe(false)
   })
 
@@ -295,7 +295,7 @@ describe("setup in a design system repository: publishing the contract", () => {
     expect(r.code).toBe(0)
     const pkg = JSON.parse(readFileSync(path.join(dir, "packages/ui/package.json"), "utf8"))
     expect(pkg.scripts.prepack).toBe(
-      "npx invariant-ui@0.1.0 compile --cwd ../.. && npx invariant-ui@0.1.0 export --to packages/ui/invariant --force --cwd ../.."
+      "npx @invariant-ui/cli@0.1.0 compile --cwd ../.. && npx @invariant-ui/cli@0.1.0 export --to packages/ui/invariant --force --cwd ../.."
     )
     expect(pkg.files).toContain("invariant")
   })
@@ -304,7 +304,7 @@ describe("setup in a design system repository: publishing the contract", () => {
 describe("the publishing wiring actually works", () => {
   const main = path.join(root, "apps/cli/dist/main.js")
   const runPrepack = (dir: string, cmd: string) =>
-    execSync(cmd.replaceAll("npx invariant-ui@0.1.0", `node ${main}`), { cwd: dir, stdio: "pipe" })
+    execSync(cmd.replaceAll("npx @invariant-ui/cli@0.1.0", `node ${main}`), { cwd: dir, stdio: "pipe" })
   const tarball = (dir: string): string[] =>
     (
       JSON.parse(
@@ -359,8 +359,8 @@ describe("setup: GitHub Action", () => {
     expect(r.out).not.toMatch(/Add this to CI/)
     const yaml = readFileSync(path.join(dir, wf), "utf8")
     expect(yaml).toMatch(/pull_request:\n\s+types: \[opened, synchronize, reopened\]/)
-    expect(yaml).toContain("npx invariant-ui@0.1.0 verify --fresh")
-    expect(yaml).toContain("npx invariant-ui@0.1.0 validate 'app' --format github")
+    expect(yaml).toContain("npx @invariant-ui/cli@0.1.0 verify --fresh")
+    expect(yaml).toContain("npx @invariant-ui/cli@0.1.0 validate 'app' --format github")
     expect(yaml).toMatch(/permissions:\n\s+contents: read/)
     expect(yaml).not.toMatch(/secrets\.|pull_request_target|write/)
     expect(yaml).not.toContain("\t")
