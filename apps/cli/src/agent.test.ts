@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs"
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
 import { PassThrough } from "node:stream"
@@ -132,12 +132,118 @@ describe("agent init", () => {
     await cli(dir, "agent", "init", "claude-code")
     const file = path.join(dir, ".mcp.json")
     const mine = JSON.stringify({ mcpServers: { invariant: { command: "mine" } } })
-    const { writeFileSync } = await import("node:fs")
     writeFileSync(file, mine)
     const r = await cli(dir, "agent", "init", "claude-code")
     expect(r.out).toMatch(/skipped\s+\.mcp\.json.*use --force/)
     expect(read(dir, ".mcp.json")).toBe(mine)
     expect(r.out).toMatch(/1 file\(s\) were left alone/)
+  })
+})
+
+describe("agent init: enforcement hooks", () => {
+  const settings = (dir: string): Record<string, unknown> => JSON.parse(read(dir, ".claude/settings.json"))
+  const hookEntries = (dir: string, event: string): unknown[] =>
+    (settings(dir).hooks as Record<string, unknown[]>)[event] ?? []
+
+  it("writes PreToolUse and PostToolUse hook entries for claude-code only", async () => {
+    const dir = await compiled()
+    const r = await cli(dir, "agent", "init", "all")
+    expect(r.code).toBe(0)
+    const expected = [
+      {
+        matcher: "Write|Edit",
+        hooks: [
+          {
+            type: "command",
+            command: "invariant",
+            args: ["hook"],
+            timeout: 30,
+            statusMessage: "invariant: checking the design system contract"
+          }
+        ]
+      }
+    ]
+    expect(hookEntries(dir, "PreToolUse")).toEqual(expected)
+    expect(hookEntries(dir, "PostToolUse")).toEqual(expected)
+    // Only Claude Code has hook entries in the plan; other clients keep their own shape.
+    await cli(dir, "agent", "init", "cursor")
+    expect(JSON.parse(read(dir, ".cursor/mcp.json")).hooks).toBeUndefined()
+  })
+
+  it("mentions the hooks and their fail-open behavior in the notes", async () => {
+    const dir = await compiled()
+    const r = await cli(dir, "agent", "init", "claude-code")
+    expect(r.out).toMatch(/run `invariant hook` before and after every Write and Edit/)
+    expect(r.out).toMatch(/fail open/)
+    expect(r.out).toMatch(/enforcement\.hooks/)
+  })
+
+  it("is idempotent, and reflects a custom launch command", async () => {
+    const dir = await compiled()
+    await cli(dir, "agent", "init", "claude-code")
+    const again = await cli(dir, "agent", "init", "claude-code")
+    expect(again.out).toMatch(/unchanged\s+\.claude\/settings\.json/)
+    await cli(
+      dir,
+      "agent",
+      "init",
+      "claude-code",
+      "--command",
+      "node",
+      "--command-arg",
+      "/opt/invariant/main.js",
+      "--force"
+    )
+    const hooks = hookEntries(dir, "PreToolUse")[0] as { hooks: Array<Record<string, unknown>> }
+    expect(hooks.hooks[0]).toMatchObject({
+      command: "node",
+      args: ["/opt/invariant/main.js", "hook"]
+    })
+  })
+
+  it("keeps hooks the user configured and appends ours", async () => {
+    const dir = await compiled()
+    const user = {
+      hooks: {
+        PreToolUse: [{ matcher: "Bash", hooks: [{ type: "command", command: "echo", args: ["hi"] }] }]
+      }
+    }
+    mkdirSync(path.join(dir, ".claude"), { recursive: true })
+    writeFileSync(path.join(dir, ".claude/settings.json"), JSON.stringify(user, null, 2))
+    const r = await cli(dir, "agent", "init", "claude-code")
+    expect(r.code).toBe(0)
+    const pre = hookEntries(dir, "PreToolUse")
+    expect(pre).toHaveLength(2)
+    expect(pre[0]).toEqual(user.hooks.PreToolUse[0])
+    expect((pre[1] as { matcher: string }).matcher).toBe("Write|Edit")
+    expect(hookEntries(dir, "PostToolUse")).toHaveLength(1)
+  })
+
+  it("replaces an entry it owns only when forced", async () => {
+    const dir = await compiled()
+    await cli(dir, "agent", "init", "claude-code")
+    const tweaked = settings(dir) as {
+      hooks: Record<string, Array<{ hooks: Array<Record<string, unknown>> }>>
+    }
+    for (const event of ["PreToolUse", "PostToolUse"])
+      for (const group of tweaked.hooks[event] ?? []) for (const hook of group.hooks) hook.timeout = 10
+    writeFileSync(path.join(dir, ".claude/settings.json"), JSON.stringify(tweaked, null, 2))
+    const r = await cli(dir, "agent", "init", "claude-code")
+    expect(r.out).toMatch(/skipped\s+\.claude\/settings\.json.*use --force/)
+    const forced = await cli(dir, "agent", "init", "claude-code", "--force")
+    expect(forced.code).toBe(0)
+    const groups = hookEntries(dir, "PreToolUse")
+    const hooks = groups[0] as { hooks: Array<Record<string, unknown>> }
+    expect(hooks.hooks[0]?.timeout).toBe(30)
+  })
+
+  it("leaves a settings.json that is not plain JSON alone", async () => {
+    const dir = await compiled()
+    mkdirSync(path.join(dir, ".claude"), { recursive: true })
+    writeFileSync(path.join(dir, ".claude/settings.json"), '{ "$schema": … } // hand-edited')
+    const r = await cli(dir, "agent", "init", "claude-code")
+    expect(r.out).toMatch(/skipped\s+\.claude\/settings\.json.*not plain JSON/)
+    expect(read(dir, ".claude/settings.json")).toBe('{ "$schema": … } // hand-edited')
   })
 })
 

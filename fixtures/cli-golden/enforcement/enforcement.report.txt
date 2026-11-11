@@ -1,0 +1,14 @@
+Invariant enforcement: 5 writes checked · 3 violations caught · 2 fixed · 1 outstanding
+session s1
+
+2026-01-01T00:00:00.000Z  src/Settings.tsx  blocked (1 finding)
+    ✗ prop-value-not-allowed: Button.variant is "danger", which is not one of "primary", "secondary" (line 3)
+        fix: Use one of "primary", "secondary".
+2026-01-01T00:00:05.000Z  src/Settings.tsx  warned (1 finding)
+    ⚠ color-matches-token: <b>#ff0000</b> equals the value of color.action.danger (line 7)
+        fix: Use color.action.danger.
+2026-01-01T00:00:09.000Z  src/Settings.tsx  fixed (caught prop-value-not-allowed, color-matches-token; now clean, 2 component uses checked)
+2026-01-01T00:00:12.000Z  src/Profile.tsx  passed (1 component use checked)
+2026-01-01T00:00:20.000Z  src/Billing.tsx  blocked (3 findings)
+    ✗ unknown-prop: Card has no prop "tone" (line 4)
+    …and 2 more

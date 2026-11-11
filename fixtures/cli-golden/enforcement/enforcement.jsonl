@@ -1,0 +1,7 @@
+{"v":1,"time":"2026-01-01T00:00:00.000Z","session":"s1","file":"src/Settings.tsx","outcome":"blocked","findings":[{"code":"prop-value-not-allowed","severity":"error","message":"Button.variant is \"danger\", which is not one of \"primary\", \"secondary\"","line":3,"fix":"Use one of \"primary\", \"secondary\"."}],"omitted":0,"checked":0}
+{"v":1,"time":"2026-01-01T00:00:05.000Z","session":"s1","file":"src/Settings.tsx","outcome":"warned","findings":[{"code":"color-matches-token","severity":"warning","message":"<b>#ff0000</b> equals the value of color.action.danger","line":7,"fix":"Use color.action.danger."}],"omitted":0,"checked":0}
+{"v":1,"time":"2026-01-01T00:00:09.000Z","session":"s1","file":"src/Settings.tsx","outcome":"passed","findings":[],"omitted":0,"checked":2}
+{"v":1,"time":"2026-01-01T00:00:12.000Z","session":"s1","file":"src/Profile.tsx","outcome":"passed","findings":[],"omitted":0,"checked":1}
+{"v":1,"time":"2026-01-01T00:00:20.000Z","session":"s1","file":"src/Billing.tsx","outcome":"blocked","findings":[{"code":"unknown-prop","severity":"error","message":"Card has no prop \"tone\"","line":4}],"omitted":2,"checked":0}
+{"v":1,"time":"2026-02-01T00:00:00.000Z","session":"s2","file":"src/Other.tsx","outcome":"passed","findings":[],"omitted":0,"checked":0}
+not json

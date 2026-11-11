@@ -3,7 +3,9 @@ import { parse } from "./args.js"
 import * as commands from "./commands.js"
 import * as browserCommands from "./commands-browser.js"
 import * as discoverCommands from "./commands-discover.js"
+import * as enforcementCommands from "./commands-enforcement.js"
 import * as governance from "./commands-governance.js"
+import * as hookCommands from "./commands-hook.js"
 import * as patterns from "./commands-patterns.js"
 import * as setupCommands from "./commands-setup.js"
 import * as validation from "./commands-validate.js"
@@ -37,6 +39,8 @@ usage: ${CLI_NAME} <command> [options]
   review approve|reject|resolve|accept|dismiss <id> --as <name>   record a decision in invariant.decisions.json
   export --to <dir>             write a portable copy of the artifacts
   mcp                           serve the compiled contract to AI tools over stdio (read-only)
+  hook                          check an agent's Write/Edit against the contract and answer in its hook format (stdin payload) [--posture gate-errors|warn|off]
+  enforcement report            the enforcement timeline of an agent session [--session id|--all] [--format text|html] [--to file]
   agent init <client|all>       write MCP config and skills for claude-code, cursor, codex, windsurf
   agent list                    list supported clients
 
@@ -98,6 +102,10 @@ export async function run(argv: string[], io: Io): Promise<number> {
         return await commands.exportCommand(context)
       case "mcp":
         return await commands.mcp(context)
+      case "hook":
+        return await hookCommands.hook(context)
+      case "enforcement":
+        return await enforcementCommands.enforcement(context)
       case "agent":
         return await commands.agent(context)
       default:

@@ -89,7 +89,8 @@ function launch(
   }
 }
 
-const textOf = (m: Msg): any => JSON.parse(m.result.content[0].text)
+/** The tool's data. Prefers structuredContent: validate tools lead their text with the enforcement card. */
+const textOf = (m: Msg): any => m.result.structuredContent ?? JSON.parse(m.result.content[0].text)
 
 describe.skipIf(!existsSync(main))(
   "Phase 9 exit criterion: an AI client can consume and validate the contract",

@@ -6,6 +6,15 @@ export type Client = (typeof CLIENTS)[number]
 
 export type PlannedFile =
   | { path: string; kind: "json-merge"; key: string[]; value: Record<string, unknown> }
+  | {
+      path: string
+      kind: "json-array-append"
+      key: string[]
+      /** Elements to make sure the array holds. Others the user configured are kept. */
+      value: unknown[]
+      /** Substring that marks an existing element as ours, so a changed one is replaced, not duplicated. */
+      identity: string
+    }
   | { path: string; kind: "toml-table"; table: string; text: string }
   | { path: string; kind: "generated"; content: string }
   | { path: string; kind: "markdown-section"; content: string }
@@ -40,10 +49,39 @@ const server = (launch: LaunchOptions): { command: string; args: string[] } => (
   args: launch.args
 })
 
+/** Marks a settings entry as ours. The status message is the marker because it survives launch-command changes: an entry written with a different `--command` is still ours, and is replaced with `--force`. */
+const HOOK_STATUS_MESSAGE = "invariant: checking the design system contract"
+const hookIdentity = (): string => JSON.stringify(HOOK_STATUS_MESSAGE)
+
+/** A Claude Code matcher group that runs `invariant hook` on every Write and Edit. */
+const hookGroup = (launch: LaunchOptions): Record<string, unknown> => ({
+  matcher: "Write|Edit",
+  hooks: [
+    {
+      type: "command",
+      command: launch.command,
+      args: launch.args,
+      timeout: 30,
+      statusMessage: HOOK_STATUS_MESSAGE
+    }
+  ]
+})
+
+const HOOK_NOTES = [
+  "The hooks in .claude/settings.json run `invariant hook` before and after every Write and Edit, so UI the agent writes is checked against the contract in real time. They fail open: if invariant cannot run, the write proceeds.",
+  "Errors block a write; warnings and info arrive after it. Soften or disable that with enforcement.hooks (warn, off) in invariant.config.json.",
+  "Re-run `invariant agent init` after changing the launch command or the enforcement posture."
+]
+
 const rulesFile = (f: Facts, frontmatter: string): string =>
   `${frontmatter}<!-- ${MARKER} (contract ${f.hash.slice(0, 12)}); regenerate with \`invariant agent init\` -->\n\n${rulesBody(f)}`
 
-export function planIntegration(client: Client, contract: Contract, launch: LaunchOptions): Plan {
+export function planIntegration(
+  client: Client,
+  contract: Contract,
+  launch: LaunchOptions,
+  hookLaunch?: LaunchOptions
+): Plan {
   const f = safeFacts(contract)
   const entry = server(launch)
   switch (client) {
@@ -56,9 +94,21 @@ export function planIntegration(client: Client, contract: Contract, launch: Laun
             path: `.claude/skills/${name}/SKILL.md`,
             kind: "generated" as const,
             content: skillFile(name, f)
-          }))
+          })),
+          ...(hookLaunch
+            ? (["PreToolUse", "PostToolUse"] as const).map((event) => ({
+                path: ".claude/settings.json",
+                kind: "json-array-append" as const,
+                key: ["hooks", event],
+                value: [hookGroup(hookLaunch)],
+                identity: hookIdentity()
+              }))
+            : [])
         ],
-        notes: ["Claude Code asks you to approve project MCP servers the first time it loads .mcp.json."],
+        notes: [
+          "Claude Code asks you to approve project MCP servers the first time it loads .mcp.json.",
+          ...(hookLaunch ? HOOK_NOTES : [])
+        ],
         snippets: []
       }
     case "cursor":

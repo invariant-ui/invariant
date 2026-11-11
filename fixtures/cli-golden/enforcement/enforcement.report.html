@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>Invariant enforcement report</title>
+<style>body{font:14px/1.5 system-ui,sans-serif;margin:2rem auto;max-width:72rem;padding:0 1rem;color:#1a1a1a}
+h1,h2{font-weight:600}table{border-collapse:collapse;width:100%;margin:.5rem 0 1.5rem}
+th,td{border:1px solid #d0d0d0;padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:#f3f3f3}
+code{font:12px ui-monospace,monospace}summary{cursor:pointer;margin:.5rem 0}.error{color:#a40000}.warning{color:#8a5a00}.info{color:#555}</style></head><body>
+<h1>Invariant enforcement</h1>
+<p><strong>5 writes checked · 3 violations caught · 2 fixed · 1 outstanding</strong></p>
+<p>Session <code>s1</code></p>
+<table><thead><tr><th>Time</th><th>File</th><th>Outcome</th><th>Detail</th></tr></thead><tbody>
+<tr><td>2026-01-01T00:00:00.000Z</td><td><code>src/Settings.tsx</code></td><td>blocked</td><td><div><span class="error">✗</span> <code>prop-value-not-allowed</code> Button.variant is &quot;danger&quot;, which is not one of &quot;primary&quot;, &quot;secondary&quot; (line 3)<br><small>fix: Use one of &quot;primary&quot;, &quot;secondary&quot;.</small></div></td></tr>
+<tr><td>2026-01-01T00:00:05.000Z</td><td><code>src/Settings.tsx</code></td><td>warned</td><td><div><span class="warning">⚠</span> <code>color-matches-token</code> &lt;b&gt;#ff0000&lt;/b&gt; equals the value of color.action.danger (line 7)<br><small>fix: Use color.action.danger.</small></div></td></tr>
+<tr><td>2026-01-01T00:00:09.000Z</td><td><code>src/Settings.tsx</code></td><td>fixed</td><td>Caught <code>prop-value-not-allowed</code>, <code>color-matches-token</code>; now clean.</td></tr>
+<tr><td>2026-01-01T00:00:12.000Z</td><td><code>src/Profile.tsx</code></td><td>passed</td><td>Clean (1 component use checked).</td></tr>
+<tr><td>2026-01-01T00:00:20.000Z</td><td><code>src/Billing.tsx</code></td><td>blocked</td><td><div><span class="error">✗</span> <code>unknown-prop</code> Card has no prop &quot;tone&quot; (line 4)</div><div>…and 2 more</div></td></tr>
+</tbody></table>
+</body></html>

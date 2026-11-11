@@ -203,6 +203,49 @@ describe("integration plans", () => {
     expect(JSON.parse(p.snippets[0]?.text as string).mcpServers.invariant.command).toBe("invariant")
     expect(p.notes.join(" ")).toMatch(/could not be verified/)
   })
+  it("claude-code with a hook launch: PreToolUse and PostToolUse entries in .claude/settings.json", () => {
+    const p = planIntegration("claude-code", contract(), launch, { command: "invariant", args: ["hook"] })
+    expect(p.files.map((f) => f.path)).toEqual([
+      ".mcp.json",
+      ...SKILL_NAMES.map((n) => `.claude/skills/${n}/SKILL.md`),
+      ".claude/settings.json",
+      ".claude/settings.json"
+    ])
+    const [pre, post] = p.files.slice(-2)
+    const expected = {
+      path: ".claude/settings.json",
+      kind: "json-array-append",
+      key: ["hooks", "PreToolUse"],
+      value: [
+        {
+          matcher: "Write|Edit",
+          hooks: [
+            {
+              type: "command",
+              command: "invariant",
+              args: ["hook"],
+              timeout: 30,
+              statusMessage: "invariant: checking the design system contract"
+            }
+          ]
+        }
+      ],
+      identity: '"invariant: checking the design system contract"'
+    }
+    expect(pre).toEqual(expected)
+    expect(post).toEqual({ ...expected, key: ["hooks", "PostToolUse"] })
+    expect(p.notes.join(" ")).toMatch(/before and after every Write and Edit/)
+    expect(p.notes.join(" ")).toMatch(/fail open/)
+  })
+  it("ignores the hook launch for clients without hook entries", () => {
+    for (const client of ["cursor", "codex", "windsurf"] as const) {
+      const p = planIntegration(client, contract(), launch, { command: "invariant", args: ["hook"] })
+      expect(
+        p.files.some((f) => f.path === ".claude/settings.json"),
+        client
+      ).toBe(false)
+    }
+  })
   it("rejects multi-line commands", () => {
     expect(validateLaunch({ command: "a\nb", args: [] })).toBeDefined()
     expect(validateLaunch({ command: "a", args: ["x\ry"] })).toBeDefined()
@@ -300,6 +343,94 @@ describe("applying a plan", () => {
     expect(out).toContain('command = "invariant"')
     expect(out).not.toContain('"mine"')
     expect(out).toContain("[after]\nb = 2")
+  })
+
+  it("appends hook entries to .claude/settings.json, keeping the user's own and other keys", () => {
+    const root = tmp()
+    const files = planIntegration("claude-code", contract(), launch, {
+      command: "invariant",
+      args: ["hook"]
+    }).files
+    const settings = path.join(root, ".claude/settings.json")
+    mkdirSync(path.dirname(settings), { recursive: true })
+    writeFileSync(
+      settings,
+      JSON.stringify(
+        {
+          permissions: { allow: ["Bash(ls:*)"] },
+          hooks: {
+            PreToolUse: [{ matcher: "Bash", hooks: [{ type: "command", command: "echo", args: ["hi"] }] }]
+          }
+        },
+        null,
+        2
+      )
+    )
+    const r = applyPlan(root, files)
+    expect(r.filter((x) => x.path === ".claude/settings.json").every((x) => x.action === "updated")).toBe(
+      true
+    )
+    const doc = JSON.parse(read(root, ".claude/settings.json"))
+    expect(doc.permissions).toEqual({ allow: ["Bash(ls:*)"] })
+    expect(doc.hooks.PreToolUse).toHaveLength(2)
+    expect(doc.hooks.PreToolUse[0]).toEqual({
+      matcher: "Bash",
+      hooks: [{ type: "command", command: "echo", args: ["hi"] }]
+    })
+    expect(doc.hooks.PostToolUse).toHaveLength(1)
+    expect(applyPlan(root, files).every((x) => x.action === "unchanged")).toBe(true)
+  })
+
+  it("replaces a hook entry it owns only when forced, recognizing it across launch-command changes", () => {
+    const root = tmp()
+    const files = (command: string) =>
+      planIntegration("claude-code", contract(), launch, { command, args: ["hook"] }).files
+    applyPlan(root, files("invariant"))
+    const changed = files("node")
+    expect(
+      applyPlan(root, changed).some((r) => r.path === ".claude/settings.json" && r.action === "skipped")
+    ).toBe(true)
+    expect(
+      applyPlan(root, changed, { force: true }).some(
+        (r) => r.path === ".claude/settings.json" && r.action === "updated"
+      )
+    ).toBe(true)
+    const doc = JSON.parse(read(root, ".claude/settings.json"))
+    expect(doc.hooks.PreToolUse).toHaveLength(1)
+    expect(doc.hooks.PreToolUse[0].hooks[0].command).toBe("node")
+  })
+
+  it("leaves a settings.json that is not plain JSON completely alone", () => {
+    const root = tmp()
+    const files = planIntegration("claude-code", contract(), launch, {
+      command: "invariant",
+      args: ["hook"]
+    }).files
+    const settings = path.join(root, ".claude/settings.json")
+    mkdirSync(path.dirname(settings), { recursive: true })
+    writeFileSync(settings, "{ // hand-edited }")
+    const r = applyPlan(root, files)
+    expect(r.filter((x) => x.path === ".claude/settings.json").every((x) => x.action === "skipped")).toBe(
+      true
+    )
+    expect(read(root, ".claude/settings.json")).toBe("{ // hand-edited }")
+  })
+
+  it("skips the event whose hooks entry is not an array, and preserves the user's value", () => {
+    const root = tmp()
+    const files = planIntegration("claude-code", contract(), launch, {
+      command: "invariant",
+      args: ["hook"]
+    }).files
+    const settings = path.join(root, ".claude/settings.json")
+    mkdirSync(path.dirname(settings), { recursive: true })
+    writeFileSync(settings, '{"hooks":{"PreToolUse":"nope"}}')
+    const r = applyPlan(root, files)
+    const skipped = r.find((x) => x.path === ".claude/settings.json" && x.action === "skipped")
+    expect(skipped?.reason).toMatch(/not an array/)
+    const doc = JSON.parse(read(root, ".claude/settings.json"))
+    expect(doc.hooks.PreToolUse).toBe("nope")
+    expect(doc.hooks.PostToolUse).toHaveLength(1)
   })
 
   it("manages a marked section of AGENTS.md without touching the rest", () => {

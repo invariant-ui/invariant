@@ -118,6 +118,8 @@ Supported source types: `react`, `vue`, `angular`, `storybook`, `tokens`. Figma 
 
 Add sources from the command line with `invariant source add <type> [path]`.
 
+Optional sections: `validation` (see `invariant rules`; `ignore` globs, `rules` severity overrides, `failOn`), `governance` (approver lists and the governance files' paths) and `enforcement` (`hooks`: `gate-errors` by default, `warn` or `off` — what the Claude Code hooks do when an agent writes code that breaks the contract).
+
 ## Commands
 
 | Command | What it does |
@@ -138,7 +140,8 @@ Add sources from the command line with `invariant source add <type> [path]`.
 | `rules`, `policy list` | List validation rules and approved policies |
 | `review list\|show\|approve\|reject\|resolve\|accept\|dismiss` | Record human decisions on conflicts and inferred facts |
 | `mcp` | Serve the contract to AI tools over stdio (read-only) |
-| `agent init <client\|all>` | Write MCP config, skills and rules for Claude Code, Cursor, Codex and Windsurf |
+| `hook` | Check an agent's Write/Edit against the contract and answer in its hook format (Claude Code runs this for you) |
+| `agent init <client\|all>` | Write MCP config, skills, rules and enforcement hooks for Claude Code, Cursor, Codex and Windsurf |
 | `export --to <dir>` | Copy the verified artifacts and JSON Schemas elsewhere |
 
 Read commands accept `--json`. Global options: `--cwd`, `--config`, `--dir`, `--trust-config`.
@@ -153,6 +156,10 @@ invariant agent init claude-code   # or cursor, codex, windsurf, all
 ```
 
 This registers a read-only MCP server that gives the agent tools such as `get_component`, `get_design_tokens`, `search_design_system` and `validate_component_usage`. After a recompile, the server picks up the new contract without a restart.
+
+For Claude Code, it also installs enforcement hooks: every `Write` and `Edit` is checked against the contract as the agent types it. A write that would introduce an error-severity violation is blocked with the exact finding and fix; warnings show up right after the write; clean passes get a green line in the chat. The hooks fail open — if invariant cannot run, the write proceeds — and they respect your baseline and rule overrides. Set `enforcement.hooks` to `warn` or `off` in `invariant.config.json` to soften or disable this.
+
+Whether the agent calls the `validate_design_system_compliance` tool itself or a hook fires on its write, the chat shows the same enforcement card — the findings, the fixes, and what to do next — so you always watch the contract being applied, not just hear about it afterwards.
 
 Contract text comes from your source and docs, so the server marks every result as untrusted content. Generated agent config never includes free-form descriptions from your code.
 

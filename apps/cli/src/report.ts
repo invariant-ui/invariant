@@ -12,7 +12,7 @@ const ESCAPES: Record<string, string> = {
 /** Every value that reaches the page goes through here: names and messages come from customer source. */
 export const esc = (value: unknown): string => String(value).replace(/[&<>"']/g, (c) => ESCAPES[c] as string)
 
-const STYLE = `body{font:14px/1.5 system-ui,sans-serif;margin:2rem auto;max-width:72rem;padding:0 1rem;color:#1a1a1a}
+export const STYLE = `body{font:14px/1.5 system-ui,sans-serif;margin:2rem auto;max-width:72rem;padding:0 1rem;color:#1a1a1a}
 h1,h2{font-weight:600}table{border-collapse:collapse;width:100%;margin:.5rem 0 1.5rem}
 th,td{border:1px solid #d0d0d0;padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:#f3f3f3}
 code{font:12px ui-monospace,monospace}summary{cursor:pointer;margin:.5rem 0}.error{color:#a40000}.warning{color:#8a5a00}.info{color:#555}`

@@ -86,6 +86,71 @@ function jsonMerge(
   return { path: rel, action: existed ? "updated" : "created" }
 }
 
+/**
+ * Makes sure an array at `key` holds our elements, leaving any the user configured alone. An element that
+ * carries our `identity` is ours: identical means unchanged, different means replace with `--force`, and no
+ * identity anywhere means append. A non-array at the key is never touched.
+ */
+function jsonArrayAppend(
+  file: string,
+  f: Extract<PlannedFile, { kind: "json-array-append" }>,
+  force: boolean,
+  dryRun: boolean
+): Applied {
+  const rel = f.path
+  let doc: Record<string, unknown> = {}
+  const existed = existsSync(file)
+  if (existed) {
+    try {
+      const parsed: unknown = JSON.parse(readFileSync(file, "utf8"))
+      if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed))
+        throw new Error("not an object")
+      doc = parsed as Record<string, unknown>
+    } catch {
+      return {
+        path: rel,
+        action: "skipped",
+        reason:
+          "the file is not plain JSON (comments or trailing commas?), so it was left alone. Add the entry by hand."
+      }
+    }
+  }
+  let node = doc
+  for (const key of f.key.slice(0, -1)) {
+    const next = node[key]
+    if (next === undefined) {
+      const created: Record<string, unknown> = {}
+      node[key] = created
+      node = created
+    } else if (typeof next === "object" && next !== null && !Array.isArray(next))
+      node = next as Record<string, unknown>
+    else
+      return { path: rel, action: "skipped", reason: `"${key}" is not an object, so the file was left alone` }
+  }
+  const last = f.key[f.key.length - 1] as string
+  const arr = node[last]
+  if (arr === undefined) {
+    node[last] = f.value
+    write(file, `${JSON.stringify(doc, null, 2)}\n`, dryRun)
+    return { path: rel, action: existed ? "updated" : "created" }
+  }
+  if (!Array.isArray(arr))
+    return { path: rel, action: "skipped", reason: `"${last}" is not an array, so the file was left alone` }
+  if (f.value.every((el) => arr.some((x) => same(x, el)))) return { path: rel, action: "unchanged" }
+  const isOurs = (el: unknown): boolean => JSON.stringify(el).includes(f.identity)
+  if (arr.some(isOurs)) {
+    if (!force)
+      return {
+        path: rel,
+        action: "skipped",
+        reason: "an invariant hook already exists with different settings; use --force to replace it"
+      }
+    node[last] = [...arr.filter((el) => !isOurs(el)), ...f.value]
+  } else node[last] = [...arr, ...f.value]
+  write(file, `${JSON.stringify(doc, null, 2)}\n`, dryRun)
+  return { path: rel, action: existed ? "updated" : "created" }
+}
+
 function tomlTable(
   file: string,
   f: Extract<PlannedFile, { kind: "toml-table" }>,
@@ -186,6 +251,7 @@ export function applyPlan(
       return { path: f.path, action: "skipped", reason: (error as Error).message }
     }
     if (f.kind === "json-merge") return jsonMerge(file, f, force, dryRun)
+    if (f.kind === "json-array-append") return jsonArrayAppend(file, f, force, dryRun)
     if (f.kind === "toml-table") return tomlTable(file, f, force, dryRun)
     if (f.kind === "generated") return generated(file, f, force, dryRun)
     return markdownSection(file, f, dryRun)

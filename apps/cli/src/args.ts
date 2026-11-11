@@ -46,6 +46,8 @@ const OPTIONS = {
   url: { type: "string" },
   "update-baseline": { type: "boolean" },
   "no-baseline": { type: "boolean" },
+  posture: { type: "string" },
+  session: { type: "string" },
   yes: { type: "boolean" },
   "confirm-contract": { type: "boolean" },
   "no-agent": { type: "boolean" },
@@ -104,6 +106,8 @@ export interface Parsed {
     url?: string
     "update-baseline"?: boolean
     "no-baseline"?: boolean
+    posture?: string
+    session?: string
     yes?: boolean
     "confirm-contract"?: boolean
     "no-agent"?: boolean

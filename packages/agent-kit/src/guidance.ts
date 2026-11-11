@@ -69,6 +69,7 @@ const groundRules = (f: Facts): string => `## Ground rules
 - Patterns carry a status too. Follow approved patterns. Treat documented, inferred or mixed ones as proposals and say so. Candidates from \`invariant discover\` are not in the contract and are not patterns: do not rely on them.
 - Absence of a pattern or policy here is not permission, and an empty pattern list means none is defined, not that none applies.
 - Validation covers what can be read from code. Anything reported \`not-verifiable\` or \`skipped\` is unresolved, not passed. Runtime behavior (focus, keyboard, responsive layout) is checked only by \`invariant browser run\`, which the user runs.
+- An \`invariant hook\` may block a Write or Edit that would introduce error-severity violations against this contract, and reports warnings right after a write. If one blocks you, fix what it lists and write the file again; do not work around it.
 - If \`contractHash\` changes during a task, fetch again. To refresh the contract, the user runs \`invariant compile\`.`
 
 const archetypes = (f: Facts): string =>

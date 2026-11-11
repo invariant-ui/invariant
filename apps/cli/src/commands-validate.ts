@@ -26,13 +26,15 @@ import { table } from "./format.js"
 import { loadCompiled } from "./store.js"
 import { CLI_NAME, CLI_VERSION } from "./version.js"
 
-const EXTENSIONS = /\.(tsx|jsx|ts|js|mjs|cjs|vue|html)$/i
+/** File types `validate` and `hook` read. */
+export const EXTENSIONS = /\.(tsx|jsx|ts|js|mjs|cjs|vue|html)$/i
 const MAX_FILES = 5000
 const FRAMEWORKS: readonly string[] = ["react", "vue", "angular", "html"]
 const FORMATS = ["text", "json", "github", "sarif"] as const
 const FAIL_ON: readonly string[] = ["error", "warning", "never"]
 
-function frameworkFor(file: string): CodeFramework | undefined {
+/** The framework a file's name implies. Also used by `invariant hook`. */
+export function frameworkFor(file: string): CodeFramework | undefined {
   if (/\.vue$/i.test(file)) return "vue"
   if (/\.component\.html$/i.test(file)) return "angular"
   if (/\.html$/i.test(file)) return "html"

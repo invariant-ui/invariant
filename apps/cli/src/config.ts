@@ -77,6 +77,16 @@ export const configSchema = z.strictObject({
       decisionsFile: relPath.optional(),
       candidateReviewsFile: relPath.optional()
     })
+    .optional(),
+  enforcement: z
+    .strictObject({
+      /**
+       * What `invariant hook` does when an AI agent writes code that breaks the contract. `gate-errors` blocks
+       * the write when error-severity findings remain after the baseline and rule overrides; `warn` never blocks
+       * and reports everything after the write; `off` checks nothing. Warnings never block.
+       */
+      hooks: z.enum(["gate-errors", "warn", "off"]).optional()
+    })
     .optional()
 })
 export type InvariantConfig = z.infer<typeof configSchema>

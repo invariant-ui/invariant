@@ -584,26 +584,25 @@ export async function agent(c: Context): Promise<number> {
     searchPath === undefined ||
     searchPath.split(path.delimiter).some((d) => d !== "" && existsSync(path.join(d, "invariant")))
   const viaNpx = c.args.values.command === undefined && !installed
+  const base = [...(viaNpx ? ["-y", NPM_PACKAGE] : []), ...(c.args.values["command-arg"] ?? [])]
   const launch = {
     command: c.args.values.command ?? (viaNpx ? "npx" : "invariant"),
-    args: [
-      ...(viaNpx ? ["-y", NPM_PACKAGE] : []),
-      ...(c.args.values["command-arg"] ?? []),
-      "mcp",
-      "--dir",
-      rel
-    ]
+    args: [...base, "mcp", "--dir", rel]
   }
+  // The hook resolves the project itself (Claude Code exports CLAUDE_PROJECT_DIR), so it needs no --dir.
+  const hookLaunch = { command: launch.command, args: [...base, "hook"] }
   if (viaNpx)
     print(
       c,
       `${CLI_NAME} is not on your PATH, so the agent will start it with npx ${NPM_PACKAGE} (it installs on first use).`
     )
   const problem = validateLaunch(launch)
+  const hookProblem = validateLaunch(hookLaunch)
   if (problem) throw new CliError(problem)
+  if (hookProblem) throw new CliError(hookProblem)
   let skipped = 0
   for (const client of clients) {
-    const plan = planIntegration(client, contract, launch)
+    const plan = planIntegration(client, contract, launch, hookLaunch)
     print(c, `${client}${c.args.values["dry-run"] ? " (dry run)" : ""}`)
     for (const r of applyPlan(c.cwd, plan.files, {
       force: c.args.values.force === true,
