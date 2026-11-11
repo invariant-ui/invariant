@@ -4,7 +4,7 @@
 // Writes plugins/claude/invariant, plugins/cursor/invariant and .claude-plugin/marketplace.json (committed, so a
 // GitHub marketplace serves them), and with --zip one archive per client under dist-plugins/.
 import { spawnSync } from "node:child_process"
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
@@ -188,6 +188,15 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       const r = spawnSync("zip", ["-qr", zip, "."], { cwd: path.join(root, "plugins", client, "invariant") })
       if (r.status !== 0) throw new Error(`zip failed for ${client}: ${String(r.stderr)}`)
       console.log(`wrote ${path.relative(root, zip)}`)
+      // The website links these fixed names, so the links survive a version bump.
+      const served = path.join(
+        root,
+        "site/downloads",
+        `invariant-${client === "claude" ? "claude-code" : client}.zip`
+      )
+      mkdirSync(path.dirname(served), { recursive: true })
+      copyFileSync(zip, served)
+      console.log(`wrote ${path.relative(root, served)}`)
     }
   }
 }

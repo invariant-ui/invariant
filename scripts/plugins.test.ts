@@ -30,6 +30,13 @@ describe("generated plugins", () => {
     expect(text(`${CLAUDE}/bin/invariant-launch.mjs`)).toContain(`const PACKAGE = "${published}"`)
   })
 
+  it("are downloadable from the website at the links the docs use, and those links exist", () => {
+    for (const file of ["invariant-claude-code.zip", "invariant-cursor.zip"]) {
+      expect(existsSync(path.join(root, "site/downloads", file)), file).toBe(true)
+      expect(readFileSync(path.join(root, "site/docs/index.html"), "utf8")).toContain(`../downloads/${file}`)
+    }
+  })
+
   it("carry the CLI version everywhere and no unfilled placeholder", () => {
     expect(parsed(`${CLAUDE}/.claude-plugin/plugin.json`).version).toBe(CLI_VERSION)
     expect(parsed(`${CURSOR}/.cursor-plugin/plugin.json`).version).toBe(CLI_VERSION)

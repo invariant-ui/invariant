@@ -469,6 +469,12 @@ chromium 1.2.3: 4 passed, 1 failed, 0 could not run
     <p class="sub">Needs Node 20 or newer. Run it in the project that holds your design system.</p>
     <div class="steps">
       <div class="step"><div>
+        <h3>Prefer a plugin? Install it in Claude Code or Cursor</h3>
+        <div class="code"><pre>/plugin marketplace add mcarlucci/invariant
+/plugin install invariant@invariant</pre></div>
+        <p class="c" style="margin:10px 0 0">Then ask your AI tool to run <code>/invariant:setup</code>. It finds your design system, shows what it found and asks you to approve it. <a href="docs/#plugin">Install steps, and the Cursor download</a>.</p>
+      </div></div>
+      <div class="step"><div>
         <h3>Run setup</h3>
         <div class="code"><pre>npx @invariant-ui/cli setup</pre></div>
         <p class="c" style="margin:10px 0 0">Compiles your design system, finds the patterns your apps already repeat, and shows one plan. Answer yes once and it approves them, turns on starter rules, connects your AI tool, baselines old violations and adds the CI check. Nothing is approved until you say so.</p>

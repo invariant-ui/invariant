@@ -188,6 +188,7 @@ td code{white-space:nowrap}
   <a href="#cli">CLI</a>
   <a href="#configuration">Configuration</a>
   <a href="#mcp">MCP server</a>
+  <a href="#plugin">Install the plugin</a>
   <a href="#agents">Agent setup</a>
   <a href="#enforcement">See it working in your agent chat</a>
   <h4>Reference</h4>
@@ -960,6 +961,23 @@ invariant mcp [--dir invariant]     # serves until stdin closes</pre></div>
   <h3>Loading and reload</h3>
   <p>The server verifies the contract (structure, references, content hash, evidence) before serving and reloads when file modification times or sizes change, so a recompile is picked up without a restart. Pair it with <code>invariant compile --watch</code> to keep the contract current as you edit. A missing, invalid or tampered contract is never partly served: tools report what is wrong and to run <code>invariant compile</code>.</p>
   <div class="note warn"><b>Treat contract text as untrusted</b>Names, descriptions and examples are copied from your source and documents, and can contain instructions aimed at a model. The server says so in its instructions, marks every result as untrusted content, and returns structured JSON instead of prose. It has no network listener, no authentication surface, no write path, and never runs customer code.</div>
+</section>
+
+<section class="doc" id="plugin">
+  <div class="kicker">Use it</div>
+  <h2>Install the plugin</h2>
+  <p>The plugin is the easiest way to start, and it needs no terminal work. You install it into Claude Code or Cursor, ask the AI tool to set up Invariant, and answer a few plain questions. It finds your design system, shows you what it found, asks for your approval, and turns on the checks. Nothing is approved until you say yes.</p>
+  <p>It needs Node.js 20 or newer. The first time it runs, it installs the Invariant command line tool into <code>~/.invariant/</code>. If you already have <code>invariant</code> on your <code>PATH</code>, that copy is used.</p>
+  <h3>Claude Code</h3>
+  <div class="code"><span class="lang">claude code</span><pre>/plugin marketplace add mcarlucci/invariant
+/plugin install invariant@invariant</pre></div>
+  <p>No marketplace? <a href="../downloads/invariant-claude-code.zip">Download the plugin</a>, unzip it, and start Claude Code with <code>claude --plugin-dir &lt;the unzipped folder&gt;</code>. That loads it for one session.</p>
+  <h3>Cursor (preview)</h3>
+  <p><a href="../downloads/invariant-cursor.zip">Download the plugin</a>, unzip it into <code>~/.cursor/plugins/local/invariant</code>, and reload the window (<code>Developer: Reload Window</code>). On a company-managed Cursor, an admin has to turn on "Allow Local Plugin Imports" first.</p>
+  <div class="note"><b>Cursor is a preview</b>Cursor reports a violation to the agent after it edits a file. It does not stop the write the way Claude Code does, because Cursor's hooks run after the edit. The plugin's behavior in Cursor has not yet been checked on every version.</div>
+  <h3>Then</h3>
+  <p>Ask your AI tool: <code>/invariant:setup</code> (in Cursor, say "set up Invariant"). It walks you through five things: where your design system lives, what it found, which patterns to approve and under whose name, how strict to be, and a test that proves a wrong component is blocked. It tells you at the end which files to commit so your whole team gets the same contract. Teammates only need to install the plugin.</p>
+  <p>Want the details of how it works? See <a href="#enforcement">See it working in your agent chat</a>.</p>
 </section>
 
 <section class="doc" id="agents">
