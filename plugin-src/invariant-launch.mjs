@@ -4,7 +4,9 @@
 //
 //   node invariant-launch.mjs hook [--quiet ...]   a write-time hook: payload on stdin
 //   node invariant-launch.mjs mcp  [...]           the MCP server over stdio
-//   node invariant-launch.mjs --ensure             install the pinned CLI if it is missing, then exit
+//   node invariant-launch.mjs --ensure [--if-configured]
+//                                                  install the pinned CLI if it is missing, then exit;
+//                                                  with --if-configured, only in a project that uses Invariant
 //   node invariant-launch.mjs <any invariant args> everything else is passed straight through
 //
 // Which CLI runs, in order: $INVARIANT_CLI (an explicit path), `invariant` on PATH, then a pinned copy in
@@ -154,6 +156,7 @@ function run(cli, args, input) {
 const args = process.argv.slice(2)
 
 if (args[0] === "--ensure") {
+  if (args.includes("--if-configured") && !configured(projectDir(Buffer.alloc(0)))) process.exit(0)
   process.exit((await ensure()) ? 0 : 1)
 } else if (args[0] === "hook") {
   // Fail open in every way: a launcher problem must never stop an agent from writing a file.

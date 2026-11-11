@@ -1,0 +1,17 @@
+{
+  "name": "invariant",
+  "version": "0.1.0",
+  "description": "Make AI tools generate UI that follows your design system. Checks every file the agent writes against your design system's contract.",
+  "author": {
+    "name": "Invariant",
+    "url": "https://github.com/mcarlucci/invariant"
+  },
+  "keywords": [
+    "design-system",
+    "ai",
+    "mcp",
+    "ui",
+    "enforcement"
+  ],
+  "logo": "assets/logo.svg"
+}

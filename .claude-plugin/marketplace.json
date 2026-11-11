@@ -1,0 +1,19 @@
+{
+  "name": "invariant",
+  "description": "Invariant: AI tools that follow your design system.",
+  "owner": {
+    "name": "mcarlucci"
+  },
+  "plugins": [
+    {
+      "name": "invariant",
+      "source": "./plugins/claude/invariant",
+      "author": {
+        "name": "Invariant",
+        "url": "https://github.com/mcarlucci/invariant"
+      },
+      "description": "Make AI tools generate UI that follows your design system. Checks every file the agent writes against your design system's contract.",
+      "version": "0.1.0"
+    }
+  ]
+}

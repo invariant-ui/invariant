@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "invariant": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/bin/invariant-launch.mjs",
+        "mcp"
+      ]
+    }
+  }
+}

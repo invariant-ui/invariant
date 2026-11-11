@@ -98,6 +98,17 @@ describe("plugin launcher", () => {
     expect(existsSync(path.join(s.home, "cli/9.9.9.lock"))).toBe(false)
   }, 60_000)
 
+  it("--ensure --if-configured installs only in a project that uses Invariant", async () => {
+    const plain = sandbox()
+    expect((await launch(["--ensure", "--if-configured"], { env: plain.env })).code).toBe(0)
+    expect(existsSync(path.join(plain.home, "cli"))).toBe(false)
+
+    const used = sandbox()
+    configure(used.project)
+    expect((await launch(["--ensure", "--if-configured"], { env: used.env })).code).toBe(0)
+    expect(installed(used.home)).toBe(true)
+  }, 60_000)
+
   it("passes a hook's stdin and arguments straight to the installed CLI", async () => {
     const s = sandbox()
     configure(s.project)

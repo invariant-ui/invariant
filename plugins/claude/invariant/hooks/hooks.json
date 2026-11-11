@@ -1,0 +1,58 @@
+{
+  "description": "Checks every file the agent writes against the design system contract.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/bin/invariant-launch.mjs",
+              "--ensure",
+              "--if-configured"
+            ],
+            "timeout": 300,
+            "statusMessage": "invariant: preparing the checker"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/bin/invariant-launch.mjs",
+              "hook",
+              "--quiet"
+            ],
+            "timeout": 30,
+            "statusMessage": "invariant: checking the design system contract"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/bin/invariant-launch.mjs",
+              "hook",
+              "--quiet"
+            ],
+            "timeout": 30,
+            "statusMessage": "invariant: checking the design system contract"
+          }
+        ]
+      }
+    ]
+  }
+}
