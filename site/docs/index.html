@@ -189,6 +189,7 @@ td code{white-space:nowrap}
   <a href="#configuration">Configuration</a>
   <a href="#mcp">MCP server</a>
   <a href="#agents">Agent setup</a>
+  <a href="#enforcement">See it working in your agent chat</a>
   <h4>Reference</h4>
   <a href="#artifacts">Output files</a>
   <a href="#safety">Safety model</a>
@@ -973,6 +974,44 @@ invariant agent list</pre></div>
   <p><code>--dry-run</code> shows what would be written. <code>--force</code> replaces differing entries.</p>
   <p>The <code>invariant-build-ui</code> skill gives agents a scoped workflow instead of the whole contract: understand the task, find the page archetype (<code>get_design_patterns</code> with <code>resolve</code>), find interaction and layout patterns, check each pattern's status, get components and tokens, generate, validate, correct, and report. Agents follow approved patterns and treat documented, inferred or mixed ones as proposals to confirm. The report must list what is unresolved: unfixed violations, every check that was <code>not-verifiable</code> or <code>skipped</code>, and unapproved patterns that were followed. Generated files list the ids of fully approved page archetypes, never their names or descriptions.</p>
   <div class="note"><b>Safe by construction</b>Generated skills and rules only include identifiers matching <code>[A-Za-z][A-Za-z0-9._-]{0,63}</code> (at most 60 component names) and a short title. A hostile description in your source cannot be written into committed agent configuration.</div>
+</section>
+
+<section class="doc" id="enforcement">
+  <div class="kicker">Use it</div>
+  <h2>See it working in your agent chat</h2>
+  <p>You do not have to trust that an agent followed your design system, or ask it to check. With Claude Code, Invariant checks every file the agent writes, stops the ones that break the contract, and keeps a record you can forward.</p>
+  <p>Ask an agent for a settings page with a delete button. This is what you watch happen, taken from the scripted demo (<code>pnpm demo</code> in a source checkout):</p>
+  <div class="code"><span class="lang">chat</span><pre>1. The agent writes a danger-styled delete button.
+   invariant blocked app/pages/Settings.tsx: 1 error against the @acme/ui contract
+   ✗ prop-value-not-allowed: Button.variant is "danger", which is not one of "primary", "secondary", "ghost" (line 8)
+       fix: Use one of "primary", "secondary", "ghost".
+
+2. It switches to primary and paints it red by hand.
+   ✗ color-not-in-tokens: #ff0000 is a literal color that is not the value of any token (line 8)
+
+3. It uses tokens, but the confirmation dialog has no button.
+   ✗ pattern-required-child-missing: Modal at line 11 has no Button (pattern pattern:page.settings) (line 11)
+       fix: Add Button inside Modal.
+
+4. It adds a confirm button.
+   invariant ✓ app/pages/Settings.tsx follows the @acme/ui contract (6 component uses checked)</pre></div>
+  <p>Each block happens before the file is written, so the bad code never lands. The agent reads the finding and the fix from your contract and tries again. You do not run anything.</p>
+  <h3>The record</h3>
+  <p>Every check the hook makes is appended to <code>.invariant/enforcement.jsonl</code>, a local file that ignores itself in git. It holds file paths and findings, never file contents.</p>
+  <div class="code"><span class="lang">bash</span><pre>invariant enforcement report                       # latest session, as text
+invariant enforcement report --format html --to report.html   # one self-contained page you can forward</pre></div>
+  <p>The headline reads <code>4 writes checked · 3 violations caught · 3 fixed · 0 outstanding</code>, followed by a timeline of what was caught and what fixed it. A violation counts as fixed when a later write to the same file passes. The report covers what the hook checked; it does not include checks the agent ran itself through the MCP tools.</p>
+  <h3>Turn it up or down</h3>
+  <p>Set <code>enforcement.hooks</code> in <code>invariant.config.json</code>: <code>gate-errors</code> (default) blocks writes with errors, <code>warn</code> never blocks and reports after the write, <code>off</code> checks nothing. Your baseline, rule overrides and ignore globs apply, so existing violations do not trap an agent. If the hook cannot run, the write goes ahead.</p>
+  <h3>What each tool gets</h3>
+  <div class="tbl"><table>
+    <tr><th>Client</th><th>How the contract is applied</th><th>Enforced at write time</th></tr>
+    <tr><td>Claude Code</td><td>Hooks on every Write and Edit, plus MCP and skills</td><td>Yes</td></tr>
+    <tr><td>Cursor</td><td>MCP and rules; the agent is asked to validate</td><td>No</td></tr>
+    <tr><td>Codex, Windsurf</td><td>MCP and rules; the agent is asked to validate</td><td>No</td></tr>
+    <tr><td>Any client</td><td><code>invariant validate</code> in CI</td><td>At pull request time</td></tr>
+  </table></div>
+  <p>Only Claude Code has a hook system that can stop a write today. For the others, Invariant gives the agent the facts and the validator, and CI is the backstop.</p>
 </section>
 
 <section class="doc" id="artifacts">

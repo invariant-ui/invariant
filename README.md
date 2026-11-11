@@ -155,11 +155,29 @@ invariant compile
 invariant agent init claude-code   # or cursor, codex, windsurf, all
 ```
 
-This registers a read-only MCP server that gives the agent tools such as `get_component`, `get_design_tokens`, `search_design_system` and `validate_component_usage`. After a recompile, the server picks up the new contract without a restart.
+With Claude Code, you watch the contract being enforced. Ask an agent for a settings page with a delete button and every file it writes is checked before it lands:
 
-For Claude Code, it also installs enforcement hooks: every `Write` and `Edit` is checked against the contract as the agent types it. A write that would introduce an error-severity violation is blocked with the exact finding and fix; warnings show up right after the write; clean passes get a green line in the chat. The hooks fail open — if invariant cannot run, the write proceeds — and they respect your baseline and rule overrides. Set `enforcement.hooks` to `warn` or `off` in `invariant.config.json` to soften or disable this.
+```text
+1. invariant blocked app/pages/Settings.tsx: 1 error against the @acme/ui contract
+   ✗ prop-value-not-allowed: Button.variant is "danger", which is not one of "primary", "secondary", "ghost" (line 8)
+       fix: Use one of "primary", "secondary", "ghost".
+2. ✗ color-not-in-tokens: #ff0000 is a literal color that is not the value of any token (line 8)
+3. ✗ pattern-required-child-missing: Modal at line 11 has no Button (pattern pattern:page.settings) (line 11)
+4. invariant ✓ app/pages/Settings.tsx follows the @acme/ui contract (6 component uses checked)
+```
 
-Whether the agent calls the `validate_design_system_compliance` tool itself or a hook fires on its write, the chat shows the same enforcement card — the findings, the fixes, and what to do next — so you always watch the contract being applied, not just hear about it afterwards.
+Run `pnpm demo` in a checkout to replay exactly that, and `invariant enforcement report` (add `--format html --to report.html`) to get a forwardable timeline: `4 writes checked · 3 violations caught · 3 fixed · 0 outstanding`. See [See it working in your agent chat](https://mcarlucci.github.io/invariant/docs/#enforcement).
+
+`agent init` installs the hooks for Claude Code: a write that would introduce an error-severity violation is blocked with the exact finding and fix; warnings show up right after the write; clean passes get a green line in the chat. The hooks fail open (if invariant cannot run, the write proceeds) and respect your baseline and rule overrides. Set `enforcement.hooks` to `warn` or `off` in `invariant.config.json` to soften or disable this.
+
+| Client | How the contract is applied | Blocks a write |
+| --- | --- | --- |
+| Claude Code | Hooks on Write and Edit, plus MCP and skills | Yes |
+| Cursor | MCP and rules; the agent is asked to validate | No |
+| Codex, Windsurf | MCP and rules; the agent is asked to validate | No |
+| Any client | `invariant validate` in CI | At pull request time |
+
+The MCP server is read-only and gives the agent tools such as `get_component`, `get_design_tokens`, `search_design_system` and `validate_component_usage`. After a recompile, the server picks up the new contract without a restart. Whether the agent calls `validate_design_system_compliance` itself or a hook fires on its write, the chat shows the same enforcement card: the findings, the fixes, and what to do next. The enforcement report records hook checks only, not the agent's own MCP calls.
 
 Contract text comes from your source and docs, so the server marks every result as untrusted content. Generated agent config never includes free-form descriptions from your code.
 
