@@ -334,3 +334,60 @@ describe("hook: enforcement log and report", () => {
     expect((await cli(dir, "enforcement", "report")).out).toContain("0 writes checked")
   })
 })
+
+describe("hook: plugin use (--quiet, --client cursor)", () => {
+  const cursorPayloadFor = (dir: string, rel: string): unknown => ({
+    hook_event_name: "afterFileEdit",
+    conversation_id: "c1",
+    workspace_roots: [dir],
+    file_path: path.join(dir, rel),
+    edits: [{ old_string: "a", new_string: "b" }]
+  })
+
+  it("--quiet prints no note for a project without a config or contract", async () => {
+    const bare = mkdtempSync(path.join(tmpdir(), "invariant-bare-"))
+    made.push(bare)
+    const loud = await hook(bare, writePayload(bare, "src/x.tsx", CLEAN_FILE))
+    expect(loud.err).toContain("no invariant.config.json")
+    const quiet = await hook(bare, writePayload(bare, "src/x.tsx", CLEAN_FILE), { extraArgs: ["--quiet"] })
+    expect(quiet).toEqual({ code: 0, out: "", err: "" })
+
+    const dir = await project()
+    rmSync(path.join(dir, "invariant"), { recursive: true, force: true })
+    const noContract = await hook(dir, writePayload(dir, "src/x.tsx", CLEAN_FILE), { extraArgs: ["--quiet"] })
+    expect(noContract).toEqual({ code: 0, out: "", err: "" })
+  })
+
+  it("--client cursor reads the landed file and answers with agent_message", async () => {
+    const dir = await project()
+    mkdirSync(path.join(dir, "src"), { recursive: true })
+    writeFileSync(path.join(dir, "src/Danger.tsx"), ERROR_FILE)
+    const r = await hook(dir, cursorPayloadFor(dir, "src/Danger.tsx"), { extraArgs: ["--client", "cursor"] })
+    expect(r.code).toBe(0)
+    const answer = JSON.parse(r.out)
+    expect(Object.keys(answer)).toEqual(["agent_message"])
+    expect(answer.agent_message).toContain("prop-value-not-allowed")
+    expect(readFileSync(path.join(dir, ".invariant/enforcement.jsonl"), "utf8")).toContain('"session":"c1"')
+
+    writeFileSync(path.join(dir, "src/Save.tsx"), CLEAN_FILE)
+    const clean = await hook(dir, cursorPayloadFor(dir, "src/Save.tsx"), {
+      extraArgs: ["--client", "cursor"]
+    })
+    expect(JSON.parse(clean.out).user_message).toContain("follows the")
+  })
+
+  it("--client cursor ignores other events and Claude-shaped payloads, and a bad --client is an error", async () => {
+    const dir = await project()
+    const other = await hook(
+      dir,
+      { ...(cursorPayloadFor(dir, "src/a.tsx") as object), hook_event_name: "stop" },
+      { extraArgs: ["--client", "cursor"] }
+    )
+    expect(other.out).toBe("")
+    const claudeShaped = await hook(dir, writePayload(dir, "src/a.tsx", ERROR_FILE), {
+      extraArgs: ["--client", "cursor"]
+    })
+    expect(claudeShaped.out).toBe("")
+    expect((await hook(dir, {}, { extraArgs: ["--client", "vim"] })).code).not.toBe(0)
+  })
+})

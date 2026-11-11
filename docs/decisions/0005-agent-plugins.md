@@ -46,6 +46,6 @@ Claude Code and Cursor both have installable plugin systems that can bundle skil
 
 ## Open items for the owner
 
-1. Publish `invariant-ui` (name, account, first version). Nothing in the auto-install path works before this.
+1. Publish `invariant-ui` (name, account, first version). The owner is locked out of the npm account (2026-11-11) and is waiting on npm support. Until then the launcher can install from a tarball URL (a GitHub release asset) instead; the plugin should not depend on npm being available.
 2. Confirm the GitHub repository that serves the Claude marketplace (the existing site links to `mcarlucci/invariant`).
-3. Do you want the plugin named `invariant` (so skills appear as `/invariant:setup`)? Names are visible and hard to change later.
+3. Plugin name: `invariant`, confirmed by the owner 2026-11-11 (the npm package name `invariant-ui` is separate; plugin names are per marketplace). The marketplace repository is `mcarlucci/invariant`, confirmed.

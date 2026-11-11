@@ -97,9 +97,9 @@ Inputs are `packages/agent-kit` (skills, rules, the hook definition), the pinned
 
 **P0. Publish (owner action).** Publish `invariant-ui` to npm and confirm the name, owner and first version. The registry returns 404 today. Blocks P2's end-to-end test and everything user-facing.
 
-**P1. Hook for plugin use.** `--quiet`, `--client cursor` adapter, tests with recorded Cursor-shaped payloads. Acceptance: Claude behavior unchanged; Cursor payloads produce findings; quiet mode prints nothing on stderr when unconfigured.
+**P1. Hook for plugin use (done 2026-11-11).** `--quiet`, `--client cursor` adapter, tests with recorded Cursor-shaped payloads. Acceptance: Claude behavior unchanged; Cursor payloads produce findings; quiet mode prints nothing on stderr when unconfigured. Built: `--quiet` and `--client claude-code|cursor` on `invariant hook`, with three new tests in `apps/cli/src/hook.test.ts`. The Cursor answer (`agent_message` for findings, `user_message` for the clean pass) follows the documented field names but is still unverified against a live Cursor.
 
-**P2. Launcher.** `invariant-launch.mjs` with fast exit, resolution order, locked install, fail-open. Tests with a fake registry (a local tarball) and concurrent invocations. Acceptance: first call installs once under concurrency; later calls add under 100 ms of overhead before the CLI starts; unrelated projects exit in under 100 ms; the full hook stays under 500 ms.
+**P2. Launcher.** The install source is swappable: npm by default, or a tarball URL (for example a GitHub release asset of the `dist-npm` package), so the plugins are not blocked on the npm account. Tests use a local `npm pack` tarball. `invariant-launch.mjs` with fast exit, resolution order, locked install, fail-open. Tests with a fake registry (a local tarball) and concurrent invocations. Acceptance: first call installs once under concurrency; later calls add under 100 ms of overhead before the CLI starts; unrelated projects exit in under 100 ms; the full hook stays under 500 ms.
 
 **P3. Generic skills and the setup skill.** Generic versions of the existing skills; `invariant-setup` as designed above. Acceptance: the setup flow succeeds end to end on a fixture (compile, approve a pattern, verify a block) driven by scripted answers; no skill text derives from contract content.
 

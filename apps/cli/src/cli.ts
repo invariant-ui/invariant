@@ -39,7 +39,7 @@ usage: ${CLI_NAME} <command> [options]
   review approve|reject|resolve|accept|dismiss <id> --as <name>   record a decision in invariant.decisions.json
   export --to <dir>             write a portable copy of the artifacts
   mcp                           serve the compiled contract to AI tools over stdio (read-only)
-  hook                          check an agent's Write/Edit against the contract and answer in its hook format (stdin payload) [--posture gate-errors|warn|off]
+  hook                          check an agent's Write/Edit against the contract and answer in its hook format (stdin payload) [--posture gate-errors|warn|off] [--client claude-code|cursor] [--quiet]
   enforcement report            the enforcement timeline of an agent session [--session id|--all] [--format text|html] [--to file]
   agent init <client|all>       write MCP config and skills for claude-code, cursor, codex, windsurf
   agent list                    list supported clients

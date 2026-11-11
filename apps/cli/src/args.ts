@@ -48,6 +48,8 @@ const OPTIONS = {
   "no-baseline": { type: "boolean" },
   posture: { type: "string" },
   session: { type: "string" },
+  client: { type: "string" },
+  quiet: { type: "boolean" },
   yes: { type: "boolean" },
   "confirm-contract": { type: "boolean" },
   "no-agent": { type: "boolean" },
@@ -108,6 +110,8 @@ export interface Parsed {
     "no-baseline"?: boolean
     posture?: string
     session?: string
+    client?: string
+    quiet?: boolean
     yes?: boolean
     "confirm-contract"?: boolean
     "no-agent"?: boolean

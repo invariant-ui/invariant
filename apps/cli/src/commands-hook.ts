@@ -56,6 +56,40 @@ const payloadSchema = z.object({
 
 type Payload = z.infer<typeof payloadSchema>
 
+/**
+ * Cursor's `afterFileEdit` payload (cursor.com/docs/hooks): the edit has already landed, so it is treated as a
+ * `PostToolUse` on the file. The fields are from the docs; the answer shape in {@link cursorAnswer} is not yet
+ * verified against a live Cursor.
+ */
+const cursorPayloadSchema = z.object({
+  hook_event_name: z.string(),
+  file_path: z.string().min(1),
+  workspace_roots: z.array(z.string()).optional(),
+  conversation_id: z.string().optional()
+})
+
+const CLIENTS = ["claude-code", "cursor"] as const
+
+function cursorPayload(raw: unknown): Payload | undefined {
+  const parsed = cursorPayloadSchema.safeParse(raw)
+  if (!parsed.success || parsed.data.hook_event_name !== "afterFileEdit") return undefined
+  const root = parsed.data.workspace_roots?.find((r) => parsed.data.file_path.startsWith(r))
+  return {
+    hook_event_name: "PostToolUse",
+    tool_name: "Edit",
+    ...((root ?? parsed.data.workspace_roots?.[0]) ? { cwd: root ?? parsed.data.workspace_roots?.[0] } : {}),
+    ...(parsed.data.conversation_id ? { session_id: parsed.data.conversation_id } : {}),
+    tool_input: { file_path: parsed.data.file_path }
+  }
+}
+
+/** Cursor reads `agent_message` as feedback to the model and `user_message` as text for the person. */
+function cursorAnswer(decision: Record<string, unknown>): Record<string, unknown> {
+  if (typeof decision.reason === "string") return { agent_message: decision.reason }
+  if (typeof decision.systemMessage === "string") return { user_message: decision.systemMessage }
+  return {}
+}
+
 async function readAll(stream: Readable, max: number): Promise<string> {
   let text = ""
   for await (const chunk of stream) {
@@ -114,7 +148,8 @@ async function decide(c: Context, payload: Payload): Promise<Record<string, unkn
 
   const loaded = await loadConfig({ cwd: root, trustConfig: false })
   if (!loaded) {
-    c.io.stderr(`invariant hook: no invariant.config.json in ${root}; the write proceeds unchecked\n`)
+    if (c.args.values.quiet !== true)
+      c.io.stderr(`invariant hook: no invariant.config.json in ${root}; the write proceeds unchecked\n`)
     return undefined
   }
   const ignore = (loaded.config.validation?.ignore ?? []).map((g) => globToRegExp(g))
@@ -128,9 +163,10 @@ async function decide(c: Context, payload: Payload): Promise<Record<string, unkn
 
   const dir = path.resolve(root, outputDirectory(loaded.config))
   if (!existsSync(path.join(dir, "invariant.contract.json"))) {
-    c.io.stderr(
-      `invariant hook: no compiled contract in ${path.relative(root, dir) || "."}; run \`invariant compile\`. The write proceeds unchecked.\n`
-    )
+    if (c.args.values.quiet !== true)
+      c.io.stderr(
+        `invariant hook: no compiled contract in ${path.relative(root, dir) || "."}; run \`invariant compile\`. The write proceeds unchecked.\n`
+      )
     return undefined
   }
   const { contract, evidence } = loadCompiled(dir)
@@ -215,12 +251,18 @@ async function decide(c: Context, payload: Payload): Promise<Record<string, unkn
 export async function hook(c: Context): Promise<number> {
   const { input } = c.io
   if (!input) throw new CliError("`hook` reads the agent's hook payload from standard input")
+  const client = c.args.values.client ?? "claude-code"
+  if (!(CLIENTS as readonly string[]).includes(client))
+    throw new CliError(`--client must be one of ${CLIENTS.join(", ")}`)
   let payload: Payload | undefined
   try {
-    const raw = await readAll(input, MAX_PAYLOAD_CHARS)
-    const parsed = payloadSchema.safeParse(JSON.parse(raw))
-    if (parsed.success) payload = parsed.data
-    else c.io.stderr(`invariant hook: unrecognized payload; staying silent\n`)
+    const raw = JSON.parse(await readAll(input, MAX_PAYLOAD_CHARS))
+    if (client === "cursor") payload = cursorPayload(raw)
+    else {
+      const parsed = payloadSchema.safeParse(raw)
+      if (parsed.success) payload = parsed.data
+    }
+    if (!payload) c.io.stderr(`invariant hook: unrecognized payload; staying silent\n`)
   } catch (error) {
     // Fail open in every way: the write proceeds and the reason is visible on stderr.
     c.io.stderr(`invariant hook: ${(error as Error).message}\n`)
@@ -228,7 +270,7 @@ export async function hook(c: Context): Promise<number> {
   if (!payload) return 0
   try {
     const decision = await decide(c, payload)
-    if (decision) c.io.stdout(`${JSON.stringify(decision)}\n`)
+    if (decision) c.io.stdout(`${JSON.stringify(client === "cursor" ? cursorAnswer(decision) : decision)}\n`)
   } catch (error) {
     c.io.stderr(`invariant hook: ${(error as Error).message}\n`)
   }
