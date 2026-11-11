@@ -8,7 +8,11 @@ import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSy
 import { tmpdir } from "node:os"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { pluginRules, pluginSkills } from "../packages/agent-kit/dist/index.js"
+
+// Loaded from the build output (`pnpm build` first), typed from the workspace package, so typecheck needs no build.
+const { pluginRules, pluginSkills } = (await import(
+  new URL("../packages/agent-kit/dist/index.js", import.meta.url).href
+)) as typeof import("@invariant/agent-kit")
 
 const root = fileURLToPath(new URL("..", import.meta.url))
 const read = (rel: string): string => readFileSync(path.join(root, rel), "utf8")
@@ -36,7 +40,7 @@ function claude(): Tree {
     args: ["${CLAUDE_PLUGIN_ROOT}/bin/invariant-launch.mjs", ...args]
   })
   const check = { ...run(["hook", "--quiet"]), timeout: 30, statusMessage: STATUS }
-  const tree: Tree = new Map([
+  const tree: Tree = new Map<string, string | Buffer>([
     [
       ".claude-plugin/plugin.json",
       json({
@@ -91,7 +95,7 @@ function claude(): Tree {
 
 function cursor(): Tree {
   const command = 'node "${CURSOR_PLUGIN_ROOT}/scripts/invariant-launch.mjs"'
-  const tree: Tree = new Map([
+  const tree: Tree = new Map<string, string | Buffer>([
     [
       ".cursor-plugin/plugin.json",
       json({

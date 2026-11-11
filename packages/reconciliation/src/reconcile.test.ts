@@ -127,7 +127,7 @@ describe("variants with an empty-string value", () => {
     const r = run([rawDoc("react-ui", "react", [input])])
     const variants = r.contract.components.find((c) => c.id === "component:input")?.variants
     expect(variants).toEqual([{ name: "size", values: ["small", "large"] }])
-    expect(() => parseContract(serializeContract(r.contract))).not.toThrow()
+    expect(parseContract(JSON.parse(serializeContract(r.final.contract))).ok).toBe(true)
   })
 })
 
