@@ -101,6 +101,46 @@ describe("invariant setup", () => {
     expect(inspected.out).not.toMatch(/NOT APPROVED/)
   })
 
+  it("--only adds just the numbered patterns, --posture writes the enforcement setting, and bad values are refused", async () => {
+    const dir = project()
+    const r = await cli(dir, [
+      "setup",
+      "--confirm-contract",
+      "--as",
+      "ana",
+      "--only",
+      "1,3",
+      "--posture",
+      "warn",
+      "--no-ci",
+      "--no-agent"
+    ])
+    expect(r.code).toBe(0)
+    expect(r.out).toMatch(/patterns {3}2 approved by ana/)
+    expect(patterns(dir).patterns).toHaveLength(2)
+    expect(r.out).toMatch(/enforcement.*never blocked.*enforcement\.hooks = warn/)
+    const config = JSON.parse(readFileSync(path.join(dir, "invariant.config.json"), "utf8"))
+    expect(config.enforcement).toEqual({ hooks: "warn" })
+    expect(config.sources.length).toBeGreaterThan(0)
+
+    const none = project()
+    const n = await cli(none, [
+      "setup",
+      "--confirm-contract",
+      "--as",
+      "ana",
+      "--only",
+      "none",
+      "--no-ci",
+      "--no-agent"
+    ])
+    expect(n.out).not.toMatch(/patterns {3}/)
+    expect(existsSync(path.join(none, "invariant.patterns.json"))).toBe(false)
+
+    expect((await cli(project(), ["setup", "--posture", "loud"])).code).toBe(2)
+    expect((await cli(project(), ["setup", "--only", "one"])).code).toBe(2)
+  })
+
   it("a starter rule flags new code and, as a warning, does not fail the build", async () => {
     const dir = project()
     await cli(dir, ["setup", "--confirm-contract", "--as", "ana", "--no-ci", "--no-agent"])

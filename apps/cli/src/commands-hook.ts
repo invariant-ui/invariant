@@ -35,7 +35,7 @@ import { loadCompiled } from "./store.js"
 
 /** Claude Code hook payloads carry the whole file; the MCP line limit is a reasonable ceiling here too. */
 const MAX_PAYLOAD_CHARS = 2_000_000
-const POSTURES = ["gate-errors", "warn", "off"] as const
+export const POSTURES = ["gate-errors", "warn", "off"] as const
 export type Posture = (typeof POSTURES)[number]
 export const DEFAULT_POSTURE: Posture = "gate-errors"
 

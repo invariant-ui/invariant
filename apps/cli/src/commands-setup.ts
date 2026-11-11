@@ -6,6 +6,7 @@ import type { CandidatesFile } from "@invariant/validation"
 import { BASELINE_FILE } from "./baseline.js"
 import { run } from "./cli.js"
 import { type Context, outputDir, print } from "./commands.js"
+import { POSTURES } from "./commands-hook.js"
 import { CONFIG_FILE, detectConfig, type InvariantConfig, loadConfig, writeConfig } from "./config.js"
 import { CliError } from "./errors.js"
 import { applyPublish, planPublish } from "./publish.js"
@@ -105,6 +106,13 @@ export async function setup(c: Context): Promise<number> {
     if (a === undefined || a === "") return byDefault
     return a.startsWith("y")
   }
+
+  const posture = c.args.values.posture
+  if (posture !== undefined && !(POSTURES as readonly string[]).includes(posture))
+    throw new CliError(`--posture must be one of ${POSTURES.join(", ")}`)
+  const only = c.args.values.only?.trim().toLowerCase()
+  if (only !== undefined && only !== "none" && !/^\d+(\s*,\s*\d+)*$/.test(only))
+    throw new CliError("--only takes the numbers of the patterns to add (like 1,3), or none")
 
   say(`${CLI_NAME} setup`)
 
@@ -342,6 +350,11 @@ export async function setup(c: Context): Promise<number> {
   let wantCi = ciPossible
   let wantPublish = publishNeeded
   if (mode === "quick") {
+    if (only !== undefined) {
+      const keep =
+        only === "none" ? new Set<number>() : new Set(only.split(/\s*,\s*/).map((n) => Number(n) - 1))
+      chosen = top.filter((_, i) => keep.has(i))
+    }
     approve = confirmed
     withRules = confirmed && !noRules
   } else {
@@ -444,6 +457,16 @@ export async function setup(c: Context): Promise<number> {
         : `patterns   ${promoted.length} added as proposals (not approved). Approve with \`${CLI_NAME} review\` once you have read them.`
     )
     if (rulesOn > 0) did.push(`rules      ${rulesOn} starter rule(s), as warnings`)
+  }
+
+  if (posture !== undefined && config) {
+    writeConfig(configPath, {
+      ...config,
+      enforcement: { ...config.enforcement, hooks: posture as "gate-errors" | "warn" | "off" }
+    })
+    did.push(
+      `enforcement   writes are ${posture === "gate-errors" ? "blocked when they break an error rule" : posture === "warn" ? "never blocked; findings are reported after the write" : "not checked"} (enforcement.hooks = ${posture})`
+    )
   }
 
   if (wantAgents)

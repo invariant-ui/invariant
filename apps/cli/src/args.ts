@@ -49,6 +49,7 @@ const OPTIONS = {
   posture: { type: "string" },
   session: { type: "string" },
   client: { type: "string" },
+  only: { type: "string" },
   quiet: { type: "boolean" },
   yes: { type: "boolean" },
   "confirm-contract": { type: "boolean" },
@@ -111,6 +112,7 @@ export interface Parsed {
     posture?: string
     session?: string
     client?: string
+    only?: string
     quiet?: boolean
     yes?: boolean
     "confirm-contract"?: boolean
