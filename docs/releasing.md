@@ -17,7 +17,28 @@ The package name is set in one place, `NPM_PACKAGE` in `apps/cli/src/version.ts`
 
 The launcher in a plugin pins an exact CLI version and installs it from npm on first use. If a plugin version reaches users before that CLI version is on npm, the install fails. The hook then lets every write through unchecked (it fails open, by design) and the MCP server does not start. Nothing tells the person except a line on stderr. So: **publish to npm first, confirm it, and only then push the plugins.**
 
-## Release checklist
+## How a release happens (release-please)
+
+Releases are driven by conventional commit messages (`feat:`, `fix:`, `feat!:` or a `BREAKING CHANGE:` footer) and `.github/workflows/release.yml`. Commits of other kinds (`docs:`, `chore:`, `test:`) do not trigger a release.
+
+1. **Every push to `main`** runs release-please, which keeps a single open pull request titled `chore(main): release <version>`. It bumps `apps/cli/package.json` and `CLI_VERSION` in `apps/cli/src/version.ts`, and writes `apps/cli/CHANGELOG.md` from the commits. Before 1.0, a breaking change bumps the minor version, and a `feat` also bumps the minor.
+2. **A `prepare` job then regenerates everything that depends on the version** and pushes it to that pull request: the golden files (`UPDATE_GOLDEN=1`), the plugins, `.claude-plugin/marketplace.json`, the zips in `site/downloads/`, and the pinned `@invariant-ui/cli@<version>` examples on the website. Review the diff: apart from the changelog, only versions and hashes should change.
+3. **You merge the release pull request.** release-please tags `v<version>` and creates the GitHub release.
+4. **The `publish` job** (same workflow) checks out the merged commit, runs `pnpm verify`, checks the tag equals the package version, builds `dist-npm/`, and runs `npm publish --provenance --access public`.
+5. **Check it:** `npx -y @invariant-ui/cli@<version> --version` (wait a few minutes if it is a 404), then the install test in step 11 of the manual checklist below.
+
+Setup that only an owner can do:
+- **Settings, Actions, General:** turn on "Allow GitHub Actions to create and approve pull requests", or release-please cannot open its pull request.
+- **Secret `NPM_TOKEN`:** an npm automation token that can publish `@invariant-ui/cli` (npm, Access Tokens). Without it, step 4 fails after the tag exists. Fix the secret and re-run the job; the version is not burned until npm accepts the publish. (npm trusted publishing from GitHub Actions is the alternative that needs no token. It is configured on the package's settings page on npmjs.com, and the workflow file name it must match is `release.yml`.)
+- A merge of the release pull request is the approval. Nothing publishes until a person merges it.
+
+Two things to know:
+- **The release pull request does not run CI.** Commits pushed with the default `GITHUB_TOKEN`, which release-please and the `prepare` job use, do not trigger other workflows. The `publish` job runs `pnpm verify` after the merge and before anything is published, so a bad release stops there. To also see checks on the pull request, give release-please a personal access token instead.
+- **Plugins and npm are not atomic.** The merge puts the new plugin files on `main` a few minutes before the new CLI version is on npm. In that window a user who updates the plugin gets a hook that lets writes through unchecked until the version appears. See "Why the order matters".
+
+## Manual release (fallback)
+
+Use this if the automation is unavailable. The steps are the ones the workflow performs.
 
 1. **Pick the version** (semantic versioning; before 1.0, a minor bump for anything users would notice). Edit `apps/cli/package.json` and `apps/cli/src/version.ts`, keeping them equal.
 2. **Update the golden files.** Version strings appear in committed goldens: run `UPDATE_GOLDEN=1 pnpm test` and review `git diff`. Only versions and hashes should change.
@@ -39,7 +60,7 @@ The launcher in a plugin pins an exact CLI version and installs it from npm on f
     claude plugin list        # invariant <version>, enabled
     ```
 
-12. **Tag the release** if you publish from CI (below), or `git tag v<version>` afterwards for the record.
+12. **Tag the release** with `git tag v<version>` for the record. Do not push a tag while release-please is active, or it will try to create the same release.
 
 ## Publishing to npm
 
@@ -52,13 +73,7 @@ npm publish --access public --otp=<6-digit code>
 
 `--access public` is required: scoped packages default to private.
 
-**From CI.** `.github/workflows/publish.yml` publishes with provenance when a tag matching the version is pushed. It needs an npm automation token stored as the `NPM_TOKEN` repository secret. Then:
-
-```bash
-git tag v<version> && git push origin v<version>
-```
-
-The workflow checks that the tag equals `apps/cli/package.json`'s version before it publishes.
+**From CI.** The `publish` job in `.github/workflows/release.yml` does this after a release pull request is merged (see above).
 
 Publishing cannot be undone. A version number, once used, is never reusable, even if the package is unpublished. If a release is wrong, publish a new version and run `npm deprecate @invariant-ui/cli@<bad version> "reason"`.
 

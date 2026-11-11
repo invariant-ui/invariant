@@ -1,0 +1,84 @@
+# Releases the CLI and the plugins that pin it.
+#
+# Every push to main runs release-please, which keeps one release PR open: it bumps the version and writes the
+# changelog from conventional commits. A job then regenerates what depends on that version (golden files, the
+# plugins, their zips and the pinned examples on the website) and pushes it to the release PR.
+# Merging the release PR creates the tag and GitHub release; the publish job then runs the full checks and
+# publishes to npm. See docs/releasing.md.
+name: Release
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.rp.outputs.releases_created }}
+      tag_name: ${{ steps.rp.outputs['apps/cli--tag_name'] }}
+      pr_branch: ${{ steps.rp.outputs.pr && fromJSON(steps.rp.outputs.pr).headBranchName }}
+    steps:
+      - id: rp
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  # The version appears in files release-please does not know about. Regenerate them on the release PR, so
+  # that merging it leaves main consistent and `pnpm verify` passes.
+  prepare:
+    needs: release-please
+    if: needs.release-please.outputs.pr_branch != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release-please.outputs.pr_branch }}
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Pin the new version in the website's CI examples
+        run: |
+          version=$(node -p "require('./apps/cli/package.json').version")
+          sed -i -E "s#@invariant-ui/cli@[0-9]+\.[0-9]+\.[0-9]+[-0-9A-Za-z.]*#@invariant-ui/cli@${version}#g" site/index.html site/docs/index.html
+      - name: Update golden files (only versions and hashes should change)
+        run: UPDATE_GOLDEN=1 pnpm exec vitest run
+      - run: pnpm build:plugins
+      - name: Push what changed to the release PR
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nothing to regenerate"; exit 0; fi
+          git commit -m "chore: regenerate version-dependent files for the release"
+          git push
+
+  publish:
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - name: The tag must match the package version
+        run: test "${{ needs.release-please.outputs.tag_name }}" = "v$(node -p "require('./apps/cli/package.json').version")"
+      - run: pnpm build:npm
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        working-directory: dist-npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
