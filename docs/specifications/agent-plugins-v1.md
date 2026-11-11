@@ -95,7 +95,7 @@ Inputs are `packages/agent-kit` (skills, rules, the hook definition), the pinned
 
 ## Phases
 
-**P0. Publish (owner action).** Publish `@invariant-ui/cli` to npm and confirm the name, owner and first version. The registry returns 404 today. Blocks P2's end-to-end test and everything user-facing.
+**P0. Publish (done 2026-11-11).** `@invariant-ui/cli@0.1.0` is on npm (org `invariant-ui`). Verified from a clean directory: `npx -y @invariant-ui/cli --version` prints 0.1.0. A new scoped package took a few minutes to appear after the publish (the registry returned 404 until then). Verified with the real registry: the launcher installed the pinned CLI into an empty cache in 0.5 s (npm cache warm) and a real Claude Code session with the plugin loaded had its `Write` of `<Button variant="danger">` blocked through it.
 
 **P1. Hook for plugin use (done 2026-11-11).** `--quiet`, `--client cursor` adapter, tests with recorded Cursor-shaped payloads. Acceptance: Claude behavior unchanged; Cursor payloads produce findings; quiet mode prints nothing on stderr when unconfigured. Built: `--quiet` and `--client claude-code|cursor` on `invariant hook`, with three new tests in `apps/cli/src/hook.test.ts`. The Cursor answer (`agent_message` for findings, `user_message` for the clean pass) follows the documented field names but is still unverified against a live Cursor.
 
