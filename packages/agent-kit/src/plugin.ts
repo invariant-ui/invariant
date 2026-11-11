@@ -63,10 +63,10 @@ Also ask which folders hold the applications that use it, if that is not obvious
 
 ## 3. Compile and look
 Run \`invariant setup\` with the choices from step 2. Run like this, without a terminal, it compiles and prints a plan, and changes nothing else.
-Summarize in plain words, using only the output: how many components and what kinds of tokens were found, which frameworks, any errors or warnings that matter, and anything it said it could not extract. If compile failed, explain why and stop.
+Summarize in plain words, using only the output: how many components were found, how many tokens (say plainly if there are none, since then colors and spacing cannot be checked), which frameworks, how many conflicts between sources (for example Storybook claiming a value the code does not have), any errors or warnings that matter, and anything it said it could not extract. If compile failed, explain why and stop.
 
 ## 4. Does this match?
-Ask: "Does this match your design system? Is anything missing or wrong?" If something is off, adjust (\`invariant source add <type> [path]\` or \`invariant source remove <id>\`, or a different \`--paths\`), run \`invariant compile\`, and show the new summary. Repeat until they say it matches. Do not go on before that.
+Ask: "Does this match your design system? Is anything missing or wrong?" If there are conflicts or no tokens, say so in the question and ask whether to go on anyway: conflicts stay unresolved and are listed in \`invariant/invariant.review.json\` for a person to decide. If something is off, adjust (\`invariant source add <type> [path]\` or \`invariant source remove <id>\`, or a different \`--paths\`), run \`invariant compile\`, and show the new summary. Repeat until they say it matches. Do not go on before that.
 
 ## 5. Patterns
 If the plan lists recurring structures found in their application code, say each one in a plain sentence and explain that approved patterns guide AI tools and unapproved ones are only proposals. They are numbered in the plan. Ask: approve all, approve some, or none for now. For some, ask which numbers. Then ask for the approver's name.
@@ -82,13 +82,13 @@ Summarize every decision in a short list and ask for a final yes. Then run, once
 
     invariant setup --confirm-contract --as "<their name>" --no-agent --posture <choice> [--only <numbers>|none] [--no-baseline] [--no-ci] [--paths ...] [--contract ...]
 
-\`--no-agent\` is always passed here: the plugin already connects the AI tool, so setup must not add a second connection. Report what it did, using its output.
+\`--no-agent\` is always passed here: the plugin already connects the AI tool, so setup must not add a second connection. Report what it did, using its output. Setup can also add a \`prepack\` script to \`package.json\` (so a published design system carries its contract), write \`invariant.candidate-reviews.json\`, and turn on a few starter rules as warnings; say so if it did.
 
 ## 8. Prove it works
 Pick a component from the contract (\`get_component\`) with a property that accepts a fixed set of values. Try to write a small file that uses a value outside that set. If blocking was chosen, the write is refused: show the person the message, and nothing is left behind. If the write succeeded, say so plainly, delete the file, and explain the check did not run (Claude Code may need a restart before the checks start in a project that had no configuration when the session began).
 
 ## 9. Wrap up
-Tell the person, in a short list: what was approved and by whom, what is still only a proposal, what was skipped or could not be extracted, and what changes from now on (every file an AI tool writes is checked, and a mistake is shown with the exact fix). Name the files to commit so teammates get the same contract: \`invariant.config.json\`, the \`invariant/\` folder, \`invariant.patterns.json\`, \`invariant.decisions.json\` and \`invariant.policies.json\` when present, \`invariant.baseline.json\`, and the CI workflow. Mention \`invariant enforcement report\` for a record of what was caught, and that teammates only need to install this plugin.
+Tell the person, in a short list: what was approved and by whom, what is still only a proposal, what was skipped or could not be extracted, and what changes from now on (every file an AI tool writes is checked, and a mistake is shown with the exact fix). Run \`git status\` and list the files Invariant added or changed, so they can be committed and teammates get the same contract (never the \`.invariant/\` folder, which ignores itself). Mention \`invariant enforcement report\` for a record of what was caught, and that teammates only need to install this plugin.
 `
 
 export interface PluginFile {

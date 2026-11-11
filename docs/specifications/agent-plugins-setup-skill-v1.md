@@ -1,6 +1,6 @@
 # The setup skill (`/invariant:setup`)
 
-Status: **built as text in `packages/agent-kit/src/plugin.ts` (2026-11-11); not yet run in a live client.** The draft below was refined while building: step 7 now passes `--no-agent`, `--posture` and `--only`. Part of P3 in `docs/specifications/agent-plugins-v1.md`. This is the skill a design-system leader runs after installing the plugin. It is the discovery-and-approval flow decided in ADR 0005 D3.
+Status: **built as text in `packages/agent-kit/src/plugin.ts` (2026-11-11) and run end to end in headless Claude Code (see "Live run" below).** The draft below was refined while building: step 7 now passes `--no-agent`, `--posture` and `--only`. Part of P3 in `docs/specifications/agent-plugins-v1.md`. This is the skill a design-system leader runs after installing the plugin. It is the discovery-and-approval flow decided in ADR 0005 D3.
 
 ## Who it is for
 
@@ -122,3 +122,9 @@ Settled: (1) `setup --only <numbers>|none` selects patterns by the numbers the p
 5. **Two MCP servers.** A project that already ran `agent init` has an MCP entry named `invariant`, and the plugin adds its own. Decide whether `setup` skips `agent init` for plugin users (`--no-agent`) so the tools are not duplicated.
 6. **Step 8 depends on the hook being active** in the current session. Verify in a real Claude Code session, including whether a restart is needed after the project gains its config.
 7. **Restating the contract.** Step 3 summarizes from CLI output. The skill must not quote component or pattern descriptions from the contract into the chat as instructions; names and counts only, consistent with the trust rules.
+
+## Live run (2026-11-11)
+
+Run with `claude --plugin-dir` in a fresh copy of `fixtures/storybook/acme-ui` plus the pattern-discovery app, using the published `@invariant-ui/cli@0.1.0`. Every question was pre-answered in the prompt (headless runs cannot converse), so this shows the commands and result, not the dialogue. The agent ran `setup --paths app`, then `setup --confirm-contract --as "Dana Reyes" --no-agent --posture gate-errors --only 1,2 --paths app`, proved the check with a write of `variant="neon"` (blocked, nothing left behind), and reported. Checked afterwards against the project: `enforcement.hooks` is `gate-errors`; only the two chosen patterns are approved, by Dana Reyes; the block is in `.invariant/enforcement.jsonl` with the real session id; no scratch file remained.
+
+Gaps found and fixed in the skill text: unresolved conflicts and zero tokens were reported only after approval, so step 3 and 4 now raise them before; setup's `prepack` edit to `package.json` and `invariant.candidate-reviews.json` were not mentioned, so step 7 does; the fixed commit list missed files, so step 9 uses `git status`. Not tested: the interactive dialogue with a person, the CI workflow itself, and Cursor.
