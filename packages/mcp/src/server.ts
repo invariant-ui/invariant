@@ -189,12 +189,14 @@ export class McpServer {
     const result = tool.run(loaded.ds, parsed.data as never)
     const data = { ...result.data, contractHash: loaded.ds.contentHash }
     const body = JSON.stringify(data, null, 2)
-    if (body.length > MAX_RESULT_CHARS)
+    // A tool that renders a card shows it ahead of the JSON, so the chat reads first and the model parses second.
+    const shown = result.text === undefined ? body : `${result.text}\n\n${body}`
+    if (shown.length > MAX_RESULT_CHARS)
       return text("The result is too large. Narrow the request with a filter or a smaller limit.")
     return this.ok(
       id,
       {
-        content: [{ type: "text", text: body }],
+        content: [{ type: "text", text: shown }],
         structuredContent: data,
         isError: result.isError,
         _meta: { [PROVENANCE_KEY]: { untrustedContent: true, contractHash: loaded.ds.contentHash } }

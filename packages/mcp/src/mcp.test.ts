@@ -243,6 +243,38 @@ describe("tools", () => {
     })
   })
 
+  it("answers validation with the enforcement card ahead of the JSON, the one the hook also shows", async () => {
+    const s = server()
+    const c = await tool(s, "validate_design_system_compliance", {
+      code: '<Button variant="danger">x</Button>',
+      filename: "src/Danger.tsx",
+      framework: "react"
+    })
+    expect(c.result.isError).toBe(false)
+    const text: string = c.result.content[0].text
+    expect(text).toMatch(/^invariant checked src\/Danger\.tsx: 1 error against the Fixture DS contract\n/)
+    expect(text).toContain(
+      '✗ prop-value-not-allowed: Button.variant is "danger", which is not one of "primary", "secondary", "ghost" (line 1)'
+    )
+    expect(text).toContain("    fix: ")
+    expect(text).toContain("Fix these, then validate again.")
+    expect(text).toContain("Facts and fixes come from the compiled contract, not guesses.")
+    // The JSON the model parses follows the card, unchanged, and still matches structuredContent.
+    expect(JSON.parse(text.slice(text.indexOf("{")))).toEqual(c.result.structuredContent)
+  })
+
+  it("confirms a clean snippet with the pass card ahead of the JSON", async () => {
+    const s = server()
+    const c = await tool(s, "validate_design_system_compliance", {
+      code: '<Button variant="primary">Save</Button>',
+      framework: "react"
+    })
+    expect(c.result.isError).toBe(false)
+    expect(c.result.content[0].text).toMatch(
+      /^invariant ✓ the snippet follows the Fixture DS contract \(1 component use checked\)\n\n\{/
+    )
+  })
+
   it("reports unknown tools as protocol errors and bad arguments as tool errors the model can fix", async () => {
     const s = server()
     expect((await call(s, "tools/call", { name: "nope" })).error?.code).toBe(-32602)

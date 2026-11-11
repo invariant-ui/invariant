@@ -72,10 +72,12 @@ export function sortEvaluations(evaluations: readonly Evaluation[]): Evaluation[
 
 const RANK: Record<Severity, number> = { error: 0, warning: 1, info: 2 }
 
-export function sortViolations(violations: readonly Violation[]): Violation[] {
+/** Sorts worst-first: file, then position in it, then severity, then rule. `file` is optional for snippet checks. */
+export function sortViolations<T extends Finding>(violations: readonly T[]): T[] {
+  const fileOf = (f: Finding): string => f.file ?? ""
   return [...violations].sort(
     (a, b) =>
-      (a.file < b.file ? -1 : a.file > b.file ? 1 : 0) ||
+      (fileOf(a) < fileOf(b) ? -1 : fileOf(a) > fileOf(b) ? 1 : 0) ||
       (a.line ?? 0) - (b.line ?? 0) ||
       (a.column ?? 0) - (b.column ?? 0) ||
       RANK[a.severity] - RANK[b.severity] ||

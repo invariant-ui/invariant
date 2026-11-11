@@ -14,13 +14,25 @@ import {
   usageView
 } from "@invariant/contract-query"
 import type { JsonValue } from "@invariant/shared"
-import { MAX_CODE_CHARS, type PropValue, validateCode, validateUsage } from "@invariant/validation"
+import {
+  enforcementCard,
+  MAX_CODE_CHARS,
+  type PropValue,
+  passCard,
+  validateCode,
+  validateUsage
+} from "@invariant/validation"
 import { z } from "zod"
 
 export interface ToolResult {
   isError: boolean
   /** The JSON object returned to the model, also serialized into the text content. */
   data: Record<string, JsonValue>
+  /**
+   * The human-readable rendering shown in the chat, ahead of the serialized JSON in the text content.
+   * Omitted for tools the model reads programmatically; `structuredContent` is unchanged either way.
+   */
+  text?: string
 }
 
 export interface Tool {
@@ -31,7 +43,11 @@ export interface Tool {
   run(ds: DesignSystem, args: never): ToolResult
 }
 
-const ok = (data: Record<string, JsonValue>): ToolResult => ({ isError: false, data })
+const ok = (data: Record<string, JsonValue>, text?: string): ToolResult => ({
+  isError: false,
+  data,
+  ...(text === undefined ? {} : { text })
+})
 const fail = (message: string, extra: Record<string, JsonValue> = {}): ToolResult => ({
   isError: true,
   data: { error: message, ...extra }
@@ -323,7 +339,25 @@ export const TOOLS: Tool[] = [
           "Project-relative path, for example src/pages/Settings.tsx. Needed for path-scoped pattern rules."
         )
     }),
-    run: (ds, a: { code: string; framework?: "react" | "vue" | "angular" | "html"; filename?: string }) =>
-      ok(validateCode(ds, a) as unknown as Record<string, JsonValue>)
+    run: (ds, a: { code: string; framework?: "react" | "vue" | "angular" | "html"; filename?: string }) => {
+      const result = validateCode(ds, a)
+      const name = ds.contract.metadata.name
+      // The same card the hook shows in the chat, so a fix asked for here reads identically there.
+      const card =
+        result.findings.length > 0
+          ? enforcementCard({
+              findings: result.findings,
+              contractName: name,
+              file: a.filename,
+              next: "Fix these, then validate again.",
+              more: (n) => `…and ${n} more findings follow in the JSON below.`
+            })
+          : passCard({
+              contractName: name,
+              file: a.filename,
+              componentsChecked: result.summary.componentsChecked
+            })
+      return ok(result as unknown as Record<string, JsonValue>, card)
+    }
   }
 ]
