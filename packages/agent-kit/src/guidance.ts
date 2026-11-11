@@ -27,7 +27,22 @@ export interface Facts {
   approvedArchetypes: string[]
   omittedArchetypes: number
   hash: string
+  /** True for the plugin's skills: written before any contract exists, so they name no component or pattern. */
+  generic?: boolean
 }
+
+/** What a plugin's skills know: nothing about a particular contract. They point the agent at the tools. */
+export const genericFacts = (): Facts => ({
+  name: "your design system",
+  frameworks: [],
+  components: [],
+  omittedComponents: 0,
+  tokenCategories: [],
+  approvedArchetypes: [],
+  omittedArchetypes: 0,
+  hash: "",
+  generic: true
+})
 
 /**
  * The only contract data allowed into generated files, and only after a strict filter: identifiers and a
@@ -73,16 +88,20 @@ const groundRules = (f: Facts): string => `## Ground rules
 - If \`contractHash\` changes during a task, fetch again. To refresh the contract, the user runs \`invariant compile\`.`
 
 const archetypes = (f: Facts): string =>
-  f.approvedArchetypes.length === 0
-    ? "No page archetype is fully approved in the contract. Any archetype you find is a proposal."
-    : `Approved page archetypes: ${f.approvedArchetypes.join(", ")}${f.omittedArchetypes > 0 ? `, and ${f.omittedArchetypes} more (use \`get_design_patterns\` with category page)` : ""}.`
+  f.generic
+    ? "Use `get_design_patterns` with category page to find the page archetypes. Only fully approved ones are to be followed; the rest are proposals."
+    : f.approvedArchetypes.length === 0
+      ? "No page archetype is fully approved in the contract. Any archetype you find is a proposal."
+      : `Approved page archetypes: ${f.approvedArchetypes.join(", ")}${f.omittedArchetypes > 0 ? `, and ${f.omittedArchetypes} more (use \`get_design_patterns\` with category page)` : ""}.`
 
 const tools = (names: string[]): string => names.map((n) => `\`${n}\``).join(", ")
 
 const components = (f: Facts): string =>
-  f.components.length === 0
-    ? "The contract currently lists no components; run `invariant compile` first."
-    : `Components in the contract: ${f.components.join(", ")}${f.omittedComponents > 0 ? `, and ${f.omittedComponents} more (use \`search_design_system\`)` : ""}.`
+  f.generic
+    ? "Find components with `search_design_system`; do not rely on memory."
+    : f.components.length === 0
+      ? "The contract currently lists no components; run `invariant compile` first."
+      : `Components in the contract: ${f.components.join(", ")}${f.omittedComponents > 0 ? `, and ${f.omittedComponents} more (use \`search_design_system\`)` : ""}.`
 
 interface Skill {
   description: string
@@ -226,14 +245,25 @@ ${groundRules(f)}
   }
 }
 
-export const skillFile = (name: SkillName, f: Facts): string => {
+export interface SkillOptions {
+  /** How the client names an MCP tool in `allowed-tools`. Defaults to Claude Code's `mcp__invariant__<tool>`. */
+  tool?: (name: string) => string
+  /** False for clients whose skills have no `allowed-tools` field. */
+  allowedTools?: boolean
+  /** The comment under the frontmatter; the default says which contract it was generated from. */
+  comment?: string
+}
+
+export const skillFile = (name: SkillName, f: Facts, options: SkillOptions = {}): string => {
   const s = SKILLS[name]
+  const toolName = options.tool ?? tool
+  const comment =
+    options.comment ?? `${MARKER} (contract ${f.hash.slice(0, 12)}); regenerate with \`invariant agent init\``
   return `---
 name: ${name}
 description: ${s.description}
-allowed-tools: ${s.tools.map(tool).join(" ")}
----
-<!-- ${MARKER} (contract ${f.hash.slice(0, 12)}); regenerate with \`invariant agent init\` -->
+${options.allowedTools === false ? "" : `allowed-tools: ${s.tools.map(toolName).join(" ")}\n`}---
+<!-- ${comment} -->
 
 ${s.body(f)}`
 }

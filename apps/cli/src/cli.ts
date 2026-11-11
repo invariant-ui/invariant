@@ -25,7 +25,7 @@ usage: ${CLI_NAME} <command> [options]
   compile                       build the contract, evidence, diagnostics, review and report [--watch recompiles when sources change]
   components list | inspect <name>
   tokens list
-  setup                         one command: compile, propose patterns from your code, connect your AI tool   [--yes] [--confirm-contract] [--as name] [--paths a,b] [--only 1,3|none] [--posture gate-errors|warn|off] [--contract dir] [--no-agent] [--ci|--no-ci] [--no-rules] [--no-publish]
+  setup                         one command: compile, propose patterns from your code, connect your AI tool   [--yes] [--confirm-contract] [--as name] [--paths a,b] [--only 1,3|none] [--posture gate-errors|warn|off] [--contract dir] [--no-agent] [--ci|--no-ci] [--no-rules] [--no-baseline] [--no-publish]
   browser run                   check a running app in a real browser (opt-in; needs Playwright)   [--spec file] [--browser chromium|firefox|webkit] [--url base]
   discover <path...>            find structures that recur in your code and write them as candidates   [--min-files n] [--min-uses n] [--similarity 0-1] [--depth n]
   candidates list | show <id> | accept|reject|defer <id> | promote <id>   review candidates   [--status s] [--kind k] [--all] [--as name] [--note why] [--id pattern-id]
@@ -44,7 +44,7 @@ usage: ${CLI_NAME} <command> [options]
   agent init <client|all>       write MCP config and skills for claude-code, cursor, codex, windsurf
   agent list                    list supported clients
 
-options: --cwd <dir> --config <file> --dir <output dir> --json --force --trust-config --keep-ir --evidence
+options: --version --help --cwd <dir> --config <file> --dir <output dir> --json --force --trust-config --keep-ir --evidence
          agent init: --command <exe> --command-arg <arg> --dry-run
 exit codes: 0 ok, 1 findings or invalid output, 2 bad usage or input
 `

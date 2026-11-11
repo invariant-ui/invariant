@@ -1,6 +1,6 @@
-# The setup skill (`/invariant:setup`), draft
+# The setup skill (`/invariant:setup`)
 
-Status: **draft for review. Not built.** Part of P3 in `docs/specifications/agent-plugins-v1.md`. This is the skill a design-system leader runs after installing the plugin. It is the discovery-and-approval flow decided in ADR 0005 D3.
+Status: **built as text in `packages/agent-kit/src/plugin.ts` (2026-11-11); not yet run in a live client.** The draft below was refined while building: step 7 now passes `--no-agent`, `--posture` and `--only`. Part of P3 in `docs/specifications/agent-plugins-v1.md`. This is the skill a design-system leader runs after installing the plugin. It is the discovery-and-approval flow decided in ADR 0005 D3.
 
 ## Who it is for
 
@@ -111,7 +111,9 @@ Tell the person, in a short list: what was approved and by whom, what is still o
 >
 > **Agent:** Done. To confirm it works, I'll try writing a Button with an invalid style… blocked: `Button.variant is "danger", which is not one of "primary", "secondary", "ghost"`. From now on every file an AI tool writes is checked like that. Commit these files so your team shares it: …
 
-## Open items to settle while building
+## Open items (1, 2 and 5 settled 2026-11-11)
+
+Settled: (1) `setup --only <numbers>|none` selects patterns by the numbers the plan prints; (2) `setup --posture gate-errors|warn|off` writes `enforcement.hooks`; (5) the skill always passes `--no-agent`, because the plugin already connects the client. Still open: 3, 4, 6 and 7 below.
 
 1. **Subset approval.** `setup --confirm-contract` approves every proposed pattern. Approving only some needs `candidates accept` and `promote` (or a `--only` flag on setup). Check which the CLI supports cleanly before building step 5; adding a small CLI option is preferable to the skill doing several approvals by hand.
 2. **Posture.** There is no CLI command that sets `enforcement.hooks`. Either `setup` gains `--posture`, or the skill edits that one key in `invariant.config.json` and shows the change. The first is cleaner and keeps the config a CLI-owned file.
