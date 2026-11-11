@@ -13,4 +13,4 @@ pnpm build
 vhs docs/demo/demo.tape
 ```
 
-This writes `docs/demo/enforcement-loop.gif`. The GIF is not committed yet: it has to be recorded on a machine with VHS installed.
+This writes `docs/demo/enforcement-loop.gif` (about 15 seconds, under 300 KB), which the README embeds. The tape builds off camera first, then records `pnpm demo`. Re-record it whenever the demo's output changes.

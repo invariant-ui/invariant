@@ -157,6 +157,8 @@ invariant agent init claude-code   # or cursor, codex, windsurf, all
 
 With Claude Code, you watch the contract being enforced. Ask an agent for a settings page with a delete button and every file it writes is checked before it lands:
 
+![An agent is blocked three times, then passes: the enforcement loop in the terminal](docs/demo/enforcement-loop.gif)
+
 ```text
 1. invariant blocked app/pages/Settings.tsx: 1 error against the @acme/ui contract
    ✗ prop-value-not-allowed: Button.variant is "danger", which is not one of "primary", "secondary", "ghost" (line 8)
