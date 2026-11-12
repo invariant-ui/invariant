@@ -15,6 +15,7 @@ import { FIXED_CLOCK } from "@invariant/compiler-core/testing"
 import { afterAll, describe, expect, it } from "vitest"
 import { loadConfig, run, runPipeline, validateConfig } from "./index.js"
 import { esc, renderReport } from "./report.js"
+import { CLI_VERSION } from "./version.js"
 
 const root = fileURLToPath(new URL("../../..", import.meta.url))
 const fixture = (name: string): string => path.join(root, "fixtures", name)
@@ -375,7 +376,7 @@ describe("usage and exit codes", () => {
     expect((await cli(dir, "--help")).out).toMatch(/usage: invariant/)
     expect((await cli(dir, "help")).code).toBe(0)
     expect((await cli(dir)).code).toBe(2)
-    expect((await cli(dir, "--version")).out.trim()).toBe("0.1.0")
+    expect((await cli(dir, "--version")).out.trim()).toBe(CLI_VERSION)
     const unknownFlag = await cli(dir, "compile", "--nope")
     expect(unknownFlag.code).toBe(2)
     expect(unknownFlag.err).toMatch(/Unknown option/)

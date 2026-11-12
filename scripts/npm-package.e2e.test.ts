@@ -92,7 +92,9 @@ describe("the published package", () => {
 
   it("runs as a real process: version, then compile a project", () => {
     const main = path.join(pkg, "dist/cli/main.js")
-    expect(execFileSync(process.execPath, [main, "--version"], { encoding: "utf8" }).trim()).toBe("0.1.0")
+    expect(execFileSync(process.execPath, [main, "--version"], { encoding: "utf8" }).trim()).toBe(
+      JSON.parse(readFileSync(path.join(root, "apps/cli/package.json"), "utf8")).version
+    )
     const work = mkdtempSync(path.join(tmpdir(), "invariant-npm-run-"))
     made.push(work)
     cpSync(path.join(root, "fixtures/storybook/acme-ui"), work, {
