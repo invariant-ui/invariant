@@ -1,6 +1,7 @@
 {
   "name": "invariant",
   "private": true,
+  "version": "0.1.0",
   "license": "FSL-1.1-ALv2",
   "type": "module",
   "packageManager": "pnpm@12.16.1",
@@ -19,6 +20,7 @@
     "dev:compile": "pnpm build && node scripts/compile-dev.ts",
     "invariant": "node apps/cli/dist/main.js",
     "build:plugins": "pnpm build && node scripts/build-plugins.ts --zip",
+    "plugin:bump": "pnpm build && node scripts/build-plugins.ts --zip --bump",
     "demo": "pnpm build && node scripts/demo.ts",
     "build:npm": "tsc -b && node scripts/build-npm.ts",
     "pack:check": "pnpm build:npm && cd dist-npm && npm pack --dry-run"

@@ -5,11 +5,28 @@
   "include-component-in-tag": false,
   "include-v-in-tag": true,
   "packages": {
-    "apps/cli": {
+    ".": {
       "release-type": "node",
       "package-name": "@invariant-ui/cli",
       "changelog-path": "CHANGELOG.md",
-      "extra-files": ["src/version.ts"]
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "apps/cli/package.json",
+          "jsonpath": "$.version"
+        },
+        "apps/cli/src/version.ts"
+      ],
+      "exclude-paths": [
+        "plugins",
+        ".claude-plugin",
+        "plugin-src",
+        "site",
+        "docs",
+        "packages/agent-kit/src/plugin.ts",
+        "scripts/build-plugins.ts",
+        "scripts/plugins.test.ts"
+      ]
     }
   }
 }

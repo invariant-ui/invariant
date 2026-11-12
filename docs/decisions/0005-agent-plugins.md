@@ -42,6 +42,10 @@ Claude Code and Cursor both have installable plugin systems that can bundle skil
 
 The package is published as `@invariant-ui/cli` under the owner's new npm organization `invariant-ui`, not as the unscoped `invariant-ui`. The earlier npm account was locked, and an org-owned package cannot be stranded by one account. The installed command is still `invariant`. `NPM_PACKAGE` in `apps/cli/src/version.ts` is the source of truth for the build; the launcher's `PACKAGE` constant mirrors it and a test should keep the two equal.
 
+## Decoupled plugin version (2026-11-12)
+
+The plugin originally shared the CLI's version, so a skill or hook fix needed a new CLI version and an npm publish to reach users who already installed it (Claude Code appears to update by comparing versions). The plugins now have their own version and pin a CLI version separately, both in `plugin-src/plugin-version.json`, with a hash of the plugins' content. A test fails when the content changes and the version does not, so a plugin fix cannot ship unversioned. Releasing a plugin is a commit to `main`; releasing the CLI is release-please and npm. Raising the pinned CLI version is a deliberate act, done only after that CLI version is on npm. release-please now tracks the repository root (every workspace package ships in the CLI) and excludes the plugin-only paths, so a plugin fix does not cause a CLI release.
+
 ## Repository and site move (2026-11-11)
 
 The repository was transferred to the GitHub organization `invariant-ui` (now `invariant-ui/invariant`) so that the package scope `@invariant-ui` equals the repository owner, which GitHub requires to list the package in the repository's Packages section. The website is served at `https://invariant-ui.com/` (a custom domain; the old `github.io` address no longer works), and the marketplace is added with `/plugin marketplace add invariant-ui/invariant`.

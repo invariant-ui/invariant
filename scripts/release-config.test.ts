@@ -12,17 +12,28 @@ describe("release-please configuration", () => {
   const cli = JSON.parse(read("apps/cli/package.json"))
 
   it("tracks the published CLI at the version it has", () => {
-    expect(Object.keys(config.packages)).toEqual(["apps/cli"])
-    expect(manifest["apps/cli"]).toBe(cli.version)
+    // Tracked at the repository root: every workspace package ships in the CLI, so a change to any of them is a
+    // CLI change. Tracking only apps/cli would ignore commits that touch packages/**.
+    expect(Object.keys(config.packages)).toEqual(["."])
+    expect(manifest["."]).toBe(cli.version)
+    expect(JSON.parse(read("package.json")).version).toBe(cli.version)
+    expect(config.packages["."]["extra-files"]).toContainEqual({
+      type: "json",
+      path: "apps/cli/package.json",
+      jsonpath: "$.version"
+    })
+    // A plugin-only change must not cause a CLI release (and an npm publish).
+    for (const excluded of ["plugins", "plugin-src", ".claude-plugin", "packages/agent-kit/src/plugin.ts"])
+      expect(config.packages["."]["exclude-paths"]).toContain(excluded)
     // The changelog names the package users install, not the workspace package.
-    expect(config.packages["apps/cli"]["package-name"]).toBe(
+    expect(config.packages["."]["package-name"]).toBe(
       /NPM_PACKAGE = "([^"]+)"/.exec(read("apps/cli/src/version.ts"))?.[1]
     )
     expect(config["include-component-in-tag"]).toBe(false)
   })
 
   it("rewrites CLI_VERSION in version.ts, which the plugins and tests read", () => {
-    expect(config.packages["apps/cli"]["extra-files"]).toContain("src/version.ts")
+    expect(config.packages["."]["extra-files"]).toContain("apps/cli/src/version.ts")
     const line = read("apps/cli/src/version.ts")
       .split("\n")
       .find((l) => l.includes("CLI_VERSION"))

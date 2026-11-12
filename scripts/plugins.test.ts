@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
-import { buildPlugins, CLI_VERSION } from "./build-plugins.ts"
+import { buildPlugins, bumped, CLI_VERSION, contentHash, readPluginVersion } from "./build-plugins.ts"
 
 const root = fileURLToPath(new URL("..", import.meta.url))
 const tree = buildPlugins()
@@ -37,14 +37,39 @@ describe("generated plugins", () => {
     }
   })
 
-  it("carry the CLI version everywhere and no unfilled placeholder", () => {
-    expect(parsed(`${CLAUDE}/.claude-plugin/plugin.json`).version).toBe(CLI_VERSION)
-    expect(parsed(`${CURSOR}/.cursor-plugin/plugin.json`).version).toBe(CLI_VERSION)
-    expect(parsed(".claude-plugin/marketplace.json").plugins[0].version).toBe(CLI_VERSION)
+  it("carry the plugin's own version, and pin the CLI version it was recorded with", () => {
+    const { version, cliVersion } = readPluginVersion()
+    expect(parsed(`${CLAUDE}/.claude-plugin/plugin.json`).version).toBe(version)
+    expect(parsed(`${CURSOR}/.cursor-plugin/plugin.json`).version).toBe(version)
+    expect(parsed(".claude-plugin/marketplace.json").plugins[0].version).toBe(version)
     for (const launcher of [`${CLAUDE}/bin/invariant-launch.mjs`, `${CURSOR}/scripts/invariant-launch.mjs`]) {
-      expect(text(launcher)).toContain(`const PINNED_VERSION = "${CLI_VERSION}"`)
+      expect(text(launcher)).toContain(`const PINNED_VERSION = "${cliVersion}"`)
       expect(text(launcher)).not.toContain("__INVARIANT_VERSION__")
     }
+  })
+
+  it("never pin a CLI version newer than the one in this checkout (it might not be on npm yet)", () => {
+    const parts = (v: string): number[] => v.split(".").map(Number)
+    const [pin, current] = [parts(readPluginVersion().cliVersion), parts(CLI_VERSION)]
+    const at = pin.findIndex((n, i) => n !== current[i])
+    const newer = at >= 0 && (pin[at] as number) > (current[at] as number)
+    expect(newer, `plugin pins CLI ${readPluginVersion().cliVersion} but the CLI is ${CLI_VERSION}`).toBe(
+      false
+    )
+  })
+
+  it("change version whenever their content changes: run `pnpm plugin:bump patch` after editing a skill, hook or the launcher", () => {
+    expect(
+      contentHash(),
+      "the plugins' content changed but the plugin version did not. Claude Code updates by comparing versions, so installed copies would never receive this change. Run: pnpm plugin:bump patch"
+    ).toBe(readPluginVersion().contentHash)
+  })
+
+  it("bump versions the usual way", () => {
+    expect(bumped("0.1.9", "patch")).toBe("0.1.10")
+    expect(bumped("0.1.9", "minor")).toBe("0.2.0")
+    expect(bumped("0.9.9", "major")).toBe("1.0.0")
+    expect(() => bumped("0.1.0", "huge")).toThrow()
   })
 
   it("wire the hook, the MCP server and the early install through the launcher, with fixed commands", () => {
