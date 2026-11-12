@@ -48,7 +48,7 @@ function claude(): Tree {
         version: CLI_VERSION,
         description: DESCRIPTION,
         author: AUTHOR,
-        homepage: "https://invariantui.com/",
+        homepage: "https://invariant-ui.com/",
         repository: REPO,
         license: "FSL-1.1-ALv2",
         keywords: KEYWORDS,

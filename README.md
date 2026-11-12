@@ -9,8 +9,8 @@
 <p align="center"><strong>Turn your design system into a contract that AI agents can read and check.</strong></p>
 
 <p align="center">
-  <a href="https://invariantui.com/">Website</a> &middot;
-  <a href="https://invariantui.com/docs/">Documentation</a> &middot;
+  <a href="https://invariant-ui.com/">Website</a> &middot;
+  <a href="https://invariant-ui.com/docs/">Documentation</a> &middot;
   <a href="docs/specifications">Specifications</a>
 </p>
 
@@ -168,7 +168,7 @@ With Claude Code, you watch the contract being enforced. Ask an agent for a sett
 4. invariant ✓ app/pages/Settings.tsx follows the @acme/ui contract (6 component uses checked)
 ```
 
-Run `pnpm demo` in a checkout to replay exactly that, and `invariant enforcement report` (add `--format html --to report.html`) to get a forwardable timeline: `4 writes checked · 3 violations caught · 3 fixed · 0 outstanding`. See [See it working in your agent chat](https://invariantui.com/docs/#enforcement).
+Run `pnpm demo` in a checkout to replay exactly that, and `invariant enforcement report` (add `--format html --to report.html`) to get a forwardable timeline: `4 writes checked · 3 violations caught · 3 fixed · 0 outstanding`. See [See it working in your agent chat](https://invariant-ui.com/docs/#enforcement).
 
 `agent init` installs the hooks for Claude Code: a write that would introduce an error-severity violation is blocked with the exact finding and fix; warnings show up right after the write; clean passes get a green line in the chat. The hooks fail open (if invariant cannot run, the write proceeds) and respect your baseline and rule overrides. Set `enforcement.hooks` to `warn` or `off` in `invariant.config.json` to soften or disable this.
 
@@ -225,7 +225,7 @@ pnpm update:golden     # regenerate golden fixtures
 
 ## Documentation
 
-- [Website](https://invariantui.com/) and [documentation site](https://invariantui.com/docs/)
+- [Website](https://invariant-ui.com/) and [documentation site](https://invariant-ui.com/docs/)
 - [System architecture](docs/architecture/system-architecture.md)
 - [Pattern definitions](docs/specifications/pattern-definitions-v1.md): write layouts, interactions and page archetypes in `invariant.patterns.json`
 - [Browser verification](docs/specifications/browser-verification-v1.md): opt-in runtime checks for focus, keyboard order, rendered composition and responsive layout

@@ -118,7 +118,7 @@ export function buildNpmPackage(out = join(root, "dist-npm")): BuildResult {
       "Compile your design system, UX patterns and page layouts into a contract AI agents can read, and check code against it.",
     keywords: ["design-system", "ai-agents", "mcp", "design-tokens", "storybook", "linting", "ux-patterns"],
     license: "SEE LICENSE IN LICENSE",
-    homepage: "https://invariantui.com/",
+    homepage: "https://invariant-ui.com/",
     repository: { type: "git", url: "git+https://github.com/invariant-ui/invariant.git" },
     bugs: { url: "https://github.com/invariant-ui/invariant/issues" },
     type: "module",

@@ -9,9 +9,12 @@ const tracked = execFileSync("git", ["ls-files", "-z"], { cwd: root, encoding: "
   .split("\0")
   .filter((f) => /\.(md|html|json|ts|mjs|yml)$/.test(f) && f !== "pnpm-lock.yaml")
 
+// Built from parts so this file does not contain the strings it forbids.
+const OLD = new RegExp([`mcarl${"ucci"}`, `invariantui${"\\"}.com`].join("|"))
+
 describe("where the project lives", () => {
-  it("links to the invariant-ui organization and invariantui.com, never to the old personal address", () => {
-    const stale = tracked.filter((f) => /mcarlucci/.test(readFileSync(path.join(root, f), "utf8")))
+  it("links to the invariant-ui organization and invariant-ui.com, never to the old personal or domain addresses", () => {
+    const stale = tracked.filter((f) => OLD.test(readFileSync(path.join(root, f), "utf8")))
     expect(stale).toEqual([])
   })
 })

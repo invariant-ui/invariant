@@ -44,7 +44,7 @@ The package is published as `@invariant-ui/cli` under the owner's new npm organi
 
 ## Repository and site move (2026-11-11)
 
-The repository was transferred to the GitHub organization `invariant-ui` (now `invariant-ui/invariant`) so that the package scope `@invariant-ui` equals the repository owner, which GitHub requires to list the package in the repository's Packages section. The website is served at `https://invariantui.com/` (a custom domain; the old `github.io` address no longer works), and the marketplace is added with `/plugin marketplace add invariant-ui/invariant`.
+The repository was transferred to the GitHub organization `invariant-ui` (now `invariant-ui/invariant`) so that the package scope `@invariant-ui` equals the repository owner, which GitHub requires to list the package in the repository's Packages section. The website is served at `https://invariant-ui.com/` (a custom domain; the old `github.io` address no longer works), and the marketplace is added with `/plugin marketplace add invariant-ui/invariant`.
 
 ## Alternatives considered
 
