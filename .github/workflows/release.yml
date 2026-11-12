@@ -83,11 +83,12 @@ jobs:
       - name: The tag must match the package version
         run: test "${{ needs.release-please.outputs.tag_name }}" = "v$(node -p "require('./apps/cli/package.json').version")"
       - run: pnpm build:npm
+      # No token: npm trusted publishing signs in with this job's identity. It is configured on the package's
+      # settings page on npmjs.com (organization invariant-ui, repository invariant, workflow release.yml), and
+      # it needs the id-token permission above.
       - name: Publish to npm
         run: npm publish --provenance --access public
         working-directory: dist-npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
           name: dist-npm

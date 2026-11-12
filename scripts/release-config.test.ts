@@ -44,6 +44,13 @@ describe("release-please configuration", () => {
     expect(owner).toBe(scope)
   })
 
+  it("publishes to npm with trusted publishing, not a stored token", () => {
+    const workflow = read(".github/workflows/release.yml")
+    expect(workflow).not.toContain("NPM_TOKEN")
+    expect(workflow).toContain("npm publish --provenance --access public")
+    expect(workflow).toMatch(/id-token: write/)
+  })
+
   it("publishes only after a release is created, and checks first", () => {
     const workflow = read(".github/workflows/release.yml")
     expect(workflow).toContain("release_created == 'true'")
