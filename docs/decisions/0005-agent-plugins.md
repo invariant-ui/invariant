@@ -42,6 +42,10 @@ Claude Code and Cursor both have installable plugin systems that can bundle skil
 
 The package is published as `@invariant-ui/cli` under the owner's new npm organization `invariant-ui`, not as the unscoped `invariant-ui`. The earlier npm account was locked, and an org-owned package cannot be stranded by one account. The installed command is still `invariant`. `NPM_PACKAGE` in `apps/cli/src/version.ts` is the source of truth for the build; the launcher's `PACKAGE` constant mirrors it and a test should keep the two equal.
 
+## Repository and site move (2026-11-11)
+
+The repository was transferred to the GitHub organization `invariant-ui` (now `invariant-ui/invariant`) so that the package scope `@invariant-ui` equals the repository owner, which GitHub requires to list the package in the repository's Packages section. The website is served at `https://invariantui.com/` (a custom domain; the old `github.io` address no longer works), and the marketplace is added with `/plugin marketplace add invariant-ui/invariant`.
+
 ## Alternatives considered
 
 - **Bundle the CLI in the plugin.** Works offline but is heavy, and every CLI change forces a plugin rebuild and re-download for users.
@@ -51,5 +55,5 @@ The package is published as `@invariant-ui/cli` under the owner's new npm organi
 ## Open items for the owner
 
 1. Publish `@invariant-ui/cli` (name, account, first version). The owner is locked out of the npm account (2026-11-11) and is waiting on npm support. Until then the launcher can install from a tarball URL (a GitHub release asset) instead; the plugin should not depend on npm being available.
-2. Confirm the GitHub repository that serves the Claude marketplace (the existing site links to `mcarlucci/invariant`).
-3. Plugin name: `invariant`, confirmed by the owner 2026-11-11 (the npm package name `@invariant-ui/cli` is separate; plugin names are per marketplace). The marketplace repository is `mcarlucci/invariant`, confirmed.
+2. Confirm the GitHub repository that serves the Claude marketplace (the existing site links to `invariant-ui/invariant`).
+3. Plugin name: `invariant`, confirmed by the owner 2026-11-11 (the npm package name `@invariant-ui/cli` is separate; plugin names are per marketplace). The marketplace repository is `invariant-ui/invariant`, confirmed.

@@ -35,6 +35,15 @@ describe("release-please configuration", () => {
     expect(workflow.match(/secrets\.RELEASE_PLEASE_TOKEN/g)?.length).toBeGreaterThanOrEqual(2)
   })
 
+  it("also publishes to GitHub Packages, which needs the package scope to equal the repository owner", () => {
+    const workflow = read(".github/workflows/release.yml")
+    expect(workflow).toContain("registry-url: https://npm.pkg.github.com")
+    expect(workflow).toContain("packages: write")
+    const scope = /NPM_PACKAGE = "@([^/]+)\//.exec(read("apps/cli/src/version.ts"))?.[1]
+    const owner = /github\.com\/([^/]+)\//.exec(read("scripts/build-plugins.ts"))?.[1]
+    expect(owner).toBe(scope)
+  })
+
   it("publishes only after a release is created, and checks first", () => {
     const workflow = read(".github/workflows/release.yml")
     expect(workflow).toContain("release_created == 'true'")

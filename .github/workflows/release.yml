@@ -13,6 +13,7 @@ permissions:
   contents: write
   pull-requests: write
   id-token: write
+  packages: write
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -87,3 +88,28 @@ jobs:
         working-directory: dist-npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-npm
+          path: dist-npm
+
+  # The same package on GitHub's registry, so it shows in the repository's Packages section. GitHub requires the
+  # package scope to equal the repository owner, which is why the repository lives in the invariant-ui org. It is
+  # a separate job so it can be re-run alone: npm has already accepted this version by the time it starts.
+  publish-github:
+    needs: [release-please, publish]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-npm
+          path: dist-npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+      - name: Publish to GitHub Packages
+        run: npm publish
+        working-directory: dist-npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

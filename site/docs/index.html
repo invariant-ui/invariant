@@ -155,7 +155,7 @@ td code{white-space:nowrap}
     <label class="search"><span aria-hidden="true">&#128269;</span><input id="q" type="search" role="combobox" aria-expanded="false" aria-controls="results" aria-autocomplete="list" placeholder="Search docs" aria-label="Search docs" autocomplete="off"><kbd id="kbd">/</kbd></label>
     <div class="results" id="results" role="listbox" hidden></div>
   </div>
-  <a class="toplink" href="https://github.com/mcarlucci/invariant" aria-label="Invariant on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  <a class="toplink" href="https://github.com/invariant-ui/invariant" aria-label="Invariant on GitHub" title="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
 </div>
 
 <div class="shell">
@@ -237,7 +237,7 @@ invariant --help</pre></div>
   <p>Without a global install, write <code>npx @invariant-ui/cli</code> where the docs say <code>invariant</code>. <code>invariant agent init</code> notices when <code>invariant</code> is not on your <code>PATH</code> and writes an MCP entry that starts the server with <code>npx -y @invariant-ui/cli mcp</code> instead.</p>
   <h3>From source</h3>
   <p>To work on Invariant itself you need Node 24 and <a href="https://pnpm.io">pnpm</a>.</p>
-  <div class="code"><span class="lang">bash</span><pre>git clone https://github.com/mcarlucci/invariant.git
+  <div class="code"><span class="lang">bash</span><pre>git clone https://github.com/invariant-ui/invariant.git
 cd invariant
 nvm use                 # reads .nvmrc (Node 24)
 pnpm install
@@ -969,7 +969,7 @@ invariant mcp [--dir invariant]     # serves until stdin closes</pre></div>
   <p>The plugin is the easiest way to start, and it needs no terminal work. You install it into Claude Code or Cursor, ask the AI tool to set up Invariant, and answer a few plain questions. It finds your design system, shows you what it found, asks for your approval, and turns on the checks. Nothing is approved until you say yes.</p>
   <p>It needs Node.js 20 or newer. The first time it runs, it installs the Invariant command line tool into <code>~/.invariant/</code>. If you already have <code>invariant</code> on your <code>PATH</code>, that copy is used.</p>
   <h3>Claude Code</h3>
-  <div class="code"><span class="lang">claude code</span><pre>/plugin marketplace add mcarlucci/invariant
+  <div class="code"><span class="lang">claude code</span><pre>/plugin marketplace add invariant-ui/invariant
 /plugin install invariant@invariant</pre></div>
   <p>No marketplace? <a href="../downloads/invariant-claude-code.zip">Download the plugin</a>, unzip it, and start Claude Code with <code>claude --plugin-dir &lt;the unzipped folder&gt;</code>. That loads it for one session.</p>
   <h3>Cursor (preview)</h3>
@@ -1141,9 +1141,9 @@ pnpm build:npm         # assemble the single package that is published</pre></di
     <li>Contract changes are versioned: update the schema and runtime validation, add migration logic when needed, and update fixtures and tests.</li>
     <li>Significant architecture decisions are recorded as ADRs in <code>docs/decisions/</code>.</li>
   </ul>
-  <p>The detailed specifications live in <a href="https://github.com/mcarlucci/invariant/tree/main/docs/specifications"><code>docs/specifications/</code></a>.</p>
+  <p>The detailed specifications live in <a href="https://github.com/invariant-ui/invariant/tree/main/docs/specifications"><code>docs/specifications/</code></a>.</p>
   <h3>License</h3>
-  <p>Invariant is source-available under the <a href="https://github.com/mcarlucci/invariant/blob/main/LICENSE">Functional Source License, Version 1.1, ALv2 Future License</a>. Each version converts to Apache-2.0 two years after release.</p>
+  <p>Invariant is source-available under the <a href="https://github.com/invariant-ui/invariant/blob/main/LICENSE">Functional Source License, Version 1.1, ALv2 Future License</a>. Each version converts to Apache-2.0 two years after release.</p>
 </section>
 
 </article>

@@ -5,7 +5,7 @@ A release has two halves that share one version number: the CLI on npm, and the 
 | Artifact | Where it lives | How users get it |
 | --- | --- | --- |
 | CLI, `@invariant-ui/cli` (bin `invariant`) | npm, org `invariant-ui` | `npx @invariant-ui/cli setup`, or `npm install -g @invariant-ui/cli` |
-| Claude Code plugin | `plugins/claude/invariant/` in this repository, listed by `.claude-plugin/marketplace.json` | `/plugin marketplace add mcarlucci/invariant`, then `/plugin install invariant@invariant` |
+| Claude Code plugin | `plugins/claude/invariant/` in this repository, listed by `.claude-plugin/marketplace.json` | `/plugin marketplace add invariant-ui/invariant`, then `/plugin install invariant@invariant` |
 | Plugin zips | `site/downloads/invariant-claude-code.zip` and `invariant-cursor.zip`, served by the website | Download from the docs page "Install the plugin" |
 | Cursor plugin | `plugins/cursor/invariant/` and the zip above | Unzip into `~/.cursor/plugins/local/invariant` (preview) |
 
@@ -55,7 +55,7 @@ Use this if the automation is unavailable. The steps are the ones the workflow p
     ```bash
     export CLAUDE_CONFIG_DIR=$(mktemp -d)
     cd $(mktemp -d)
-    claude plugin marketplace add mcarlucci/invariant
+    claude plugin marketplace add invariant-ui/invariant
     claude plugin install invariant@invariant --scope project
     claude plugin list        # invariant <version>, enabled
     ```

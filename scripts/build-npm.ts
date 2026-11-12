@@ -118,9 +118,9 @@ export function buildNpmPackage(out = join(root, "dist-npm")): BuildResult {
       "Compile your design system, UX patterns and page layouts into a contract AI agents can read, and check code against it.",
     keywords: ["design-system", "ai-agents", "mcp", "design-tokens", "storybook", "linting", "ux-patterns"],
     license: "SEE LICENSE IN LICENSE",
-    homepage: "https://mcarlucci.github.io/invariant/",
-    repository: { type: "git", url: "git+https://github.com/mcarlucci/invariant.git" },
-    bugs: { url: "https://github.com/mcarlucci/invariant/issues" },
+    homepage: "https://invariantui.com/",
+    repository: { type: "git", url: "git+https://github.com/invariant-ui/invariant.git" },
+    bugs: { url: "https://github.com/invariant-ui/invariant/issues" },
     type: "module",
     bin: { [BIN]: "dist/cli/main.js" },
     files: ["dist", "README.md", "LICENSE"],
@@ -130,8 +130,8 @@ export function buildNpmPackage(out = join(root, "dist-npm")): BuildResult {
   writeFileSync(join(out, "package.json"), `${JSON.stringify(manifest, null, 2)}\n`)
 
   // The README's images and links are relative to the repository, so point them at it.
-  const base = "https://github.com/mcarlucci/invariant/blob/main/"
-  const raw = "https://raw.githubusercontent.com/mcarlucci/invariant/main/"
+  const base = "https://github.com/invariant-ui/invariant/blob/main/"
+  const raw = "https://raw.githubusercontent.com/invariant-ui/invariant/main/"
   const readme = readFileSync(join(root, "README.md"), "utf8")
     .replace(/(srcset|src)="(site\/assets\/[^"]+)"/g, `$1="${raw}$2"`)
     .replace(/\]\((docs\/[^)]+|LICENSE)\)/g, `](${base}$1)`)

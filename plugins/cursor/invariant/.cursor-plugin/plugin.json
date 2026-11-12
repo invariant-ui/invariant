@@ -4,7 +4,7 @@
   "description": "Make AI tools generate UI that follows your design system. Checks every file the agent writes against your design system's contract.",
   "author": {
     "name": "Invariant",
-    "url": "https://github.com/mcarlucci/invariant"
+    "url": "https://github.com/invariant-ui/invariant"
   },
   "keywords": [
     "design-system",

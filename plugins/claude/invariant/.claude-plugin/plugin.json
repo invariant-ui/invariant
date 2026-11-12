@@ -4,10 +4,10 @@
   "description": "Make AI tools generate UI that follows your design system. Checks every file the agent writes against your design system's contract.",
   "author": {
     "name": "Invariant",
-    "url": "https://github.com/mcarlucci/invariant"
+    "url": "https://github.com/invariant-ui/invariant"
   },
-  "homepage": "https://mcarlucci.github.io/invariant/",
-  "repository": "https://github.com/mcarlucci/invariant",
+  "homepage": "https://invariantui.com/",
+  "repository": "https://github.com/invariant-ui/invariant",
   "license": "FSL-1.1-ALv2",
   "keywords": [
     "design-system",

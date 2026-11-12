@@ -18,7 +18,7 @@ const root = fileURLToPath(new URL("..", import.meta.url))
 const read = (rel: string): string => readFileSync(path.join(root, rel), "utf8")
 
 export const CLI_VERSION = /CLI_VERSION = "([^"]+)"/.exec(read("apps/cli/src/version.ts"))?.[1] as string
-const REPO = "https://github.com/mcarlucci/invariant"
+const REPO = "https://github.com/invariant-ui/invariant"
 const DESCRIPTION =
   "Make AI tools generate UI that follows your design system. Checks every file the agent writes against your design system's contract."
 const STATUS = "invariant: checking the design system contract"
@@ -48,7 +48,7 @@ function claude(): Tree {
         version: CLI_VERSION,
         description: DESCRIPTION,
         author: AUTHOR,
-        homepage: "https://mcarlucci.github.io/invariant/",
+        homepage: "https://invariantui.com/",
         repository: REPO,
         license: "FSL-1.1-ALv2",
         keywords: KEYWORDS,
@@ -135,7 +135,7 @@ ${DESCRIPTION}
 
 Install:
 
-${client === "Claude Code" ? "```\n/plugin install invariant --marketplace mcarlucci/invariant\n```" : "Download the Cursor zip from the website, unzip it into `~/.cursor/plugins/local/invariant`, and reload the window."}
+${client === "Claude Code" ? "```\n/plugin install invariant --marketplace invariant-ui/invariant\n```" : "Download the Cursor zip from the website, unzip it into `~/.cursor/plugins/local/invariant`, and reload the window."}
 
 After installing, ask your AI tool to run \`/invariant:setup\` (or say "set up Invariant"). It finds your design system, shows you what it found, asks you to approve it, and turns on the checks. Nothing is approved without your yes.
 
@@ -155,7 +155,7 @@ export function buildPlugins(): Tree {
     json({
       name: "invariant",
       description: "Invariant: AI tools that follow your design system.",
-      owner: { name: "mcarlucci" },
+      owner: { name: "invariant-ui" },
       plugins: [
         {
           name: "invariant",
