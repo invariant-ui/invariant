@@ -21,8 +21,8 @@ The package name is set in one place, `NPM_PACKAGE` in `apps/cli/src/version.ts`
 Releases are driven by conventional commit messages (`feat:`, `fix:`, `feat!:` or a `BREAKING CHANGE:` footer) and `.github/workflows/release.yml`. Commits of other kinds (`docs:`, `chore:`, `test:`, `ci:`) do not trigger a release. Changes that only touch the plugins or the website (`plugins/`, `plugin-src/`, `.claude-plugin/`, `site/`, `docs/`, the plugin text in `packages/agent-kit/src/plugin.ts`, and the plugin generator and its test) are excluded, so a plugin fix never causes a CLI release. Every other workspace package ships in the CLI, so a change to any of them counts.
 
 1. **Every push to `main`** runs release-please, which keeps a single open pull request titled `chore(main): release <version>`. It bumps the version in the root `package.json`, `apps/cli/package.json` and `apps/cli/src/version.ts`, and writes `CHANGELOG.md` from the commits. Before 1.0, a breaking change bumps the minor version, and a `feat` also bumps the minor.
-2. **A `prepare` job then regenerates what depends on that version** and pushes it to the pull request: the golden files (`UPDATE_GOLDEN=1`) and the pinned `@invariant-ui/cli@<version>` examples on the website. Review the diff: apart from the changelog, only versions and hashes should change.
-3. **You merge the release pull request.** release-please tags `v<version>` and creates the GitHub release.
+2. **A `prepare` job then regenerates what depends on that version** (it finds the open release pull request itself, because release-please's own output only names it in the run that creates it) and pushes it to the pull request: the golden files (`UPDATE_GOLDEN=1`) and the pinned `@invariant-ui/cli@<version>` examples on the website. Review the diff: apart from the changelog, only versions and hashes should change.
+3. **Wait for the pull request's checks to pass, then merge it.** The `prepare` job pushes its commit a minute or two after the pull request changes, and CI re-runs on that push. Merging before then leaves main with stale golden files, and the `publish` job will stop at `pnpm verify` (nothing is published, but the tag and GitHub release already exist). release-please then tags `v<version>` and creates the GitHub release.
 4. **The `publish` job** (same workflow) checks out the merged commit, runs `pnpm verify`, checks the tag equals the package version, builds `dist-npm/`, and runs `npm publish --provenance --access public`. A second job, `publish-github`, then publishes the same package to GitHub Packages, so it shows in the repository's Packages section. It is separate so it can be re-run alone.
 5. **Check it:** `npx -y @invariant-ui/cli@<version> --version` (wait a few minutes if it is a 404).
 
@@ -32,6 +32,8 @@ Setup that only an owner can do:
 - A merge of the release pull request is the approval. Nothing publishes until a person merges it.
 
 The `publish` job re-runs `pnpm verify` after the merge, before anything is published, so a bad release stops there.
+
+**If the `publish` job fails its checks after a merge** (nothing was published, but the tag exists): fix main with a normal commit (typically `UPDATE_GOLDEN=1 pnpm test` and the pinned website examples, as the `prepare` job would have done), push it, then run the workflow by hand: Actions, Release, Run workflow, and enter the tag, for example `v0.2.0`. It publishes the current `main` behind the same checks, and only if the tag equals the version in `apps/cli/package.json`. Re-running the failed job instead would re-check out the old commit and fail the same way.
 
 ## Releasing the plugins
 

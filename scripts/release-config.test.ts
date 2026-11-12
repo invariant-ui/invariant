@@ -62,6 +62,19 @@ describe("release-please configuration", () => {
     expect(workflow).toMatch(/id-token: write/)
   })
 
+  it("finds the release pull request by asking GitHub, not from release-please's per-run output", () => {
+    const workflow = read(".github/workflows/release.yml")
+    expect(workflow).not.toContain("pr_branch")
+    expect(workflow).toContain('startswith("release-please--")')
+  })
+
+  it("can publish an existing tag by hand, still behind the full checks", () => {
+    const workflow = read(".github/workflows/release.yml")
+    expect(workflow).toContain("workflow_dispatch:")
+    expect(workflow).toContain("github.event_name == 'workflow_dispatch'")
+    expect(workflow.indexOf("pnpm verify")).toBeLessThan(workflow.indexOf("npm publish"))
+  })
+
   it("publishes only after a release is created, and checks first", () => {
     const workflow = read(".github/workflows/release.yml")
     expect(workflow).toContain("release_created == 'true'")
