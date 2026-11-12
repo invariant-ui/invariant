@@ -28,12 +28,12 @@ Releases are driven by conventional commit messages (`feat:`, `fix:`, `feat!:` o
 5. **Check it:** `npx -y @invariant-ui/cli@<version> --version` (wait a few minutes if it is a 404), then the install test in step 11 of the manual checklist below.
 
 Setup that only an owner can do:
-- **Settings, Actions, General:** turn on "Allow GitHub Actions to create and approve pull requests", or release-please cannot open its pull request.
+- **Secret `RELEASE_PLEASE_TOKEN`:** a fine-grained personal access token (github.com/settings/personal-access-tokens), limited to this repository, with **Contents: Read and write** and **Pull requests: Read and write**. Add it under the repository's Settings, Secrets and variables, Actions. release-please uses it to open the release pull request, and the `prepare` job uses it to push to that pull request. It is a personal token because the org setting "Allow GitHub Actions to create and approve pull requests" is disabled for this org and cannot be turned on; a token also makes CI run on the release pull request (commits pushed with the default `GITHUB_TOKEN` trigger no other workflow). The token stops working when it expires or when its owner leaves the organization: put its expiry date in a calendar, and re-create it before then.
 - **Secret `NPM_TOKEN`:** an npm automation token that can publish `@invariant-ui/cli` (npm, Access Tokens). Without it, step 4 fails after the tag exists. Fix the secret and re-run the job; the version is not burned until npm accepts the publish. (npm trusted publishing from GitHub Actions is the alternative that needs no token. It is configured on the package's settings page on npmjs.com, and the workflow file name it must match is `release.yml`.)
 - A merge of the release pull request is the approval. Nothing publishes until a person merges it.
 
 Two things to know:
-- **The release pull request does not run CI.** Commits pushed with the default `GITHUB_TOKEN`, which release-please and the `prepare` job use, do not trigger other workflows. The `publish` job runs `pnpm verify` after the merge and before anything is published, so a bad release stops there. To also see checks on the pull request, give release-please a personal access token instead.
+- **The `publish` job re-runs `pnpm verify` after the merge**, before anything is published, so a bad release stops there even if the pull request's checks were skipped or ignored.
 - **Plugins and npm are not atomic.** The merge puts the new plugin files on `main` a few minutes before the new CLI version is on npm. In that window a user who updates the plugin gets a hook that lets writes through unchecked until the version appears. See "Why the order matters".
 
 ## Manual release (fallback)

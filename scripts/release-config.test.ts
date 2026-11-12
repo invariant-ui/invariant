@@ -30,6 +30,11 @@ describe("release-please configuration", () => {
     expect(line).toContain(`"${cli.version}"`)
   })
 
+  it("opens the release pull request and pushes to it with a personal token, so CI runs on it", () => {
+    const workflow = read(".github/workflows/release.yml")
+    expect(workflow.match(/secrets\.RELEASE_PLEASE_TOKEN/g)?.length).toBeGreaterThanOrEqual(2)
+  })
+
   it("publishes only after a release is created, and checks first", () => {
     const workflow = read(".github/workflows/release.yml")
     expect(workflow).toContain("release_created == 'true'")

@@ -4,7 +4,7 @@
 # changelog from conventional commits. A job then regenerates what depends on that version (golden files, the
 # plugins, their zips and the pinned examples on the website) and pushes it to the release PR.
 # Merging the release PR creates the tag and GitHub release; the publish job then runs the full checks and
-# publishes to npm. See docs/releasing.md.
+# publishes to npm. Needs the RELEASE_PLEASE_TOKEN secret. See docs/releasing.md.
 name: Release
 on:
   push:
@@ -24,6 +24,9 @@ jobs:
       - id: rp
         uses: googleapis/release-please-action@v4
         with:
+          # A personal access token, not the default GITHUB_TOKEN: it lets release-please open its pull request
+          # without the org-level "create pull requests" setting, and it makes CI run on that pull request.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
@@ -37,6 +40,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ needs.release-please.outputs.pr_branch }}
+          # Pushes made with this token trigger CI on the release pull request.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
