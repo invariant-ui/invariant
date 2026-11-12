@@ -101,7 +101,8 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          registry-url: https://registry.npmjs.org
+          # No registry-url here: it would write an auth line into .npmrc and export a placeholder
+          # NODE_AUTH_TOKEN, which npm then sends instead of signing in through trusted publishing (E404).
       - run: pnpm install --frozen-lockfile
       - run: pnpm verify
       - name: The tag must match the package version
@@ -113,7 +114,9 @@ jobs:
       # settings page on npmjs.com (organization invariant-ui, repository invariant, workflow release.yml), and
       # it needs the id-token permission above.
       - name: Publish to npm
-        run: npm publish --provenance --access public
+        run: |
+          npm --version
+          npm publish --provenance --access public
         working-directory: dist-npm
       - uses: actions/upload-artifact@v4
         with:

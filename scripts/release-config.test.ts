@@ -58,6 +58,8 @@ describe("release-please configuration", () => {
   it("publishes to npm with trusted publishing, not a stored token", () => {
     const workflow = read(".github/workflows/release.yml")
     expect(workflow).not.toContain("NPM_TOKEN")
+    // setup-node's registry-url exports a dummy NODE_AUTH_TOKEN that npm sends instead of the OIDC sign-in.
+    expect(workflow).not.toContain("registry-url: https://registry.npmjs.org")
     expect(workflow).toContain("npm publish --provenance --access public")
     expect(workflow).toMatch(/id-token: write/)
   })
