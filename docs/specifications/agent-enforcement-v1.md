@@ -62,7 +62,7 @@ In the MCP tool the card is the text content, ahead of the JSON body with a blan
 
 ## Postures
 
-`enforcement.hooks` in `invariant.config.json` (or `--posture` on the command, which wins):
+`enforcement.hooks` in `invariant.config.json` (or `--posture` on the command, which wins). This is the setting's name. The enforcement plan called it `enforcement.posture`; it stays `enforcement.hooks` because 0.1.0 shipped with it, and renaming would break existing configs. `--posture` is the matching flag on `hook` and `setup`:
 
 | Posture | PreToolUse | PostToolUse |
 |---|---|---|
