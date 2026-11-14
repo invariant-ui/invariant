@@ -7,7 +7,7 @@ I could not see the portal's form, so the field names below are my best guess. P
 ## Before you submit
 
 - [ ] `claude plugin validate plugins/claude/invariant --strict` and `claude plugin validate . --strict` pass (they do as of the last run). The portal also runs a safety scan and a policy review that this command does not.
-- [ ] The plugin installs from the marketplace: `/plugin marketplace add invariant-ui/invariant`, then `/plugin install invariant@invariant` (verified with an isolated config on 2026-11-11, before the move to `invariant-ui`; re-check once).
+- [ ] The plugin installs from the marketplace: `/plugin marketplace add invariant-ui/cli`, then `/plugin install invariant@invariant` (verified with an isolated config on 2026-11-11, before the move to `invariant-ui`; re-check once).
 - [ ] The CLI the plugin installs is on npm: `npx -y @invariant-ui/cli@0.1.0 --version`. It pins 0.1.0 (see `plugin-src/plugin-version.json`).
 - [ ] Decide the open items at the end of this page (license, privacy policy, support contact).
 
@@ -42,8 +42,8 @@ Invariant reads your design system and checks every file Claude writes against i
 **Links**
 - Homepage: https://invariant-ui.com/
 - Documentation: https://invariant-ui.com/docs/
-- Source: https://github.com/invariant-ui/invariant
-- Issues and support: https://github.com/invariant-ui/invariant/issues
+- Source: https://github.com/invariant-ui/cli
+- Issues and support: https://github.com/invariant-ui/cli/issues
 - License: FSL-1.1-ALv2 (see the open items)
 
 **Version:** 0.1.0
@@ -79,7 +79,7 @@ Invariant reads your design system and checks every file Claude writes against i
 Needs Node.js 20 or newer and network access for the first install. This uses a fixture from the repository, so no real design system is needed.
 
 ```bash
-git clone https://github.com/invariant-ui/invariant.git
+git clone https://github.com/invariant-ui/cli.git
 cp -R invariant/fixtures/storybook/acme-ui /tmp/invariant-review
 cd /tmp/invariant-review
 npx -y @invariant-ui/cli init

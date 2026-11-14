@@ -10,4 +10,4 @@ After installing, ask your AI tool to run `/invariant:setup` (or say "set up Inv
 
 Needs Node.js 20 or newer. The first time it runs, it installs the Invariant command line tool into `~/.invariant/`. If you already have `invariant` on your PATH, that one is used.
 
-Source and documentation: https://github.com/invariant-ui/invariant
+Source and documentation: https://github.com/invariant-ui/cli

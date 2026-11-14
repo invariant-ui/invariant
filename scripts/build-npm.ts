@@ -119,8 +119,8 @@ export function buildNpmPackage(out = join(root, "dist-npm")): BuildResult {
     keywords: ["design-system", "ai-agents", "mcp", "design-tokens", "storybook", "linting", "ux-patterns"],
     license: "SEE LICENSE IN LICENSE",
     homepage: "https://invariant-ui.com/",
-    repository: { type: "git", url: "git+https://github.com/invariant-ui/invariant.git" },
-    bugs: { url: "https://github.com/invariant-ui/invariant/issues" },
+    repository: { type: "git", url: "git+https://github.com/invariant-ui/cli.git" },
+    bugs: { url: "https://github.com/invariant-ui/cli/issues" },
     type: "module",
     bin: { [BIN]: "dist/cli/main.js" },
     files: ["dist", "README.md", "LICENSE"],
@@ -130,8 +130,8 @@ export function buildNpmPackage(out = join(root, "dist-npm")): BuildResult {
   writeFileSync(join(out, "package.json"), `${JSON.stringify(manifest, null, 2)}\n`)
 
   // The README's images and links are relative to the repository, so point them at it.
-  const base = "https://github.com/invariant-ui/invariant/blob/main/"
-  const raw = "https://raw.githubusercontent.com/invariant-ui/invariant/main/"
+  const base = "https://github.com/invariant-ui/cli/blob/main/"
+  const raw = "https://raw.githubusercontent.com/invariant-ui/cli/main/"
   const readme = readFileSync(join(root, "README.md"), "utf8")
     .replace(/(srcset|src)="(site\/assets\/[^"]+)"/g, `$1="${raw}$2"`)
     .replace(/\]\((docs\/[^)]+|LICENSE)\)/g, `](${base}$1)`)

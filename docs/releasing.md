@@ -10,7 +10,7 @@ A skill or hook fix is a plugin release and needs no npm publish. A CLI change i
 | Artifact | Where it lives | How users get it |
 | --- | --- | --- |
 | CLI, `@invariant-ui/cli` (bin `invariant`) | npm, and GitHub Packages, org `invariant-ui` | `npx @invariant-ui/cli setup`, or `npm install -g @invariant-ui/cli` |
-| Claude Code plugin | `plugins/claude/invariant/` in this repository, listed by `.claude-plugin/marketplace.json` | `/plugin marketplace add invariant-ui/invariant`, then `/plugin install invariant@invariant` |
+| Claude Code plugin | `plugins/claude/invariant/` in this repository, listed by `.claude-plugin/marketplace.json` | `/plugin marketplace add invariant-ui/cli`, then `/plugin install invariant@invariant` |
 | Plugin zips | `site/downloads/invariant-claude-code.zip` and `invariant-cursor.zip`, served by the website | Download from the docs page "Install the plugin" |
 | Cursor plugin | `plugins/cursor/invariant/` and the zip above | Unzip into `~/.cursor/plugins/local/invariant` (preview) |
 
@@ -49,7 +49,7 @@ A plugin release is a commit to `main`; nothing is published to a registry. GitH
    ```bash
    export CLAUDE_CONFIG_DIR=$(mktemp -d)
    cd $(mktemp -d)
-   claude plugin marketplace add invariant-ui/invariant
+   claude plugin marketplace add invariant-ui/cli
    claude plugin install invariant@invariant --scope project
    claude plugin list        # invariant <version>, enabled
    ```

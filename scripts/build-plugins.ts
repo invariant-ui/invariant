@@ -35,7 +35,7 @@ export interface PluginVersion {
 }
 export const readPluginVersion = (): PluginVersion => JSON.parse(read(VERSION_FILE))
 type Versions = Pick<PluginVersion, "version" | "cliVersion">
-const REPO = "https://github.com/invariant-ui/invariant"
+const REPO = "https://github.com/invariant-ui/cli"
 const DESCRIPTION =
   "Make AI tools generate UI that follows your design system. Checks every file the agent writes against your design system's contract."
 const STATUS = "invariant: checking the design system contract"
@@ -152,7 +152,7 @@ ${DESCRIPTION}
 
 Install:
 
-${client === "Claude Code" ? "```\n/plugin install invariant --marketplace invariant-ui/invariant\n```" : "Download the Cursor zip from the website, unzip it into `~/.cursor/plugins/local/invariant`, and reload the window."}
+${client === "Claude Code" ? "```\n/plugin install invariant --marketplace invariant-ui/cli\n```" : "Download the Cursor zip from the website, unzip it into `~/.cursor/plugins/local/invariant`, and reload the window."}
 
 After installing, ask your AI tool to run \`/invariant:setup\` (or say "set up Invariant"). It finds your design system, shows you what it found, asks you to approve it, and turns on the checks. Nothing is approved without your yes.
 

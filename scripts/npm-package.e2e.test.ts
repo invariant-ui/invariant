@@ -87,7 +87,7 @@ describe("the published package", () => {
   it("points the README at the repository, since its images and links are relative", () => {
     const readme = readFileSync(path.join(pkg, "README.md"), "utf8")
     expect(readme).not.toMatch(/(src|srcset)="site\//)
-    expect(readme).toContain("raw.githubusercontent.com/invariant-ui/invariant/main/site/assets/")
+    expect(readme).toContain("raw.githubusercontent.com/invariant-ui/cli/main/site/assets/")
   })
 
   it("runs as a real process: version, then compile a project", () => {
