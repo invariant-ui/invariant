@@ -49,6 +49,7 @@ h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--acc
 .lead{max-width:640px;margin:0 auto 32px;color:var(--muted);font-size:18px}
 .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
 pre,code{font-family:var(--mono)}
+code{overflow-wrap:anywhere}
 .term{max-width:640px;margin:0 auto;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .term-bar{padding:10px 14px;border-bottom:1px solid var(--line);font:12px var(--mono);color:var(--muted)}
 .term pre{margin:0;padding:16px 18px;font-size:13.5px;overflow-x:auto;line-height:1.7}
@@ -70,14 +71,14 @@ h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;line-height:1.15;margin:
 .node span{color:var(--muted);font-size:13px}
 .node.hl{border-color:var(--accent)}
 .arrow{color:var(--muted);font-size:20px}
-@media(max-width:720px){.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}nav ul{display:none}}
+@media(max-width:720px){.flow{grid-template-columns:minmax(0,1fr)}.arrow{transform:rotate(90deg);text-align:center}nav ul{display:none}}
 .facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
 .fact{font:12px var(--mono);padding:4px 10px;border-radius:6px;background:#0e1118;border:1px solid var(--line)}
 .fact.d{color:var(--ok)} .fact.m{color:var(--accent2)} .fact.i{color:var(--warn)} .fact.a{color:var(--accent)}
 .code{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px;overflow-x:auto}
 .code pre{margin:0;font-size:13.5px;line-height:1.7}
 .steps{counter-reset:s;display:grid;gap:14px}
-.step{display:grid;grid-template-columns:36px 1fr;gap:14px}
+.step{display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px}
 .step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);font:600 14px var(--mono);color:var(--accent)}
 .step h3{margin:4px 0 6px;font-size:16px}
 footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
@@ -106,7 +107,7 @@ footer a:hover{color:var(--text)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(94,234,212,.6)}100%{box-shadow:0 0 0 10px rgba(94,234,212,0)}}
 
 .stage{position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:18px;text-align:left;align-items:start}
-@media(max-width:760px){.stage{grid-template-columns:1fr}}
+@media(max-width:760px){.stage{grid-template-columns:minmax(0,1fr)}}
 .stage .term{margin:0;max-width:none}
 .term,.contract{box-shadow:0 30px 80px -30px rgba(124,140,255,.35)}
 .term{animation:bob 7s ease-in-out infinite}
@@ -240,6 +241,14 @@ footer a:hover{color:var(--text)}
 
 .progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));z-index:20}
 
+@media(max-width:720px){
+  .wrap{padding:0 20px}
+  .hero{padding:56px 0 48px}
+  section{padding:56px 0}
+  .lead{font-size:16px}
+  .cta .btn{flex:1 1 100%;text-align:center}
+  .term pre,.contract pre{font-size:12px}
+}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal,.checks .ck,.o,.pl3,.dn,.cl{opacity:1!important;transform:none!important}.ty{width:auto!important}.spin,.cw,.pl2{opacity:0!important}.t2,.pl2{opacity:1!important}.status .s1,.status .s2{opacity:0!important}.status .s3{opacity:1!important}
